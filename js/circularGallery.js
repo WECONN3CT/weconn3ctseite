@@ -76,7 +76,7 @@ class Media{ constructor({geometry,gl,image,emoji,index,length,renderer,scene,sc
   }
   createMesh(){ this.plane=new Mesh(this.gl,{ geometry:this.geometry, program:this.program }); this.plane.setParent(this.scene); }
   createTitle(){ this.title=new Title({ gl:this.gl, plane:this.plane, text:this.text, textColor:this.textColor }); }
-  update(scroll, direction){ this.plane.position.x=this.x-scroll.current-this.extra; const x=this.plane.position.x; const H=this.viewport.width/2.0; if(this.bend===0){ this.plane.position.y=0; this.plane.rotation.z=0; } else { const B=Math.abs(this.bend); const R=(H*H+B*B)/(2.0*B); const ex=Math.min(Math.abs(x),H); const arc=R-Math.sqrt(R*R-ex*ex); if(this.bend>0){ this.plane.position.y=-arc; this.plane.rotation.z=-Math.sign(x)*Math.asin(ex/R); } else { this.plane.position.y=arc; this.plane.rotation.z=Math.sign(x)*Math.asin(ex/R); } } this.program.uniforms; }
+  update(scroll, direction){ this.plane.position.x=this.x; const x=this.plane.position.x; const H=this.viewport.width/2.0; if(this.bend===0){ this.plane.position.y=0; this.plane.rotation.z=0; } else { const B=Math.abs(this.bend); const R=(H*H+B*B)/(2.0*B); const ex=Math.min(Math.abs(x),H); const arc=R-Math.sqrt(R*R-ex*ex); if(this.bend>0){ this.plane.position.y=-arc; this.plane.rotation.z=-Math.sign(x)*Math.asin(ex/R); } else { this.plane.position.y=arc; this.plane.rotation.z=Math.sign(x)*Math.asin(ex/R); } } this.program.uniforms; }
   onResize({screen,viewport}={}){
     if(screen) this.screen=screen; if(viewport){ this.viewport=viewport; }
     const visibleCount = 5.0;
@@ -87,7 +87,8 @@ class Media{ constructor({geometry,gl,image,emoji,index,length,renderer,scene,sc
     this.program.uniforms.uPlaneSizes.value=[this.plane.scale.x,this.plane.scale.y];
     this.width=this.plane.scale.x+this.padding;
     this.widthTotal=this.width*this.length;
-    this.x=this.width*this.index;
+    const centerIndex = Math.floor(this.length * 0.5);
+    this.x=this.width*(this.index - centerIndex);
   }
 }
 
@@ -100,7 +101,7 @@ class App{ constructor(container,{items,bend=3,textColor='#ffffff',borderRadius=
     { emoji:'👨‍🎨', name:'Leonardo Braun', position:'Projekt- & Designmanagement' },
     { emoji:'👨‍💻',  name:'Thinesh Rajabalah', position:'Programmierung' },
     { emoji:'🧩',   name:'Mentor Sadiku', position:'Projektabgabe & Wartung' }
-  ]; const data=(items&&items.length?items:fallback); const gallery=data.concat(data); const cardScale=0.85; this.medias=gallery.map((d,idx)=> new Media({ geometry:this.planeGeometry, gl:this.gl, image:d.image, emoji:d.emoji||'👤', index:idx, length:gallery.length, renderer:this.renderer, scene:this.scene, screen:this.screen, text:`${d.name} – ${d.position}`, viewport:this.viewport, bend, textColor, borderRadius, cardScale })); }
+  ]; const base=(items&&items.length?items:fallback).map(d=>({ ...d, emoji:d.emoji||'👤' })); const desired=5; let pool=base.slice(); while(pool.length<desired){ pool=pool.concat(base); } const gallery=pool.slice(0,desired); const cardScale=0.85; this.medias=gallery.map((d,idx)=> new Media({ geometry:this.planeGeometry, gl:this.gl, image:d.image, emoji:d.emoji, index:idx, length:gallery.length, renderer:this.renderer, scene:this.scene, screen:this.screen, text:`${d.name} – ${d.position}`, viewport:this.viewport, bend, textColor, borderRadius, cardScale })); }
   onTouchDown(e){ this.isDown=true; this.scroll.position=this.scroll.current; this.start=e.touches?e.touches[0].clientX:e.clientX; }
   onTouchMove(e){ if(!this.isDown) return; const x=e.touches?e.touches[0].clientX:e.clientX; const dist=(this.start-x)*(this.scrollSpeed*0.025); this.scroll.target=this.scroll.position+dist; }
   onTouchUp(){ this.isDown=false; this.onCheck(); }
