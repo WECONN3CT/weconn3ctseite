@@ -1,10 +1,8 @@
 /* Animierter Gradient Text in Blau-Lila-Magenta */
-.hero-title.gradient-text,
-.hero-title.gradient-text span { color: #ffffff; }
+.hero-title.gradient-text { color: #ffffff; }
 
 @supports (-webkit-background-clip: text) or (background-clip: text) {
-  .hero-title.gradient-text,
-  .hero-title.gradient-text span {
+  .hero-title.gradient-text {
     background: linear-gradient(
       90deg,
       #4169E1,
@@ -19,6 +17,12 @@
     -webkit-text-fill-color: transparent;
     color: transparent;
     animation: gradient-flow 8s linear infinite;
+  }
+  /* Spans erhalten keine eigenen Hintergründe, nur transparente Füllung, damit der Elterngradient als Einheit wirkt */
+  .hero-title.gradient-text span {
+    background: none !important;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
   }
 }
 
