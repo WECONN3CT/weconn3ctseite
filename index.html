@@ -18,7 +18,8 @@
     <link rel="stylesheet" href="css/components.css">
     <link rel="stylesheet" href="css/utilities.css">
     <link rel="stylesheet" href="css/circular-gallery.css">
-    <script defer src="js/navbar-glass-effect.js"></script>
+    <link rel="stylesheet" href="css/logoLoop.css">
+<script defer src="js/navbar-glass-effect.js"></script>
 </head>
 <body>
 
@@ -67,7 +68,15 @@
                 </div>
             </div>
             <div class="hero-glassbar">
-                <div class="glass-bar"></div>
+                <div class="glass-bar glass-dark">
+                    <div class="logo-loop-container">
+                      <div class="logo-loop" id="heroLogoLoop">
+                        <div class="logo-loop__track">
+                          
+                        </div>
+                      </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -666,5 +675,6 @@
     activate(0); slideTo(0); window.addEventListener('resize', onResize);
   })();
 </script>
+<script src="js/logoLoop.js"></script>
 </body>
 </html>
