@@ -1,0 +1,39 @@
+/* Animierter Gradient Text in Blau-Lila-Magenta */
+.hero-title.gradient-text {
+  background: linear-gradient(
+    90deg,
+    #4169E1,
+    #8A2BE2,
+    #FF00FF,
+    #8A2BE2,
+    #4169E1
+  );
+  background-size: 300% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradient-flow 8s linear infinite;
+  font-weight: bold;
+  filter: drop-shadow(0 0 10px rgba(138, 43, 226, 0.3));
+}
+
+@keyframes gradient-flow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Responsive Anpassungen */
+@media (max-width: 768px) {
+  .hero-title.gradient-text { font-size: clamp(1.5rem, 5vw, 3rem); }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .hero-title.gradient-text {
+    animation: none !important;
+    background: linear-gradient(90deg, #4169E1, #8A2BE2, #FF00FF);
+    background-clip: text;
+    -webkit-background-clip: text;
+  }
+}
