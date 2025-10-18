@@ -76,7 +76,8 @@ class Media{ constructor({geometry,gl,image,emoji,index,length,renderer,scene,sc
   }
   createMesh(){ this.plane=new Mesh(this.gl,{ geometry:this.geometry, program:this.program }); this.plane.setParent(this.scene); }
   createTitle(){ this.title=new Title({ gl:this.gl, plane:this.plane, text:this.text, textColor:this.textColor }); }
-  update(scroll, direction){ this.plane.position.x=this.x; const x=this.plane.position.x; const H=this.viewport.width/2.0; if(this.bend===0){ this.plane.position.y=0; this.plane.rotation.z=0; } else { const B=Math.abs(this.bend); const R=(H*H+B*B)/(2.0*B); const ex=Math.min(Math.abs(x),H); const arc=R-Math.sqrt(R*R-ex*ex); if(this.bend>0){ this.plane.position.y=-arc; this.plane.rotation.z=-Math.sign(x)*Math.asin(ex/R); } else { this.plane.position.y=arc; this.plane.rotation.z=Math.sign(x)*Math.asin(ex/R); } } this.program.uniforms; }
+  update(scroll, direction){ this.plane.position.x=this.x-scroll.current-this.extra; const x=this.plane.position.x; const H=this.viewport.width/2.0; if(this.bend===0){ this.plane.position.y=0; this.plane.rotation.z=0; } else { const B=Math.abs(this.bend); const R=(H*H+B*B)/(2.0*B); const ex=Math.min(Math.abs(x),H); const arc=R-Math.sqrt(R*R-ex*ex); if(this.bend>0){ this.plane.position.y=-arc; this.plane.rotation.z=-Math.sign(x)*Math.asin(ex/R); } else { this.plane.position.y=arc; this.plane.rotation.z=Math.sign(x)*Math.asin(ex/R); } } // Wrap für Endlos-Scroll
+    const half=this.widthTotal*0.5; if(this.plane.position.x<-half){ this.extra-=this.widthTotal; } else if(this.plane.position.x>half){ this.extra+=this.widthTotal; } this.program.uniforms; }
   onResize({screen,viewport}={}){
     if(screen) this.screen=screen; if(viewport){ this.viewport=viewport; }
     const visibleCount = 5.0;
@@ -87,12 +88,12 @@ class Media{ constructor({geometry,gl,image,emoji,index,length,renderer,scene,sc
     this.program.uniforms.uPlaneSizes.value=[this.plane.scale.x,this.plane.scale.y];
     this.width=this.plane.scale.x+this.padding;
     this.widthTotal=this.width*this.length;
-    const centerIndex = Math.floor(this.length * 0.5);
-    this.x=this.width*(this.index - centerIndex);
+    const centerIndex=Math.floor(this.length*0.5);
+    this.x=this.width*(this.index-centerIndex);
   }
 }
 
-class App{ constructor(container,{items,bend=3,textColor='#ffffff',borderRadius=0.05,font='bold 28px Figtree, Inter, sans-serif',scrollSpeed=2,scrollEase=0.05}={}){ document.documentElement.classList.remove('no-js'); this.container=container; this.scrollSpeed=scrollSpeed; this.scroll={ ease:scrollEase, current:0, target:0, last:0 }; this.onCheckDebounce=debounce(this.onCheck,200); this.createRenderer(); this.createCamera(); this.createScene(); this.onResize(); this.createGeometry(); this.createMedias(items,bend,textColor,borderRadius,font); this.update(); this.addEventListeners(); }
+class App{ constructor(container,{items,bend=3,textColor='#ffffff',borderRadius=0.05,font='bold 28px Figtree, Inter, sans-serif',scrollSpeed=2,scrollEase=0.05,autoScrollSpeed=0.12}={}){ document.documentElement.classList.remove('no-js'); this.container=container; this.scrollSpeed=scrollSpeed; this.scroll={ ease:scrollEase, current:0, target:0, last:0 }; this.autoScrollSpeed=autoScrollSpeed; this.autoScrollDir=-1; this.lastTs=0; this.onCheckDebounce=debounce(this.onCheck,200); this.createRenderer(); this.createCamera(); this.createScene(); this.onResize(); this.createGeometry(); this.createMedias(items,bend,textColor,borderRadius,font); this.update(); this.addEventListeners(); }
   createRenderer(){ this.renderer=new Renderer({ alpha:true, antialias:true, dpr:Math.min(window.devicePixelRatio||1,2), powerPreference:'high-performance', premultipliedAlpha:false, depth:true, stencil:false }); this.gl=this.renderer.gl; this.gl.canvas.style.width='100%'; this.gl.canvas.style.height='100%'; this.gl.clearColor(0,0,0,0); this.container.appendChild(this.gl.canvas); }
   createCamera(){ this.camera=new Camera(this.gl); this.camera.fov=45; this.camera.position.z=20; }
   createScene(){ this.scene=new Transform(); }
@@ -101,14 +102,16 @@ class App{ constructor(container,{items,bend=3,textColor='#ffffff',borderRadius=
     { emoji:'👨‍🎨', name:'Leonardo Braun', position:'Projekt- & Designmanagement' },
     { emoji:'👨‍💻',  name:'Thinesh Rajabalah', position:'Programmierung' },
     { emoji:'🧩',   name:'Mentor Sadiku', position:'Projektabgabe & Wartung' }
-  ]; const base=(items&&items.length?items:fallback).map(d=>({ ...d, emoji:d.emoji||'👤' })); const desired=5; let pool=base.slice(); while(pool.length<desired){ pool=pool.concat(base); } const gallery=pool.slice(0,desired); const cardScale=0.85; this.medias=gallery.map((d,idx)=> new Media({ geometry:this.planeGeometry, gl:this.gl, image:d.image, emoji:d.emoji, index:idx, length:gallery.length, renderer:this.renderer, scene:this.scene, screen:this.screen, text:`${d.name} – ${d.position}`, viewport:this.viewport, bend, textColor, borderRadius, cardScale })); }
+  ]; const data=(items&&items.length?items:fallback); const gallery=data.concat(data); const cardScale=0.85; this.medias=gallery.map((d,idx)=> new Media({ geometry:this.planeGeometry, gl:this.gl, image:d.image, emoji:d.emoji||'👤', index:idx, length:gallery.length, renderer:this.renderer, scene:this.scene, screen:this.screen, text:`${d.name} – ${d.position}`, viewport:this.viewport, bend, textColor, borderRadius, cardScale })); }
   onTouchDown(e){ this.isDown=true; this.scroll.position=this.scroll.current; this.start=e.touches?e.touches[0].clientX:e.clientX; }
   onTouchMove(e){ if(!this.isDown) return; const x=e.touches?e.touches[0].clientX:e.clientX; const dist=(this.start-x)*(this.scrollSpeed*0.025); this.scroll.target=this.scroll.position+dist; }
   onTouchUp(){ this.isDown=false; this.onCheck(); }
   onWheel(e){ /* deaktiviert: kein Scrollen des Karussells bei Seiten-Scroll */ }
   onCheck(){ if(!this.medias||!this.medias[0]) return; const width=this.medias[0].width; const itemIndex=Math.round(Math.abs(this.scroll.target)/width); const item=width*itemIndex; this.scroll.target=this.scroll.target<0?-item:item; }
   onResize(){ const rect=this.container.getBoundingClientRect(); const w=Math.max(1,rect.width); const h=Math.max(1,rect.height); this.screen={ width:w, height:h }; this.renderer.setSize(w,h); this.gl.viewport(0,0,w,h); this.camera.perspective({ aspect:w/h }); const fov=(this.camera.fov*Math.PI)/180; const vh=2*Math.tan(fov/2)*this.camera.position.z; const vw=vh*this.camera.aspect; this.viewport={ width:vw, height:vh }; if(this.medias){ this.medias.forEach(m=>m.onResize({ screen:this.screen, viewport:this.viewport })); } }
-  update(){ this.scroll.current=lerp(this.scroll.current,this.scroll.target,this.scroll.ease); const dir=this.scroll.current>this.scroll.last?'right':'left'; if(this.medias){ this.medias.forEach(m=>m.update(this.scroll,dir)); } try{ this.renderer.render({ scene:this.scene, camera:this.camera }); }catch(_e){} this.scroll.last=this.scroll.current; this.raf=window.requestAnimationFrame(this.update.bind(this)); }
+  update(){ const now=performance.now(); const dt=this.lastTs? (now-this.lastTs)/1000 : 0; this.lastTs=now; const unitWidth=(this.medias&&this.medias[0]? this.medias[0].width:1); // langsames Auto-Scrollen
+    this.scroll.target += this.autoScrollDir * this.autoScrollSpeed * unitWidth * dt;
+    this.scroll.current=lerp(this.scroll.current,this.scroll.target,this.scroll.ease); const dir=this.scroll.current>this.scroll.last?'right':'left'; if(this.medias){ this.medias.forEach(m=>m.update(this.scroll,dir)); } try{ this.renderer.render({ scene:this.scene, camera:this.camera }); }catch(_e){} this.scroll.last=this.scroll.current; this.raf=window.requestAnimationFrame(this.update.bind(this)); }
   addEventListeners(){ this.boundOnResize=this.onResize.bind(this); this.boundOnTouchDown=this.onTouchDown.bind(this); this.boundOnTouchMove=this.onTouchMove.bind(this); this.boundOnTouchUp=this.onTouchUp.bind(this); window.addEventListener('resize',this.boundOnResize); /* wheel deaktiviert */ window.addEventListener('mousedown',this.boundOnTouchDown); window.addEventListener('mousemove',this.boundOnTouchMove); window.addEventListener('mouseup',this.onTouchUp.bind(this)); window.addEventListener('touchstart',this.boundOnTouchDown); window.addEventListener('touchmove',this.boundOnTouchMove); window.addEventListener('touchend',this.onTouchUp.bind(this)); }
   destroy(){ window.cancelAnimationFrame(this.raf); window.removeEventListener('resize',this.boundOnResize); window.removeEventListener('wheel',this.boundOnWheel); window.removeEventListener('mousedown',this.boundOnTouchDown); window.removeEventListener('mousemove',this.boundOnTouchMove); window.removeEventListener('mouseup',this.onTouchUp); window.removeEventListener('touchstart',this.boundOnTouchDown); window.removeEventListener('touchmove',this.boundOnTouchMove); window.removeEventListener('touchend',this.onTouchUp); if(this.renderer&&this.renderer.gl&&this.renderer.gl.canvas.parentNode){ this.renderer.gl.canvas.parentNode.removeChild(this.renderer.gl.canvas); } }
 }
@@ -125,7 +128,7 @@ function initCircularGallery(){
     { image:'https://i.pravatar.cc/800?img=68', name:'Mentor Sadiku', position:'Projektabgabe & Wartung' }
   ];
 
-  const app=new App(container,{ items, bend:1.6, textColor:'#ffffff', borderRadius:0.05, scrollSpeed:2, scrollEase:0.05 });
+  const app=new App(container,{ items, bend:1.6, textColor:'#ffffff', borderRadius:0.05, scrollSpeed:2, scrollEase:0.05, autoScrollSpeed:0.12 });
   window.__teamGallery=app;
   window.addEventListener('beforeunload', ()=>{ try{ app.destroy(); }catch(e){ console.error('Cleanup-Fehler', e); } });
 }
