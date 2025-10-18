@@ -63,13 +63,23 @@ function initLogoLoop(){
   const container=document.getElementById('heroLogoLoop');
   if(!container){ console.warn('⚠️ LogoLoop Container nicht gefunden'); return; }
   console.log('✅ Container gefunden');
+  // Fiktive Logos als transparente SVG-Data-URIs
+  function svgLogo(text, color='#E0E7FF', width=140, height=40, fontSize=18, fontWeight=800){
+    const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='${width}' height='${height}' viewBox='0 0 ${width} ${height}'>\n`+
+                `<g font-family='Inter, Space Grotesk, system-ui, -apple-system, Arial, sans-serif' font-weight='${fontWeight}' text-anchor='middle' dominant-baseline='middle'>\n`+
+                `<text x='50%' y='50%' fill='${color}' font-size='${fontSize}'>${text}</text>\n`+
+                `</g></svg>`;
+    return `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
+  }
   const logos=[
-    { src:'https://via.placeholder.com/120x40/333/fff?text=Logo+1', alt:'Partner 1' },
-    { src:'https://via.placeholder.com/120x40/333/fff?text=Logo+2', alt:'Partner 2' },
-    { src:'https://via.placeholder.com/120x40/333/fff?text=Logo+3', alt:'Partner 3' },
-    { src:'https://via.placeholder.com/120x40/333/fff?text=Logo+4', alt:'Partner 4' },
-    { src:'https://via.placeholder.com/120x40/333/fff?text=Logo+5', alt:'Partner 5' },
-    { src:'https://via.placeholder.com/120x40/333/fff?text=Logo+6', alt:'Partner 6' }
+    { src: svgLogo('RheinTech'), alt: 'RheinTech' },
+    { src: svgLogo('AlpenCloud'), alt: 'AlpenCloud' },
+    { src: svgLogo('SiebenCode'), alt: 'SiebenCode' },
+    { src: svgLogo('DeltaSoft'), alt: 'DeltaSoft' },
+    { src: svgLogo('NovaWorks'), alt: 'NovaWorks' },
+    { src: svgLogo('GammaLabs'), alt: 'GammaLabs' },
+    { src: svgLogo('BonnAI'), alt: 'BonnAI' },
+    { src: svgLogo('Honnef IT'), alt: 'Honnef IT' }
   ];
   const logoLoop=new LogoLoop(container,{ logos, speed:50, gap:48 });
   window.__heroLogoLoop=logoLoop;
