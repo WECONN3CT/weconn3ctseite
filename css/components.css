@@ -750,7 +750,7 @@
   letter-spacing: -0.02em;
   margin-bottom: var(--space-6);
   position: relative;
-  color: var(--gamma-gray); /* Basis: grau, Spotlight zeigt Verlauf */
+  color: #ffffff; /* Fallback-Farbe sichtbar auf dunklem BG */
   text-align: center;
 }
 
