@@ -113,7 +113,7 @@ function initCircularGallery(){
     { image:'https://i.pravatar.cc/800?img=68', name:'Mentor Sadiku', position:'Projektabgabe & Wartung' }
   ];
 
-  const app=new App(container,{ items, bend:3, textColor:'#ffffff', borderRadius:0.05, scrollSpeed:2, scrollEase:0.05 });
+  const app=new App(container,{ items, bend:1.6, textColor:'#ffffff', borderRadius:0.05, scrollSpeed:2, scrollEase:0.05 });
   window.__teamGallery=app;
   window.addEventListener('beforeunload', ()=>{ try{ app.destroy(); }catch(e){ console.error('Cleanup-Fehler', e); } });
 }
