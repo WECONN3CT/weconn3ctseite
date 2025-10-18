@@ -26,12 +26,44 @@ function createTextTexture(gl, text, font='bold 28px Figtree, Inter, sans-serif'
   return { texture, width: canvas.width, height: canvas.height };
 }
 
+// Emoji-Texture (als Bild-Platzhalter)
+function createEmojiTexture(gl, emoji='👤', options={}){
+  const size = options.size || 512;
+  const bgColor = options.bgColor || '#0B0B10';
+  const gradientFrom = options.gradientFrom || '#1b1f3a';
+  const gradientTo = options.gradientTo || '#242b57';
+  const emojiFontPx = options.emojiFontPx || Math.floor(size * 0.55);
+  const canvas = document.createElement('canvas');
+  const ctx = canvas.getContext('2d');
+  canvas.width = canvas.height = size;
+
+  // Hintergrund mit radialem Verlauf
+  const g = ctx.createRadialGradient(size*0.35,size*0.35,size*0.1, size*0.5,size*0.6,size*0.9);
+  g.addColorStop(0, gradientFrom);
+  g.addColorStop(1, gradientTo);
+  ctx.fillStyle = g;
+  ctx.fillRect(0,0,size,size);
+
+  // Emoji mittig zeichnen
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.font = `bold ${emojiFontPx}px Apple Color Emoji, Segoe UI Emoji, Noto Color Emoji, sans-serif`;
+  ctx.fillStyle = '#ffffff';
+  ctx.fillText(emoji, size/2, size/2);
+
+  const texture = new Texture(gl,{ generateMipmaps: true });
+  texture.image = canvas;
+  return { texture, width: canvas.width, height: canvas.height };
+}
+
 class Title{ constructor({gl, plane, text, textColor='#ffffff', font='bold 28px Figtree, Inter, sans-serif'}){ autoBind(this); this.gl=gl; this.plane=plane; this.text=text; this.textColor=textColor; this.font=font; this.createMesh(); }
   createMesh(){ const {texture,width,height}=createTextTexture(this.gl,this.text,this.font,this.textColor); const geometry=new Plane(this.gl); const program=new Program(this.gl,{ vertex:`attribute vec3 position; attribute vec2 uv; uniform mat4 modelViewMatrix; uniform mat4 projectionMatrix; varying vec2 vUv; void main(){ vUv=uv; gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0); }`, fragment:`precision highp float; uniform sampler2D tMap; varying vec2 vUv; void main(){ vec4 c=texture2D(tMap,vUv); if(c.a<0.1) discard; gl_FragColor=c; }`, uniforms:{ tMap:{ value:texture } }, transparent:true }); this.mesh=new Mesh(this.gl,{ geometry, program }); const aspect=width/height; const textH=this.plane.scale.y*0.14; const textW=textH*aspect; this.mesh.scale.set(textW,textH,1); this.mesh.position.y=-this.plane.scale.y*0.5 - textH*0.55; this.mesh.setParent(this.plane); }
 }
 
-class Media{ constructor({geometry,gl,image,index,length,renderer,scene,screen,text,viewport,bend,textColor,borderRadius=0}){ this.extra=0; this.geometry=geometry; this.gl=gl; this.image=image; this.index=index; this.length=length; this.renderer=renderer; this.scene=scene; this.screen=screen; this.text=text; this.viewport=viewport; this.bend=bend; this.textColor=textColor; this.borderRadius=borderRadius; this.createShader(); this.createMesh(); this.createTitle(); this.onResize(); }
+class Media{ constructor({geometry,gl,image,emoji,index,length,renderer,scene,screen,text,viewport,bend,textColor,borderRadius=0}){ this.extra=0; this.geometry=geometry; this.gl=gl; this.image=image; this.emoji=emoji; this.index=index; this.length=length; this.renderer=renderer; this.scene=scene; this.screen=screen; this.text=text; this.viewport=viewport; this.bend=bend; this.textColor=textColor; this.borderRadius=borderRadius; this.createShader(); this.createMesh(); this.createTitle(); this.onResize(); }
   createShader(){ const texture=new Texture(this.gl,{generateMipmaps:true}); this.program=new Program(this.gl,{ depthTest:false, depthWrite:false, vertex:`precision highp float; attribute vec3 position; attribute vec2 uv; uniform mat4 modelViewMatrix; uniform mat4 projectionMatrix; varying vec2 vUv; void main(){ vUv=uv; vec3 p=position; p.z=0.0; gl_Position=projectionMatrix*modelViewMatrix*vec4(p,1.0); }`, fragment:`precision highp float; uniform vec2 uImageSizes; uniform vec2 uPlaneSizes; uniform sampler2D tMap; uniform float uBorderRadius; uniform float uUseTexture; uniform float uAASoftness; varying vec2 vUv; float roundedBoxSDF(vec2 p, vec2 b, float r){ vec2 d=abs(p)-b; return length(max(d,vec2(0.0)))+min(max(d.x,d.y),0.0)-r; } void main(){ vec2 ratio=vec2( min((uPlaneSizes.x/uPlaneSizes.y)/(uImageSizes.x/uImageSizes.y),1.0), min((uPlaneSizes.y/uPlaneSizes.x)/(uImageSizes.y/uImageSizes.x),1.0)); vec2 uv=vec2( vUv.x*ratio.x+(1.0-ratio.x)*0.5, vUv.y*ratio.y+(1.0-ratio.y)*0.5 ); vec4 tex=texture2D(tMap,uv); vec3 baseRgb=mix(vec3(0.0), tex.rgb, uUseTexture); float d=roundedBoxSDF(vUv-0.5, vec2(0.5-uBorderRadius), uBorderRadius); float aa=uAASoftness; float alpha=1.0-smoothstep(0.0, aa, d); gl_FragColor=vec4(baseRgb, alpha); }`, uniforms:{ tMap:{ value:texture }, uPlaneSizes:{ value:[0,0] }, uImageSizes:{ value:[0,0] }, uBorderRadius:{ value:this.borderRadius }, uUseTexture:{ value:0 }, uAASoftness:{ value:0.003 } }, transparent:true });
+    // Emoji bevorzugen
+    if(this.emoji){ const { texture:emoTex, width, height } = createEmojiTexture(this.gl, this.emoji); this.program.uniforms.tMap.value = emoTex; this.program.uniforms.uImageSizes.value = [width, height]; this.program.uniforms.uUseTexture.value = 1.0; return; }
     const img=new Image(); img.crossOrigin='anonymous';
     const isAbsolute=/^(https?:)?\/\//i.test(this.image);
     const trySources=isAbsolute
@@ -54,10 +86,10 @@ class App{ constructor(container,{items,bend=3,textColor='#ffffff',borderRadius=
   createScene(){ this.scene=new Transform(); }
   createGeometry(){ this.planeGeometry=new Plane(this.gl,{ heightSegments:1, widthSegments:1 }); }
   createMedias(items,bend,textColor,borderRadius,font){ const fallback=[
-    { image:'Images/teams/leonardo.png', name:'Leonardo Braun', position:'Projekt- & Designmanagement' },
-    { image:'Images/teams/thinesh.png',  name:'Thinesh Rajabalah', position:'Programmierung' },
-    { image:'Images/teams/mentor.png',   name:'Mentor Sadiku', position:'Projektabgabe & Wartung' }
-  ]; const data=(items&&items.length?items:fallback); const gallery=data.concat(data); this.medias=gallery.map((d,idx)=> new Media({ geometry:this.planeGeometry, gl:this.gl, image:d.image, index:idx, length:gallery.length, renderer:this.renderer, scene:this.scene, screen:this.screen, text:`${d.name} – ${d.position}`, viewport:this.viewport, bend, textColor, borderRadius })); }
+    { emoji:'👨‍🎨', name:'Leonardo Braun', position:'Projekt- & Designmanagement' },
+    { emoji:'👨‍💻',  name:'Thinesh Rajabalah', position:'Programmierung' },
+    { emoji:'🧩',   name:'Mentor Sadiku', position:'Projektabgabe & Wartung' }
+  ]; const data=(items&&items.length?items:fallback); const gallery=data.concat(data); this.medias=gallery.map((d,idx)=> new Media({ geometry:this.planeGeometry, gl:this.gl, image:d.image, emoji:d.emoji||'👤', index:idx, length:gallery.length, renderer:this.renderer, scene:this.scene, screen:this.screen, text:`${d.name} – ${d.position}`, viewport:this.viewport, bend, textColor, borderRadius })); }
   onTouchDown(e){ this.isDown=true; this.scroll.position=this.scroll.current; this.start=e.touches?e.touches[0].clientX:e.clientX; }
   onTouchMove(e){ if(!this.isDown) return; const x=e.touches?e.touches[0].clientX:e.clientX; const dist=(this.start-x)*(this.scrollSpeed*0.025); this.scroll.target=this.scroll.position+dist; }
   onTouchUp(){ this.isDown=false; this.onCheck(); }
