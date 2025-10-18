@@ -30,8 +30,13 @@ class LogoLoop {
         item.className='logo-loop__item shiny';
         const img=document.createElement('img');
         img.src=logo.src; img.alt=logo.alt||'Logo'; img.loading='lazy'; img.draggable=false;
-        // Shine nur über Schrift: Bild als Mask auf dem Item setzen
-        const setMask=()=>{ try{ item.style.setProperty('--logo-mask', `url("${img.src}")`); }catch(_e){} };
+        // Shine nur über Schrift: Bild als Mask direkt auf dem Item setzen (breiter Browser-Support)
+        const setMask=()=>{
+          try{
+            item.style.webkitMaskImage = `url('${img.src}')`;
+            item.style.maskImage = `url('${img.src}')`;
+          }catch(_e){}
+        };
         if(img.complete){ setMask(); } else { img.addEventListener('load', setMask); img.addEventListener('error', setMask); }
         if(logo.href){ const link=document.createElement('a'); link.href=logo.href; link.target='_blank'; link.rel='noopener noreferrer'; link.appendChild(img); item.appendChild(link); }
         else { item.appendChild(img); }
