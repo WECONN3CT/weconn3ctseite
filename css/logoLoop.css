@@ -40,10 +40,6 @@
 }
 
 /* Shiny Text Effekt auf Logos */
-.logo-loop__item.shiny img {
-  position: relative;
-}
-
 .logo-loop__item.shiny::after {
   content: '';
   position: absolute;
@@ -60,6 +56,15 @@
   animation: logo-shine 3s linear infinite;
   pointer-events: none;
   z-index: 1;
+  /* Shine nur auf die Schrift (Logo-Alpha als Maske) */
+  -webkit-mask-image: var(--logo-mask);
+  mask-image: var(--logo-mask);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-position: center;
+  mask-position: center;
 }
 
 @keyframes logo-shine {
