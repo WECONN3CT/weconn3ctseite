@@ -120,6 +120,8 @@ class BlurText {
       };
 
       const animation = span.animate(keyframes, timing);
+      // Zusätzlich: Klasse für CSS-Transition setzen, damit Gradient + Blur koordiniert sind
+      span.classList.add('animate-in');
       animation.addEventListener('finish', () => {
         finishedCount += 1;
         if (finishedCount === total) {

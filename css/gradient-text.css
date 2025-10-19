@@ -18,7 +18,8 @@
     color: transparent;
     animation: gradient-flow 8s linear infinite;
   }
-  /* Spans erben den Gradient, ohne die BlurText-Animation zu blockieren */
+  
+  /* Spans erben Gradient */
   .hero-title.gradient-text span {
     background: inherit;
     background-size: inherit;
@@ -26,13 +27,21 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     color: transparent;
-    /* keine erzwungene opacity/transform/filter hier */
+    display: inline-block;
   }
-  /* Nach Abschluss der BlurText-Animation: sichtbarer, stabiler Zustand */
-  .hero-title.gradient-text.blur-text-complete span {
+  
+  /* WICHTIG: Spans starten UNSICHTBAR für BlurText-Animation */
+  .hero-title.gradient-text[data-blur-text] span {
+    opacity: 0;
+    filter: blur(10px);
+    transform: translateY(-20px);
+  }
+  
+  /* BlurText wird diese Klasse auf animierte Spans setzen */
+  .hero-title.gradient-text span.animate-in {
     opacity: 1 !important;
-    transform: none !important;
-    filter: none !important;
+    filter: blur(0px) !important;
+    transform: translateY(0) !important;
   }
 }
 
@@ -46,6 +55,20 @@
 
 /* Responsive Anpassungen */
 @media (max-width: 768px) { .hero-title.gradient-text { font-size: clamp(1.5rem, 5vw, 3rem); } }
+
+/* Smooth Transition für Blur-to-Clear Animation */
+.hero-title.gradient-text[data-blur-text] span {
+  transition: 
+    opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+    filter 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Stelle sicher dass der Container sichtbar ist */
+.hero-title.gradient-text[data-blur-text] {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
 
 /* Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
