@@ -18,9 +18,14 @@
     color: transparent;
     animation: gradient-flow 8s linear infinite;
   }
-  /* Spans erhalten keine eigenen Hintergründe, nur transparente Füllung, damit der Elterngradient als Einheit wirkt */
+  /* Fix: Wenn der Titel in Spans aufgeteilt wird, muss der Gradient auch auf die
+     Spans angewendet werden. Sonst bleibt der Text transparent. */
   .hero-title.gradient-text span {
-    background: none !important;
+    background: inherit;
+    background-size: inherit;
+    background-position: inherit;
+    background-clip: text;
+    -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     color: transparent;
     opacity: 1 !important;           /* falls BlurText initial auf 0 setzt */
