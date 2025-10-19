@@ -141,3 +141,9 @@
     animation: none !important;
   }
 }
+
+/* Override: Shiny-Effekt in der Glasbar deaktivieren */
+.glass-bar .logo-loop__item.shiny::after {
+  content: none !important;
+  animation: none !important;
+}
