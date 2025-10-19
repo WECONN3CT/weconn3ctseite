@@ -18,6 +18,8 @@ class LogoLoop {
     if(this.logos.length===0){ console.warn('⚠️ Keine Logos definiert'); return; }
     this.createLogoElements();
     this.calculateDimensions();
+    // Markiere: JS läuft (deaktiviert CSS-Fallback-Animation)
+    this.track.setAttribute('data-js-running','true');
     this.start();
     this.setupEventListeners();
     console.log('✅ LogoLoop erfolgreich initialisiert');
