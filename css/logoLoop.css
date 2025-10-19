@@ -160,3 +160,12 @@
 .glass-bar .logo-loop {
   width: 100%;
 }
+
+/* Größere Logos in der Glasbar, weiterhin vertikal mittig */
+.glass-bar .logo-loop__item {
+  height: 56px; /* vorher 32px */
+}
+
+@media (max-width: 768px) {
+  .glass-bar .logo-loop__item { height: 44px; }
+}
