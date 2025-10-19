@@ -18,19 +18,21 @@
     color: transparent;
     animation: gradient-flow 8s linear infinite;
   }
-  /* Fix: Wenn der Titel in Spans aufgeteilt wird, muss der Gradient auch auf die
-     Spans angewendet werden. Sonst bleibt der Text transparent. */
+  /* Spans erben den Gradient, ohne die BlurText-Animation zu blockieren */
   .hero-title.gradient-text span {
     background: inherit;
     background-size: inherit;
-    background-position: inherit;
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     color: transparent;
-    opacity: 1 !important;           /* falls BlurText initial auf 0 setzt */
-    transform: none !important;       /* verhindert, dass Worte außerhalb liegen */
-    filter: none !important;          /* entfernt etwaige Blur/opacity Filter */
+    /* keine erzwungene opacity/transform/filter hier */
+  }
+  /* Nach Abschluss der BlurText-Animation: sichtbarer, stabiler Zustand */
+  .hero-title.gradient-text.blur-text-complete span {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
   }
 }
 

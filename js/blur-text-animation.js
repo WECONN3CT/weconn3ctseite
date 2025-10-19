@@ -83,6 +83,9 @@ class BlurText {
   }
 
   animate() {
+    let finishedCount = 0;
+    const total = this.spans.length;
+
     this.spans.forEach((span, index) => {
       const delay = index * this.options.delay;
 
@@ -116,7 +119,14 @@ class BlurText {
         delay
       };
 
-      span.animate(keyframes, timing);
+      const animation = span.animate(keyframes, timing);
+      animation.addEventListener('finish', () => {
+        finishedCount += 1;
+        if (finishedCount === total) {
+          // Markiere den Container als abgeschlossen, damit CSS den stabilen Zustand erzwingt
+          this.element.classList.add('blur-text-complete');
+        }
+      });
     });
   }
 }
