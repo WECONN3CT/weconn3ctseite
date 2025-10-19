@@ -23,6 +23,9 @@
     background: none !important;
     -webkit-text-fill-color: transparent;
     color: transparent;
+    opacity: 1 !important;           /* falls BlurText initial auf 0 setzt */
+    transform: none !important;       /* verhindert, dass Worte außerhalb liegen */
+    filter: none !important;          /* entfernt etwaige Blur/opacity Filter */
   }
 }
 

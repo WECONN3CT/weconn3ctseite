@@ -756,7 +756,7 @@
 
 /* Optional: bessere Darstellung in Kombination mit BlurText */
 .hero-title-glass[data-blur-text] { line-height: 1.3; min-height: 1.3em; }
-.hero-title-glass[data-blur-text] span { transition: none; }
+.hero-title-glass[data-blur-text] span { transition: none; opacity: 1 !important; filter: none !important; transform: none !important; }
 
 .hero-subtitle {
   font-size: var(--text-xl);
