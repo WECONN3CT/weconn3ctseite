@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio | weconn3ct</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1a1a2e;
+            --secondary: #f8f9ff;
+            --accent-purple: #8b5cf6;
+            --accent-blue: #3b82f6;
+            --accent-purple-dark: #7c3aed;
+            --accent-blue-dark: #2563eb;
+            --text-light: #64748b;
+            --text-lighter: #94a3b8;
+            --gradient-primary: linear-gradient(135deg, #8b5cf6 0%, #3b82f6 100%);
+            --gradient-purple: linear-gradient(135deg, #a78bfa 0%, #8b5cf6 100%);
+            --gradient-blue: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
+        }
+
+        body {
+            font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #ffffff;
+            color: var(--primary);
+            overflow-x: hidden;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 16px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Outfit', sans-serif;
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--primary);
+            text-decoration: none;
+            letter-spacing: -1px;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .logo span {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-purple);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .cta-button {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 10px 24px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(139, 92, 246, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 30px rgba(139, 92, 246, 0.5);
+        }
+
+        /* Page Header */
+        .page-header {
+            padding: 160px 40px 100px;
+            background: linear-gradient(135deg, #f8f9ff 0%, #eff6ff 100%);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -20%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .page-header-content {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .page-badge {
+            display: inline-block;
+            padding: 8px 20px;
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--accent-blue);
+            margin-bottom: 24px;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.2s forwards;
+        }
+
+        .page-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: clamp(48px, 7vw, 80px);
+            font-weight: 800;
+            letter-spacing: -3px;
+            margin-bottom: 24px;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.4s forwards;
+        }
+
+        .page-title .gradient-text {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .page-subtitle {
+            font-size: 22px;
+            color: var(--text-light);
+            line-height: 1.7;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.6s forwards;
+        }
+
+        /* Filter Tabs */
+        .filter-section {
+            padding: 80px 40px 40px;
+            background: #ffffff;
+        }
+
+        .filter-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .filter-tabs {
+            display: inline-flex;
+            gap: 16px;
+            padding: 8px;
+            background: var(--secondary);
+            border-radius: 50px;
+            margin-bottom: 60px;
+        }
+
+        .filter-tab {
+            padding: 12px 32px;
+            background: transparent;
+            border: none;
+            border-radius: 50px;
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--primary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-tab:hover {
+            background: rgba(139, 92, 246, 0.1);
+        }
+
+        .filter-tab.active {
+            background: var(--gradient-primary);
+            color: white;
+            box-shadow: 0 4px 20px rgba(139, 92, 246, 0.3);
+        }
+
+        /* Portfolio Grid */
+        .portfolio-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px 120px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
+            gap: 40px;
+        }
+
+        .portfolio-item {
+            background: white;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+            transform: translateY(30px);
+            cursor: pointer;
+        }
+
+        .portfolio-item.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.15);
+        }
+
+        .portfolio-image {
+            width: 100%;
+            height: 320px;
+            background: linear-gradient(135deg, #e0e7ff 0%, #dbeafe 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .portfolio-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--gradient-primary);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .portfolio-item:hover .portfolio-image::after {
+            opacity: 0.1;
+        }
+
+        .portfolio-content {
+            padding: 32px;
+        }
+
+        .portfolio-category {
+            display: inline-block;
+            padding: 6px 16px;
+            background: rgba(139, 92, 246, 0.1);
+            color: var(--accent-purple);
+            border-radius: 50px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 16px;
+        }
+
+        .portfolio-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            letter-spacing: -0.5px;
+        }
+
+        .portfolio-description {
+            color: var(--text-light);
+            line-height: 1.7;
+            margin-bottom: 24px;
+        }
+
+        .portfolio-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 24px;
+        }
+
+        .portfolio-tag {
+            padding: 6px 14px;
+            background: var(--secondary);
+            border-radius: 50px;
+            font-size: 13px;
+            color: var(--text-light);
+        }
+
+        .portfolio-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--accent-purple);
+            font-weight: 600;
+            text-decoration: none;
+            transition: gap 0.3s ease;
+        }
+
+        .portfolio-link:hover {
+            gap: 16px;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            padding: 120px 40px;
+            background: var(--gradient-primary);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stats-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse"><path d="M 100 0 L 0 0 0 100" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.5;
+        }
+
+        .stats-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 60px;
+            text-align: center;
+        }
+
+        .stat-item {
+            color: white;
+        }
+
+        .stat-number {
+            font-family: 'Outfit', sans-serif;
+            font-size: 64px;
+            font-weight: 800;
+            margin-bottom: 12px;
+            opacity: 0;
+        }
+
+        .stat-label {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+
+        /* Testimonials */
+        .testimonials-section {
+            padding: 120px 40px;
+            background: #ffffff;
+        }
+
+        .testimonials-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .section-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: clamp(40px, 5vw, 64px);
+            font-weight: 800;
+            letter-spacing: -2px;
+            margin-bottom: 24px;
+        }
+
+        .section-description {
+            font-size: 20px;
+            color: var(--text-light);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+        }
+
+        .testimonial-card {
+            background: linear-gradient(135deg, #f8f9ff 0%, #eff6ff 100%);
+            padding: 48px;
+            border-radius: 24px;
+            transition: all 0.5s ease;
+            opacity: 0;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.1);
+        }
+
+        .testimonial-stars {
+            color: #fbbf24;
+            font-size: 24px;
+            margin-bottom: 24px;
+        }
+
+        .testimonial-text {
+            font-size: 17px;
+            line-height: 1.8;
+            color: var(--primary);
+            margin-bottom: 32px;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .author-avatar {
+            width: 56px;
+            height: 56px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .author-info h4 {
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .author-info p {
+            font-size: 14px;
+            color: var(--text-light);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 160px 40px;
+            background: linear-gradient(135deg, #1a1a2e 0%, #2d2d44 100%);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.2) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .cta-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-content h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: clamp(40px, 6vw, 72px);
+            font-weight: 800;
+            color: white;
+            margin-bottom: 24px;
+            letter-spacing: -2px;
+        }
+
+        .cta-content p {
+            font-size: 22px;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 48px;
+        }
+
+        .cta-button-large {
+            display: inline-block;
+            padding: 20px 60px;
+            background: var(--gradient-primary);
+            color: white;
+            border-radius: 50px;
+            font-size: 20px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 20px 60px rgba(139, 92, 246, 0.4);
+        }
+
+        .cta-button-large:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 30px 80px rgba(139, 92, 246, 0.6);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary);
+            color: white;
+            padding: 80px 40px 40px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 60px;
+        }
+
+        .footer-brand h3 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 16px;
+        }
+
+        .footer-brand h3 span {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .footer-brand p {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.8;
+        }
+
+        .footer-column h4 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 16px;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            padding-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes countUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .nav-links {
+                gap: 20px;
+            }
+
+            .portfolio-grid,
+            .testimonials-grid,
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .filter-tabs {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="weconn3ct-startseite.html" class="logo">wec<span>onn3ct</span></a>
+            <ul class="nav-links">
+                <li><a href="leistungen.html">Leistungen</a></li>
+                <li><a href="portfolio.html" class="active">Projekte</a></li>
+                <li><a href="ueber-uns.html">Über uns</a></li>
+                <li><a href="kontakt.html" class="cta-button">Kontakt</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="page-header-content">
+            <div class="page-badge">🎨 UNSERE ARBEIT</div>
+            <h1 class="page-title">
+                Projekte, die<br>
+                <span class="gradient-text">begeistern</span>
+            </h1>
+            <p class="page-subtitle">
+                Von innovativen Web-Apps bis zu eleganten Websites – hier findest du eine Auswahl<br>
+                unserer erfolgreichsten Projekte und zufriedensten Kunden
+            </p>
+        </div>
+    </section>
+
+    <!-- Filter Section -->
+    <section class="filter-section">
+        <div class="filter-container">
+            <div class="filter-tabs">
+                <button class="filter-tab active" data-filter="all">Alle Projekte</button>
+                <button class="filter-tab" data-filter="web">Websites</button>
+                <button class="filter-tab" data-filter="app">Apps</button>
+                <button class="filter-tab" data-filter="design">Design</button>
+                <button class="filter-tab" data-filter="ai">KI-Integration</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Grid -->
+    <section class="portfolio-grid">
+        <!-- Portfolio Item 1 -->
+        <div class="portfolio-item" data-category="web app">
+            <div class="portfolio-image">🏦</div>
+            <div class="portfolio-content">
+                <span class="portfolio-category">Web-App</span>
+                <h3 class="portfolio-title">FinanceFlow Dashboard</h3>
+                <p class="portfolio-description">
+                    Eine moderne Finanz-Management Plattform mit Echtzeit-Analytics und KI-gestützten Insights für mittelständische Unternehmen.
+                </p>
+                <div class="portfolio-tags">
+                    <span class="portfolio-tag">React</span>
+                    <span class="portfolio-tag">Node.js</span>
+                    <span class="portfolio-tag">AI/ML</span>
+                    <span class="portfolio-tag">Dashboard</span>
+                </div>
+                <a href="#" class="portfolio-link">Case Study ansehen →</a>
+            </div>
+        </div>
+
+        <!-- Portfolio Item 2 -->
+        <div class="portfolio-item" data-category="app">
+            <div class="portfolio-image">🍽️</div>
+            <div class="portfolio-content">
+                <span class="portfolio-category">Mobile App</span>
+                <h3 class="portfolio-title">FoodieDelight</h3>
+                <p class="portfolio-description">
+                    Eine intuitive Restaurant-Finder App mit personalisierten Empfehlungen und nahtloser Buchungsfunktion.
+                </p>
+                <div class="portfolio-tags">
+                    <span class="portfolio-tag">React Native</span>
+                    <span class="portfolio-tag">Firebase</span>
+                    <span class="portfolio-tag">Maps API</span>
+                </div>
+                <a href="#" class="portfolio-link">Case Study ansehen →</a>
+            </div>
+        </div>
+
+        <!-- Portfolio Item 3 -->
+        <div class="portfolio-item" data-category="web design">
+            <div class="portfolio-image">🏢</div>
+            <div class="portfolio-content">
+                <span class="portfolio-category">Website</span>
+                <h3 class="portfolio-title">TechCorp Corporate</h3>
+                <p class="portfolio-description">
+                    Eine elegante Corporate Website mit modernem Design, Multi-Language Support und CMS-Integration.
+                </p>
+                <div class="portfolio-tags">
+                    <span class="portfolio-tag">Next.js</span>
+                    <span class="portfolio-tag">WordPress</span>
+                    <span class="portfolio-tag">SEO</span>
+                </div>
+                <a href="#" class="portfolio-link">Case Study ansehen →</a>
+            </div>
+        </div>
+
+        <!-- Portfolio Item 4 -->
+        <div class="portfolio-item" data-category="app ai">
+            <div class="portfolio-image">🏋️</div>
+            <div class="portfolio-content">
+                <span class="portfolio-category">Fitness App</span>
+                <h3 class="portfolio-title">FitGenius AI</h3>
+                <p class="portfolio-description">
+                    KI-gestützte Fitness-App mit personalisierten Trainingsplänen, Ernährungsberatung und Progress-Tracking.
+                </p>
+                <div class="portfolio-tags">
+                    <span class="portfolio-tag">Flutter</span>
+                    <span class="portfolio-tag">Machine Learning</span>
+                    <span class="portfolio-tag">HealthKit</span>
+                </div>
+                <a href="#" class="portfolio-link">Case Study ansehen →</a>
+            </div>
+        </div>
+
+        <!-- Portfolio Item 5 -->
+        <div class="portfolio-item" data-category="web">
+            <div class="portfolio-image">🛍️</div>
+            <div class="portfolio-content">
+                <span class="portfolio-category">E-Commerce</span>
+                <h3 class="portfolio-title">StyleHub Fashion</h3>
+                <p class="portfolio-description">
+                    Premium E-Commerce Plattform mit AR-Anprobe, Größenberatung und nahtlosem Checkout-Prozess.
+                </p>
+                <div class="portfolio-tags">
+                    <span class="portfolio-tag">Shopify</span>
+                    <span class="portfolio-tag">AR/VR</span>
+                    <span class="portfolio-tag">Payment</span>
+                </div>
+                <a href="#" class="portfolio-link">Case Study ansehen →</a>
+            </div>
+        </div>
+
+        <!-- Portfolio Item 6 -->
+        <div class="portfolio-item" data-category="design web">
+            <div class="portfolio-image">🎨</div>
+            <div class="portfolio-content">
+                <span class="portfolio-category">Portfolio</span>
+                <h3 class="portfolio-title">CreativeStudio Portfolio</h3>
+                <p class="portfolio-description">
+                    Visuell beeindruckendes Portfolio für eine Kreativagentur mit Animationen und interaktiven Showcases.
+                </p>
+                <div class="portfolio-tags">
+                    <span class="portfolio-tag">WebGL</span>
+                    <span class="portfolio-tag">GSAP</span>
+                    <span class="portfolio-tag">3D</span>
+                </div>
+                <a href="#" class="portfolio-link">Case Study ansehen →</a>
+            </div>
+        </div>
+
+        <!-- Portfolio Item 7 -->
+        <div class="portfolio-item" data-category="web ai">
+            <div class="portfolio-image">🎓</div>
+            <div class="portfolio-content">
+                <span class="portfolio-category">EdTech</span>
+                <h3 class="portfolio-title">LearnSmart Platform</h3>
+                <p class="portfolio-description">
+                    Adaptive Learning-Plattform mit KI-basierten Lernpfaden und interaktiven Video-Kursen.
+                </p>
+                <div class="portfolio-tags">
+                    <span class="portfolio-tag">Vue.js</span>
+                    <span class="portfolio-tag">AI Tutor</span>
+                    <span class="portfolio-tag">Video</span>
+                </div>
+                <a href="#" class="portfolio-link">Case Study ansehen →</a>
+            </div>
+        </div>
+
+        <!-- Portfolio Item 8 -->
+        <div class="portfolio-item" data-category="app">
+            <div class="portfolio-image">🚗</div>
+            <div class="portfolio-content">
+                <span class="portfolio-category">Mobility App</span>
+                <h3 class="portfolio-title">DriveShare Connect</h3>
+                <p class="portfolio-description">
+                    Carsharing-App mit Echtzeit-Verfügbarkeit, Smart-Routing und nahtloser Zahlungsintegration.
+                </p>
+                <div class="portfolio-tags">
+                    <span class="portfolio-tag">React Native</span>
+                    <span class="portfolio-tag">GPS</span>
+                    <span class="portfolio-tag">Payment</span>
+                </div>
+                <a href="#" class="portfolio-link">Case Study ansehen →</a>
+            </div>
+        </div>
+
+        <!-- Portfolio Item 9 -->
+        <div class="portfolio-item" data-category="web design">
+            <div class="portfolio-image">🏨</div>
+            <div class="portfolio-content">
+                <span class="portfolio-category">Booking Website</span>
+                <h3 class="portfolio-title">LuxuryStay Hotels</h3>
+                <p class="portfolio-description">
+                    Elegante Hotel-Buchungsplattform mit 360°-Touren, Live-Verfügbarkeit und Multi-Property Management.
+                </p>
+                <div class="portfolio-tags">
+                    <span class="portfolio-tag">Next.js</span>
+                    <span class="portfolio-tag">360° Tours</span>
+                    <span class="portfolio-tag">Booking</span>
+                </div>
+                <a href="#" class="portfolio-link">Case Study ansehen →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="stats-container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number" data-target="150">0</div>
+                    <div class="stat-label">Erfolgreich abgeschlossene Projekte</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-target="98">0</div>
+                    <div class="stat-label">Kundenzufriedenheit (%)</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-target="50">0</div>
+                    <div class="stat-label">Zufriedene Kunden</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-target="12">0</div>
+                    <div class="stat-label">Awards & Auszeichnungen</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials-section">
+        <div class="testimonials-container">
+            <div class="section-header">
+                <h2 class="section-title">Was Kunden sagen</h2>
+                <p class="section-description">
+                    Ehrliches Feedback von echten Menschen, die mit uns zusammengearbeitet haben
+                </p>
+            </div>
+
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">
+                        "Die Zusammenarbeit mit weconn3ct war fantastisch. Sie haben unsere Vision perfekt umgesetzt und dabei sogar unsere Erwartungen übertroffen. Das Team ist professionell, kreativ und sehr reaktionsschnell."
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">MK</div>
+                        <div class="author-info">
+                            <h4>Maria Klein</h4>
+                            <p>CEO, TechCorp GmbH</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">
+                        "Von der ersten Idee bis zum Launch – alles lief reibungslos. Die Expertise in Sachen UX/UI ist beeindruckend. Unsere neue Website generiert 40% mehr Leads als zuvor!"
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">TS</div>
+                        <div class="author-info">
+                            <h4>Thomas Schmidt</h4>
+                            <p>Marketing Director, StyleHub</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">
+                        "Absolute Profis! Die App läuft super stabil und sieht fantastisch aus. Besonders beeindruckend war die Beratung zur KI-Integration. Kann ich nur weiterempfehlen!"
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">LW</div>
+                        <div class="author-info">
+                            <h4>Laura Weber</h4>
+                            <p>Founder, FitGenius</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2>Dein Projekt könnte das nächste sein</h2>
+            <p>Lass uns gemeinsam etwas Außergewöhnliches erschaffen</p>
+            <a href="kontakt.html" class="cta-button-large">Projekt besprechen</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>wec<span>onn3ct</span></h3>
+                    <p>Wir verbinden kreatives Design mit technischer Exzellenz, um digitale Erlebnisse zu schaffen, die Ihr Unternehmen voranbringen.</p>
+                </div>
+                <div class="footer-column">
+                    <h4>Unternehmen</h4>
+                    <ul class="footer-links">
+                        <li><a href="ueber-uns.html">Über uns</a></li>
+                        <li><a href="ueber-uns.html#team">Team</a></li>
+                        <li><a href="karriere.html">Karriere</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Services</h4>
+                    <ul class="footer-links">
+                        <li><a href="leistungen.html">Webentwicklung</a></li>
+                        <li><a href="leistungen.html">App-Entwicklung</a></li>
+                        <li><a href="leistungen.html">UI/UX Design</a></li>
+                        <li><a href="leistungen.html">Beratung</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Kontakt</h4>
+                    <ul class="footer-links">
+                        <li><a href="mailto:hello@weconn3ct.com">hello@weconn3ct.com</a></li>
+                        <li><a href="tel:+49123456789">+49 123 456 789</a></li>
+                        <li><a href="#">LinkedIn</a></li>
+                        <li><a href="#">Instagram</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 weconn3ct. Alle Rechte vorbehalten. Made with ❤️ in Germany</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Filter functionality
+        const filterTabs = document.querySelectorAll('.filter-tab');
+        const portfolioItems = document.querySelectorAll('.portfolio-item');
+
+        filterTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Update active tab
+                filterTabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+
+                const filter = tab.dataset.filter;
+
+                // Filter items
+                portfolioItems.forEach((item, index) => {
+                    const category = item.dataset.category;
+                    
+                    if (filter === 'all' || category.includes(filter)) {
+                        setTimeout(() => {
+                            item.classList.add('show');
+                            item.style.display = 'block';
+                        }, index * 100);
+                    } else {
+                        item.classList.remove('show');
+                        setTimeout(() => {
+                            item.style.display = 'none';
+                        }, 300);
+                    }
+                });
+            });
+        });
+
+        // Show all items on load
+        window.addEventListener('load', () => {
+            portfolioItems.forEach((item, index) => {
+                setTimeout(() => {
+                    item.classList.add('show');
+                }, index * 100);
+            });
+        });
+
+        // Animate stats counter
+        const animateCounter = (element, target) => {
+            let current = 0;
+            const increment = target / 50;
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    element.textContent = target + (target === 98 ? '%' : '+');
+                    clearInterval(timer);
+                } else {
+                    element.textContent = Math.floor(current) + (target === 98 ? '%' : '+');
+                }
+            }, 30);
+        };
+
+        // Intersection Observer for stats
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const statNumbers = entry.target.querySelectorAll('.stat-number');
+                    statNumbers.forEach(stat => {
+                        stat.style.animation = 'countUp 0.8s ease forwards';
+                        const target = parseInt(stat.dataset.target);
+                        animateCounter(stat, target);
+                    });
+                    statsObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        const statsSection = document.querySelector('.stats-section');
+        if (statsSection) {
+            statsObserver.observe(statsSection);
+        }
+
+        // Scroll reveal for testimonials
+        const testimonialCards = document.querySelectorAll('.testimonial-card');
+        const testimonialObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }, index * 150);
+                }
+            });
+        }, { threshold: 0.2 });
+
+        testimonialCards.forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'all 0.6s ease';
+            testimonialObserver.observe(card);
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

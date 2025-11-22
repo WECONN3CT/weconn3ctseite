@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Über uns | weconn3ct</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1a1a2e;
+            --secondary: #f8f9ff;
+            --accent-purple: #8b5cf6;
+            --accent-blue: #3b82f6;
+            --accent-green: #10b981;
+            --accent-orange: #f97316;
+            --text-light: #64748b;
+            --gradient-primary: linear-gradient(135deg, #8b5cf6 0%, #3b82f6 100%);
+            --gradient-purple: linear-gradient(135deg, #a78bfa 0%, #8b5cf6 100%);
+            --gradient-blue: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
+        }
+
+        body {
+            font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #ffffff;
+            color: var(--primary);
+            overflow-x: hidden;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px) saturate(180%);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 16px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Outfit', sans-serif;
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--primary);
+            text-decoration: none;
+            letter-spacing: -1px;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .logo span {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-purple);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .cta-button {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 10px 24px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(139, 92, 246, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 30px rgba(139, 92, 246, 0.5);
+        }
+
+        /* Page Header */
+        .page-header {
+            padding: 160px 40px 100px;
+            background: linear-gradient(135deg, #f8f9ff 0%, #eff6ff 100%);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .page-header-content {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .page-badge {
+            display: inline-block;
+            padding: 8px 20px;
+            background: rgba(139, 92, 246, 0.1);
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--accent-purple);
+            margin-bottom: 24px;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.2s forwards;
+        }
+
+        .page-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: clamp(48px, 7vw, 80px);
+            font-weight: 800;
+            letter-spacing: -3px;
+            margin-bottom: 24px;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.4s forwards;
+        }
+
+        .page-title .gradient-text {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .page-subtitle {
+            font-size: 22px;
+            color: var(--text-light);
+            line-height: 1.7;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.6s forwards;
+        }
+
+        /* Story Section */
+        .story-section {
+            padding: 120px 40px;
+            background: #ffffff;
+        }
+
+        .story-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .story-content h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: clamp(36px, 5vw, 56px);
+            font-weight: 800;
+            letter-spacing: -2px;
+            margin-bottom: 32px;
+        }
+
+        .story-content p {
+            font-size: 18px;
+            color: var(--text-light);
+            line-height: 1.9;
+            margin-bottom: 24px;
+        }
+
+        .story-highlight {
+            background: linear-gradient(135deg, #f8f9ff 0%, #eff6ff 100%);
+            padding: 32px;
+            border-radius: 24px;
+            border-left: 4px solid var(--accent-purple);
+            margin-top: 32px;
+        }
+
+        .story-highlight p {
+            color: var(--primary);
+            font-weight: 500;
+            margin: 0;
+        }
+
+        .story-image {
+            width: 100%;
+            height: 500px;
+            background: var(--gradient-primary);
+            border-radius: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 120px;
+            box-shadow: 0 30px 80px rgba(139, 92, 246, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .story-image::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 400px;
+            height: 400px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+        }
+
+        /* Values Section */
+        .values-section {
+            padding: 120px 40px;
+            background: linear-gradient(135deg, #f8f9ff 0%, #eff6ff 100%);
+        }
+
+        .values-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .section-eyebrow {
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent-purple);
+            margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: clamp(40px, 5vw, 64px);
+            font-weight: 800;
+            letter-spacing: -2px;
+            margin-bottom: 24px;
+        }
+
+        .section-description {
+            font-size: 20px;
+            color: var(--text-light);
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .value-card {
+            background: white;
+            padding: 48px;
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+            transition: all 0.5s ease;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .value-card.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .value-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.12);
+        }
+
+        .value-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--gradient-primary);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            margin-bottom: 24px;
+            transition: transform 0.5s ease;
+        }
+
+        .value-card:nth-child(2) .value-icon {
+            background: var(--gradient-blue);
+        }
+
+        .value-card:nth-child(3) .value-icon {
+            background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
+        }
+
+        .value-card:nth-child(4) .value-icon {
+            background: linear-gradient(135deg, #fb923c 0%, #f97316 100%);
+        }
+
+        .value-card:hover .value-icon {
+            transform: scale(1.1) rotate(-5deg);
+        }
+
+        .value-card h3 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .value-card p {
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+
+        /* Team Section */
+        .team-section {
+            padding: 120px 40px;
+            background: #ffffff;
+        }
+
+        .team-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 48px;
+            margin-top: 60px;
+        }
+
+        .team-card {
+            background: white;
+            border-radius: 32px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+            transition: all 0.5s ease;
+            opacity: 0;
+            transform: scale(0.95);
+        }
+
+        .team-card.show {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .team-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.15);
+        }
+
+        .team-image {
+            width: 100%;
+            height: 350px;
+            background: var(--gradient-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 100px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .team-card:nth-child(2) .team-image {
+            background: var(--gradient-blue);
+        }
+
+        .team-card:nth-child(3) .team-image {
+            background: var(--gradient-purple);
+        }
+
+        .team-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.2) 100%);
+        }
+
+        .team-content {
+            padding: 32px;
+        }
+
+        .team-name {
+            font-family: 'Outfit', sans-serif;
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .team-role {
+            color: var(--accent-purple);
+            font-weight: 600;
+            margin-bottom: 16px;
+            font-size: 15px;
+        }
+
+        .team-description {
+            color: var(--text-light);
+            line-height: 1.8;
+            margin-bottom: 24px;
+        }
+
+        .team-social {
+            display: flex;
+            gap: 16px;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: var(--secondary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 18px;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: var(--gradient-primary);
+            transform: translateY(-3px);
+        }
+
+        /* Timeline Section */
+        .timeline-section {
+            padding: 120px 40px;
+            background: linear-gradient(135deg, #1a1a2e 0%, #2d2d44 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .timeline-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse"><path d="M 100 0 L 0 0 0 100" fill="none" stroke="rgba(255,255,255,0.02)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+        }
+
+        .timeline-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .timeline-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .timeline-header h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: clamp(40px, 5vw, 64px);
+            font-weight: 800;
+            letter-spacing: -2px;
+            margin-bottom: 24px;
+        }
+
+        .timeline-header p {
+            font-size: 20px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .timeline {
+            position: relative;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--accent-purple) 0%, var(--accent-blue) 100%);
+            border-radius: 4px;
+        }
+
+        .timeline-item {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 80px;
+            opacity: 0;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content {
+            grid-column: 2;
+        }
+
+        .timeline-item:nth-child(even) .timeline-year {
+            grid-column: 1;
+            text-align: right;
+        }
+
+        .timeline-content {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            padding: 32px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.5s ease;
+        }
+
+        .timeline-item:hover .timeline-content {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateY(-5px);
+        }
+
+        .timeline-content h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .timeline-content p {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.7;
+        }
+
+        .timeline-year {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .year-badge {
+            font-family: 'Outfit', sans-serif;
+            font-size: 32px;
+            font-weight: 800;
+            background: var(--gradient-primary);
+            padding: 16px 32px;
+            border-radius: 50px;
+            box-shadow: 0 20px 60px rgba(139, 92, 246, 0.4);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 160px 40px;
+            background: var(--gradient-primary);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse"><path d="M 100 0 L 0 0 0 100" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.5;
+        }
+
+        .cta-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-content h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: clamp(40px, 6vw, 72px);
+            font-weight: 800;
+            color: white;
+            margin-bottom: 24px;
+            letter-spacing: -2px;
+        }
+
+        .cta-content p {
+            font-size: 22px;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 48px;
+        }
+
+        .cta-button-large {
+            display: inline-block;
+            padding: 20px 60px;
+            background: white;
+            color: var(--accent-purple);
+            border-radius: 50px;
+            font-size: 20px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta-button-large:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary);
+            color: white;
+            padding: 80px 40px 40px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 60px;
+        }
+
+        .footer-brand h3 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 16px;
+        }
+
+        .footer-brand h3 span {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .footer-brand p {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.8;
+        }
+
+        .footer-column h4 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 16px;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            padding-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .nav-links {
+                gap: 20px;
+            }
+
+            .story-container,
+            .team-grid,
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline::before {
+                left: 30px;
+            }
+
+            .timeline-item {
+                grid-template-columns: 1fr;
+                padding-left: 80px;
+            }
+
+            .timeline-item:nth-child(even) .timeline-content {
+                grid-column: 1;
+            }
+
+            .timeline-year {
+                position: absolute;
+                left: 0;
+                text-align: center;
+            }
+
+            .year-badge {
+                font-size: 20px;
+                padding: 12px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="weconn3ct-startseite.html" class="logo">wec<span>onn3ct</span></a>
+            <ul class="nav-links">
+                <li><a href="leistungen.html">Leistungen</a></li>
+                <li><a href="portfolio.html">Projekte</a></li>
+                <li><a href="ueber-uns.html" class="active">Über uns</a></li>
+                <li><a href="kontakt.html" class="cta-button">Kontakt</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="page-header-content">
+            <div class="page-badge">👥 UNSER TEAM</div>
+            <h1 class="page-title">
+                Menschen, die<br>
+                <span class="gradient-text">Großartiges schaffen</span>
+            </h1>
+            <p class="page-subtitle">
+                Lerne das kreative Team hinter weconn3ct kennen – passionierte Experten,<br>
+                die mit Herz und Verstand digitale Träume wahr werden lassen
+            </p>
+        </div>
+    </section>
+
+    <!-- Story Section -->
+    <section class="story-section">
+        <div class="story-container">
+            <div class="story-content">
+                <h2>Unsere Geschichte</h2>
+                <p>
+                    Was 2020 als kleine Vision zweier Entwickler begann, hat sich zu einer der innovativsten digitalen Agenturen entwickelt. Wir glauben daran, dass großartige Software mehr ist als nur Code – sie ist das Ergebnis von Leidenschaft, Kreativität und dem unbedingten Willen, Außergewöhnliches zu schaffen.
+                </p>
+                <p>
+                    Heute sind wir ein Team von 15 talentierten Designern, Entwicklern und Strategen, die alle ein Ziel teilen: digitale Erlebnisse zu schaffen, die Menschen begeistern und Unternehmen voranbringen.
+                </p>
+                <div class="story-highlight">
+                    <p>
+                        <strong>Unsere Mission:</strong> Digitale Innovation für jeden erreichbar machen – durch herausragendes Design, moderne Technologie und erstklassigen Service.
+                    </p>
+                </div>
+            </div>
+            <div class="story-image">
+                🚀
+            </div>
+        </div>
+    </section>
+
+    <!-- Values Section -->
+    <section class="values-section">
+        <div class="values-container">
+            <div class="section-header">
+                <div class="section-eyebrow">UNSERE WERTE</div>
+                <h2 class="section-title">Wofür wir stehen</h2>
+                <p class="section-description">
+                    Diese Prinzipien leiten uns in allem, was wir tun
+                </p>
+            </div>
+
+            <div class="values-grid">
+                <div class="value-card">
+                    <div class="value-icon">💡</div>
+                    <h3>Innovation First</h3>
+                    <p>
+                        Wir bleiben am Puls der Zeit und setzen modernste Technologien ein, um Lösungen zu schaffen, die heute und morgen funktionieren.
+                    </p>
+                </div>
+
+                <div class="value-card">
+                    <div class="value-icon">🎯</div>
+                    <h3>Qualität & Präzision</h3>
+                    <p>
+                        Jedes Detail zählt. Wir streben nach Perfektion in Design, Code und User Experience – ohne Kompromisse.
+                    </p>
+                </div>
+
+                <div class="value-card">
+                    <div class="value-icon">🤝</div>
+                    <h3>Partnerschaft</h3>
+                    <p>
+                        Dein Erfolg ist unser Erfolg. Wir arbeiten eng mit dir zusammen, hören zu und entwickeln Lösungen, die wirklich passen.
+                    </p>
+                </div>
+
+                <div class="value-card">
+                    <div class="value-icon">⚡</div>
+                    <h3>Speed & Agilität</h3>
+                    <p>
+                        In der digitalen Welt zählt Geschwindigkeit. Wir liefern schnell, ohne dabei die Qualität aus den Augen zu verlieren.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="team-section" id="team">
+        <div class="team-container">
+            <div class="section-header">
+                <div class="section-eyebrow">MEET THE TEAM</div>
+                <h2 class="section-title">Die Köpfe hinter weconn3ct</h2>
+                <p class="section-description">
+                    Talentierte Experten mit einer gemeinsamen Vision
+                </p>
+            </div>
+
+            <div class="team-grid">
+                <div class="team-card">
+                    <div class="team-image">
+                        👨‍💼
+                    </div>
+                    <div class="team-content">
+                        <h3 class="team-name">Leonardo Braun</h3>
+                        <p class="team-role">Projekt- & Designmanagement</p>
+                        <p class="team-description">
+                            Als kreativer Kopf und Organisationstalent sorgt Leonardo dafür, dass jedes Projekt nicht nur technisch perfekt, sondern auch visuell beeindruckend wird.
+                        </p>
+                        <div class="team-social">
+                            <a href="#" class="social-link">💼</a>
+                            <a href="#" class="social-link">🐦</a>
+                            <a href="#" class="social-link">📧</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="team-card">
+                    <div class="team-image">
+                        👨‍💻
+                    </div>
+                    <div class="team-content">
+                        <h3 class="team-name">Jan Beek</h3>
+                        <p class="team-role">Lead Developer</p>
+                        <p class="team-description">
+                            Jan ist unser Tech-Wizard. Mit jahrelanger Erfahrung in Full-Stack Development verwandelt er komplexe Anforderungen in eleganten, performanten Code.
+                        </p>
+                        <div class="team-social">
+                            <a href="#" class="social-link">💼</a>
+                            <a href="#" class="social-link">🐙</a>
+                            <a href="#" class="social-link">📧</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="team-card">
+                    <div class="team-image">
+                        👨‍🔧
+                    </div>
+                    <div class="team-content">
+                        <h3 class="team-name">Mentor Sadiku</h3>
+                        <p class="team-role">Projektabgabe & Wartung</p>
+                        <p class="team-description">
+                            Mentor ist der Garant für reibungslose Launches und zuverlässigen Support. Er stellt sicher, dass alles perfekt läuft – auch nach dem Go-Live.
+                        </p>
+                        <div class="team-social">
+                            <a href="#" class="social-link">💼</a>
+                            <a href="#" class="social-link">🐦</a>
+                            <a href="#" class="social-link">📧</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline Section -->
+    <section class="timeline-section">
+        <div class="timeline-container">
+            <div class="timeline-header">
+                <h2>Unsere Journey</h2>
+                <p>Von den ersten Schritten bis heute – eine Geschichte voller Innovation</p>
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>🌱 Die Gründung</h3>
+                        <p>
+                            weconn3ct wird von zwei passionierten Entwicklern gegründet. Mit einer Vision: digitale Produkte zu schaffen, die Menschen lieben.
+                        </p>
+                    </div>
+                    <div class="timeline-year">
+                        <div class="year-badge">2020</div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-year">
+                        <div class="year-badge">2021</div>
+                    </div>
+                    <div class="timeline-content">
+                        <h3>🚀 Erstes großes Projekt</h3>
+                        <p>
+                            Erfolgreicher Launch unserer ersten Enterprise-App mit über 10.000 Nutzern. Das Team wächst auf 8 Mitarbeiter.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>🏆 Award-Winning Year</h3>
+                        <p>
+                            Auszeichnung als "Best Design Agency" und Expansion des Service-Portfolios um KI-Integration und Machine Learning.
+                        </p>
+                    </div>
+                    <div class="timeline-year">
+                        <div class="year-badge">2022</div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-year">
+                        <div class="year-badge">2023</div>
+                    </div>
+                    <div class="timeline-content">
+                        <h3>🌍 Going International</h3>
+                        <p>
+                            Erste internationale Projekte in ganz Europa. Das Team wächst auf 15 Experten. Launch unserer eigenen SaaS-Plattform.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>💫 Innovation & Growth</h3>
+                        <p>
+                            Über 150 erfolgreich abgeschlossene Projekte. Neue Partnerschaften mit führenden Tech-Companies. Die Zukunft beginnt jetzt.
+                        </p>
+                    </div>
+                    <div class="timeline-year">
+                        <div class="year-badge">2024</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2>Werde Teil unserer Story</h2>
+            <p>Lass uns gemeinsam das nächste Kapitel schreiben</p>
+            <a href="kontakt.html" class="cta-button-large">Projekt starten</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>wec<span>onn3ct</span></h3>
+                    <p>Wir verbinden kreatives Design mit technischer Exzellenz, um digitale Erlebnisse zu schaffen, die Ihr Unternehmen voranbringen.</p>
+                </div>
+                <div class="footer-column">
+                    <h4>Unternehmen</h4>
+                    <ul class="footer-links">
+                        <li><a href="ueber-uns.html">Über uns</a></li>
+                        <li><a href="ueber-uns.html#team">Team</a></li>
+                        <li><a href="karriere.html">Karriere</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Services</h4>
+                    <ul class="footer-links">
+                        <li><a href="leistungen.html">Webentwicklung</a></li>
+                        <li><a href="leistungen.html">App-Entwicklung</a></li>
+                        <li><a href="leistungen.html">UI/UX Design</a></li>
+                        <li><a href="leistungen.html">Beratung</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Kontakt</h4>
+                    <ul class="footer-links">
+                        <li><a href="mailto:hello@weconn3ct.com">hello@weconn3ct.com</a></li>
+                        <li><a href="tel:+49123456789">+49 123 456 789</a></li>
+                        <li><a href="#">LinkedIn</a></li>
+                        <li><a href="#">Instagram</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 weconn3ct. Alle Rechte vorbehalten. Made with ❤️ in Germany</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Scroll reveal for value cards
+        const valueCards = document.querySelectorAll('.value-card');
+        const valueObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.classList.add('show');
+                    }, index * 150);
+                }
+            });
+        }, { threshold: 0.2 });
+
+        valueCards.forEach(card => {
+            valueObserver.observe(card);
+        });
+
+        // Scroll reveal for team cards
+        const teamCards = document.querySelectorAll('.team-card');
+        const teamObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.classList.add('show');
+                    }, index * 200);
+                }
+            });
+        }, { threshold: 0.2 });
+
+        teamCards.forEach(card => {
+            teamObserver.observe(card);
+        });
+
+        // Timeline animation
+        const timelineItems = document.querySelectorAll('.timeline-item');
+        const timelineObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }, index * 200);
+                }
+            });
+        }, { threshold: 0.3 });
+
+        timelineItems.forEach(item => {
+            item.style.opacity = '0';
+            item.style.transform = 'translateY(30px)';
+            item.style.transition = 'all 0.8s ease';
+            timelineObserver.observe(item);
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

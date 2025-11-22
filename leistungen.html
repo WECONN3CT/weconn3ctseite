@@ -1,0 +1,1318 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unsere Leistungen | weconn3ct</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1a1a2e;
+            --secondary: #f8f9ff;
+            --accent-purple: #8b5cf6;
+            --accent-blue: #3b82f6;
+            --accent-purple-dark: #7c3aed;
+            --accent-blue-dark: #2563eb;
+            --text-light: #64748b;
+            --text-lighter: #94a3b8;
+            --gradient-primary: linear-gradient(135deg, #8b5cf6 0%, #3b82f6 100%);
+            --gradient-purple: linear-gradient(135deg, #a78bfa 0%, #8b5cf6 100%);
+            --gradient-blue: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
+            --gradient-green: linear-gradient(135deg, #34d399 0%, #10b981 100%);
+            --gradient-orange: linear-gradient(135deg, #fb923c 0%, #f97316 100%);
+        }
+
+        body {
+            font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #ffffff;
+            color: var(--primary);
+            overflow-x: hidden;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 16px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Outfit', sans-serif;
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--primary);
+            text-decoration: none;
+            letter-spacing: -1px;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .logo span {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-purple);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .cta-button {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 10px 24px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(139, 92, 246, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 30px rgba(139, 92, 246, 0.5);
+        }
+
+        /* Page Header */
+        .page-header {
+            padding: 160px 40px 100px;
+            background: linear-gradient(135deg, #f8f9ff 0%, #eff6ff 100%);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .page-header-content {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .page-badge {
+            display: inline-block;
+            padding: 8px 20px;
+            background: rgba(139, 92, 246, 0.1);
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--accent-purple);
+            margin-bottom: 24px;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.2s forwards;
+        }
+
+        .page-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: clamp(48px, 7vw, 80px);
+            font-weight: 800;
+            letter-spacing: -3px;
+            margin-bottom: 24px;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.4s forwards;
+        }
+
+        .page-title .gradient-text {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .page-subtitle {
+            font-size: 22px;
+            color: var(--text-light);
+            line-height: 1.7;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.6s forwards;
+        }
+
+        /* Services Grid */
+        .services-section {
+            padding: 120px 40px;
+            background: #ffffff;
+        }
+
+        .services-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 40px;
+            margin-bottom: 100px;
+        }
+
+        .service-detail-card {
+            background: white;
+            border-radius: 32px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+            position: relative;
+        }
+
+        .service-detail-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.15);
+        }
+
+        .service-card-header {
+            padding: 48px 40px 32px;
+            background: var(--gradient-primary);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-detail-card:nth-child(2) .service-card-header {
+            background: var(--gradient-purple);
+        }
+
+        .service-detail-card:nth-child(3) .service-card-header {
+            background: var(--gradient-blue);
+        }
+
+        .service-detail-card:nth-child(4) .service-card-header {
+            background: var(--gradient-green);
+        }
+
+        .service-detail-card:nth-child(5) .service-card-header {
+            background: var(--gradient-orange);
+        }
+
+        .service-detail-card:nth-child(6) .service-card-header {
+            background: var(--gradient-primary);
+        }
+
+        .service-card-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+        }
+
+        .service-icon-large {
+            width: 100px;
+            height: 100px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            margin-bottom: 24px;
+            position: relative;
+            z-index: 1;
+            transition: transform 0.5s ease;
+        }
+
+        .service-detail-card:hover .service-icon-large {
+            transform: scale(1.1) rotate(-5deg);
+        }
+
+        .service-card-header h3 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 32px;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 12px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .service-card-header p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 16px;
+            position: relative;
+            z-index: 1;
+            line-height: 1.6;
+        }
+
+        .service-card-body {
+            padding: 40px;
+        }
+
+        .service-features {
+            list-style: none;
+            margin-bottom: 32px;
+        }
+
+        .service-features li {
+            padding: 16px 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            color: var(--text-light);
+        }
+
+        .service-features li:last-child {
+            border-bottom: none;
+        }
+
+        .check-icon {
+            width: 24px;
+            height: 24px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+
+        .service-cta {
+            display: block;
+            text-align: center;
+            padding: 16px 32px;
+            background: var(--gradient-primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3);
+        }
+
+        .service-cta:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(139, 92, 246, 0.4);
+        }
+
+        /* Process Section */
+        .process-section {
+            padding: 120px 40px;
+            background: linear-gradient(135deg, #f8f9ff 0%, #eff6ff 100%);
+        }
+
+        .process-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .section-eyebrow {
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent-purple);
+            margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: clamp(40px, 5vw, 64px);
+            font-weight: 800;
+            letter-spacing: -2px;
+            margin-bottom: 24px;
+        }
+
+        .section-description {
+            font-size: 20px;
+            color: var(--text-light);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .process-timeline {
+            position: relative;
+        }
+
+        .process-timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--accent-purple) 0%, var(--accent-blue) 100%);
+            border-radius: 4px;
+        }
+
+        .process-step {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            margin-bottom: 80px;
+            opacity: 0;
+        }
+
+        .process-step:nth-child(even) .process-content {
+            grid-column: 2;
+            grid-row: 1;
+        }
+
+        .process-step:nth-child(even) .process-number {
+            grid-column: 1;
+            grid-row: 1;
+        }
+
+        .process-content {
+            background: white;
+            padding: 48px;
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+            transition: all 0.5s ease;
+            position: relative;
+        }
+
+        .process-content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.12);
+        }
+
+        .process-content h3 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .process-content p {
+            color: var(--text-light);
+            line-height: 1.8;
+            font-size: 16px;
+        }
+
+        .process-number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .number-circle {
+            width: 120px;
+            height: 120px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Outfit', sans-serif;
+            font-size: 48px;
+            font-weight: 800;
+            color: white;
+            box-shadow: 0 20px 60px rgba(139, 92, 246, 0.4);
+            z-index: 10;
+            position: relative;
+        }
+
+        /* Pricing Section */
+        .pricing-section {
+            padding: 120px 40px;
+            background: #ffffff;
+        }
+
+        .pricing-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .pricing-card {
+            background: white;
+            border: 2px solid rgba(139, 92, 246, 0.1);
+            border-radius: 32px;
+            padding: 48px;
+            transition: all 0.5s ease;
+            opacity: 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pricing-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: var(--gradient-primary);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s ease;
+        }
+
+        .pricing-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(139, 92, 246, 0.3);
+            box-shadow: 0 30px 80px rgba(139, 92, 246, 0.15);
+        }
+
+        .pricing-card.featured {
+            background: var(--gradient-primary);
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 30px 80px rgba(139, 92, 246, 0.3);
+        }
+
+        .pricing-card.featured h3,
+        .pricing-card.featured .pricing-amount {
+            color: white;
+        }
+
+        .pricing-card.featured p,
+        .pricing-card.featured .pricing-features li {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .pricing-card.featured .check-icon {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .pricing-header h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .pricing-description {
+            color: var(--text-light);
+            font-size: 15px;
+            margin-bottom: 32px;
+        }
+
+        .pricing-amount {
+            font-family: 'Outfit', sans-serif;
+            font-size: 56px;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+        }
+
+        .pricing-amount span {
+            font-size: 20px;
+            font-weight: 500;
+            color: var(--text-light);
+        }
+
+        .pricing-period {
+            color: var(--text-light);
+            font-size: 14px;
+            margin-bottom: 32px;
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin-bottom: 32px;
+        }
+
+        .pricing-features li {
+            padding: 12px 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--text-light);
+        }
+
+        .pricing-button {
+            width: 100%;
+            padding: 16px;
+            background: var(--gradient-primary);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: block;
+            text-align: center;
+        }
+
+        .pricing-card.featured .pricing-button {
+            background: white;
+            color: var(--accent-purple);
+        }
+
+        .pricing-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.4);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 160px 40px;
+            background: var(--gradient-primary);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse"><path d="M 100 0 L 0 0 0 100" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.5;
+        }
+
+        .cta-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-content h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: clamp(40px, 6vw, 72px);
+            font-weight: 800;
+            color: white;
+            margin-bottom: 24px;
+            letter-spacing: -2px;
+        }
+
+        .cta-content p {
+            font-size: 22px;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 48px;
+        }
+
+        .cta-button-large {
+            display: inline-block;
+            padding: 20px 60px;
+            background: white;
+            color: var(--accent-purple);
+            border-radius: 50px;
+            font-size: 20px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta-button-large:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary);
+            color: white;
+            padding: 80px 40px 40px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 60px;
+        }
+
+        .footer-brand h3 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 16px;
+        }
+
+        .footer-brand h3 span {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .footer-brand p {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.8;
+        }
+
+        .footer-column h4 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 16px;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            padding-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .nav-links {
+                gap: 20px;
+            }
+
+            .services-grid,
+            .pricing-grid,
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .process-timeline::before {
+                left: 30px;
+            }
+
+            .process-step {
+                grid-template-columns: 1fr;
+                padding-left: 80px;
+            }
+
+            .process-step:nth-child(even) .process-content {
+                grid-column: 1;
+            }
+
+            .process-number {
+                position: absolute;
+                left: 0;
+            }
+
+            .number-circle {
+                width: 80px;
+                height: 80px;
+                font-size: 32px;
+            }
+        }
+
+        /* Scroll Reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="weconn3ct-startseite.html" class="logo">wec<span>onn3ct</span></a>
+            <ul class="nav-links">
+                <li><a href="leistungen.html" class="active">Leistungen</a></li>
+                <li><a href="portfolio.html">Projekte</a></li>
+                <li><a href="ueber-uns.html">Über uns</a></li>
+                <li><a href="kontakt.html" class="cta-button">Kontakt</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="page-header-content">
+            <div class="page-badge">💎 UNSERE EXPERTISE</div>
+            <h1 class="page-title">
+                Leistungen, die<br>
+                <span class="gradient-text">begeistern</span>
+            </h1>
+            <p class="page-subtitle">
+                Von der ersten Idee bis zur erfolgreichen Umsetzung – wir bieten umfassende digitale Lösungen,<br>
+                die Ihr Unternehmen nachhaltig voranbringen
+            </p>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services-section">
+        <div class="services-container">
+            <div class="services-grid">
+                <!-- Service 1 -->
+                <div class="service-detail-card reveal">
+                    <div class="service-card-header">
+                        <div class="service-icon-large">📱</div>
+                        <h3>App-Entwicklung</h3>
+                        <p>Native & Cross-Platform Apps für iOS und Android</p>
+                    </div>
+                    <div class="service-card-body">
+                        <ul class="service-features">
+                            <li>
+                                <span class="check-icon">✓</span>
+                                Native iOS & Android Entwicklung
+                            </li>
+                            <li>
+                                <span class="check-icon">✓</span>
+                                React Native & Flutter
+                            </li>
+                            <li>
+                                <span class="check-icon">✓</span>
+                                Progressive Web Apps (PWA)
+                            </li>
+                            <li>
+                                <span class="check-icon">✓</span>
+                                App Store Optimierung
+                            </li>
+                            <li>
+                                <span class="check-icon">✓</span>
+                                Backend & API Integration
+                            </li>
+                        </ul>
+                        <a href="kontakt.html" class="service-cta">Projekt besprechen</a>
+                    </div>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="service-detail-card reveal">
+                    <div class="service-card-header">
+                        <div class="service-icon-large">🌐</div>
+                        <h3>Website-Entwicklung</h3>
+                        <p>Moderne Websites, die konvertieren und begeistern</p>
+                    </div>
+                    <div class="service-card-body">
+                        <ul class="service-features">
+                            <li>
+                                <span class="check-icon">✓</span>
+                                Responsive Webdesign
+                            </li>
+                            <li>
+                                <span class="check-icon">✓</span>
+                                E-Commerce Lösungen
+                            </li>
+                            <li>
+                                <span class="check-icon">✓</span>
+                                CMS Integration (WordPress, Shopify)
+                            </li>
+                            <li>
+                                <span class="check-icon">✓</span>
+                                SEO & Performance-Optimierung
+                            </li>
+                            <li>
+                                <span class="check-icon">✓</span>
+                                Wartung & Support
+                            </li>
+                        </ul>
+                        <a href="kontakt.html" class="service-cta">Projekt besprechen</a>
+                    </div>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="service-detail-card reveal">
+                    <div class="service-card-header">
+                        <div class="service-icon-large">⚙️</div>
+                        <h3>Software-Lösungen</h3>
+                        <p>Maßgeschneiderte Software für Ihre Prozesse</p>
+                    </div>
+                    <div class="service-card-body">
+                        <ul class="service-features">
+                            <li>
+                                <span class="check-icon">✓</span>
+                                Custom Software Development
+                            </li>
+                            <li>
+                                <span class="check-icon">✓</span>
+                                Enterprise-Systeme
+                            </li>
+                            <li>
+                                <span class="check-icon">✓</span>
+                                API-Entwicklung & Integration
+                            </li>
+                            <li>
+                                <span class="check-icon">✓</span>
+                                Cloud-Infrastruktur
+                            </li>
+                            <li>
+                                <span class="check-icon">✓</span>
+                                DevOps & Automatisierung
+                            </li>
+                        </ul>
+                        <a href="kontakt.html" class="service-cta">Projekt besprechen</a>
+                    </div>
+                </div>
+
+                <!-- Service 4 -->
+                <div class="service-detail-card reveal">
+                    <div class="service-card-header">
+                        <div class="service-icon-large">🤖</div>
+                        <h3>KI-Integration</h3>
+                        <p>Intelligente Lösungen powered by AI</p>
+                    </div>
+                    <div class="service-card-body">
+                        <ul class="service-features">
+                            <li>
+                                <span class="check-icon">✓</span>
+                                Machine Learning Integration
+                            </li>
+                            <li>
+                                <span class="check-icon">✓</span>
+                                Chatbots & Virtuelle Assistenten
+                            </li>
+                            <li>
+                                <span class="check-icon">✓</span>
+                                Datenanalyse & Predictions
+                            </li>
+                            <li>
+                                <span class="check-icon">✓</span>
+                                Computer Vision
+                            </li>
+                            <li>
+                                <span class="check-icon">✓</span>
+                                Natural Language Processing
+                            </li>
+                        </ul>
+                        <a href="kontakt.html" class="service-cta">Projekt besprechen</a>
+                    </div>
+                </div>
+
+                <!-- Service 5 -->
+                <div class="service-detail-card reveal">
+                    <div class="service-card-header">
+                        <div class="service-icon-large">🎨</div>
+                        <h3>UX/UI Design</h3>
+                        <p>Designs, die Nutzer lieben und verstehen</p>
+                    </div>
+                    <div class="service-card-body">
+                        <ul class="service-features">
+                            <li>
+                                <span class="check-icon">✓</span>
+                                User Research & Testing
+                            </li>
+                            <li>
+                                <span class="check-icon">✓</span>
+                                Wireframing & Prototyping
+                            </li>
+                            <li>
+                                <span class="check-icon">✓</span>
+                                Interface Design
+                            </li>
+                            <li>
+                                <span class="check-icon">✓</span>
+                                Design Systems
+                            </li>
+                            <li>
+                                <span class="check-icon">✓</span>
+                                Brand Identity
+                            </li>
+                        </ul>
+                        <a href="kontakt.html" class="service-cta">Projekt besprechen</a>
+                    </div>
+                </div>
+
+                <!-- Service 6 -->
+                <div class="service-detail-card reveal">
+                    <div class="service-card-header">
+                        <div class="service-icon-large">🔧</div>
+                        <h3>Wartung & Support</h3>
+                        <p>Zuverlässiger Service, wenn du ihn brauchst</p>
+                    </div>
+                    <div class="service-card-body">
+                        <ul class="service-features">
+                            <li>
+                                <span class="check-icon">✓</span>
+                                24/7 Monitoring
+                            </li>
+                            <li>
+                                <span class="check-icon">✓</span>
+                                Regelmäßige Updates
+                            </li>
+                            <li>
+                                <span class="check-icon">✓</span>
+                                Bug-Fixing & Optimierung
+                            </li>
+                            <li>
+                                <span class="check-icon">✓</span>
+                                Security Patches
+                            </li>
+                            <li>
+                                <span class="check-icon">✓</span>
+                                Performance-Tuning
+                            </li>
+                        </ul>
+                        <a href="kontakt.html" class="service-cta">Projekt besprechen</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="process-section">
+        <div class="process-container">
+            <div class="section-header">
+                <div class="section-eyebrow">UNSER PROZESS</div>
+                <h2 class="section-title">So arbeiten wir</h2>
+                <p class="section-description">
+                    Ein bewährter Prozess, der Qualität garantiert und dich in jedem Schritt einbindet
+                </p>
+            </div>
+
+            <div class="process-timeline">
+                <div class="process-step reveal">
+                    <div class="process-content">
+                        <h3>🎯 Discovery & Strategie</h3>
+                        <p>
+                            Wir beginnen mit einem ausführlichen Gespräch über deine Vision, Ziele und Zielgruppe. 
+                            Gemeinsam entwickeln wir eine maßgeschneiderte Strategie für dein Projekt.
+                        </p>
+                    </div>
+                    <div class="process-number">
+                        <div class="number-circle">01</div>
+                    </div>
+                </div>
+
+                <div class="process-step reveal">
+                    <div class="process-content">
+                        <h3>✏️ Design & Konzept</h3>
+                        <p>
+                            Unsere Designer kreieren moderne, intuitive Interfaces mit Fokus auf beste User Experience. 
+                            Du erhältst interaktive Prototypen zur Freigabe.
+                        </p>
+                    </div>
+                    <div class="process-number">
+                        <div class="number-circle">02</div>
+                    </div>
+                </div>
+
+                <div class="process-step reveal">
+                    <div class="process-content">
+                        <h3>⚡ Entwicklung</h3>
+                        <p>
+                            Unser Entwicklerteam setzt das Design mit modernsten Technologien um. 
+                            Agile Sprints sorgen für schnelle Fortschritte und regelmäßiges Feedback.
+                        </p>
+                    </div>
+                    <div class="process-number">
+                        <div class="number-circle">03</div>
+                    </div>
+                </div>
+
+                <div class="process-step reveal">
+                    <div class="process-content">
+                        <h3>✅ Testing & QA</h3>
+                        <p>
+                            Umfassende Tests auf allen Geräten und Browsern garantieren fehlerfreie Performance. 
+                            Wir optimieren Geschwindigkeit, Sicherheit und Accessibility.
+                        </p>
+                    </div>
+                    <div class="process-number">
+                        <div class="number-circle">04</div>
+                    </div>
+                </div>
+
+                <div class="process-step reveal">
+                    <div class="process-content">
+                        <h3>🚀 Launch & Support</h3>
+                        <p>
+                            Nach dem erfolgreichen Launch stehen wir dir mit Wartung, Updates und Support zur Seite. 
+                            Dein Erfolg ist unser langfristiges Ziel.
+                        </p>
+                    </div>
+                    <div class="process-number">
+                        <div class="number-circle">05</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing-section">
+        <div class="pricing-container">
+            <div class="section-header">
+                <div class="section-eyebrow">PREISE & PAKETE</div>
+                <h2 class="section-title">Transparent & Fair</h2>
+                <p class="section-description">
+                    Wähle das Paket, das am besten zu deinem Projekt passt. Alle Pakete sind individuell anpassbar.
+                </p>
+            </div>
+
+            <div class="pricing-grid">
+                <div class="pricing-card reveal">
+                    <div class="pricing-header">
+                        <h3>Starter</h3>
+                        <p class="pricing-description">Perfekt für kleine Projekte und Start-ups</p>
+                    </div>
+                    <div class="pricing-amount">
+                        €2.500
+                        <span>ab</span>
+                    </div>
+                    <div class="pricing-period">Einmalzahlung</div>
+                    <ul class="pricing-features">
+                        <li><span class="check-icon">✓</span> Landing Page oder kleine Website</li>
+                        <li><span class="check-icon">✓</span> Responsive Design</li>
+                        <li><span class="check-icon">✓</span> SEO-Optimierung</li>
+                        <li><span class="check-icon">✓</span> 2 Revisionsrunden</li>
+                        <li><span class="check-icon">✓</span> 30 Tage Support</li>
+                    </ul>
+                    <a href="kontakt.html" class="pricing-button">Jetzt starten</a>
+                </div>
+
+                <div class="pricing-card featured reveal">
+                    <div class="pricing-header">
+                        <h3>Professional</h3>
+                        <p class="pricing-description">Ideal für etablierte Unternehmen</p>
+                    </div>
+                    <div class="pricing-amount">
+                        €8.500
+                        <span>ab</span>
+                    </div>
+                    <div class="pricing-period">Einmalzahlung</div>
+                    <ul class="pricing-features">
+                        <li><span class="check-icon">✓</span> Umfangreiche Website oder App</li>
+                        <li><span class="check-icon">✓</span> Custom Design & UX</li>
+                        <li><span class="check-icon">✓</span> CMS Integration</li>
+                        <li><span class="check-icon">✓</span> Unbegrenzte Revisionen</li>
+                        <li><span class="check-icon">✓</span> 90 Tage Premium Support</li>
+                        <li><span class="check-icon">✓</span> Analytics Setup</li>
+                    </ul>
+                    <a href="kontakt.html" class="pricing-button">Jetzt starten</a>
+                </div>
+
+                <div class="pricing-card reveal">
+                    <div class="pricing-header">
+                        <h3>Enterprise</h3>
+                        <p class="pricing-description">Für komplexe Anforderungen</p>
+                    </div>
+                    <div class="pricing-amount">
+                        Individual
+                    </div>
+                    <div class="pricing-period">Nach Aufwand</div>
+                    <ul class="pricing-features">
+                        <li><span class="check-icon">✓</span> Enterprise Software</li>
+                        <li><span class="check-icon">✓</span> KI-Integration</li>
+                        <li><span class="check-icon">✓</span> Dedicated Team</li>
+                        <li><span class="check-icon">✓</span> Agile Development</li>
+                        <li><span class="check-icon">✓</span> 24/7 Priority Support</li>
+                        <li><span class="check-icon">✓</span> SLA Garantien</li>
+                    </ul>
+                    <a href="kontakt.html" class="pricing-button">Angebot anfordern</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2>Bereit durchzustarten?</h2>
+            <p>Lass uns dein Projekt besprechen und eine maßgeschneiderte Lösung entwickeln</p>
+            <a href="kontakt.html" class="cta-button-large">Kostenloses Erstgespräch</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>wec<span>onn3ct</span></h3>
+                    <p>Wir verbinden kreatives Design mit technischer Exzellenz, um digitale Erlebnisse zu schaffen, die Ihr Unternehmen voranbringen.</p>
+                </div>
+                <div class="footer-column">
+                    <h4>Unternehmen</h4>
+                    <ul class="footer-links">
+                        <li><a href="ueber-uns.html">Über uns</a></li>
+                        <li><a href="ueber-uns.html#team">Team</a></li>
+                        <li><a href="karriere.html">Karriere</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Services</h4>
+                    <ul class="footer-links">
+                        <li><a href="leistungen.html">Webentwicklung</a></li>
+                        <li><a href="leistungen.html">App-Entwicklung</a></li>
+                        <li><a href="leistungen.html">UI/UX Design</a></li>
+                        <li><a href="leistungen.html">Beratung</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Kontakt</h4>
+                    <ul class="footer-links">
+                        <li><a href="mailto:hello@weconn3ct.com">hello@weconn3ct.com</a></li>
+                        <li><a href="tel:+49123456789">+49 123 456 789</a></li>
+                        <li><a href="#">LinkedIn</a></li>
+                        <li><a href="#">Instagram</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 weconn3ct. Alle Rechte vorbehalten. Made with ❤️ in Germany</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Scroll reveal animation
+        const revealElements = document.querySelectorAll('.reveal');
+        
+        const revealOnScroll = () => {
+            revealElements.forEach((element, index) => {
+                const elementTop = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (elementTop < windowHeight - 100) {
+                    setTimeout(() => {
+                        element.style.opacity = '1';
+                        element.style.transform = 'translateY(0)';
+                    }, index * 100);
+                }
+            });
+        };
+
+        window.addEventListener('scroll', revealOnScroll);
+        window.addEventListener('load', revealOnScroll);
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

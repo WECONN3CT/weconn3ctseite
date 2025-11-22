@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog | weconn3ct</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1a1a2e;
+            --secondary: #f8f9ff;
+            --accent-purple: #8b5cf6;
+            --accent-blue: #3b82f6;
+            --accent-green: #10b981;
+            --accent-orange: #f97316;
+            --text-light: #64748b;
+            --gradient-primary: linear-gradient(135deg, #8b5cf6 0%, #3b82f6 100%);
+            --gradient-purple: linear-gradient(135deg, #a78bfa 0%, #8b5cf6 100%);
+            --gradient-blue: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
+        }
+
+        body {
+            font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #ffffff;
+            color: var(--primary);
+            overflow-x: hidden;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px) saturate(180%);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 16px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Outfit', sans-serif;
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--primary);
+            text-decoration: none;
+            letter-spacing: -1px;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .logo span {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-purple);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .cta-button {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 10px 24px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(139, 92, 246, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 30px rgba(139, 92, 246, 0.5);
+        }
+
+        /* Page Header */
+        .page-header {
+            padding: 160px 40px 100px;
+            background: linear-gradient(135deg, #f8f9ff 0%, #eff6ff 100%);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .page-header-content {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .page-badge {
+            display: inline-block;
+            padding: 8px 20px;
+            background: rgba(139, 92, 246, 0.1);
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--accent-purple);
+            margin-bottom: 24px;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.2s forwards;
+        }
+
+        .page-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: clamp(48px, 7vw, 80px);
+            font-weight: 800;
+            letter-spacing: -3px;
+            margin-bottom: 24px;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.4s forwards;
+        }
+
+        .page-title .gradient-text {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .page-subtitle {
+            font-size: 22px;
+            color: var(--text-light);
+            line-height: 1.7;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.6s forwards;
+        }
+
+        /* Filter Section */
+        .filter-section {
+            padding: 80px 40px 40px;
+            background: #ffffff;
+        }
+
+        .filter-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .filter-tabs {
+            display: inline-flex;
+            gap: 16px;
+            padding: 8px;
+            background: var(--secondary);
+            border-radius: 50px;
+            margin-bottom: 60px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .filter-tab {
+            padding: 12px 28px;
+            background: transparent;
+            border: none;
+            border-radius: 50px;
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--primary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-tab:hover {
+            background: rgba(139, 92, 246, 0.1);
+        }
+
+        .filter-tab.active {
+            background: var(--gradient-primary);
+            color: white;
+            box-shadow: 0 4px 20px rgba(139, 92, 246, 0.3);
+        }
+
+        /* Featured Post */
+        .featured-post {
+            max-width: 1400px;
+            margin: 0 auto 80px;
+            padding: 0 40px;
+        }
+
+        .featured-card {
+            background: white;
+            border-radius: 32px;
+            overflow: hidden;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.1);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            transition: all 0.5s ease;
+        }
+
+        .featured-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.15);
+        }
+
+        .featured-image {
+            width: 100%;
+            height: 100%;
+            min-height: 500px;
+            background: var(--gradient-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 120px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .featured-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.2) 100%);
+        }
+
+        .featured-content {
+            padding: 80px 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .featured-badge {
+            display: inline-block;
+            padding: 8px 16px;
+            background: rgba(139, 92, 246, 0.1);
+            color: var(--accent-purple);
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 24px;
+            width: fit-content;
+        }
+
+        .featured-content h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: clamp(32px, 4vw, 48px);
+            font-weight: 800;
+            letter-spacing: -1.5px;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .featured-excerpt {
+            font-size: 18px;
+            color: var(--text-light);
+            line-height: 1.8;
+            margin-bottom: 32px;
+        }
+
+        .featured-meta {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            margin-bottom: 32px;
+            font-size: 15px;
+            color: var(--text-light);
+        }
+
+        .featured-meta span {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .read-more {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 40px;
+            background: var(--gradient-primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            width: fit-content;
+            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3);
+        }
+
+        .read-more:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(139, 92, 246, 0.4);
+        }
+
+        /* Blog Grid */
+        .blog-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px 120px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: 40px;
+        }
+
+        .blog-card {
+            background: white;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+            transition: all 0.5s ease;
+            opacity: 0;
+            transform: translateY(30px);
+            cursor: pointer;
+        }
+
+        .blog-card.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .blog-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.12);
+        }
+
+        .blog-image {
+            width: 100%;
+            height: 280px;
+            background: var(--gradient-blue);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .blog-card:nth-child(2n) .blog-image {
+            background: var(--gradient-purple);
+        }
+
+        .blog-card:nth-child(3n) .blog-image {
+            background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
+        }
+
+        .blog-card:nth-child(4n) .blog-image {
+            background: linear-gradient(135deg, #fb923c 0%, #f97316 100%);
+        }
+
+        .blog-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--gradient-primary);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .blog-card:hover .blog-image::after {
+            opacity: 0.15;
+        }
+
+        .blog-content {
+            padding: 32px;
+        }
+
+        .blog-category {
+            display: inline-block;
+            padding: 6px 16px;
+            background: rgba(139, 92, 246, 0.1);
+            color: var(--accent-purple);
+            border-radius: 50px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 16px;
+        }
+
+        .blog-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+
+        .blog-excerpt {
+            color: var(--text-light);
+            line-height: 1.7;
+            margin-bottom: 24px;
+        }
+
+        .blog-meta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 20px;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+            font-size: 14px;
+            color: var(--text-light);
+        }
+
+        .blog-author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .author-avatar {
+            width: 36px;
+            height: 36px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+
+        .blog-date {
+            color: var(--text-light);
+        }
+
+        /* Newsletter Section */
+        .newsletter-section {
+            padding: 120px 40px;
+            background: var(--gradient-primary);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .newsletter-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse"><path d="M 100 0 L 0 0 0 100" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.5;
+        }
+
+        .newsletter-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .newsletter-icon {
+            font-size: 80px;
+            margin-bottom: 32px;
+        }
+
+        .newsletter-container h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: clamp(36px, 5vw, 56px);
+            font-weight: 800;
+            color: white;
+            margin-bottom: 20px;
+            letter-spacing: -2px;
+        }
+
+        .newsletter-container p {
+            font-size: 20px;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 48px;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 16px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 18px 28px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50px;
+            font-size: 16px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .newsletter-input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .newsletter-input:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+
+        .newsletter-button {
+            padding: 18px 40px;
+            background: white;
+            color: var(--accent-purple);
+            border: none;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .newsletter-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary);
+            color: white;
+            padding: 80px 40px 40px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 60px;
+        }
+
+        .footer-brand h3 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 16px;
+        }
+
+        .footer-brand h3 span {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .footer-brand p {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.8;
+        }
+
+        .footer-column h4 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 16px;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            padding-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .nav-links {
+                gap: 20px;
+            }
+
+            .featured-card {
+                grid-template-columns: 1fr;
+            }
+
+            .featured-content {
+                padding: 40px 32px;
+            }
+
+            .blog-grid,
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="weconn3ct-startseite.html" class="logo">wec<span>onn3ct</span></a>
+            <ul class="nav-links">
+                <li><a href="leistungen.html">Leistungen</a></li>
+                <li><a href="portfolio.html">Projekte</a></li>
+                <li><a href="ueber-uns.html">Über uns</a></li>
+                <li><a href="kontakt.html" class="cta-button">Kontakt</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="page-header-content">
+            <div class="page-badge">📝 INSIGHTS & TIPPS</div>
+            <h1 class="page-title">
+                Wissen, das<br>
+                <span class="gradient-text">weiterbringt</span>
+            </h1>
+            <p class="page-subtitle">
+                Entdecke unsere neuesten Artikel über Webentwicklung, Design-Trends,<br>
+                KI-Integration und digitale Innovation
+            </p>
+        </div>
+    </section>
+
+    <!-- Filter Section -->
+    <section class="filter-section">
+        <div class="filter-container">
+            <div class="filter-tabs">
+                <button class="filter-tab active" data-filter="all">Alle Artikel</button>
+                <button class="filter-tab" data-filter="development">Development</button>
+                <button class="filter-tab" data-filter="design">Design</button>
+                <button class="filter-tab" data-filter="ai">KI & Tech</button>
+                <button class="filter-tab" data-filter="business">Business</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Post -->
+    <section class="featured-post">
+        <div class="featured-card">
+            <div class="featured-image">
+                🚀
+            </div>
+            <div class="featured-content">
+                <span class="featured-badge">⭐ Featured</span>
+                <h2>Die Zukunft der KI in der Webentwicklung: Was 2025 auf uns zukommt</h2>
+                <p class="featured-excerpt">
+                    Künstliche Intelligenz revolutioniert die Art, wie wir Websites entwickeln. Von automatisierten Design-Systemen bis zu intelligenten User Experiences – wir zeigen dir, welche KI-Trends 2025 die Branche dominieren werden.
+                </p>
+                <div class="featured-meta">
+                    <span>👤 Leonardo Braun</span>
+                    <span>📅 18. November 2024</span>
+                    <span>⏱️ 8 Min. Lesezeit</span>
+                </div>
+                <a href="#" class="read-more">Artikel lesen →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Grid -->
+    <section class="blog-grid">
+        <!-- Blog Post 1 -->
+        <article class="blog-card" data-category="design">
+            <div class="blog-image">🎨</div>
+            <div class="blog-content">
+                <span class="blog-category">Design</span>
+                <h3 class="blog-title">10 UX-Prinzipien, die jede moderne Website braucht</h3>
+                <p class="blog-excerpt">
+                    User Experience ist mehr als nur schönes Design. Entdecke die fundamentalen Prinzipien für intuitive Interfaces.
+                </p>
+                <div class="blog-meta">
+                    <div class="blog-author">
+                        <div class="author-avatar">👨‍🎨</div>
+                        <span>Leonardo</span>
+                    </div>
+                    <span class="blog-date">15. Nov 2024</span>
+                </div>
+            </div>
+        </article>
+
+        <!-- Blog Post 2 -->
+        <article class="blog-card" data-category="development">
+            <div class="blog-image">⚡</div>
+            <div class="blog-content">
+                <span class="blog-category">Development</span>
+                <h3 class="blog-title">Performance-Optimierung: So wird deine Website blitzschnell</h3>
+                <p class="blog-excerpt">
+                    Langsame Ladezeiten kosten Conversions. Wir zeigen dir, wie du deine Website auf Höchstgeschwindigkeit bringst.
+                </p>
+                <div class="blog-meta">
+                    <div class="blog-author">
+                        <div class="author-avatar">👨‍💻</div>
+                        <span>Jan</span>
+                    </div>
+                    <span class="blog-date">12. Nov 2024</span>
+                </div>
+            </div>
+        </article>
+
+        <!-- Blog Post 3 -->
+        <article class="blog-card" data-category="ai">
+            <div class="blog-image">🤖</div>
+            <div class="blog-content">
+                <span class="blog-category">KI & Tech</span>
+                <h3 class="blog-title">ChatGPT in deiner App: Ein Praxisleitfaden</h3>
+                <p class="blog-excerpt">
+                    Von der Integration bis zum Go-Live – so implementierst du KI-Chatbots in deine Anwendung.
+                </p>
+                <div class="blog-meta">
+                    <div class="blog-author">
+                        <div class="author-avatar">👨‍🔧</div>
+                        <span>Mentor</span>
+                    </div>
+                    <span class="blog-date">10. Nov 2024</span>
+                </div>
+            </div>
+        </article>
+
+        <!-- Blog Post 4 -->
+        <article class="blog-card" data-category="business">
+            <div class="blog-image">💼</div>
+            <div class="blog-content">
+                <span class="blog-category">Business</span>
+                <h3 class="blog-title">ROI deiner Website: Wie du Erfolg messbar machst</h3>
+                <p class="blog-excerpt">
+                    Datenbasierte Entscheidungen treffen – die wichtigsten KPIs und Tracking-Strategien für dein Business.
+                </p>
+                <div class="blog-meta">
+                    <div class="blog-author">
+                        <div class="author-avatar">👨‍💼</div>
+                        <span>Leonardo</span>
+                    </div>
+                    <span class="blog-date">8. Nov 2024</span>
+                </div>
+            </div>
+        </article>
+
+        <!-- Blog Post 5 -->
+        <article class="blog-card" data-category="design">
+            <div class="blog-image">🌈</div>
+            <div class="blog-content">
+                <span class="blog-category">Design</span>
+                <h3 class="blog-title">Farbpsychologie im Webdesign: Die Macht der Farben</h3>
+                <p class="blog-excerpt">
+                    Farben beeinflussen Emotionen und Conversions. So nutzt du Farbpsychologie für bessere Ergebnisse.
+                </p>
+                <div class="blog-meta">
+                    <div class="blog-author">
+                        <div class="author-avatar">👨‍🎨</div>
+                        <span>Leonardo</span>
+                    </div>
+                    <span class="blog-date">5. Nov 2024</span>
+                </div>
+            </div>
+        </article>
+
+        <!-- Blog Post 6 -->
+        <article class="blog-card" data-category="development">
+            <div class="blog-image">📱</div>
+            <div class="blog-content">
+                <span class="blog-category">Development</span>
+                <h3 class="blog-title">React vs. Vue vs. Next.js: Der ultimative Framework-Vergleich</h3>
+                <p class="blog-excerpt">
+                    Welches JavaScript-Framework ist das richtige für dein Projekt? Wir vergleichen die Top-Kandidaten.
+                </p>
+                <div class="blog-meta">
+                    <div class="blog-author">
+                        <div class="author-avatar">👨‍💻</div>
+                        <span>Jan</span>
+                    </div>
+                    <span class="blog-date">2. Nov 2024</span>
+                </div>
+            </div>
+        </article>
+
+        <!-- Blog Post 7 -->
+        <article class="blog-card" data-category="ai">
+            <div class="blog-image">🧠</div>
+            <div class="blog-content">
+                <span class="blog-category">KI & Tech</span>
+                <h3 class="blog-title">Machine Learning für Einsteiger: Von Zero to Hero</h3>
+                <p class="blog-excerpt">
+                    Du willst in die Welt der KI eintauchen? Dieser Guide bringt dir die Grundlagen bei – verständlich erklärt.
+                </p>
+                <div class="blog-meta">
+                    <div class="blog-author">
+                        <div class="author-avatar">👨‍💻</div>
+                        <span>Jan</span>
+                    </div>
+                    <span class="blog-date">28. Okt 2024</span>
+                </div>
+            </div>
+        </article>
+
+        <!-- Blog Post 8 -->
+        <article class="blog-card" data-category="business">
+            <div class="blog-image">📊</div>
+            <div class="blog-content">
+                <span class="blog-category">Business</span>
+                <h3 class="blog-title">Von der Idee zur App: Dein Projektfahrplan</h3>
+                <p class="blog-excerpt">
+                    Schritt für Schritt zur erfolgreichen App – von der Konzeption bis zum Launch und darüber hinaus.
+                </p>
+                <div class="blog-meta">
+                    <div class="blog-author">
+                        <div class="author-avatar">👨‍🔧</div>
+                        <span>Mentor</span>
+                    </div>
+                    <span class="blog-date">25. Okt 2024</span>
+                </div>
+            </div>
+        </article>
+
+        <!-- Blog Post 9 -->
+        <article class="blog-card" data-category="design">
+            <div class="blog-image">✨</div>
+            <div class="blog-content">
+                <span class="blog-category">Design</span>
+                <h3 class="blog-title">Microinteractions: Die kleinen Details, die den Unterschied machen</h3>
+                <p class="blog-excerpt">
+                    Subtile Animationen und Interaktionen hauchen deinem Design Leben ein. So setzt du sie effektiv ein.
+                </p>
+                <div class="blog-meta">
+                    <div class="blog-author">
+                        <div class="author-avatar">👨‍🎨</div>
+                        <span>Leonardo</span>
+                    </div>
+                    <span class="blog-date">22. Okt 2024</span>
+                </div>
+            </div>
+        </article>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter-section">
+        <div class="newsletter-container">
+            <div class="newsletter-icon">📬</div>
+            <h2>Bleib auf dem Laufenden</h2>
+            <p>
+                Erhalte die neuesten Artikel, Tipps und exklusive Insights direkt in dein Postfach
+            </p>
+            <form class="newsletter-form">
+                <input 
+                    type="email" 
+                    class="newsletter-input" 
+                    placeholder="Deine E-Mail Adresse"
+                    required
+                >
+                <button type="submit" class="newsletter-button">Abonnieren</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>wec<span>onn3ct</span></h3>
+                    <p>Wir verbinden kreatives Design mit technischer Exzellenz, um digitale Erlebnisse zu schaffen, die Ihr Unternehmen voranbringen.</p>
+                </div>
+                <div class="footer-column">
+                    <h4>Unternehmen</h4>
+                    <ul class="footer-links">
+                        <li><a href="ueber-uns.html">Über uns</a></li>
+                        <li><a href="ueber-uns.html#team">Team</a></li>
+                        <li><a href="karriere.html">Karriere</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Services</h4>
+                    <ul class="footer-links">
+                        <li><a href="leistungen.html">Webentwicklung</a></li>
+                        <li><a href="leistungen.html">App-Entwicklung</a></li>
+                        <li><a href="leistungen.html">UI/UX Design</a></li>
+                        <li><a href="leistungen.html">Beratung</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Kontakt</h4>
+                    <ul class="footer-links">
+                        <li><a href="mailto:hello@weconn3ct.com">hello@weconn3ct.com</a></li>
+                        <li><a href="tel:+49123456789">+49 123 456 789</a></li>
+                        <li><a href="#">LinkedIn</a></li>
+                        <li><a href="#">Instagram</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 weconn3ct. Alle Rechte vorbehalten. Made with ❤️ in Germany</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Filter functionality
+        const filterTabs = document.querySelectorAll('.filter-tab');
+        const blogCards = document.querySelectorAll('.blog-card');
+
+        filterTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Update active tab
+                filterTabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+
+                const filter = tab.dataset.filter;
+
+                // Filter items
+                blogCards.forEach((card, index) => {
+                    const category = card.dataset.category;
+                    
+                    if (filter === 'all' || category === filter) {
+                        setTimeout(() => {
+                            card.classList.add('show');
+                            card.style.display = 'block';
+                        }, index * 100);
+                    } else {
+                        card.classList.remove('show');
+                        setTimeout(() => {
+                            card.style.display = 'none';
+                        }, 300);
+                    }
+                });
+            });
+        });
+
+        // Show all cards on load
+        window.addEventListener('load', () => {
+            blogCards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.classList.add('show');
+                }, index * 100);
+            });
+        });
+
+        // Newsletter form
+        document.querySelector('.newsletter-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Vielen Dank für deine Anmeldung! 🎉 Du erhältst bald unseren Newsletter.');
+            e.target.reset();
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
