@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>weconn3ct - Wo Visionen Realität werden</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1a1a2e;
+            --secondary: #f8f9ff;
+            --accent-purple: #8b5cf6;
+            --accent-blue: #3b82f6;
+            --accent-purple-dark: #7c3aed;
+            --accent-blue-dark: #2563eb;
+            --text-light: #64748b;
+            --text-lighter: #94a3b8;
+            --gradient-primary: linear-gradient(135deg, #8b5cf6 0%, #3b82f6 100%);
+            --gradient-purple: linear-gradient(135deg, #a78bfa 0%, #8b5cf6 100%);
+            --gradient-blue: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
+            --gradient-light: linear-gradient(135deg, #e0e7ff 0%, #dbeafe 100%);
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(139, 92, 246, 0.2);
+        }
+
+        body {
+            font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #ffffff;
+            color: var(--primary);
+            overflow-x: hidden;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 16px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Outfit', sans-serif;
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--primary);
+            text-decoration: none;
+            letter-spacing: -1px;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .logo span {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-purple);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .cta-button {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 10px 24px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(139, 92, 246, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 30px rgba(139, 92, 246, 0.5);
+            opacity: 0.9;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(180deg, #ffffff 0%, #f8f9ff 100%);
+            padding: 120px 40px 80px;
+        }
+
+        .hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            opacity: 0.04;
+            background-image: 
+                linear-gradient(30deg, var(--accent-purple) 12%, transparent 12.5%, transparent 87%, var(--accent-purple) 87.5%, var(--accent-purple)),
+                linear-gradient(150deg, var(--accent-blue) 12%, transparent 12.5%, transparent 87%, var(--accent-blue) 87.5%, var(--accent-blue)),
+                linear-gradient(30deg, var(--accent-purple) 12%, transparent 12.5%, transparent 87%, var(--accent-purple) 87.5%, var(--accent-purple)),
+                linear-gradient(150deg, var(--accent-blue) 12%, transparent 12.5%, transparent 87%, var(--accent-blue) 87.5%, var(--accent-blue));
+            background-size: 80px 140px;
+            background-position: 0 0, 0 0, 40px 70px, 40px 70px;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: clamp(48px, 8vw, 96px);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            letter-spacing: -3px;
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards;
+        }
+
+        .hero-title .gradient-text {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(20px, 3vw, 28px);
+            color: var(--text-light);
+            margin-bottom: 48px;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.2s forwards;
+            font-weight: 400;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.4s forwards;
+        }
+
+        .button-primary, .button-secondary {
+            padding: 16px 40px;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .button-primary {
+            background: var(--gradient-primary);
+            color: white;
+            box-shadow: 0 10px 40px rgba(139, 92, 246, 0.3);
+        }
+
+        .button-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 50px rgba(139, 92, 246, 0.4);
+            opacity: 0.95;
+        }
+
+        .button-secondary {
+            background: transparent;
+            color: var(--accent-purple);
+            border: 2px solid var(--accent-purple);
+        }
+
+        .button-secondary:hover {
+            background: var(--gradient-primary);
+            color: white;
+            border-color: transparent;
+        }
+
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            animation: fadeIn 1s ease 1s forwards, bounce 2s ease infinite 1s;
+        }
+
+        .scroll-indicator svg {
+            width: 30px;
+            height: 50px;
+            stroke: var(--accent-purple);
+            fill: none;
+            stroke-width: 2;
+        }
+
+        /* Services Section */
+        .services {
+            padding: 120px 40px;
+            background: #ffffff;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 80px;
+        }
+
+        .section-eyebrow {
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent-purple);
+            margin-bottom: 16px;
+            opacity: 0;
+        }
+
+        .section-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: clamp(36px, 5vw, 64px);
+            font-weight: 800;
+            letter-spacing: -2px;
+            margin-bottom: 24px;
+            opacity: 0;
+        }
+
+        .section-description {
+            font-size: 20px;
+            color: var(--text-light);
+            opacity: 0;
+        }
+
+        .services-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+        }
+
+        .service-card {
+            background: white;
+            padding: 48px 40px;
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.05);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient-primary);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s ease;
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.1);
+        }
+
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--gradient-purple);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 32px;
+            font-size: 36px;
+            transition: transform 0.5s ease;
+        }
+
+        .service-card:nth-child(2) .service-icon {
+            background: var(--gradient-primary);
+        }
+
+        .service-card:nth-child(3) .service-icon {
+            background: var(--gradient-blue);
+        }
+
+        .service-card:hover .service-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .service-card h3 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            letter-spacing: -0.5px;
+        }
+
+        .service-card p {
+            color: var(--text-light);
+            font-size: 16px;
+            line-height: 1.7;
+            margin-bottom: 24px;
+        }
+
+        .service-link {
+            color: var(--accent-purple);
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: gap 0.3s ease;
+        }
+
+        .service-link:hover {
+            gap: 16px;
+        }
+
+        /* Showcase Section */
+        .showcase {
+            padding: 120px 40px;
+            background: linear-gradient(135deg, #f8f9ff 0%, #eff6ff 100%);
+            color: var(--primary);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .showcase::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .showcase-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .showcase-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: clamp(36px, 5vw, 72px);
+            font-weight: 800;
+            letter-spacing: -2px;
+            margin-bottom: 64px;
+            text-align: center;
+            opacity: 0;
+        }
+
+        .showcase-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 32px;
+        }
+
+        .showcase-item {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            border-radius: 24px;
+            padding: 48px;
+            transition: all 0.5s ease;
+            opacity: 0;
+        }
+
+        .showcase-item:hover {
+            background: rgba(255, 255, 255, 1);
+            transform: translateY(-5px);
+            border-color: rgba(139, 92, 246, 0.3);
+            box-shadow: 0 20px 60px rgba(139, 92, 246, 0.15);
+        }
+
+        .showcase-number {
+            font-family: 'Outfit', sans-serif;
+            font-size: 72px;
+            font-weight: 800;
+            background: var(--gradient-purple);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 16px;
+        }
+
+        .showcase-item:nth-child(2) .showcase-number {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .showcase-item:nth-child(3) .showcase-number {
+            background: var(--gradient-blue);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .showcase-item h3 {
+            font-size: 24px;
+            margin-bottom: 8px;
+            color: var(--primary);
+        }
+
+        .showcase-item p {
+            color: var(--text-light);
+            font-size: 16px;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 160px 40px;
+            background: var(--gradient-primary);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse"><path d="M 100 0 L 0 0 0 100" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.5;
+        }
+
+        .cta-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-content h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: clamp(40px, 6vw, 80px);
+            font-weight: 800;
+            color: white;
+            margin-bottom: 32px;
+            letter-spacing: -2px;
+            opacity: 0;
+        }
+
+        .cta-content p {
+            font-size: 24px;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 48px;
+            opacity: 0;
+        }
+
+        .cta-button-large {
+            display: inline-block;
+            padding: 20px 60px;
+            background: white;
+            color: var(--accent-purple);
+            border-radius: 50px;
+            font-size: 20px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+        }
+
+        .cta-button-large:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary);
+            color: white;
+            padding: 80px 40px 40px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 60px;
+        }
+
+        .footer-brand h3 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 16px;
+        }
+
+        .footer-brand h3 span {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .footer-brand p {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.8;
+        }
+
+        .footer-column h4 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 16px;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            padding-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            50% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .nav-links {
+                gap: 20px;
+            }
+
+            .services-grid, .showcase-grid, .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero {
+                padding: 100px 20px 60px;
+            }
+
+            .services, .showcase, .cta-section {
+                padding: 80px 20px;
+            }
+        }
+
+        /* Scroll Reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="weconn3ct-startseite.html" class="logo">wec<span>onn3ct</span></a>
+            <ul class="nav-links">
+                <li><a href="leistungen.html">Leistungen</a></li>
+                <li><a href="portfolio.html">Projekte</a></li>
+                <li><a href="ueber-uns.html">Über uns</a></li>
+                <li><a href="kontakt.html" class="cta-button">Kontakt</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-background"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">
+                Digitale Erlebnisse, die<br>
+                <span class="gradient-text">begeistern</span>
+            </h1>
+            <p class="hero-subtitle">
+                Wir entwickeln Softwarelösungen und Websites,<br>
+                die Ihre Vision zum Leben erwecken
+            </p>
+            <div class="hero-buttons">
+                <a href="#contact" class="button-primary">Projekt starten</a>
+                <a href="#services" class="button-secondary">Mehr erfahren</a>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <svg viewBox="0 0 30 50">
+                <rect x="5" y="5" width="20" height="40" rx="10"/>
+                <circle cx="15" cy="15" r="3" fill="currentColor">
+                    <animate attributeName="cy" from="15" to="30" dur="1.5s" repeatCount="indefinite"/>
+                    <animate attributeName="opacity" from="1" to="0" dur="1.5s" repeatCount="indefinite"/>
+                </circle>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="section-header">
+            <div class="section-eyebrow reveal">Unsere Expertise</div>
+            <h2 class="section-title reveal">Was wir für Sie tun</h2>
+            <p class="section-description reveal">
+                Von der ersten Idee bis zur erfolgreichen Umsetzung – wir begleiten Sie auf jedem Schritt Ihrer digitalen Reise
+            </p>
+        </div>
+        <div class="services-grid">
+            <div class="service-card reveal">
+                <div class="service-icon">💻</div>
+                <h3>Softwareentwicklung</h3>
+                <p>Maßgeschneiderte Softwarelösungen, die perfekt auf Ihre Geschäftsprozesse abgestimmt sind. Von Web-Apps bis zu komplexen Enterprise-Systemen.</p>
+                <a href="#" class="service-link">Mehr erfahren →</a>
+            </div>
+            <div class="service-card reveal">
+                <div class="service-icon">🎨</div>
+                <h3>Webdesign & UI/UX</h3>
+                <p>Atemberaubende Designs mit perfekter User Experience. Wir schaffen digitale Erlebnisse, die Ihre Nutzer lieben werden.</p>
+                <a href="#" class="service-link">Mehr erfahren →</a>
+            </div>
+            <div class="service-card reveal">
+                <div class="service-icon">🚀</div>
+                <h3>Digitale Transformation</h3>
+                <p>Bringen Sie Ihr Unternehmen ins digitale Zeitalter. Wir optimieren Ihre Prozesse und schaffen neue Wachstumschancen.</p>
+                <a href="#" class="service-link">Mehr erfahren →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Showcase Section -->
+    <section class="showcase" id="showcase">
+        <div class="showcase-content">
+            <h2 class="showcase-title reveal">Zahlen, die sprechen</h2>
+            <div class="showcase-grid">
+                <div class="showcase-item reveal">
+                    <div class="showcase-number">150+</div>
+                    <h3>Erfolgreiche Projekte</h3>
+                    <p>Zufriedene Kunden aus verschiedensten Branchen</p>
+                </div>
+                <div class="showcase-item reveal">
+                    <div class="showcase-number">98%</div>
+                    <h3>Kundenzufriedenheit</h3>
+                    <p>Exzellenz in jedem Detail unserer Arbeit</p>
+                </div>
+                <div class="showcase-item reveal">
+                    <div class="showcase-number">24/7</div>
+                    <h3>Support</h3>
+                    <p>Immer für Sie da, wenn Sie uns brauchen</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section" id="contact">
+        <div class="cta-content">
+            <h2 class="reveal">Bereit für Ihr<br>nächstes Projekt?</h2>
+            <p class="reveal">Lassen Sie uns gemeinsam etwas Außergewöhnliches schaffen</p>
+            <a href="mailto:hello@weconn3ct.com" class="cta-button-large reveal">Jetzt Kontakt aufnehmen</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="about">
+        <div class="footer-content">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>wec<span>onn3ct</span></h3>
+                    <p>Wir verbinden kreatives Design mit technischer Exzellenz, um digitale Erlebnisse zu schaffen, die Ihr Unternehmen voranbringen.</p>
+                </div>
+                <div class="footer-column">
+                    <h4>Unternehmen</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Über uns</a></li>
+                        <li><a href="#">Team</a></li>
+                        <li><a href="#">Karriere</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Services</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Webentwicklung</a></li>
+                        <li><a href="#">App-Entwicklung</a></li>
+                        <li><a href="#">UI/UX Design</a></li>
+                        <li><a href="#">Beratung</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Kontakt</h4>
+                    <ul class="footer-links">
+                        <li><a href="mailto:hello@weconn3ct.com">hello@weconn3ct.com</a></li>
+                        <li><a href="tel:+49123456789">+49 123 456 789</a></li>
+                        <li><a href="#">LinkedIn</a></li>
+                        <li><a href="#">Instagram</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 weconn3ct. Alle Rechte vorbehalten. Made with ❤️ in Germany</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        let lastScroll = 0;
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+            
+            lastScroll = currentScroll;
+        });
+
+        // Scroll reveal animation
+        const revealElements = document.querySelectorAll('.reveal');
+        
+        const revealOnScroll = () => {
+            revealElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (elementTop < windowHeight - 100) {
+                    element.classList.add('active');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', revealOnScroll);
+        window.addEventListener('load', revealOnScroll);
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Parallax effect for hero
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero-content');
+            if (hero) {
+                hero.style.transform = `translateY(${scrolled * 0.3}px)`;
+                hero.style.opacity = 1 - scrolled / 600;
+            }
+        });
+
+        // Add stagger animation to service cards
+        const observerOptions = {
+            threshold: 0.2,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }, index * 100);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.service-card, .showcase-item').forEach(card => {
+            observer.observe(card);
+        });
+
+        // Mouse parallax for hero background
+        document.addEventListener('mousemove', (e) => {
+            const mouseX = e.clientX / window.innerWidth;
+            const mouseY = e.clientY / window.innerHeight;
+            const heroBackground = document.querySelector('.hero-background');
+            
+            if (heroBackground) {
+                heroBackground.style.transform = `translate(${mouseX * 50}px, ${mouseY * 50}px)`;
+            }
+        });
+    </script>
+</body>
+</html>
