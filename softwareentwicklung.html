@@ -91,6 +91,15 @@
         .footer-bottom p{color:var(--text-lighter);font-size:14px;display:flex;align-items:center;justify-content:center;gap:8px}
         @media(max-width:1200px){.services-grid{grid-template-columns:repeat(2,1fr)}.footer-grid{grid-template-columns:1fr 1fr;gap:40px}}
         @media(max-width:768px){.nav-container{padding:0 30px}.services-grid{grid-template-columns:1fr}.section{padding:100px 30px}.breadcrumb{padding:10px 30px}.cta-section{padding:120px 30px}.footer-grid{grid-template-columns:1fr}}
+        /* ==================== BOTTOM NAVIGATION (Mobile) ==================== */
+        .bottom-nav{display:none;position:fixed;bottom:0;left:0;right:0;background:rgba(10,10,15,.95);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);border-top:1px solid rgba(255,255,255,.1);padding:8px 0;padding-bottom:calc(8px + env(safe-area-inset-bottom));z-index:1000;justify-content:space-around;align-items:center}
+        .bottom-nav-item{display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px 16px;color:var(--text-lighter);text-decoration:none;font-size:11px;font-weight:600;transition:all .3s ease;position:relative}
+        .bottom-nav-item svg{width:24px;height:24px;transition:all .3s ease}
+        .bottom-nav-item:hover,.bottom-nav-item.active{color:#fff}
+        .bottom-nav-item.active svg{stroke:var(--accent-purple);filter:drop-shadow(0 0 8px rgba(139,92,246,.5))}
+        .bottom-nav-item.active::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:40px;height:3px;background:var(--gradient-primary);border-radius:0 0 4px 4px}
+        @media(max-width:768px){.bottom-nav{display:flex}.nav-links{display:none !important}.nav-container{padding:0 20px}nav{padding:12px 0 !important}.logo-img{height:32px}body{padding-bottom:80px}footer{padding-bottom:100px}.mobile-cta{display:flex;position:fixed;top:12px;right:20px;background:var(--gradient-primary);color:#fff;padding:10px 20px;border-radius:50px;font-size:13px;font-weight:600;text-decoration:none;z-index:1001;box-shadow:0 4px 20px rgba(139,92,246,.4)}}
+        @media(min-width:769px){.mobile-cta{display:none}}
     </style>
     <meta name="description" content="Maßgeschneiderte Softwareentwicklung von weconn3ct – moderne Web-Apps, skalierbare Backends, Enterprise Software und Cloud-Lösungen.">
 </head>
@@ -107,7 +116,8 @@
     <!-- Navigation -->
     <nav id="navbar">
         <div class="nav-container">
-            <a href="index.html" class="logo"><img src="Images/properties/logo.png" alt="weconn3ct" class="logo-img"></a>
+            <a href="index.html" class="logo"><img src="images/logo.png" alt="weconn3ct" class="logo-img"></a>
+            <a href="kontakt.html" class="mobile-cta">Projekt starten</a>
             <ul class="nav-links" id="navLinks">
                 <li><a href="index.html#services">Services</a></li>
                 <li><a href="softwareentwicklung.html" class="active">Software</a></li>
@@ -239,7 +249,7 @@
         <div class="footer-content">
             <div class="footer-grid">
                 <div class="footer-brand">
-                    <img src="Images/properties/logo.png" alt="weconn3ct" class="footer-logo-img">
+                    <img src="images/logo.png" alt="weconn3ct" class="footer-logo-img">
                     <p>Wir verbinden kreatives Design mit technischer Exzellenz, um digitale Erlebnisse zu schaffen, die Ihr Unternehmen voranbringen.</p>
                 </div>
                 <div>
@@ -273,28 +283,224 @@
             </div>
         </div>
     </footer>
-
+    <!-- Bottom Navigation (Mobile) -->
+    <nav class="bottom-nav" id="bottomNav">
+        <a href="index.html" class="bottom-nav-item" data-page="index">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+            <span>Home</span>
+        </a>
+        <a href="leistungen.html" class="bottom-nav-item" data-page="leistungen">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+            <span>Services</span>
+        </a>
+        <a href="portfolio.html" class="bottom-nav-item" data-page="portfolio">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+            <span>Portfolio</span>
+        </a>
+        <a href="kontakt.html" class="bottom-nav-item" data-page="kontakt">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+            <span>Kontakt</span>
+        </a>
+    </nav>
     <script>
         // ==================== LOADING SCREEN ====================
-        // Verstecke Loader nach Animation ODER nach Timeout (falls Ressourcen nicht laden)
-        const hideLoader=()=>{const loader=document.getElementById('loader');if(loader && !loader.classList.contains('hidden')){loader.classList.add('hidden');}};
-        // Normaler Fall: Nach 1.8 Sekunden ausblenden
-        setTimeout(hideLoader,1800);
-        // Fallback: Spätestens nach 3 Sekunden ausblenden (falls etwas hängt)
-        setTimeout(hideLoader,3000);
-        // Zusätzlich: Bei window load prüfen
-        window.addEventListener('load',()=>{setTimeout(hideLoader,500)});
-        // Sofort ausblenden wenn DOM ready und Animation durch
-        document.addEventListener('DOMContentLoaded',()=>{setTimeout(hideLoader,1800)});
-        // Cursor
-        const cursor=document.getElementById('cursor'),dot=document.getElementById('cursorDot');let mx=0,my=0,cx=0,cy=0;
-        document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;dot.style.left=mx+'px';dot.style.top=my+'px';});
-        (function anim(){cx+=(mx-cx)*.1;cy+=(my-cy)*.1;cursor.style.left=cx+'px';cursor.style.top=cy+'px';requestAnimationFrame(anim)})();
-        document.querySelectorAll('a,button,.service-card').forEach(el=>{el.addEventListener('mouseenter',()=>cursor.classList.add('hover'));el.addEventListener('mouseleave',()=>cursor.classList.remove('hover'));});
-        // Navbar scroll
-        const navbar=document.getElementById('navbar');window.addEventListener('scroll',()=>{window.pageYOffset>100?navbar.classList.add('scrolled'):navbar.classList.remove('scrolled')});
-        // Smooth scroll
-        document.querySelectorAll('a[href^=\"#\"]').forEach(a=>a.addEventListener('click',e=>{const href=a.getAttribute('href');if(href===\"#contact\"||href===\"#tech\"){e.preventDefault();document.querySelector(href)?.scrollIntoView({behavior:'smooth',block:'start'})}}));
+        const hideLoader = () => {
+            const loader = document.getElementById('loader');
+            if (loader && !loader.classList.contains('hidden')) {
+                loader.classList.add('hidden');
+            }
+        };
+        setTimeout(hideLoader, 1800);
+        setTimeout(hideLoader, 3000);
+        window.addEventListener('load', () => setTimeout(hideLoader, 500));
+        document.addEventListener('DOMContentLoaded', () => setTimeout(hideLoader, 1800));
+
+        // ==================== CUSTOM CURSOR ====================
+        const cursor = document.getElementById('cursor');
+        const cursorDot = document.getElementById('cursorDot');
+        
+        if (cursor && cursorDot) {
+            let mouseX = 0, mouseY = 0;
+            let cursorX = 0, cursorY = 0;
+
+            document.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+                cursorDot.style.left = mouseX + 'px';
+                cursorDot.style.top = mouseY + 'px';
+            });
+
+            function animateCursor() {
+                cursorX += (mouseX - cursorX) * 0.1;
+                cursorY += (mouseY - cursorY) * 0.1;
+                cursor.style.left = cursorX + 'px';
+                cursor.style.top = cursorY + 'px';
+                requestAnimationFrame(animateCursor);
+            }
+            animateCursor();
+
+            // Cursor hover effect
+            document.querySelectorAll('a, button, .service-card, .showcase-item, .project-card, .blog-card, .job-card, .team-card, .info-card, .faq-item').forEach(el => {
+                el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+                el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+            });
+        }
+
+        // ==================== NAVBAR ====================
+        const navbar = document.getElementById('navbar') || document.querySelector('nav');
+        if (navbar) {
+            window.addEventListener('scroll', () => {
+                if (window.pageYOffset > 100) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+        }
+
+        // ==================== MOBILE MENU ====================
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+        if (menuToggle && navLinks) {
+            menuToggle.addEventListener('click', () => {
+                menuToggle.classList.toggle('active');
+                navLinks.classList.toggle('active');
+            });
+            navLinks.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    menuToggle.classList.remove('active');
+                    navLinks.classList.remove('active');
+                });
+            });
+        }
+
+        // ==================== SCROLL REVEAL ====================
+        const revealElements = document.querySelectorAll('.reveal, .service-card, .showcase-item, .project-card, .blog-card');
+        const revealOnScroll = () => {
+            revealElements.forEach((element, index) => {
+                const elementTop = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                if (elementTop < windowHeight - 100) {
+                    setTimeout(() => {
+                        element.classList.add('active');
+                        element.style.opacity = '1';
+                        element.style.transform = 'translateY(0)';
+                    }, index * 50);
+                }
+            });
+        };
+        window.addEventListener('scroll', revealOnScroll);
+        window.addEventListener('load', revealOnScroll);
+
+        // ==================== SMOOTH SCROLL ====================
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href && href !== '#') {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }
+            });
+        });
+
+        // ==================== ANIMATED COUNTER (if exists) ====================
+        const counters = document.querySelectorAll('.showcase-number[data-count]');
+        let countersStarted = false;
+        const startCounters = () => {
+            if (countersStarted) return;
+            const showcaseSection = document.querySelector('.showcase');
+            if (!showcaseSection) return;
+            const sectionTop = showcaseSection.getBoundingClientRect().top;
+            if (sectionTop < window.innerHeight - 200) {
+                countersStarted = true;
+                counters.forEach(counter => {
+                    const target = parseInt(counter.getAttribute('data-count'));
+                    const suffix = counter.getAttribute('data-suffix') || '+';
+                    const duration = 2000;
+                    const step = target / (duration / 16);
+                    let current = 0;
+                    const updateCounter = () => {
+                        current += step;
+                        if (current < target) {
+                            counter.textContent = Math.floor(current) + suffix;
+                            requestAnimationFrame(updateCounter);
+                        } else {
+                            counter.textContent = target + suffix;
+                        }
+                    };
+                    updateCounter();
+                });
+            }
+        };
+        window.addEventListener('scroll', startCounters);
+
+        // ==================== PARALLAX ORBS (if exists) ====================
+        const orbs = document.querySelectorAll('.orb');
+        if (orbs.length > 0) {
+            document.addEventListener('mousemove', (e) => {
+                const mouseX = e.clientX / window.innerWidth - 0.5;
+                const mouseY = e.clientY / window.innerHeight - 0.5;
+                orbs.forEach((orb, index) => {
+                    const speed = (index + 1) * 20;
+                    orb.style.transform = `translate(${mouseX * speed}px, ${mouseY * speed}px)`;
+                });
+            });
+        }
+
+        // ==================== TILT EFFECT FOR CARDS ====================
+        const tiltCards = document.querySelectorAll('.service-card');
+        tiltCards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const rotateX = (y - centerY) / 20;
+                const rotateY = (centerX - x) / 20;
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-15px)`;
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
+            });
+        });
+
+        // ==================== FAQ ACCORDION (if exists) ====================
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const item = question.parentElement;
+                const isActive = item.classList.contains('active');
+                document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+                if (!isActive) item.classList.add('active');
+            });
+        });
+
+        // ==================== FORM SUBMISSION (if exists) ====================
+        const contactForm = document.getElementById('contactForm');
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                // Form handling logic here
+                alert('Vielen Dank für Ihre Nachricht! Wir melden uns bald bei Ihnen.');
+                this.reset();
+            });
+        }
+        // ==================== BOTTOM NAV ACTIVE STATE ====================
+        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+        document.querySelectorAll('.bottom-nav-item').forEach(item => {
+            const page = item.getAttribute('data-page');
+            if (currentPage.includes(page) || (currentPage === '' && page === 'index')) {
+                item.classList.add('active');
+            }
+        });
+        if (currentPage.includes('softwareentwicklung') || currentPage.includes('webdesign') || currentPage.includes('digitale-transformation')) {
+            document.querySelectorAll('.bottom-nav-item').forEach(i => i.classList.remove('active'));
+            const servicesItem = document.querySelector('.bottom-nav-item[data-page="leistungen"]');
+            if (servicesItem) servicesItem.classList.add('active');
+        }
     </script>
 </body>
 </html>
