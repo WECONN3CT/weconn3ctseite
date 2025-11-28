@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webdesign & UI/UX | weconn3ct</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #1a1a2e; --secondary: #f8f9ff;
+            --accent-purple: #8b5cf6; --accent-blue: #3b82f6;
+            --text-light: #64748b;
+            --gradient-primary: linear-gradient(135deg, #8b5cf6 0%, #3b82f6 100%);
+        }
+        body { font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif; background: #ffffff; color: var(--primary); line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+        nav { position: fixed; top:0; left:0; right:0; z-index:1000; background: rgba(255,255,255,0.95); backdrop-filter: blur(20px) saturate(180%); border-bottom: 1px solid rgba(0,0,0,0.05); box-shadow: 0 4px 30px rgba(0,0,0,0.05); }
+        .nav-container { max-width: 1200px; margin: 0 auto; padding: 16px 40px; padding-left: 16px; display:flex; justify-content: space-between; align-items:center; }
+        .logo { text-decoration: none; }
+        .logo img { height: 40px; display: block; }
+        .nav-links { display:flex; gap:40px; list-style:none; align-items:center; }
+        .nav-links a { color: var(--primary); text-decoration:none; font-size:14px; font-weight:500; position:relative; transition: all .3s ease; }
+        .nav-links a::after { content:''; position:absolute; bottom:-4px; left:0; width:0; height:2px; background: var(--accent-purple); transition: width .3s ease; }
+        .nav-links a:hover::after, .nav-links a.active::after { width:100%; }
+        .cta-button { background: var(--gradient-primary); color:#fff; padding:10px 24px; border-radius: 50px; text-decoration:none; font-weight:600; box-shadow:0 4px 20px rgba(139,92,246,.3); }
+        .services-subnav { background:#fff; border-bottom:1px solid rgba(0,0,0,.05); }
+        .services-subnav .container { max-width:1200px; margin:0 auto; padding:10px 40px; display:flex; gap:20px; }
+        .services-subnav a { color: var(--text-light); text-decoration:none; font-weight:600; font-size:14px; }
+        .services-subnav a.active { color: var(--accent-purple); }
+        .hero { min-height: 70vh; display:flex; align-items:center; justify-content:center; background: linear-gradient(180deg,#ffffff 0%, #f8f9ff 100%); padding:140px 40px 80px; text-align:center; }
+        .hero-title { font-family:'Outfit', sans-serif; font-size: clamp(40px,7vw,72px); font-weight:800; letter-spacing:-2px; margin-bottom:16px; opacity:0; animation: fadeInUp 1s ease forwards; }
+        .hero-subtitle { font-size: clamp(18px,3vw,22px); color: var(--text-light); margin-bottom: 36px; opacity:0; animation: fadeInUp 1s ease .2s forwards; }
+        .button-primary { display:inline-block; padding:14px 32px; border-radius:50px; background: var(--gradient-primary); color:#fff; font-weight:800; text-decoration:none; box-shadow:0 10px 40px rgba(139,92,246,.3); }
+        .section { padding: 100px 40px; }
+        .section.alt { background: linear-gradient(135deg, #f8f9ff 0%, #eff6ff 100%); }
+        .section-header { text-align:center; max-width:800px; margin:0 auto 60px; }
+        .section-title { font-family:'Outfit', sans-serif; font-size: clamp(28px,5vw,44px); font-weight:800; letter-spacing:-1px; margin-bottom:12px; }
+        .section-description { color: var(--text-light); font-size:18px; }
+        .services-grid { max-width:1200px; margin:0 auto; display:grid; grid-template-columns: repeat(auto-fit,minmax(280px,1fr)); gap:32px; }
+        .service-card { background:#fff; padding:32px; border-radius:20px; box-shadow:0 20px 60px rgba(0,0,0,.05); transition: all .5s ease; }
+        .service-card:hover { transform: translateY(-8px); box-shadow:0 30px 80px rgba(0,0,0,.1); }
+        .service-icon { width:80px; height:80px; background: var(--gradient-primary); border-radius:20px; display:flex; align-items:center; justify-content:center; margin-bottom:20px; }
+        .service-icon-img { width:48px; height:48px; object-fit: contain; }
+        .service-card h3 { font-family:'Outfit', sans-serif; font-size:22px; font-weight:700; margin-bottom:10px; }
+        .three-grid { max-width:1100px; margin:0 auto; display:grid; grid-template-columns: repeat(auto-fit,minmax(280px,1fr)); gap:24px; }
+        .point-card { background:#fff; border:1px solid rgba(139,92,246,.15); border-radius:18px; padding:28px; transition: all .3s ease; }
+        .point-card:hover { transform: translateY(-6px); box-shadow: 0 20px 60px rgba(139,92,246,.15); }
+        .stats-grid { max-width:1100px; margin:0 auto; display:grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap:24px; }
+        .stat { background:#fff; border-radius:18px; padding:28px; border:1px solid rgba(0,0,0,.06); text-align:center; }
+        .stat .num { font-family:'Outfit', sans-serif; font-size: 36px; font-weight:800; color: var(--primary); margin-bottom:6px; }
+        .cta-section { padding:120px 40px; background: var(--gradient-primary); text-align:center; }
+        .cta-section h2 { font-family:'Outfit', sans-serif; font-size: clamp(32px,6vw,56px); font-weight:800; color:#fff; margin-bottom:16px; }
+        .cta-section p { color: rgba(255,255,255,.9); margin-bottom:24px; font-size:20px; }
+        footer { background:#1a1a2e; color:#fff; padding:80px 40px 40px; }
+        .footer-content { max-width:1200px; margin:0 auto; }
+        .footer-grid { display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:60px; margin-bottom:60px; }
+        .footer-links { list-style:none; }
+        .footer-links li { margin-bottom:16px; }
+        .footer-bottom { padding-top:40px; border-top:1px solid rgba(255,255,255,.1); text-align:center; color: rgba(255,255,255,.5); }
+        .footer-heart { width:20px; height:20px; object-fit:contain; vertical-align:middle; }
+        @keyframes fadeInUp { from { opacity:0; transform: translateY(30px);} to { opacity:1; transform: translateY(0);} }
+        @media (max-width: 968px){ .nav-links{gap:20px;} .logo img{height:32px;} .section{padding:80px 20px;} .cta-section{padding:100px 20px;} .footer-grid{grid-template-columns:1fr;} }
+    </style>
+    <meta name="description" content="Webdesign & UI/UX von weconn3ct – Ästhetik trifft Funktionalität. Pixel-perfekte Interfaces, nutzerzentrierte Konzepte und responsive Websites.">
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="weconn3ct-startseite.html" class="logo"><img src="Images/properties/logo.png" alt="WECONN3CT Logo"></a>
+            <ul class="nav-links">
+                <li><a href="leistungen.html">Leistungen</a></li>
+                <li><a href="portfolio.html">Projekte</a></li>
+                <li><a href="ueber-uns.html">Über uns</a></li>
+                <li><a href="kontakt.html" class="cta-button">Kontakt</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="services-subnav">
+        <div class="container">
+            <a href="softwareentwicklung.html">Softwareentwicklung</a>
+            <a class="active" href="webdesign.html">Webdesign & UI/UX</a>
+            <a href="digitale-transformation.html">Digitale Transformation</a>
+        </div>
+    </div>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">Webdesign, das begeistert und konvertiert</h1>
+            <p class="hero-subtitle">Ästhetik trifft Funktionalität – für digitale Erlebnisse, die in Erinnerung bleiben</p>
+            <a href="#contact" class="button-primary">Design-Projekt starten</a>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="section-header">
+            <h2 class="section-title">Unsere Leistungen</h2>
+            <p class="section-description">Design mit Wirkung: visuell stark, benutzerfreundlich und messbar erfolgreich.</p>
+        </div>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon"><img src="images/icons/icon-02.png" alt="UI Design" class="service-icon-img"></div>
+                <h3>UI Design</h3>
+                <p>Pixel-perfekte Interfaces mit Wow-Effekt – durchdacht bis ins Detail und markenkonform.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon"><img src="images/icons/icon-02.png" alt="UX Design" class="service-icon-img"></div>
+                <h3>UX Design</h3>
+                <p>Nutzerzentrierte Konzepte für optimale Usability, klare Flows und hohe Zufriedenheit.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon"><img src="images/icons/icon-02.png" alt="Responsive Websites" class="service-icon-img"></div>
+                <h3>Responsive Websites</h3>
+                <p>Perfekt auf jedem Gerät – schnell, barrierearm und suchmaschinenfreundlich.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon"><img src="images/icons/icon-02.png" alt="Design-Systeme" class="service-icon-img"></div>
+                <h3>Design-Systeme</h3>
+                <p>Konsistente Komponenten und Guidelines für skalierbare Produkte und Teams.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section alt">
+        <div class="section-header">
+            <h2 class="section-title">Unser Ansatz</h2>
+            <p class="section-description">Von der Idee zum erlebbaren Interface – strukturiert, schnell, präzise.</p>
+        </div>
+        <div class="three-grid">
+            <div class="point-card">
+                <h3>Nutzer verstehen</h3>
+                <p>Research, Personas und User Journeys bilden die Basis für relevante Lösungen.</p>
+            </div>
+            <div class="point-card">
+                <h3>Prototyping</h3>
+                <p>Wireframes und interaktive Prototypen machen Entscheidungen früh erlebbar.</p>
+            </div>
+            <div class="point-card">
+                <h3>Pixel-Perfektion</h3>
+                <p>Vom Konzept zum finalen Design – sauber dokumentiert und entwicklerfreundlich.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="section-header">
+            <h2 class="section-title">Design, das Ergebnisse liefert</h2>
+        </div>
+        <div class="stats-grid">
+            <div class="stat">
+                <div class="num">+40%</div>
+                <div>höhere Conversion-Rates</div>
+            </div>
+            <div class="stat">
+                <div class="num">-60%</div>
+                <div>geringere Absprungraten</div>
+            </div>
+            <div class="stat">
+                <div class="num">&lt;3 Sek.</div>
+                <div>durchschnittliche Ladezeit</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section" id="contact">
+        <h2>Bereit für ein Design, das Ihre Marke zum Strahlen bringt?</h2>
+        <p>Wir gestalten Interfaces, die Menschen lieben – und die performen.</p>
+        <a href="kontakt.html" class="button-primary" style="background:#fff;color:#8b5cf6;">Design-Beratung anfragen</a>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-grid">
+                <div>
+                    <h3>wec<span>onn3ct</span></h3>
+                    <p>Wir verbinden kreatives Design mit technischer Exzellenz, um digitale Erlebnisse zu schaffen, die Ihr Unternehmen voranbringen.</p>
+                </div>
+                <div>
+                    <h4>Unternehmen</h4>
+                    <ul class="footer-links">
+                        <li><a href="ueber-uns.html">Über uns</a></li>
+                        <li><a href="ueber-uns.html#team">Team</a></li>
+                        <li><a href="karriere.html">Karriere</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Services</h4>
+                    <ul class="footer-links">
+                        <li><a href="softwareentwicklung.html">Softwareentwicklung</a></li>
+                        <li><a href="webdesign.html">Webdesign & UI/UX</a></li>
+                        <li><a href="digitale-transformation.html">Digitale Transformation</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Kontakt</h4>
+                    <ul class="footer-links">
+                        <li><a href="mailto:hello@weconn3ct.com">hello@weconn3ct.com</a></li>
+                        <li><a href="tel:+49123456789">+49 123 456 789</a></li>
+                        <li><a href="#">LinkedIn</a></li>
+                        <li><a href="#">Instagram</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 weconn3ct. Alle Rechte vorbehalten. Made with <img src="images/icons/icon-04.png" alt="Love" class="footer-heart"> in Germany</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href === '#contact') {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+
