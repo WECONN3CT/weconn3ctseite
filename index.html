@@ -2,965 +2,1590 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>WECONN3CT.App | Softwareentwicklung</title>
-    <meta name="description" content="WECONN3CT.App entwickelt Apps, Websites und Software – schnell, KI‑gestützt und Made in Germany. 6 Services, Team in Bad Honnef, 15 Mitarbeiter, 4 Teams, 8 Partner, 12 Projekte.">
-    <script type="module" src="js/circularGallery.js"></script>
-    <!-- Google Fonts -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>weconn3ct - Wo Visionen Realität werden</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- CSS Files -->
-    <link rel="stylesheet" href="css/variables.css">
-    <link rel="stylesheet" href="css/base.css">
-    <link rel="stylesheet" href="css/components.css">
-    <link rel="stylesheet" href="css/utilities.css">
-    <link rel="stylesheet" href="css/circular-gallery.css">
-    <link rel="stylesheet" href="css/logoLoop.css">
-    <link rel="stylesheet" href="css/gradient-text.css">
-<script defer src="js/navbar-glass-effect.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #0a0a0f;
+            --primary-light: #1a1a2e;
+            --secondary: #f8f9ff;
+            --accent-purple: #8b5cf6;
+            --accent-blue: #3b82f6;
+            --accent-cyan: #06b6d4;
+            --accent-pink: #ec4899;
+            --text-light: #64748b;
+            --text-lighter: #94a3b8;
+            --gradient-primary: linear-gradient(135deg, #8b5cf6 0%, #3b82f6 50%, #06b6d4 100%);
+            --gradient-glow: linear-gradient(135deg, #8b5cf6 0%, #ec4899 50%, #3b82f6 100%);
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--primary);
+            color: #ffffff;
+            overflow-x: hidden;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ==================== LOADING SCREEN ==================== */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+        }
+
+        .loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .loader-content {
+            text-align: center;
+        }
+
+        .loader-logo-img {
+            height: 60px;
+            width: auto;
+            animation: pulse 1.5s ease-in-out infinite;
+            margin-bottom: 10px;
+        }
+        /* Fallback falls Bild nicht lädt */
+        .loader-logo-img[src=""],
+        .loader-logo-img:not([src]) {
+            display: none;
+        }
+        .loader-logo-img::after {
+            content: 'weconn3ct';
+            font-family: 'Outfit', sans-serif;
+            font-size: 48px;
+            font-weight: 900;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .loader-bar {
+            width: 200px;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            margin-top: 30px;
+            overflow: hidden;
+        }
+
+        .loader-progress {
+            height: 100%;
+            background: var(--gradient-primary);
+            border-radius: 10px;
+            animation: loading 1.5s ease-in-out forwards;
+        }
+
+        @keyframes loading {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* ==================== CURSOR EFFECT ==================== */
+        .cursor {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--accent-purple);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9998;
+            transition: transform 0.15s ease, width 0.3s ease, height 0.3s ease, border-color 0.3s ease;
+            transform: translate(-50%, -50%);
+        }
+
+        .cursor.hover {
+            width: 50px;
+            height: 50px;
+            border-color: var(--accent-cyan);
+            background: rgba(139, 92, 246, 0.1);
+        }
+
+        .cursor-dot {
+            width: 6px;
+            height: 6px;
+            background: var(--accent-purple);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+        }
+
+        /* ==================== NAVIGATION ==================== */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 20px 0;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        nav.scrolled {
+            background: rgba(10, 10, 15, 0.9);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 15px 0;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Outfit', sans-serif;
+            font-size: 28px;
+            font-weight: 900;
+            color: #fff;
+            text-decoration: none;
+            letter-spacing: -1px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .logo span {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .logo-img {
+            height: 40px;
+            width: auto;
+            transition: transform 0.3s ease, filter 0.3s ease;
+            display: block;
+        }
+        .logo:hover .logo-img {
+            transform: scale(1.05);
+            filter: brightness(1.2);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 50px;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--gradient-primary);
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .nav-links a:hover {
+            color: #fff;
+        }
+
+        .nav-links a:hover::before {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+        .nav-links a.active {
+            color: #fff;
+        }
+        .nav-links a.active::before {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        .nav-cta {
+            background: var(--gradient-primary);
+            color: white !important;
+            padding: 12px 28px;
+            border-radius: 50px;
+            font-weight: 600;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .nav-cta::before {
+            display: none;
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 40px rgba(139, 92, 246, 0.4);
+        }
+
+        /* Mobile Menu */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .menu-toggle span {
+            width: 28px;
+            height: 2px;
+            background: #fff;
+            transition: all 0.3s ease;
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+
+        /* ==================== HERO SECTION ==================== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            padding: 140px 60px 100px;
+        }
+
+        /* Animated Gradient Orbs */
+        .hero-orbs {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.5;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .orb-1 {
+            width: 600px;
+            height: 600px;
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.4) 0%, rgba(59, 130, 246, 0.2) 100%);
+            top: -20%;
+            left: -10%;
+            animation-delay: 0s;
+        }
+
+        .orb-2 {
+            width: 500px;
+            height: 500px;
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.3) 0%, rgba(139, 92, 246, 0.2) 100%);
+            top: 50%;
+            right: -15%;
+            animation-delay: -5s;
+        }
+
+        .orb-3 {
+            width: 400px;
+            height: 400px;
+            background: linear-gradient(135deg, rgba(236, 72, 153, 0.3) 0%, rgba(139, 92, 246, 0.2) 100%);
+            bottom: -10%;
+            left: 30%;
+            animation-delay: -10s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(50px, -50px) scale(1.1); }
+            50% { transform: translate(0, 50px) scale(0.95); }
+            75% { transform: translate(-50px, -25px) scale(1.05); }
+        }
+
+        /* Grid Pattern */
+        .hero-grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            background-size: 80px 80px;
+            mask-image: radial-gradient(ellipse at center, black 0%, transparent 70%);
+            -webkit-mask-image: radial-gradient(ellipse at center, black 0%, transparent 70%);
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(139, 92, 246, 0.1);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--accent-purple);
+            margin-bottom: 32px;
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards;
+        }
+
+        .hero-badge::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--accent-purple);
+            border-radius: 50%;
+            animation: blink 2s ease-in-out infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        .hero-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: clamp(52px, 9vw, 110px);
+            font-weight: 900;
+            line-height: 1.05;
+            margin-bottom: 28px;
+            letter-spacing: -4px;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.2s forwards;
+        }
+
+        .hero-title .line {
+            display: block;
+            overflow: hidden;
+        }
+
+        .hero-title .gradient-text {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            background-size: 200% 200%;
+            animation: gradientMove 5s ease infinite;
+        }
+
+        @keyframes gradientMove {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .hero-subtitle {
+            font-size: clamp(18px, 2.5vw, 24px);
+            color: var(--text-lighter);
+            margin-bottom: 50px;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.4s forwards;
+            font-weight: 400;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.7;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.6s forwards;
+        }
+
+        .btn {
+            padding: 18px 42px;
+            border-radius: 60px;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: white;
+            box-shadow: 0 15px 50px rgba(139, 92, 246, 0.3);
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 25px 60px rgba(139, 92, 246, 0.5);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #fff;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent-purple);
+            background: rgba(139, 92, 246, 0.1);
+        }
+
+        .btn-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .btn:hover .btn-icon {
+            transform: translateX(5px);
+        }
+
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            animation: fadeIn 1s ease 1.2s forwards;
+        }
+
+        .scroll-indicator-inner {
+            width: 30px;
+            height: 50px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 25px;
+            position: relative;
+        }
+
+        .scroll-indicator-inner::before {
+            content: '';
+            position: absolute;
+            top: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 10px;
+            background: var(--accent-purple);
+            border-radius: 4px;
+            animation: scrollBounce 2s ease-in-out infinite;
+        }
+
+        @keyframes scrollBounce {
+            0%, 100% { top: 8px; opacity: 1; }
+            50% { top: 28px; opacity: 0; }
+        }
+
+        /* ==================== SERVICES SECTION ==================== */
+        .services {
+            padding: 150px 60px;
+            position: relative;
+            background: linear-gradient(180deg, var(--primary) 0%, #0f0f1a 100%);
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 100px;
+        }
+
+        .section-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--accent-purple);
+            margin-bottom: 24px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .section-eyebrow::before,
+        .section-eyebrow::after {
+            content: '';
+            width: 40px;
+            height: 1px;
+            background: var(--gradient-primary);
+        }
+
+        .section-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: clamp(40px, 6vw, 72px);
+            font-weight: 800;
+            letter-spacing: -3px;
+            margin-bottom: 24px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.1s;
+        }
+
+        .section-description {
+            font-size: 20px;
+            color: var(--text-lighter);
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.2s;
+            line-height: 1.7;
+        }
+
+        .reveal.active .section-eyebrow,
+        .reveal.active .section-title,
+        .reveal.active .section-description {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .services-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .service-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 50px 40px;
+            border-radius: 32px;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(50px);
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(59, 130, 246, 0.05) 100%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .service-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--gradient-primary);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-15px);
+            border-color: rgba(139, 92, 246, 0.3);
+            box-shadow: 
+                0 30px 60px rgba(0, 0, 0, 0.3),
+                0 0 100px rgba(139, 92, 246, 0.1);
+        }
+
+        .service-card:hover::before {
+            opacity: 1;
+        }
+
+        .service-card:hover::after {
+            transform: scaleX(1);
+        }
+
+        .service-card > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.2) 0%, rgba(139, 92, 246, 0.05) 100%);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 32px;
+            transition: all 0.5s ease;
+        }
+
+        .service-icon-img {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+            filter: brightness(0) invert(1);
+        }
+
+        .service-card:nth-child(2) .service-icon {
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.2) 0%, rgba(6, 182, 212, 0.05) 100%);
+            border-color: rgba(6, 182, 212, 0.3);
+        }
+
+        .service-card:nth-child(3) .service-icon {
+            background: linear-gradient(135deg, rgba(236, 72, 153, 0.2) 0%, rgba(236, 72, 153, 0.05) 100%);
+            border-color: rgba(236, 72, 153, 0.3);
+        }
+
+        .service-card:hover .service-icon {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 10px 40px rgba(139, 92, 246, 0.3);
+        }
+
+        .service-card h3 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            letter-spacing: -0.5px;
+        }
+
+        .service-card p {
+            color: var(--text-lighter);
+            font-size: 16px;
+            line-height: 1.8;
+            margin-bottom: 28px;
+        }
+
+        .service-link {
+            color: var(--accent-purple);
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            font-size: 15px;
+        }
+
+        .service-link svg {
+            transition: transform 0.3s ease;
+        }
+
+        .service-link:hover {
+            gap: 16px;
+            color: var(--accent-cyan);
+        }
+
+        .service-link:hover svg {
+            transform: translateX(5px);
+        }
+
+        /* ==================== SHOWCASE / STATS SECTION ==================== */
+        .showcase {
+            padding: 150px 60px;
+            position: relative;
+            overflow: hidden;
+            background: #0f0f1a;
+        }
+
+        .showcase::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 1000px;
+            height: 1000px;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.1) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .showcase-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .showcase-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: clamp(40px, 6vw, 80px);
+            font-weight: 800;
+            letter-spacing: -3px;
+            margin-bottom: 80px;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .showcase-title.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .showcase-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .showcase-item {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 32px;
+            padding: 50px 40px;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .showcase-item:hover {
+            transform: translateY(-10px);
+            border-color: rgba(139, 92, 246, 0.3);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .showcase-number {
+            font-family: 'Outfit', sans-serif;
+            font-size: clamp(56px, 8vw, 80px);
+            font-weight: 900;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+            margin-bottom: 16px;
+        }
+
+        .showcase-item h3 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .showcase-item p {
+            color: var(--text-lighter);
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        /* ==================== CTA SECTION ==================== */
+        .cta-section {
+            padding: 180px 60px;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(180deg, #0f0f1a 0%, var(--primary) 100%);
+        }
+
+        .cta-orb {
+            position: absolute;
+            width: 800px;
+            height: 800px;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.3;
+            background: var(--gradient-glow);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: ctaPulse 8s ease-in-out infinite;
+        }
+
+        @keyframes ctaPulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.3; }
+            50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.5; }
+        }
+
+        .cta-content {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-content h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: clamp(44px, 7vw, 80px);
+            font-weight: 900;
+            line-height: 1.1;
+            letter-spacing: -3px;
+            margin-bottom: 24px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .cta-content h2 .gradient-text {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .cta-content p {
+            font-size: 22px;
+            color: var(--text-lighter);
+            margin-bottom: 50px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.1s;
+        }
+
+        .cta-content.active h2,
+        .cta-content.active p {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .cta-button-large {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--gradient-primary);
+            color: white;
+            padding: 22px 50px;
+            border-radius: 60px;
+            font-size: 18px;
+            font-weight: 700;
+            text-decoration: none;
+            box-shadow: 0 20px 60px rgba(139, 92, 246, 0.4);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .cta-button-large::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .cta-button-large:hover::before {
+            left: 100%;
+        }
+
+        .cta-content.active .cta-button-large {
+            opacity: 1;
+            transform: translateY(0);
+            transition-delay: 0.2s;
+        }
+
+        .cta-button-large:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 30px 80px rgba(139, 92, 246, 0.6);
+        }
+
+        /* ==================== FOOTER ==================== */
+        footer {
+            padding: 100px 60px 40px;
+            background: var(--primary);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 80px;
+        }
+
+        .footer-logo-img {
+            height: 48px;
+            width: auto;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .footer-brand p {
+            color: var(--text-lighter);
+            font-size: 16px;
+            line-height: 1.8;
+            max-width: 350px;
+        }
+
+        .footer-column h4 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #fff;
+        }
+
+        .footer-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .footer-links a {
+            color: var(--text-lighter);
+            text-decoration: none;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-purple);
+            transform: translateX(5px);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding-top: 40px;
+            text-align: center;
+        }
+
+        .footer-bottom p {
+            color: var(--text-lighter);
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .footer-bottom .heart {
+            color: var(--accent-pink);
+            animation: heartbeat 1.5s ease infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        /* ==================== ANIMATIONS ==================== */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ==================== RESPONSIVE ==================== */
+        @media (max-width: 1200px) {
+            .services-grid,
+            .showcase-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 40px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                padding: 0 30px;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: var(--primary);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 30px;
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.5s ease;
+            }
+
+            .nav-links.active {
+                opacity: 1;
+                visibility: visible;
+            }
+
+            .nav-links a {
+                font-size: 24px;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .hero {
+                padding: 120px 30px 80px;
+            }
+
+            .hero-title {
+                letter-spacing: -2px;
+            }
+
+            .services,
+            .showcase,
+            .cta-section {
+                padding: 100px 30px;
+            }
+
+            .services-grid,
+            .showcase-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .footer-brand p {
+                max-width: 100%;
+            }
+
+            footer {
+                padding: 60px 30px 30px;
+            }
+
+            .cursor,
+            .cursor-dot {
+                display: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-buttons {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
 </head>
 <body>
-
-    <!-- NAVIGATION -->
-    <div class="navbar-wrapper">
-    <nav class="navbar" id="navbar">
-        <div class="navbar-container">
-            <a href="#" class="navbar-logo"><img src="Images/properties/logo.png" alt="WECONN3CT.App" class="navbar-logo-img"></a>
-            
-            <ul class="navbar-menu" id="navbarMenu">
-                <li><a href="#services" class="navbar-link">Services</a></li>
-                <li><a href="#vision" class="navbar-link">Vision</a></li>
-                <li><a href="#team" class="navbar-link">Team</a></li>
-                <li><a href="#standort" class="navbar-link">Standort</a></li>
-                <li class="navbar-cta"><a href="#kontakt" class="navbar-link">Termin buchen</a></li>
-            </ul>
-            <a href="#kontakt" class="navbar-cta-right">Termin buchen</a>
-            
-            <button class="navbar-toggle" id="navbarToggle">
-                <span class="navbar-toggle-icon"></span>
-            </button>
+    <!-- Loading Screen -->
+    <div class="loader" id="loader">
+        <div class="loader-content">
+            <img src="images/logo.png" alt="weconn3ct" class="loader-logo-img">
+            <div class="loader-bar">
+                <div class="loader-progress"></div>
+            </div>
         </div>
-    </nav>
     </div>
 
-    <!-- HERO SECTION -->
-    <section id="hero" class="hero hero--light">
-        <div id="gradient-blinds-bg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none;"></div>
-        <div class="container">
-            <div class="hero-content">
-                <div class="star-border-container mb-4 animate-fade-in">
-                  <div class="border-gradient-bottom"></div>
-                  <div class="border-gradient-top"></div>
-                  <div class="inner-content">
-                    <span class="shiny-text">Software made in Germany</span>
-                    <span aria-hidden="true"> 🇩🇪</span>
-                  </div>
-                </div>
-                <h1 class="hero-title hero-title-glass gradient-text" data-blur-text data-blur-delay="120" data-blur-duration="1500" data-blur-animate-by="words" data-blur-direction="top">Wir verwandeln Ideen in digitale Erlebnisse</h1>
-                <p class="hero-subtitle shiny-text animate-fade-in-up animation-delay-100">
-                    Apps, Websites und Software, die nicht nur funktionieren, sondern begeistern. Schnell, budgetfreundlich und mit smarter KI-Power. Perfekt für Startups, KMU und Creator.
-                </p>
-                <div class="hero-cta animate-fade-in-up animation-delay-200">
-                    <a href="#kontakt" class="btn btn-glass btn-glass--purple btn-lg">Kostenloses Erstgespräch</a>
-                    <a href="#services" class="btn btn-glass btn-glass--blue btn-lg">Unsere Services</a>
-                </div>
+    <!-- Custom Cursor -->
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-dot" id="cursorDot"></div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="Images/properties/logo.png" alt="weconn3ct" class="logo-img">
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html#services" class="active">Services</a></li>
+                <li><a href="softwareentwicklung.html">Software</a></li>
+                <li><a href="webdesign.html">Design</a></li>
+                <li><a href="digitale-transformation.html">Transformation</a></li>
+                <li><a href="#contact" class="nav-cta">Kontakt</a></li>
+            </ul>
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
-            <div class="hero-glassbar">
-                <div class="glass-bar glass-frosted">
-                    <div class="logo-loop-container">
-                      <div class="logo-loop" id="heroLogoLoop">
-                        <div class="logo-loop__track">
-                          
-                        </div>
-                      </div>
-                    </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-orbs">
+            <div class="orb orb-1"></div>
+            <div class="orb orb-2"></div>
+            <div class="orb orb-3"></div>
+        </div>
+        <div class="hero-grid"></div>
+        
+        <div class="hero-content">
+            <div class="hero-badge">
+                Made with Passion in Germany
+            </div>
+            <h1 class="hero-title">
+                <span class="line">Digitale Erlebnisse,</span>
+                <span class="line">die <span class="gradient-text">begeistern</span></span>
+            </h1>
+            <p class="hero-subtitle">
+                Wir entwickeln Softwarelösungen und Websites, die Ihre Vision zum Leben erwecken – mit modernster Technologie und kreativem Design.
+            </p>
+            <div class="hero-buttons">
+                <a href="#contact" class="btn btn-primary">
+                    Projekt starten
+                    <svg class="btn-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </a>
+                <a href="#services" class="btn btn-secondary">
+                    Mehr erfahren
+                </a>
+            </div>
+        </div>
+        
+        <div class="scroll-indicator">
+            <div class="scroll-indicator-inner"></div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="section-header reveal">
+            <div class="section-eyebrow">Unsere Expertise</div>
+            <h2 class="section-title">Was wir für Sie tun</h2>
+            <p class="section-description">
+                Von der ersten Idee bis zur erfolgreichen Umsetzung – wir begleiten Sie auf jedem Schritt Ihrer digitalen Reise
+            </p>
+        </div>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">
+                    <img src="images/icons/icon-01.png" alt="Softwareentwicklung" class="service-icon-img">
+                </div>
+                <h3>Softwareentwicklung</h3>
+                <p>Maßgeschneiderte Softwarelösungen, die perfekt auf Ihre Geschäftsprozesse abgestimmt sind. Von Web-Apps bis zu komplexen Enterprise-Systemen.</p>
+                <a href="softwareentwicklung.html" class="service-link">
+                    Mehr erfahren
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </a>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <img src="images/icons/icon-02.png" alt="Webdesign" class="service-icon-img">
+                </div>
+                <h3>Webdesign & UI/UX</h3>
+                <p>Atemberaubende Designs mit perfekter User Experience. Wir schaffen digitale Erlebnisse, die Ihre Nutzer lieben werden.</p>
+                <a href="webdesign.html" class="service-link">
+                    Mehr erfahren
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </a>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <img src="images/icons/icon-03.png" alt="Digitale Transformation" class="service-icon-img">
+                </div>
+                <h3>Digitale Transformation</h3>
+                <p>Bringen Sie Ihr Unternehmen ins digitale Zeitalter. Wir optimieren Ihre Prozesse und schaffen neue Wachstumschancen.</p>
+                <a href="digitale-transformation.html" class="service-link">
+                    Mehr erfahren
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Showcase Section -->
+    <section class="showcase" id="showcase">
+        <div class="showcase-content">
+            <h2 class="showcase-title reveal">Zahlen, die sprechen</h2>
+            <div class="showcase-grid">
+                <div class="showcase-item">
+                    <div class="showcase-number" data-count="150">0</div>
+                    <h3>Erfolgreiche Projekte</h3>
+                    <p>Zufriedene Kunden aus verschiedensten Branchen</p>
+                </div>
+                <div class="showcase-item">
+                    <div class="showcase-number" data-count="98" data-suffix="%">0</div>
+                    <h3>Kundenzufriedenheit</h3>
+                    <p>Exzellenz in jedem Detail unserer Arbeit</p>
+                </div>
+                <div class="showcase-item">
+                    <div class="showcase-number" data-text="24/7">24/7</div>
+                    <h3>Support</h3>
+                    <p>Immer für Sie da, wenn Sie uns brauchen</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SERVICES GRID -->
-    <section id="services" class="section-lg">
-        <div class="container">
-            <div class="text-center mb-16">
-                <h2 class="text-5xl font-bold mb-4" style="color: var(--gamma-black);">Full-Service App & Softwareentwicklung</h2>
-                <p class="text-xl text-muted max-w-3xl mx-auto text-center">
-                    Von der Idee bis zum Go-Live – Wir begleiten dich durch den gesamten Entwicklungsprozess
-                </p>
-            </div>
-
-            <div class="grid-auto-fit">
-                <!-- Service 1 -->
-                <div class="card card-tall">
-                    <div class="corner-gloss corner-gloss-tl"></div>
-                    <div class="corner-gloss corner-gloss-br"></div>
-                    <div class="card-header">
-                        <div class="text-4xl mb-3">📱</div>
-                        <h3 class="card-title">App-Entwicklung</h3>
-                    </div>
-                    <div class="card-body">
-                        <p>Business-Apps, Lifestyle-Anwendungen oder kreative Spiele – Wir bringen deine Ideen in den App-Store. Mit einzigartigem UX-Design und schnellem Development.</p>
-                    </div>
-                </div>
-
-                <!-- Service 2 -->
-                <div class="card">
-                    <div class="corner-gloss corner-gloss-tl"></div>
-                    <div class="corner-gloss corner-gloss-br"></div>
-                    <div class="card-header">
-                        <div class="text-4xl mb-3">🌐</div>
-                        <h3 class="card-title">Website-Entwicklung</h3>
-                    </div>
-                    <div class="card-body">
-                        <p>Moderne, responsive Websites mit perfekter Performance. Von Landing Pages bis zu komplexen Web-Anwendungen – alles aus einer Hand.</p>
-                    </div>
-                </div>
-
-                <!-- Service 3 -->
-                <div class="card">
-                    <div class="corner-gloss corner-gloss-tl"></div>
-                    <div class="corner-gloss corner-gloss-br"></div>
-                    <div class="card-header">
-                        <div class="text-4xl mb-3">⚙️</div>
-                        <h3 class="card-title">Software-Lösungen</h3>
-                    </div>
-                    <div class="card-body">
-                        <p>Individuelle Softwarelösungen für dein Business. Sicher, skalierbar und zukunftssicher mit deutschen Qualitätsstandards.</p>
-                    </div>
-                </div>
-
-                <!-- Service 4 -->
-                <div class="card">
-                    <div class="corner-gloss corner-gloss-tl"></div>
-                    <div class="corner-gloss corner-gloss-br"></div>
-                    <div class="card-header">
-                        <div class="text-4xl mb-3">🤖</div>
-                        <h3 class="card-title">KI-Integration</h3>
-                    </div>
-                    <div class="card-body">
-                        <p>KI-gestützte Prozesse und smarte Tools für maximale Effizienz. Wir integrieren modernste AI-Technologien in deine digitalen Produkte.</p>
-                    </div>
-                </div>
-
-                <!-- Service 5 -->
-                <div class="card">
-                    <div class="corner-gloss corner-gloss-tl"></div>
-                    <div class="corner-gloss corner-gloss-br"></div>
-                    <div class="card-header">
-                        <div class="text-4xl mb-3">🎨</div>
-                        <h3 class="card-title">UX/UI Design</h3>
-                    </div>
-                    <div class="card-body">
-                        <p>Modernes Interface-Design mit klarer Nutzerführung. Jedes Projekt wird so gestaltet, dass Nutzererlebnis und Performance perfekt zusammenspielen.</p>
-                    </div>
-                </div>
-
-                <!-- Service 6 -->
-                <div class="card">
-                    <div class="corner-gloss corner-gloss-tl"></div>
-                    <div class="corner-gloss corner-gloss-br"></div>
-                    <div class="card-header">
-                        <div class="text-4xl mb-3">🔧</div>
-                        <h3 class="card-title">Wartung & Support</h3>
-                    </div>
-                    <div class="card-body">
-                        <p>Kontinuierliche Betreuung deiner digitalen Produkte. Updates, Optimierungen und technischer Support – wir sind für dich da.</p>
-                    </div>
-                </div>
-            </div>
-        <!-- Synchrone Service-Bilder rechts neben den Karten -->
-        <div class="service-images" aria-hidden="true">
-            <img src="Images/properties/iphoneundsamsung.png" alt="App-Entwicklung Bild" class="service-image" data-image-index="0" loading="eager" decoding="async">
-            <img src="Images/properties/website.png" alt="Website Bild" class="service-image" data-image-index="1" loading="lazy" decoding="async">
-            <img src="Images/properties/placeholder.png" alt="Service Bild 3" class="service-image" data-image-index="2" loading="lazy" decoding="async">
-            <img src="Images/properties/placeholder.png" alt="Service Bild 4" class="service-image" data-image-index="3" loading="lazy" decoding="async">
-            <img src="Images/properties/placeholder.png" alt="Service Bild 5" class="service-image" data-image-index="4" loading="lazy" decoding="async">
-            <img src="Images/properties/placeholder.png" alt="Service Bild 6" class="service-image" data-image-index="5" loading="lazy" decoding="async">
-        </div>
+    <!-- CTA Section -->
+    <section class="cta-section" id="contact">
+        <div class="cta-orb"></div>
+        <div class="cta-content reveal">
+            <h2>Bereit für Ihr<br><span class="gradient-text">nächstes Projekt?</span></h2>
+            <p>Lassen Sie uns gemeinsam etwas Außergewöhnliches schaffen</p>
+            <a href="mailto:info@weconn3ct.de" class="cta-button-large">
+                Jetzt Kontakt aufnehmen
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+            </a>
         </div>
     </section>
 
-    <!-- VISION SECTION -->
-    <section id="vision" class="section-xl vision-section" data-vision>
-        <div class="container">
-            <div class="vision-wrapper">
-                <div class="vision-intro glass-panel vision-animate">
-                    <div class="vision-badge badge badge-accent mb-4">Unsere Vision</div>
-                    <h2 class="vision-title text-4xl font-bold mb-6">Digitale Innovation für jeden erreichbar machen</h2>
-                    <p class="text-lg text-muted mb-4">
-                        Jede Idee verdient eine faire Chance, Wirklichkeit zu werden. Wir kombinieren KI, Design und Engineering, um digitale Produkte zu erschaffen, die Menschen lieben und Unternehmen skalieren.
-                    </p>
-                    <p class="text-lg text-muted mb-6">
-                        Von der ersten Skizze bis zum globalen Rollout – unser Operating System liefert Geschwindigkeit, Präzision und kontinuierliche Evolution.
-                    </p>
-                    <div class="vision-tags">
-                        <span class="vision-tag">AI Fabric</span>
-                        <span class="vision-tag">Realtime Ops</span>
-                        <span class="vision-tag">Continuous Launch</span>
-                        <span class="vision-tag">Creator Experience</span>
-                    </div>
-                    <a href="#kontakt" class="btn vision-cta">Vision ins Produkt bringen</a>
+    <!-- Footer -->
+    <footer id="about">
+        <div class="footer-content">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <img src="images/logo.png" alt="weconn3ct" class="footer-logo-img">
+                    <p>Wir verbinden kreatives Design mit technischer Exzellenz, um digitale Erlebnisse zu schaffen, die Ihr Unternehmen voranbringen.</p>
                 </div>
-                <div class="vision-media vision-animate">
-                    <canvas id="visionHalo" aria-hidden="true"></canvas>
-                    <div class="vision-media-overlay">
-                        <div class="vision-quote">
-                            „Wir bauen ein Operating System, mit dem Visionäre in Echtzeit Produkte shippen – begleitet von KI, abgesichert von deutschem Engineering.“
-                        </div>
-                        <div class="vision-chips">
-                            <span class="vision-chip">Predictive Delivery</span>
-                            <span class="vision-chip">Holographic Design Reviews</span>
-                            <span class="vision-chip">24/7 AI Support Squad</span>
-                        </div>
-                        <div class="vision-highlights vision-highlights--overlay">
-                            <div class="vision-highlight vision-animate">
-                                <span class="vision-icon">⚡</span>
-                                <div>
-                                    <h3>Launch in Light-Speed</h3>
-                                    <p>KI-gestützte Pipelines liefern in Wochen, nicht Monaten. Rapid Prototyping trifft Produktionsqualität.</p>
-                                </div>
-                            </div>
-                            <div class="vision-highlight vision-animate">
-                                <span class="vision-icon">🤝</span>
-                                <div>
-                                    <h3>Human x AI Collaboration</h3>
-                                    <p>Produktteams arbeiten parallel mit intelligenten Assistenten – Wissen und Umsetzung verschmelzen.</p>
-                                </div>
-                            </div>
-                            <div class="vision-highlight vision-animate">
-                                <span class="vision-icon">🌍</span>
-                                <div>
-                                    <h3>Impact Made in Germany</h3>
-                                    <p>Premium Engineering aus Bad Honnef – skalierbar, DSGVO-konform und global einsatzbereit.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="vision-future-grid">
-                            <div class="vision-pulse">
-                                <span class="pulse-dot"></span>
-                                <span class="pulse-label">Adaptive Roadmaps</span>
-                            </div>
-                            <div class="vision-pulse">
-                                <span class="pulse-dot"></span>
-                                <span class="pulse-label">Live KPI Telemetry</span>
-                            </div>
-                            <div class="vision-pulse">
-                                <span class="pulse-dot"></span>
-                                <span class="pulse-label">Zero Downtime Culture</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- AI WORKFLOW LOOP -->
-    <section id="innovation" class="section-xl innovation-section">
-        <div class="container">
-            <div class="innovation-header">
-                <div class="badge badge-accent mb-4">AI Workflow</div>
-                <h2 class="text-5xl font-bold mb-4">Innovation powered by Artificial Intelligence</h2>
-                <p class="text-xl text-muted max-w-3xl">
-                    Unser AI Operating System verbindet Geschwindigkeit, Qualität und Service in einem nahtlosen Loop. Jede Phase liefert Daten für die nächste – so shippen wir kontinuierlich bessere Produkte.
-                </p>
-            </div>
-            <div class="innovation-grid">
-                <div class="innovation-loop-panel">
-                    <div class="innovation-loop" data-ai-loop>
-                        <div class="loop-ring">
-                            <div class="loop-ring-glow"></div>
-                        </div>
-                        <div class="loop-core">
-                            <span class="loop-core-label">AI&nbsp;OS</span>
-                            <span class="loop-core-sub">Realtime Delivery</span>
-                        </div>
-                        <button class="loop-node is-active" data-loop-node data-node="speed" data-title="Launch Velocity" data-description="Wir starten MVPs in Rekordzeit. Automatisierte Pipelines validieren Features in Stunden statt Wochen." data-tags="Rapid Sprints,CI/CD Automation,Collab Handover">
-                            <span class="loop-node-icon">⚡</span>
-                            <span class="loop-node-label">Speed</span>
-                        </button>
-                        <button class="loop-node" data-loop-node data-node="quality" data-title="Quality Intelligence" data-description="Predictive Tests, QA-Bots und Telemetrie liefern kontinuierliche Insights – Qualität steigt mit jedem Release." data-tags="Predictive QA,AI Reviews,Telemetry">
-                            <span class="loop-node-icon">🧠</span>
-                            <span class="loop-node-label">Quality</span>
-                        </button>
-                        <button class="loop-node" data-loop-node data-node="service" data-title="Service Resonance" data-description="24/7 AI Support Squad, personalisierte Journeys und DSGVO-konforme Betreuung halten jedes Produkt aktiv." data-tags="24/7 Support,Live Ops,Retention">
-                            <span class="loop-node-icon">🌍</span>
-                            <span class="loop-node-label">Service</span>
-                        </button>
-                        <div class="loop-orbit loop-orbit--outer"></div>
-                        <div class="loop-orbit loop-orbit--inner"></div>
-                    </div>
-                    <div class="loop-details">
-                        <div class="loop-detail-status">Aktive Phase</div>
-                        <h3 class="loop-detail-title" data-loop-title>Launch Velocity</h3>
-                        <p class="loop-detail-text" data-loop-text>
-                            Wir starten MVPs in Rekordzeit. Automatisierte Pipelines validieren Features in Stunden statt Wochen.
-                        </p>
-                        <div class="loop-detail-tags" data-loop-tags>
-                            <span class="loop-detail-tag">Rapid Sprints</span>
-                            <span class="loop-detail-tag">CI/CD Automation</span>
-                            <span class="loop-detail-tag">Collab Handover</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="innovation-outcomes">
-                    <div class="outcome-card">
-                        <h4>Realtime Insights Dashboard</h4>
-                        <p>Alle KPIs laufen in einem Single Source of Truth zusammen – live, personalisiert und entscheidungsbereit.</p>
-                    </div>
-                    <div class="outcome-card">
-                        <h4>Adaptive Team Pods</h4>
-                        <p>AI-Supported Squads passen sich automatisch an Projektphasen an – von Rapid Prototyping bis Enterprise Scale.</p>
-                    </div>
-                    <div class="outcome-card">
-                        <h4>Continuous Launch Culture</h4>
-                        <p>Jeder Release lernt. Feedback fließt zurück in die Roadmap, Features werden smarter statt nur fertig.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- PROJEKTE / CASE STUDIES -->
-    <section id="projekte" class="section-lg" data-stagger data-stagger-delay="120">
-        <div class="container">
-            <div class="text-center mb-16">
-                <div class="badge badge-accent mb-3">Erfolgsgeschichten</div>
-                <h2 class="text-5xl font-bold mb-4">Projekte, die Ergebnisse liefern</h2>
-                <p class="text-xl text-muted max-w-3xl mx-auto">Ausgewählte Cases mit klaren Zielen, messbaren Resultaten und KI‑Power.</p>
-            </div>
-
-            <div class="grid grid-cols-3 gap-8 lg:grid-cols-2 md:grid-cols-1">
-                <div class="card animate-fade-in-up">
-                    <div class="card-image">
-                        <img src="https://placehold.co/600x400/E8EBFF/2E3EE8?text=Case+Study+App" alt="Case Study App" data-image-reveal>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-title mb-2">FinTech App – iOS & Android</h3>
-                        <p class="text-muted mb-4">Launch in 8 Wochen, 25% höhere Conversion dank personalisiertem Onboarding (KI‑getrieben).</p>
-                        <div class="text-sm text-muted mb-4">Stack: Flutter, FastAPI, Postgres, OpenAI</div>
-                        <a href="#kontakt" class="btn btn-primary">Projekt starten</a>
-                    </div>
-                </div>
-
-                <div class="card animate-fade-in-up animation-delay-100">
-                    <div class="card-image">
-                        <img src="https://placehold.co/600x400/F0F4FF/2E3EE8?text=Case+Study+Web" alt="Case Study Web" data-image-reveal>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-title mb-2">KMU Website – Leads verdoppelt</h3>
-                        <p class="text-muted mb-4">SEO‑optimiert, 99+ PageSpeed, 2× mehr Anfragen in 3 Monaten.</p>
-                        <div class="text-sm text-muted mb-4">Stack: Astro, Tailwind, Cloudflare, GA4</div>
-                        <a href="#kontakt" class="btn btn-primary">Kostenloses Erstgespräch</a>
-                    </div>
-                </div>
-
-                <div class="card animate-fade-in-up animation-delay-200">
-                    <div class="card-image">
-                        <img src="https://placehold.co/600x400/E8EBFF/2E3EE8?text=Case+Study+KI" alt="Case Study KI" data-image-reveal>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-title mb-2">KI‑Assistent – interne Prozesse</h3>
-                        <p class="text-muted mb-4">Antwortzeiten um 62% reduziert, automatische Dokumentenzusammenfassung.</p>
-                        <div class="text-sm text-muted mb-4">Stack: Next.js, LangChain, Pinecone</div>
-                        <a href="#kontakt" class="btn btn-primary">Jetzt anfragen</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- TEAM SECTION -->
-    <section id="team" class="section-lg" style="background:#f8fafc;">
-        <div class="container">
-            <div class="text-center mb-16">
-                <h2 class="text-5xl font-bold mb-4" style="color: var(--gamma-black);">Unser Team. Weltweit vernetzt.</h2>
-                <p class="text-xl text-muted">Kreativ, vernetzt, in Bad Honnef zuhause</p>
-            </div>
-
-            <div id="team-gallery" class="circular-gallery"></div>
-
-            <div class="mt-16">
-                <div class="card card-gradient text-white">
-                    <h3 class="text-3xl font-bold mb-4">State-of-the-Art Entwicklung</h3>
-                    <p class="mb-6 opacity-90">
-                        Unser Team vereint Entwickler, Designer und kreative Köpfe aus verschiedenen Disziplinen. Wir nutzen neueste Tools, KI und agile Methoden, um Projekte schnell und zukunftssicher umzusetzen.
-                    </p>
-                    <p class="opacity-90">
-                        Durch enge Zusammenarbeit, regelmäßige Tests und eine klare Qualitätsstrategie stellen wir sicher, dass jede Lösung nicht nur heute funktioniert, sondern auch morgen skalierbar bleibt.
-                    </p>
-                </div>
-            </div>
-
-            
-        </div>
-    </section>
-
-    <!-- STANDORT SECTION -->
-    <section id="standort" class="section-lg">
-        <div class="container">
-            <div class="card card-split card-split-reverse">
-                <div class="card-content">
-                    <h2 class="text-4xl font-bold mb-4">Unser Zuhause: Bad Honnef</h2>
-                    <p class="text-lg text-muted mb-4">
-                        Bad Honnef, auch bekannt als das <strong>"Rheinische Nizza"</strong>, ist mehr als nur unser Firmensitz – es inspiriert unsere Arbeit mit seiner Lage am Rhein, dem milden Klima und dem Blick auf das Siebengebirge.
-                    </p>
-                    <p class="text-lg text-muted mb-6">
-                        Hier verbinden wir kreative Energie mit regionaler Verlässlichkeit – in einer Stadt mit Charme, Geschichte und Zukunftsvision.
-                    </p>
-                    <ul class="list-none mb-6">
-                        <li class="flex items-center gap-3 mb-3">
-                            <span class="text-2xl">🏞️</span>
-                            <span>Direkt am Rhein mit Blick auf das Siebengebirge</span>
-                        </li>
-                        <li class="flex items-center gap-3 mb-3">
-                            <span class="text-2xl">🌍</span>
-                            <span>Perfekte Balance: regionale Nähe & internationale Projekte</span>
-                        </li>
-                        <li class="flex items-center gap-3 mb-3">
-                            <span class="text-2xl">💡</span>
-                            <span>Kreatives Umfeld trifft auf moderne Infrastruktur</span>
-                        </li>
+                <div class="footer-column">
+                    <h4>Unternehmen</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Über uns</a></li>
+                        <li><a href="#">Team</a></li>
+                        <li><a href="#">Karriere</a></li>
+                        <li><a href="#">Blog</a></li>
                     </ul>
                 </div>
-                <div class="card-image">
-                    <img src="https://placehold.co/600x400/F0F4FF/2E3EE8?text=Bad+Honnef" alt="Bad Honnef" data-image-reveal>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- STATS SECTION -->
-    <section class="section-lg bg-primary text-white">
-        <div class="container">
-            <div class="text-center mb-12">
-                <h2 class="text-5xl font-bold mb-4">Erfolg steckt in unserer DNA</h2>
-            </div>
-
-            <div class="grid grid-cols-4 gap-8 md:grid-cols-2 sm:grid-cols-1">
-                <div class="text-center">
-                    <div class="text-6xl font-extrabold mb-2" data-counter="15">0</div>
-                    <div class="text-xl opacity-90">Mitarbeiter</div>
-                </div>
-                <div class="text-center">
-                    <div class="text-6xl font-extrabold mb-2" data-counter="4">0</div>
-                    <div class="text-xl opacity-90">Teams</div>
-                </div>
-                <div class="text-center">
-                    <div class="text-6xl font-extrabold mb-2" data-counter="8">0</div>
-                    <div class="text-xl opacity-90">Partner</div>
-                </div>
-                <div class="text-center">
-                    <div class="text-6xl font-extrabold mb-2" data-counter="12">0</div>
-                    <div class="text-xl opacity-90">Projekte</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CONTACT CTA SECTION -->
-    <section id="kontakt" class="section-lg">
-        <div class="container">
-            <div class="card card-gradient text-white text-center">
-                <h2 class="text-6xl font-bold mb-6">Lass uns reden</h2>
-                <p class="text-2xl mb-8 opacity-90 max-w-3xl mx-auto">
-                    Du hast eine Idee, die du schon lange umsetzen willst? Dann ist jetzt der perfekte Moment, den ersten Schritt zu machen.
-                </p>
-                <p class="text-xl mb-8 opacity-90">
-                    Buche dir ganz einfach einen Termin – kostenlos, unverbindlich und ohne Verpflichtungen.
-                </p>
-                <div class="flex gap-4 justify-center md:flex-col">
-                    <a href="#kontakt" class="btn btn-accent btn-xl">Kostenloses Erstgespräch buchen</a>
-                    <a href="#kontakt" class="btn btn-outline btn-xl" style="border-color: white; color: white;">E-Mail senden</a>
-                </div>
-            </div>
-            <div class="mt-12">
-                <form action="#" method="post" class="grid grid-cols-2 gap-6 md:grid-cols-1">
-                    <div class="col-span-1">
-                        <label class="block mb-2">Dein Name</label>
-                        <input type="text" class="form-input w-full" name="name" required placeholder="Max Mustermann">
-                    </div>
-                    <div class="col-span-1">
-                        <label class="block mb-2">E‑Mail</label>
-                        <input type="email" class="form-input w-full" name="email" required placeholder="du@beispiel.de">
-                    </div>
-                    <div class="col-span-2 md:col-span-1">
-                        <label class="block mb-2">Nachricht</label>
-                        <textarea class="form-textarea w-full" name="message" rows="5" required placeholder="Worum geht es?"></textarea>
-                    </div>
-                    <div class="col-span-2 md:col-span-1">
-                        <button type="submit" class="btn btn-primary btn-lg">Nachricht senden</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </section>
-
-    <!-- FAQ SECTION -->
-    <section id="faq" class="section-lg bg-glacier" data-reveal data-once="true">
-        <div class="container">
-            <div class="text-center mb-12">
-                <h2 class="text-5xl font-bold mb-4">Häufige Fragen</h2>
-                <p class="text-xl text-muted">Transparenz zu Kosten, Dauer, KI & Datenschutz</p>
-            </div>
-
-            <div class="grid grid-cols-2 gap-8 md:grid-cols-1">
-                <div class="card">
-                    <details>
-                        <summary class="font-semibold text-lg">Wie schnell könnt ihr starten?</summary>
-                        <div class="text-muted mt-3">Kickoff meist innerhalb von 5 Werktagen. MVPs oft in 2–6 Wochen.</div>
-                    </details>
-                </div>
-                <div class="card">
-                    <details>
-                        <summary class="font-semibold text-lg">Wie setzt ihr KI sinnvoll ein?</summary>
-                        <div class="text-muted mt-3">Von Automatisierung bis Personalisierung – wir integrieren KI dort, wo sie echten Nutzen stiftet.</div>
-                    </details>
-                </div>
-                <div class="card">
-                    <details>
-                        <summary class="font-semibold text-lg">Datenschutz & DSGVO?</summary>
-                        <div class="text-muted mt-3">„Made in Germany“ Standards, DSGVO‑konforme Tools, Auftragsverarbeitung nach Bedarf.</div>
-                    </details>
-                </div>
-                <div class="card">
-                    <details>
-                        <summary class="font-semibold text-lg">Budget & Preise?</summary>
-                        <div class="text-muted mt-3">Transparente Pakete nach Ziel & Scope. Wir beraten dich im kostenlosen Erstgespräch.</div>
-                    </details>
-                </div>
-            </div>
-
-            <div class="text-center mt-12">
-                <a href="#kontakt" class="btn btn-primary btn-lg">Kostenloses Erstgespräch</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- FOOTER -->
-    <footer class="py-12 bg-black text-white">
-        <div class="container">
-            <div class="grid grid-cols-4 gap-8 lg:grid-cols-2 md:grid-cols-1 mb-8">
-                <div>
-                    <h4 class="font-bold mb-4">Services</h4>
-                    <ul class="list-none">
-                        <li class="mb-2"><a href="#" class="text-muted hover:text-white">App-Entwicklung</a></li>
-                        <li class="mb-2"><a href="#" class="text-muted hover:text-white">Website-Entwicklung</a></li>
-                        <li class="mb-2"><a href="#" class="text-muted hover:text-white">Software-Lösungen</a></li>
-                        <li class="mb-2"><a href="#" class="text-muted hover:text-white">KI-Integration</a></li>
+                <div class="footer-column">
+                    <h4>Services</h4>
+                    <ul class="footer-links">
+                        <li><a href="softwareentwicklung.html">Softwareentwicklung</a></li>
+                        <li><a href="webdesign.html">Webdesign</a></li>
+                        <li><a href="digitale-transformation.html">Transformation</a></li>
+                        <li><a href="#">Beratung</a></li>
                     </ul>
                 </div>
-                <div>
-                    <h4 class="font-bold mb-4">Unternehmen</h4>
-                    <ul class="list-none">
-                        <li class="mb-2"><a href="#vision" class="text-muted hover:text-white">Vision</a></li>
-                        <li class="mb-2"><a href="#team" class="text-muted hover:text-white">Team</a></li>
-                        <li class="mb-2"><a href="#standort" class="text-muted hover:text-white">Standort</a></li>
-                        <li class="mb-2"><a href="#" class="text-muted hover:text-white">Karriere</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-bold mb-4">Kontakt</h4>
-                    <ul class="list-none">
-                        <li class="mb-2"><a href="#kontakt" class="text-muted hover:text-white">Termin buchen</a></li>
-                        <li class="mb-2"><a href="mailto:info@weconn3ct.app" class="text-muted hover:text-white">E-Mail</a></li>
-                        <li class="mb-2"><span class="text-muted">Bad Honnef, Deutschland</span></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-bold mb-4">Legal</h4>
-                    <ul class="list-none">
-                        <li class="mb-2"><a href="#" class="text-muted hover:text-white">Impressum</a></li>
-                        <li class="mb-2"><a href="#" class="text-muted hover:text-white">Datenschutz</a></li>
-                        <li class="mb-2"><a href="#" class="text-muted hover:text-white">AGB</a></li>
+                <div class="footer-column">
+                    <h4>Kontakt</h4>
+                    <ul class="footer-links">
+                        <li><a href="mailto:info@weconn3ct.de">info@weconn3ct.de</a></li>
+                        <li><a href="tel:+49123456789">+49 123 456 789</a></li>
+                        <li><a href="#">LinkedIn</a></li>
+                        <li><a href="#">Instagram</a></li>
                     </ul>
                 </div>
             </div>
-            <div class="divider" style="background: rgba(255,255,255,0.1);"></div>
-            <div class="flex justify-between items-center mt-8 md:flex-col md:gap-4">
-                <div class="text-muted">© 2025 WECONN3CT.App – Software made in Germany, built for the world</div>
-                <div class="flex gap-6">
-                    <a href="#" class="text-muted hover:text-white">LinkedIn</a>
-                    <a href="#" class="text-muted hover:text-white">Instagram</a>
-                    <a href="#" class="text-muted hover:text-white">GitHub</a>
-                </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 weconn3ct. Alle Rechte vorbehalten. Made with <span class="heart">♥</span> in Germany</p>
             </div>
         </div>
     </footer>
 
-    <!-- JavaScript -->
-    <script src="js/animations.js" defer></script>
-    <script type="module" src="js/main.js"></script>
-    
-    <script type="module" src="js/blur-text-animation.js"></script>
-    <!-- GSAP + ScrollTrigger for high-impact scroll reveal -->
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
     <script>
-      if (window.gsap && window.ScrollTrigger) {
-        gsap.registerPlugin(ScrollTrigger);
-
-        const cards = gsap.utils.toArray('#services .card');
-        const serviceImages = gsap.utils.toArray('.service-image');
-
-        gsap.set(cards, { 
-          yPercent: 110,
-          opacity: 0,
-          scale: 0.96
-        });
-
-        gsap.set(serviceImages, { opacity: 0, scale: 1 });
-
-        const tl = gsap.timeline({
-          defaults: { duration: 1.2, ease: 'power2.out' },
-          smoothChildTiming: true,
-          scrollTrigger: {
-            trigger: '#services',
-            start: 'top top',
-            end: () => '+=' + (cards.length * 760),
-            pin: true,
-            scrub: 0.75,
-            anticipatePin: 1.2
-          }
-        });
-
-        cards.forEach((card, index) => {
-          tl.to(card, {
-            yPercent: index * 3,
-            opacity: 1,
-            scale: 1
-          }, index * 1.2);
-
-          tl.to(`.service-image[data-image-index='${index}']`, {
-            opacity: 1,
-            scale: index === 1 ? 1.12 : 1,
-            duration: 0.8,
-            ease: 'power1.out'
-          }, '<20%');
-
-          if (index > 0) {
-            tl.to(`.service-image[data-image-index='${index - 1}']`, {
-              opacity: 0,
-              scale: 1,
-              duration: 0.8,
-              ease: 'power1.out'
-            }, '<');
-          }
-        });
-
-        // Vision Section Reveal (Glass Split Layout)
-        const visionEls = gsap.utils.toArray('#vision .vision-animate');
-        gsap.set(visionEls, { opacity: 0, y: 48, rotateX: -8 });
-
-        gsap.to(visionEls, {
-          opacity: 1,
-          y: 0,
-          rotateX: 0,
-          ease: 'power3.out',
-          duration: 0.9,
-          stagger: 0.18,
-          scrollTrigger: {
-            trigger: '#vision',
-            start: 'top 70%',
-            end: 'top 20%',
-            scrub: 0.6
-          }
-        });
-
-        gsap.to('#vision .vision-media', {
-          yPercent: -8,
-          scale: 1.02,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: '#vision',
-            start: 'top bottom',
-            end: 'bottom top',
-            scrub: true
-          }
-        });
-
-        // AI Workflow Loop auto-highlight
-        const aiLoop = document.querySelector('[data-ai-loop]');
-        if (aiLoop) {
-          const nodes = Array.from(aiLoop.querySelectorAll('[data-loop-node]'));
-          const detailTitle = document.querySelector('[data-loop-title]');
-          const detailText = document.querySelector('[data-loop-text]');
-          const detailTags = document.querySelector('[data-loop-tags]');
-          const ring = aiLoop.querySelector('.loop-ring');
-          let activeIndex = 0;
-          let autoTimer = null;
-
-          const updateDetails = (node) => {
-            detailTitle.textContent = node.dataset.title;
-            detailText.textContent = node.dataset.description;
-            if (detailTags) {
-              detailTags.innerHTML = '';
-              const tags = (node.dataset.tags || '')
-                .split(',')
-                .map(tag => tag.trim())
-                .filter(Boolean);
-              tags.forEach(tag => {
-                const span = document.createElement('span');
-                span.className = 'loop-detail-tag';
-                span.textContent = tag;
-                detailTags.appendChild(span);
-              });
+        // ==================== LOADING SCREEN ====================
+        // Verstecke Loader nach Animation ODER nach Timeout (falls Ressourcen nicht laden)
+        const hideLoader = () => {
+            const loader = document.getElementById('loader');
+            if (loader && !loader.classList.contains('hidden')) {
+                loader.classList.add('hidden');
             }
-          };
+        };
+        // Normaler Fall: Nach 1.8 Sekunden ausblenden
+        setTimeout(hideLoader, 1800);
+        // Fallback: Spätestens nach 3 Sekunden ausblenden (falls etwas hängt)
+        setTimeout(hideLoader, 3000);
+        // Zusätzlich: Bei window load prüfen
+        window.addEventListener('load', () => {
+            setTimeout(hideLoader, 500);
+        });
+        // Sofort ausblenden wenn DOM ready und Animation durch
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(hideLoader, 1800);
+        });
 
-          const activateNode = (index) => {
-            activeIndex = index % nodes.length;
-            nodes.forEach((node, idx) => {
-              node.classList.toggle('is-active', idx === activeIndex);
-            });
-            updateDetails(nodes[activeIndex]);
-            if (window.gsap && ring) {
-              gsap.to(ring, {
-                rotation: activeIndex * 120,
-                duration: 1,
-                ease: 'power3.out',
-                transformOrigin: '50% 50%'
-              });
-            }
-          };
+        // ==================== CUSTOM CURSOR ====================
+        const cursor = document.getElementById('cursor');
+        const cursorDot = document.getElementById('cursorDot');
+        
+        let mouseX = 0, mouseY = 0;
+        let cursorX = 0, cursorY = 0;
 
-          const startAuto = () => {
-            stopAuto();
-            autoTimer = setInterval(() => {
-              activateNode((activeIndex + 1) % nodes.length);
-            }, 5000);
-          };
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            
+            cursorDot.style.left = mouseX + 'px';
+            cursorDot.style.top = mouseY + 'px';
+        });
 
-          const stopAuto = () => {
-            if (autoTimer) {
-              clearInterval(autoTimer);
-              autoTimer = null;
-            }
-          };
-
-          nodes.forEach((node, idx) => {
-            node.addEventListener('click', () => {
-              activateNode(idx);
-              startAuto();
-            });
-            node.addEventListener('mouseenter', stopAuto);
-            node.addEventListener('mouseleave', startAuto);
-          });
-
-          activateNode(0);
-
-          if (window.ScrollTrigger) {
-            ScrollTrigger.create({
-              trigger: '#innovation',
-              start: 'top 80%',
-              end: 'bottom top',
-              onEnter: startAuto,
-              onEnterBack: startAuto,
-              onLeave: stopAuto,
-              onLeaveBack: stopAuto
-            });
-          } else {
-            startAuto();
-          }
+        function animateCursor() {
+            cursorX += (mouseX - cursorX) * 0.1;
+            cursorY += (mouseY - cursorY) * 0.1;
+            
+            cursor.style.left = cursorX + 'px';
+            cursor.style.top = cursorY + 'px';
+            
+            requestAnimationFrame(animateCursor);
         }
-      }
+        animateCursor();
+
+        // Cursor hover effect
+        const hoverElements = document.querySelectorAll('a, button, .service-card, .showcase-item');
+        hoverElements.forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+            el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+        });
+
+        // ==================== NAVBAR ====================
+        const navbar = document.getElementById('navbar');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                menuToggle.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // ==================== SCROLL REVEAL ====================
+        const revealElements = document.querySelectorAll('.reveal, .service-card, .showcase-item, .showcase-title');
+        
+        const revealOnScroll = () => {
+            revealElements.forEach((element, index) => {
+                const elementTop = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (elementTop < windowHeight - 100) {
+                    setTimeout(() => {
+                        element.classList.add('active');
+                        element.style.opacity = '1';
+                        element.style.transform = 'translateY(0)';
+                    }, index * 100);
+                }
+            });
+        };
+
+        window.addEventListener('scroll', revealOnScroll);
+        window.addEventListener('load', revealOnScroll);
+
+        // ==================== ANIMATED COUNTER ====================
+        const counters = document.querySelectorAll('.showcase-number[data-count]');
+        let countersStarted = false;
+
+        const startCounters = () => {
+            if (countersStarted) return;
+            
+            const showcaseSection = document.querySelector('.showcase');
+            const sectionTop = showcaseSection.getBoundingClientRect().top;
+            
+            if (sectionTop < window.innerHeight - 200) {
+                countersStarted = true;
+                
+                counters.forEach(counter => {
+                    const target = parseInt(counter.getAttribute('data-count'));
+                    const suffix = counter.getAttribute('data-suffix') || '+';
+                    const duration = 2000;
+                    const step = target / (duration / 16);
+                    let current = 0;
+                    
+                    const updateCounter = () => {
+                        current += step;
+                        if (current < target) {
+                            counter.textContent = Math.floor(current) + suffix;
+                            requestAnimationFrame(updateCounter);
+                        } else {
+                            counter.textContent = target + suffix;
+                        }
+                    };
+                    
+                    updateCounter();
+                });
+            }
+        };
+
+        window.addEventListener('scroll', startCounters);
+
+        // ==================== SMOOTH SCROLL ====================
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // ==================== PARALLAX ORBS ====================
+        document.addEventListener('mousemove', (e) => {
+            const orbs = document.querySelectorAll('.orb');
+            const mouseX = e.clientX / window.innerWidth - 0.5;
+            const mouseY = e.clientY / window.innerHeight - 0.5;
+            
+            orbs.forEach((orb, index) => {
+                const speed = (index + 1) * 20;
+                orb.style.transform = `translate(${mouseX * speed}px, ${mouseY * speed}px)`;
+            });
+        });
+
+        // ==================== TILT EFFECT FOR CARDS ====================
+        const cards = document.querySelectorAll('.service-card');
+        
+        cards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const rotateX = (y - centerY) / 20;
+                const rotateY = (centerX - x) / 20;
+                
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-15px)`;
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
+            });
+        });
     </script>
-    <script>
-      // Vision Halo Canvas (floating light orbs)
-      (function(){
-        const canvas = document.getElementById('visionHalo');
-        if (!canvas) return;
-        const ctx = canvas.getContext('2d');
-        const dpr = window.devicePixelRatio || 1;
-        const orbCount = 6;
-        const palette = [
-          { inner: 'rgba(123, 140, 255, 0.85)', outer: 'rgba(123, 140, 255, 0)' },
-          { inner: 'rgba(157, 78, 221, 0.78)', outer: 'rgba(157, 78, 221, 0)' },
-          { inner: 'rgba(255, 255, 255, 0.6)', outer: 'rgba(255, 255, 255, 0)' }
-        ];
-        let width = 0;
-        let height = 0;
-        let scrollInfluence = 0;
-
-        class Orb {
-          constructor(index){
-            this.index = index;
-            this.reset();
-          }
-          reset(){
-            this.baseX = Math.random();
-            this.baseY = Math.random();
-            const maxSide = Math.max(width, height);
-            this.baseRadius = maxSide * (0.22 + Math.random() * 0.18);
-            this.speed = 0.00012 + Math.random() * 0.00025;
-            this.offset = Math.random() * Math.PI * 2;
-            this.color = palette[Math.floor(Math.random() * palette.length)];
-            this.drift = 0.02 + Math.random() * 0.04;
-          }
-          update(time){
-            const wave = time * this.speed;
-            this.x = (this.baseX + Math.sin(wave + this.offset) * this.drift) * width;
-            this.y = (this.baseY + Math.cos(wave + this.offset) * (this.drift + scrollInfluence * 0.1)) * height;
-            this.radius = this.baseRadius * (0.55 + Math.sin(wave + this.offset * 2) * 0.12);
-          }
-          draw(){
-            const gradient = ctx.createRadialGradient(this.x, this.y, this.radius * 0.1, this.x, this.y, this.radius);
-            gradient.addColorStop(0, this.color.inner);
-            gradient.addColorStop(1, this.color.outer);
-            ctx.fillStyle = gradient;
-            ctx.beginPath();
-            ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-            ctx.fill();
-          }
-        }
-
-        function resize(){
-          width = canvas.clientWidth;
-          height = canvas.clientHeight;
-          canvas.width = width * dpr;
-          canvas.height = height * dpr;
-          ctx.resetTransform();
-          ctx.scale(dpr, dpr);
-          if (orbs.length) {
-            orbs.forEach(orb => orb.reset());
-          }
-        }
-
-        function initOrbs(){
-          orbs.length = 0;
-          for (let i = 0; i < orbCount; i++) {
-            orbs.push(new Orb(i));
-          }
-        }
-
-        const orbs = [];
-        resize();
-        initOrbs();
-
-        function render(time){
-          ctx.clearRect(0, 0, width, height);
-          ctx.globalCompositeOperation = 'lighter';
-          orbs.forEach(orb => {
-            orb.update(time);
-            orb.draw();
-          });
-          ctx.globalCompositeOperation = 'source-over';
-          requestAnimationFrame(render);
-        }
-
-        resize();
-        requestAnimationFrame(render);
-        window.addEventListener('resize', resize);
-
-        if (window.ScrollTrigger) {
-          ScrollTrigger.create({
-            trigger: '#vision',
-            start: 'top bottom',
-            end: 'bottom top',
-            scrub: true,
-            onUpdate: self => { scrollInfluence = self.progress; }
-          });
-        }
-      })();
-
-      // Team 3D Carousel (Vanilla JS)
-      (function(){
-        const carousel = document.querySelector('[data-team-carousel]');
-        if (!carousel) return;
-        const track = carousel.querySelector('.team-track');
-        const cards = Array.from(carousel.querySelectorAll('.team-card'));
-        const prevBtn = carousel.querySelector('.team-prev');
-        const nextBtn = carousel.querySelector('.team-next');
-        let index = 1; // mittlere Karte initial im Fokus (0..2)
-
-        function render() {
-          const total = cards.length;
-          cards.forEach((card, i) => {
-            const offset = i - index; // -1,0,1 etc.
-            const clamped = Math.max(-2, Math.min(2, offset));
-            const rotateY = clamped *  -20; // Seiten kippen
-            const translateX = clamped * 220; // seitlicher Versatz
-            const translateZ = -Math.abs(clamped) * 140 + (clamped === 0 ? 80 : 0); // Mitte näher
-            const scale = clamped === 0 ? 1 : 0.9;
-            const opacity = clamped === 0 ? 1 : 0.75;
-
-            card.style.transform = `translate(-50%, -50%) translateX(${translateX}px) translateZ(${translateZ}px) rotateY(${rotateY}deg) scale(${scale})`;
-            card.style.zIndex = String(10 - Math.abs(clamped));
-            card.style.opacity = String(opacity);
-            card.style.filter = clamped === 0 ? 'none' : 'blur(0px) saturate(95%)';
-          });
-        }
-
-        function next(){ index = (index + 1) % cards.length; render(); }
-        function prev(){ index = (index - 1 + cards.length) % cards.length; render(); }
-
-        nextBtn?.addEventListener('click', next);
-        prevBtn?.addEventListener('click', prev);
-
-        // Swipe
-        let startX = 0;
-        carousel.addEventListener('pointerdown', (e) => { startX = e.clientX; carousel.setPointerCapture(e.pointerId); });
-        carousel.addEventListener('pointerup', (e) => {
-          const dx = e.clientX - startX;
-          if (dx > 40) prev(); else if (dx < -40) next();
-        });
-
-        render();
-        window.addEventListener('resize', render);
-      })();
-    </script>
-<script>
-  // Flat Team Carousel logic
-  (function(){
-    const root = document.querySelector('[data-team-carousel-flat]');
-    if (!root) return;
-    const track = root.querySelector('.carousel-track');
-    const slides = Array.from(root.querySelectorAll('.team-card-flat'));
-    const prev = root.querySelector('.carousel-prev');
-    const next = root.querySelector('.carousel-next');
-    let current = 0;
-
-    function activate(index){
-      slides.forEach(s => s.classList.remove('is-active'));
-      slides[index]?.classList.add('is-active');
-    }
-
-    function slideTo(index){
-      current = Math.max(0, Math.min(slides.length - 1, index));
-      const slide = slides[current];
-      const slideWidth = slide.getBoundingClientRect().width + 24; // gap 24px
-      const offset = current * slideWidth;
-      track.style.transform = `translateX(${-offset}px)`;
-      activate(current);
-    }
-
-    function onResize(){ slideTo(current); }
-
-    prev.addEventListener('click', () => slideTo(current - 1));
-    next.addEventListener('click', () => slideTo(current + 1));
-
-    // touch/swipe
-    let startX = 0, dragging = false, baseX = 0;
-    root.addEventListener('pointerdown', (e)=>{ dragging = true; startX = e.clientX; baseX = getTranslateX(); root.setPointerCapture(e.pointerId); });
-    root.addEventListener('pointermove', (e)=>{
-      if(!dragging) return; const dx = e.clientX - startX; track.style.transform = `translateX(${baseX + dx}px)`;
-    });
-    root.addEventListener('pointerup', (e)=>{
-      if(!dragging) return; dragging = false; const dx = e.clientX - startX; if (dx > 60) slideTo(current - 1); else if (dx < -60) slideTo(current + 1); else slideTo(current);
-    });
-
-    function getTranslateX(){
-      const m = /translateX\((-?\d+(?:\.\d+)?)px\)/.exec(track.style.transform||'');
-      return m ? parseFloat(m[1]) : 0;
-    }
-
-    // initial state
-    activate(0); slideTo(0); window.addEventListener('resize', onResize);
-  })();
-</script>
-<script src="js/logoLoop.js"></script>
 </body>
 </html>

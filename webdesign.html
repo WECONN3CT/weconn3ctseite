@@ -16,11 +16,23 @@
             --text-light: #64748b;
             --gradient-primary: linear-gradient(135deg, #8b5cf6 0%, #3b82f6 100%);
         }
+        /* Loader */
+        .loader { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #1a1a2e; display: flex; align-items: center; justify-content: center; z-index: 9999; transition: opacity 0.6s ease, visibility 0.6s ease; }
+        .loader.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+        .loader-logo-img { height: 60px; width: auto; animation: pulse 1.5s ease-in-out infinite; margin-bottom: 10px; }
+        .loader-logo-img[src=""], .loader-logo-img:not([src]) { display: none; }
+        .loader-logo-img::after { content: 'weconn3ct'; font-family: 'Outfit', sans-serif; font-size: 48px; font-weight: 900; background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .loader-bar { width: 200px; height: 3px; background: rgba(255,255,255,0.1); border-radius: 10px; margin-top: 16px; overflow: hidden; }
+        .loader-progress { height: 100%; background: var(--gradient-primary); border-radius: 10px; animation: loading 1.5s ease-in-out forwards; }
+        @keyframes loading { 0% { width: 0%; } 100% { width: 100%; } }
+        @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: .5; } }
         body { font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif; background: #ffffff; color: var(--primary); line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
         nav { position: fixed; top:0; left:0; right:0; z-index:1000; background: rgba(255,255,255,0.95); backdrop-filter: blur(20px) saturate(180%); border-bottom: 1px solid rgba(0,0,0,0.05); box-shadow: 0 4px 30px rgba(0,0,0,0.05); }
         .nav-container { max-width: 1200px; margin: 0 auto; padding: 16px 40px; padding-left: 16px; display:flex; justify-content: space-between; align-items:center; }
         .logo { text-decoration: none; }
         .logo img { height: 40px; display: block; }
+        .logo-img { height: 40px; width: auto; transition: transform 0.3s ease, filter 0.3s ease; display: block; }
+        .logo:hover .logo-img { transform: scale(1.05); filter: brightness(1.2); }
         .nav-links { display:flex; gap:40px; list-style:none; align-items:center; }
         .nav-links a { color: var(--primary); text-decoration:none; font-size:14px; font-weight:500; position:relative; transition: all .3s ease; }
         .nav-links a::after { content:''; position:absolute; bottom:-4px; left:0; width:0; height:2px; background: var(--accent-purple); transition: width .3s ease; }
@@ -67,17 +79,26 @@
     <meta name="description" content="Webdesign & UI/UX von weconn3ct – Ästhetik trifft Funktionalität. Pixel-perfekte Interfaces, nutzerzentrierte Konzepte und responsive Websites.">
 </head>
 <body>
+    <div class="loader" id="loader">
+        <div class="loader-content">
+            <img src="images/logo.png" alt="weconn3ct" class="loader-logo-img">
+            <div class="loader-bar"><div class="loader-progress"></div></div>
+        </div>
+    </div>
     <nav>
         <div class="nav-container">
-            <a href="weconn3ct-startseite.html" class="logo"><img src="Images/properties/logo.png" alt="WECONN3CT Logo"></a>
-            <ul class="nav-links">
-                <li><a href="leistungen.html">Leistungen</a></li>
-                <li><a href="portfolio.html">Projekte</a></li>
-                <li><a href="ueber-uns.html">Über uns</a></li>
-                <li><a href="kontakt.html" class="cta-button">Kontakt</a></li>
+            <a href="index.html" class="logo"><img src="Images/properties/logo.png" alt="weconn3ct" class="logo-img"></a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html#services">Services</a></li>
+                <li><a href="softwareentwicklung.html">Software</a></li>
+                <li><a href="webdesign.html" class="active">Design</a></li>
+                <li><a href="digitale-transformation.html">Transformation</a></li>
+                <li><a href="#contact" class="cta-button">Kontakt</a></li>
             </ul>
         </div>
     </nav>
+    <div class="services-subnav" style="display:none"></div>
+    <div style="margin-top:90px;background:rgba(0,0,0,0.04);padding:10px 40px"><a href="index.html" style="color:inherit;text-decoration:none;opacity:0.8">← Zurück zur Startseite</a></div>
     <div class="services-subnav">
         <div class="container">
             <a href="softwareentwicklung.html">Softwareentwicklung</a>
@@ -174,7 +195,7 @@
         <div class="footer-content">
             <div class="footer-grid">
                 <div>
-                    <h3>wec<span>onn3ct</span></h3>
+                    <img src="Images/properties/logo.png" alt="weconn3ct" style="height:48px;width:auto;margin-bottom:20px;display:block">
                     <p>Wir verbinden kreatives Design mit technischer Exzellenz, um digitale Erlebnisse zu schaffen, die Ihr Unternehmen voranbringen.</p>
                 </div>
                 <div>
@@ -210,6 +231,14 @@
         </div>
     </footer>
 
+    <script>
+        // ==================== LOADING SCREEN ====================
+        const hideLoader=()=>{const loader=document.getElementById('loader');if(loader && !loader.classList.contains('hidden')){loader.classList.add('hidden');}};
+        setTimeout(hideLoader,1800);
+        setTimeout(hideLoader,3000);
+        window.addEventListener('load',()=>{setTimeout(hideLoader,500)});
+        document.addEventListener('DOMContentLoaded',()=>{setTimeout(hideLoader,1800)});
+    </script>
     <script>
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {

@@ -6,586 +6,231 @@
     <title>Softwareentwicklung | weconn3ct</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --primary: #1a1a2e;
-            --secondary: #f8f9ff;
-            --accent-purple: #8b5cf6;
-            --accent-blue: #3b82f6;
-            --accent-purple-dark: #7c3aed;
-            --accent-blue-dark: #2563eb;
-            --text-light: #64748b;
-            --text-lighter: #94a3b8;
-            --gradient-primary: linear-gradient(135deg, #8b5cf6 0%, #3b82f6 100%);
-            --gradient-purple: linear-gradient(135deg, #a78bfa 0%, #8b5cf6 100%);
-            --gradient-blue: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
-            --gradient-light: linear-gradient(135deg, #e0e7ff 0%, #dbeafe 100%);
-            --glass-bg: rgba(255, 255, 255, 0.1);
-            --glass-border: rgba(139, 92, 246, 0.2);
-        }
-
-        body {
-            font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: #ffffff;
-            color: var(--primary);
-            overflow-x: hidden;
-            line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        /* Navigation */
-        nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px) saturate(180%);
-            -webkit-backdrop-filter: blur(20px) saturate(180%);
-            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 16px 40px;
-            padding-left: 16px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            text-decoration: none;
-        }
-
-        .logo img {
-            height: 40px;
-            display: block;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 40px;
-            list-style: none;
-            align-items: center;
-        }
-
-        .nav-links a {
-            color: var(--primary);
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--accent-purple);
-            transition: width 0.3s ease;
-        }
-
-        .nav-links a:hover::after,
-        .nav-links a.active::after {
-            width: 100%;
-        }
-
-        .cta-button {
-            background: var(--gradient-primary);
-            color: white;
-            padding: 10px 24px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 20px rgba(139, 92, 246, 0.3);
-        }
-
-        .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 30px rgba(139, 92, 246, 0.5);
-        }
-
-        /* Services subnav */
-        .services-subnav {
-            background: #ffffff;
-            border-bottom: 1px solid rgba(0,0,0,0.05);
-        }
-        .services-subnav .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 10px 40px;
-            display: flex;
-            gap: 20px;
-        }
-        .services-subnav a {
-            color: var(--text-light);
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 14px;
-        }
-        .services-subnav a.active {
-            color: var(--accent-purple);
-        }
-
-        /* Hero */
-        .hero {
-            min-height: 70vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-            background: linear-gradient(180deg, #ffffff 0%, #f8f9ff 100%);
-            padding: 140px 40px 80px;
-        }
-
-        .hero-content {
-            max-width: 1000px;
-            text-align: center;
-            position: relative;
-            z-index: 1;
-        }
-
-        .hero-title {
-            font-family: 'Outfit', sans-serif;
-            font-size: clamp(40px, 7vw, 72px);
-            font-weight: 800;
-            line-height: 1.1;
-            margin-bottom: 16px;
-            letter-spacing: -2px;
-            opacity: 0;
-            animation: fadeInUp 1s ease forwards;
-        }
-
-        .hero-subtitle {
-            font-size: clamp(18px, 3vw, 22px);
-            color: var(--text-light);
-            margin-bottom: 36px;
-            opacity: 0;
-            animation: fadeInUp 1s ease 0.2s forwards;
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 16px;
-            justify-content: center;
-            flex-wrap: wrap;
-            opacity: 0;
-            animation: fadeInUp 1s ease 0.4s forwards;
-        }
-
-        .button-primary, .button-secondary {
-            padding: 14px 32px;
-            border-radius: 50px;
-            font-size: 16px;
-            font-weight: 700;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            display: inline-block;
-        }
-
-        .button-primary {
-            background: var(--gradient-primary);
-            color: white;
-            box-shadow: 0 10px 40px rgba(139, 92, 246, 0.3);
-        }
-
-        .button-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 50px rgba(139, 92, 246, 0.4);
-            opacity: 0.95;
-        }
-
-        /* Sections */
-        .section {
-            padding: 100px 40px;
-        }
-        .section.alt {
-            background: linear-gradient(135deg, #f8f9ff 0%, #eff6ff 100%);
-        }
-        .section-header {
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto 60px;
-        }
-        .section-title {
-            font-family: 'Outfit', sans-serif;
-            font-size: clamp(28px, 5vw, 44px);
-            font-weight: 800;
-            letter-spacing: -1px;
-            margin-bottom: 12px;
-        }
-        .section-description {
-            color: var(--text-light);
-            font-size: 18px;
-        }
-
-        /* Services grid */
-        .services-grid {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 32px;
-        }
-        .service-card {
-            background: white;
-            padding: 32px;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.05);
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-        }
-        .service-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.1);
-        }
-        .service-icon {
-            width: 80px;
-            height: 80px;
-            background: var(--gradient-purple);
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 20px;
-            transition: transform 0.5s ease;
-        }
-        .service-card:hover .service-icon {
-            transform: scale(1.05);
-        }
-        .service-icon-img {
-            width: 48px;
-            height: 48px;
-            object-fit: contain;
-        }
-        .service-card h3 {
-            font-family: 'Outfit', sans-serif;
-            font-size: 22px;
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
-        .service-card p {
-            color: var(--text-light);
-            line-height: 1.7;
-        }
-
-        /* Prozess */
-        .process-grid {
-            max-width: 1100px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 24px;
-        }
-        .process-step {
-            background: white;
-            border: 1px solid rgba(139, 92, 246, 0.15);
-            border-radius: 18px;
-            padding: 28px;
-            transition: all 0.3s ease;
-        }
-        .process-step:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 20px 60px rgba(139, 92, 246, 0.15);
-        }
-        .process-num {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 36px;
-            height: 36px;
-            border-radius: 10px;
-            background: var(--gradient-primary);
-            color: #fff;
-            font-weight: 800;
-            font-family: 'Outfit', sans-serif;
-            margin-bottom: 12px;
-        }
-        .process-step h4 {
-            font-size: 18px;
-            margin-bottom: 8px;
-        }
-        .process-step p {
-            color: var(--text-light);
-        }
-
-        /* Tech stack */
-        .tech-grid {
-            max-width: 1100px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-            gap: 16px;
-        }
-        .tech-item {
-            background: #fff;
-            border: 1px solid rgba(0,0,0,0.06);
-            border-radius: 14px;
-            padding: 16px 20px;
-            font-weight: 700;
-            color: var(--primary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        /* CTA Section */
-        .cta-section {
-            padding: 120px 40px;
-            background: var(--gradient-primary);
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        .cta-content {
-            max-width: 800px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
-        }
-        .cta-content h2 {
-            font-family: 'Outfit', sans-serif;
-            font-size: clamp(32px, 6vw, 56px);
-            font-weight: 800;
-            color: white;
-            margin-bottom: 16px;
-            letter-spacing: -1.5px;
-        }
-        .cta-content p {
-            font-size: 20px;
-            color: rgba(255, 255, 255, 0.9);
-            margin-bottom: 28px;
-        }
-        .cta-button-large {
-            display: inline-block;
-            padding: 16px 48px;
-            background: white;
-            color: var(--accent-purple);
-            border-radius: 50px;
-            font-size: 18px;
-            font-weight: 800;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
-        }
-        .cta-button-large:hover {
-            transform: translateY(-5px) scale(1.03);
-            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.3);
-        }
-
-        /* Footer */
-        footer {
-            background: var(--primary);
-            color: white;
-            padding: 80px 40px 40px;
-        }
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        .footer-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
-            gap: 60px;
-            margin-bottom: 60px;
-        }
-        .footer-brand h3 {
-            font-family: 'Outfit', sans-serif;
-            font-size: 32px;
-            font-weight: 800;
-            margin-bottom: 16px;
-        }
-        .footer-brand p {
-            color: rgba(255, 255, 255, 0.7);
-            line-height: 1.8;
-        }
-        .footer-column h4 {
-            font-size: 16px;
-            font-weight: 700;
-            margin-bottom: 24px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        .footer-links {
-            list-style: none;
-        }
-        .footer-links li {
-            margin-bottom: 16px;
-        }
-        .footer-links a {
-            color: rgba(255, 255, 255, 0.7);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-        .footer-links a:hover {
-            color: white;
-        }
-        .footer-bottom {
-            padding-top: 40px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            text-align: center;
-            color: rgba(255, 255, 255, 0.5);
-        }
-        .footer-heart {
-            width: 20px;
-            height: 20px;
-            object-fit: contain;
-            vertical-align: middle;
-        }
-
-        /* Animations */
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Responsive */
-        @media (max-width: 968px) {
-            .nav-links { gap: 20px; }
-            .logo img { height: 32px; }
-            .services-subnav .container { padding: 8px 20px; flex-wrap: wrap; }
-            .section { padding: 80px 20px; }
-            .cta-section { padding: 100px 20px; }
-            .footer-grid { grid-template-columns: 1fr; }
-        }
+        /* Premium Design – identisch zu index.html (gekürzt nicht) */
+        *{margin:0;padding:0;box-sizing:border-box}
+        :root{--primary:#0a0a0f;--primary-light:#1a1a2e;--secondary:#f8f9ff;--accent-purple:#8b5cf6;--accent-blue:#3b82f6;--accent-cyan:#06b6d4;--accent-pink:#ec4899;--text-light:#64748b;--text-lighter:#94a3b8;--gradient-primary:linear-gradient(135deg,#8b5cf6 0%,#3b82f6 50%,#06b6d4 100%);--gradient-glow:linear-gradient(135deg,#8b5cf6 0%,#ec4899 50%,#3b82f6 100%);--glass-bg:rgba(255,255,255,0.03);--glass-border:rgba(255,255,255,0.1)}
+        html{scroll-behavior:smooth}
+        body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--primary);color:#fff;overflow-x:hidden;line-height:1.6;-webkit-font-smoothing:antialiased}
+        .loader{position:fixed;inset:0;background:var(--primary);display:flex;align-items:center;justify-content:center;z-index:9999;transition:opacity .6s ease,visibility .6s ease}
+        .loader.hidden{opacity:0;visibility:hidden;pointer-events:none}
+        .loader-logo-img{height:60px;width:auto;animation:pulse 1.5s ease-in-out infinite;margin-bottom:10px}
+        .loader-logo-img[src=""],.loader-logo-img:not([src]){display:none}
+        .loader-logo-img::after{content:'weconn3ct';font-family:'Outfit',sans-serif;font-size:48px;font-weight:900;background:var(--gradient-primary);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+        .loader-bar{width:200px;height:3px;background:rgba(255,255,255,.1);border-radius:10px;margin-top:30px;overflow:hidden}
+        .loader-progress{height:100%;background:var(--gradient-primary);border-radius:10px;animation:loading 1.5s ease-in-out forwards}
+        @keyframes loading{0%{width:0%}100%{width:100%}}
+        @keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+        .cursor{width:20px;height:20px;border:2px solid var(--accent-purple);border-radius:50%;position:fixed;pointer-events:none;z-index:9998;transition:transform .15s ease,width .3s ease,height .3s ease,border-color .3s ease;transform:translate(-50%,-50%)}
+        .cursor.hover{width:50px;height:50px;border-color:var(--accent-cyan);background:rgba(139,92,246,.1)}
+        .cursor-dot{width:6px;height:6px;background:var(--accent-purple);border-radius:50%;position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%)}
+        nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:20px 0;transition:all .5s cubic-bezier(.4,0,.2,1)}
+        nav.scrolled{background:rgba(10,10,15,.9);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);border-bottom:1px solid rgba(255,255,255,.05);padding:15px 0}
+        .nav-container{max-width:1400px;margin:0 auto;padding:0 60px;display:flex;justify-content:space-between;align-items:center}
+        .logo{letter-spacing:-1px;position:relative;transition:transform .3s ease}
+        .logo:hover{transform:scale(1.05)}
+        .logo-img{height:40px;width:auto;transition:transform .3s ease,filter .3s ease;display:block}
+        .logo:hover .logo-img{transform:scale(1.05);filter:brightness(1.2)}
+        .nav-links{display:flex;gap:50px;list-style:none;align-items:center}
+        .nav-links a{color:rgba(255,255,255,.7);text-decoration:none;font-size:15px;font-weight:500;position:relative;padding:5px 0;transition:all .3s ease}
+        .nav-links a::before{content:'';position:absolute;bottom:0;left:0;width:100%;height:2px;background:var(--gradient-primary);transform:scaleX(0);transform-origin:right;transition:transform .4s cubic-bezier(.4,0,.2,1)}
+        .nav-links a:hover{color:#fff}
+        .nav-links a:hover::before{transform:scaleX(1);transform-origin:left}
+        .nav-links a.active{color:#fff}
+        .nav-links a.active::before{transform:scaleX(1);transform-origin:left}
+        .nav-cta{background:var(--gradient-primary);color:#fff!important;padding:12px 28px;border-radius:50px;font-weight:600;position:relative;overflow:hidden;transition:transform .3s ease,box-shadow .3s ease}
+        .nav-cta::before{display:none}
+        .nav-cta:hover{transform:translateY(-2px);box-shadow:0 10px 40px rgba(139,92,246,.4)}
+        .breadcrumb{margin-top:90px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);backdrop-filter:blur(6px);padding:10px 60px}
+        .breadcrumb a{color:#fff;text-decoration:none;opacity:.8}
+        .hero{min-height:70vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:140px 60px 80px}
+        .hero-content{text-align:center;max-width:1100px;z-index:1}
+        .hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(139,92,246,.1);border:1px solid rgba(139,92,246,.3);padding:10px 20px;border-radius:50px;font-size:14px;color:var(--accent-purple);margin-bottom:24px}
+        .hero-title{font-family:'Outfit',sans-serif;font-size:clamp(46px,8vw,96px);font-weight:900;letter-spacing:-3px;line-height:1.05;margin-bottom:16px}
+        .gradient-text{background:var(--gradient-primary);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+        .hero-subtitle{font-size:20px;color:var(--text-lighter);max-width:760px;margin:0 auto 36px}
+        .btn{padding:18px 42px;border-radius:60px;font-size:16px;font-weight:600;text-decoration:none;display:inline-flex;gap:10px;align-items:center;position:relative;overflow:hidden;transition:all .4s cubic-bezier(.4,0,.2,1)}
+        .btn-primary{background:var(--gradient-primary);color:#fff;box-shadow:0 15px 50px rgba(139,92,246,.3)}
+        .btn-secondary{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.2);backdrop-filter:blur(10px)}
+        .section{padding:120px 60px}
+        .section-header{text-align:center;max-width:800px;margin:0 auto 70px}
+        .section-eyebrow{font-size:13px;font-weight:800;letter-spacing:3px;color:var(--accent-purple);text-transform:uppercase;margin-bottom:16px}
+        .section-title{font-family:'Outfit',sans-serif;font-size:clamp(34px,5vw,56px);font-weight:900;letter-spacing:-2px}
+        .section-description{font-size:18px;color:var(--text-lighter)}
+        .services-grid{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:30px}
+        .service-card{background:linear-gradient(135deg,rgba(255,255,255,.03) 0%,rgba(255,255,255,.01) 100%);border:1px solid rgba(255,255,255,.05);padding:40px;border-radius:28px;transition:all .5s cubic-bezier(.4,0,.2,1)}
+        .service-card:hover{transform:translateY(-10px);border-color:rgba(139,92,246,.3);box-shadow:0 30px 60px rgba(0,0,0,.3)}
+        .service-icon{width:80px;height:80px;border-radius:24px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,rgba(139,92,246,.2) 0%,rgba(139,92,246,.05) 100%);border:1px solid rgba(139,92,246,.3);margin-bottom:22px}
+        .service-icon-img{width:40px;height:40px;object-fit:contain;filter:brightness(0) invert(1)}
+        .service-card h3{font-family:'Outfit',sans-serif;font-size:22px;font-weight:800;margin-bottom:10px}
+        .service-features{margin:0;padding-left:18px;color:var(--text-lighter);line-height:1.8}
+        .process{max-width:1200px;margin:0 auto;position:relative}
+        .stepper{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;position:relative}
+        .stepper::before{content:'';position:absolute;top:34px;left:0;right:0;height:2px;background:linear-gradient(90deg,rgba(139,92,246,.4),rgba(59,130,246,.4))}
+        .step{background:linear-gradient(135deg,rgba(255,255,255,.03),rgba(255,255,255,.01));border:1px solid rgba(255,255,255,.06);border-radius:20px;padding:24px;position:relative}
+        .num-circle{width:68px;height:68px;border-radius:50%;margin:-58px auto 12px;background:linear-gradient(135deg,#0f0f1a,#1a1a2e);border:2px solid transparent;background-origin:border-box;background-clip:content-box,border-box;box-shadow:inset 0 0 0 6px rgba(139,92,246,.2)}
+        .num-circle span{display:flex;align-items:center;justify-content:center;width:100%;height:100%;font-family:'Outfit',sans-serif;font-weight:900;font-size:24px;background:var(--gradient-primary);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+        .step h4{font-weight:800;margin:10px 0 6px}
+        .step p{color:var(--text-lighter)}
+        .tech-grid{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px}
+        .pill{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);border-radius:999px;padding:10px 16px;text-align:center;font-weight:700}
+        .pill:hover{border-color:rgba(139,92,246,.35)}
+        .cta-section{padding:160px 60px;background:linear-gradient(180deg,#0f0f1a 0%,var(--primary) 100%);text-align:center;position:relative;overflow:hidden}
+        .cta-content{max-width:900px;margin:0 auto;position:relative;z-index:1}
+        .cta-content h2{font-family:'Outfit',sans-serif;font-size:clamp(44px,7vw,80px);font-weight:900;letter-spacing:-3px;margin-bottom:10px}
+        .cta-content p{font-size:20px;color:var(--text-lighter);margin-bottom:30px}
+        footer{padding:100px 60px 40px;background:var(--primary);border-top:1px solid rgba(255,255,255,.05)}
+        .footer-content{max-width:1400px;margin:0 auto}
+        .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:60px;margin-bottom:80px}
+        .footer-logo-img{height:48px;width:auto;margin-bottom:20px;display:block}
+        .footer-links{list-style:none;display:flex;flex-direction:column;gap:16px}
+        .footer-links a{color:var(--text-lighter);text-decoration:none;transition:all .3s ease}
+        .footer-links a:hover{color:var(--accent-purple);transform:translateX(5px)}
+        .footer-bottom{border-top:1px solid rgba(255,255,255,.05);padding-top:40px;text-align:center}
+        .footer-bottom p{color:var(--text-lighter);font-size:14px;display:flex;align-items:center;justify-content:center;gap:8px}
+        @media(max-width:1200px){.services-grid{grid-template-columns:repeat(2,1fr)}.footer-grid{grid-template-columns:1fr 1fr;gap:40px}}
+        @media(max-width:768px){.nav-container{padding:0 30px}.services-grid{grid-template-columns:1fr}.section{padding:100px 30px}.breadcrumb{padding:10px 30px}.cta-section{padding:120px 30px}.footer-grid{grid-template-columns:1fr}}
     </style>
     <meta name="description" content="Maßgeschneiderte Softwareentwicklung von weconn3ct – moderne Web-Apps, skalierbare Backends, Enterprise Software und Cloud-Lösungen.">
 </head>
 <body>
+    <!-- Loading & Custom Cursor -->
+    <div class="loader" id="loader">
+        <div class="loader-content">
+            <img src="images/logo.png" alt="weconn3ct" class="loader-logo-img">
+            <div class="loader-bar"><div class="loader-progress"></div></div>
+        </div>
+    </div>
+    <div class="cursor" id="cursor"></div><div class="cursor-dot" id="cursorDot"></div>
+
     <!-- Navigation -->
-    <nav>
+    <nav id="navbar">
         <div class="nav-container">
-            <a href="weconn3ct-startseite.html" class="logo"><img src="Images/properties/logo.png" alt="WECONN3CT Logo"></a>
-            <ul class="nav-links">
-                <li><a href="leistungen.html">Leistungen</a></li>
-                <li><a href="portfolio.html">Projekte</a></li>
-                <li><a href="ueber-uns.html">Über uns</a></li>
-                <li><a href="kontakt.html" class="cta-button">Kontakt</a></li>
+            <a href="index.html" class="logo"><img src="Images/properties/logo.png" alt="weconn3ct" class="logo-img"></a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html#services">Services</a></li>
+                <li><a href="softwareentwicklung.html" class="active">Software</a></li>
+                <li><a href="webdesign.html">Design</a></li>
+                <li><a href="digitale-transformation.html">Transformation</a></li>
+                <li><a href="#contact" class="nav-cta">Kontakt</a></li>
             </ul>
         </div>
     </nav>
 
-    <!-- Services Subnav -->
-    <div class="services-subnav">
-        <div class="container">
-            <a class="active" href="softwareentwicklung.html">Softwareentwicklung</a>
-            <a href="webdesign.html">Webdesign & UI/UX</a>
-            <a href="digitale-transformation.html">Digitale Transformation</a>
-        </div>
-    </div>
+    <!-- Breadcrumb -->
+    <div class="breadcrumb"><a href="index.html">← Zurück zur Startseite</a></div>
 
-    <!-- HERO -->
+    <!-- Hero -->
     <section class="hero">
         <div class="hero-content">
-            <h1 class="hero-title">Softwareentwicklung, die Ihr Business voranbringt</h1>
-            <p class="hero-subtitle">Maßgeschneiderte Lösungen von der ersten Idee bis zum fertigen Produkt</p>
+            <div class="hero-badge">Maßgeschneiderte Lösungen</div>
+            <h1 class="hero-title">Software, die Ihr <span class="gradient-text">Business antreibt</span></h1>
+            <p class="hero-subtitle">Von der ersten Idee bis zum fertigen Produkt – wir entwickeln Softwarelösungen, die perfekt auf Ihre Anforderungen zugeschnitten sind.</p>
             <div class="hero-buttons">
-                <a href="#contact" class="button-primary">Projekt besprechen</a>
+                <a href="#contact" class="btn btn-primary">Projekt besprechen</a>
+                <a href="#tech" class="btn btn-secondary">Unsere Technologien</a>
             </div>
         </div>
     </section>
 
-    <!-- LEISTUNGEN -->
-    <section class="section">
+    <!-- Leistungen -->
+    <section class="section" id="leistungen">
         <div class="section-header">
-            <h2 class="section-title">Unsere Leistungen</h2>
-            <p class="section-description">Wir entwickeln leistungsstarke Softwarelösungen – präzise abgestimmt auf Ihre Ziele.</p>
+            <div class="section-eyebrow">Unsere Leistungen</div>
+            <h2 class="section-title">Was wir entwickeln</h2>
+            <p class="section-description">Skalierbare, performante und sichere Software – gebaut für reale Business-Ziele.</p>
         </div>
         <div class="services-grid">
             <div class="service-card">
                 <div class="service-icon"><img src="images/icons/icon-01.png" alt="Web-Applikationen" class="service-icon-img"></div>
                 <h3>Web-Applikationen</h3>
-                <p>Moderne, skalierbare Web-Apps mit React, Vue oder Angular. Performance-stark, zuverlässig und optimal wartbar.</p>
+                <ul class="service-features">
+                    <li>React, Vue, Angular</li>
+                    <li>Responsive & PWA</li>
+                    <li>Performance-Optimierung</li>
+                </ul>
             </div>
             <div class="service-card">
                 <div class="service-icon"><img src="images/icons/icon-01.png" alt="Backend-Systeme" class="service-icon-img"></div>
                 <h3>Backend-Systeme</h3>
-                <p>Robuste APIs und Datenbank-Architekturen mit Node.js, Python und PostgreSQL – sicher, skalierbar, belastbar.</p>
+                <ul class="service-features">
+                    <li>REST & GraphQL APIs</li>
+                    <li>Node.js, Python</li>
+                    <li>SQL & NoSQL-Design</li>
+                </ul>
             </div>
             <div class="service-card">
                 <div class="service-icon"><img src="images/icons/icon-01.png" alt="Enterprise Software" class="service-icon-img"></div>
                 <h3>Enterprise Software</h3>
-                <p>Komplexe Geschäftsprozesse digitalisiert: Rollen, Rechte, Integrationen und Workflows für höchste Effizienz.</p>
+                <ul class="service-features">
+                    <li>ERP/CRM-Integrationen</li>
+                    <li>Rollen & Rechte</li>
+                    <li>Workflows & Automatisierung</li>
+                </ul>
             </div>
             <div class="service-card">
                 <div class="service-icon"><img src="images/icons/icon-01.png" alt="Cloud-Lösungen" class="service-icon-img"></div>
                 <h3>Cloud-Lösungen</h3>
-                <p>AWS, Azure und Google Cloud Integration – zuverlässige Infrastruktur, CI/CD, Monitoring und Kostenkontrolle.</p>
+                <ul class="service-features">
+                    <li>AWS, Azure, GCP</li>
+                    <li>Docker & Kubernetes</li>
+                    <li>CI/CD & Monitoring</li>
+                </ul>
             </div>
         </div>
     </section>
 
-    <!-- PROZESS -->
-    <section class="section alt">
+    <!-- Prozess -->
+    <section class="section" id="prozess">
         <div class="section-header">
-            <h2 class="section-title">Unser Prozess</h2>
-            <p class="section-description">Transparente Schritte – von der Analyse bis zum erfolgreichen Launch.</p>
+            <h2 class="section-title">Unser Entwicklungsprozess</h2>
         </div>
-        <div class="process-grid">
-            <div class="process-step">
-                <div class="process-num">1</div>
-                <h4>Analyse</h4>
-                <p>Wir verstehen Ihre Anforderungen und Ziele in Workshops und Interviews.</p>
-            </div>
-            <div class="process-step">
-                <div class="process-num">2</div>
-                <h4>Konzept</h4>
-                <p>Technische Architektur, Roadmap und Projektplan – pragmatisch und zukunftssicher.</p>
-            </div>
-            <div class="process-step">
-                <div class="process-num">3</div>
-                <h4>Entwicklung</h4>
-                <p>Agile Umsetzung in Sprints mit regelmäßigen Demos und klarer Kommunikation.</p>
-            </div>
-            <div class="process-step">
-                <div class="process-num">4</div>
-                <h4>Launch & Support</h4>
-                <p>Go-Live, Monitoring und kontinuierliche Betreuung für langfristigen Erfolg.</p>
+        <div class="process">
+            <div class="stepper">
+                <div class="step">
+                    <div class="num-circle"><span>1</span></div>
+                    <h4>Analyse</h4>
+                    <p>Wir verstehen Ihre Anforderungen, Ziele und Herausforderungen</p>
+                </div>
+                <div class="step">
+                    <div class="num-circle"><span>2</span></div>
+                    <h4>Konzept</h4>
+                    <p>Technische Architektur, Wireframes und detaillierter Projektplan</p>
+                </div>
+                <div class="step">
+                    <div class="num-circle"><span>3</span></div>
+                    <h4>Entwicklung</h4>
+                    <p>Agile Umsetzung mit regelmäßigen Updates und Feedback-Schleifen</p>
+                </div>
+                <div class="step">
+                    <div class="num-circle"><span>4</span></div>
+                    <h4>Launch & Support</h4>
+                    <p>Go-Live, Schulung und kontinuierliche Betreuung</p>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- TECH-STACK -->
-    <section class="section">
+    <!-- Tech-Stack -->
+    <section class="section" id="tech">
         <div class="section-header">
             <h2 class="section-title">Technologien, die wir beherrschen</h2>
-            <p class="section-description">State-of-the-Art Tools und Frameworks für nachhaltige Lösungen.</p>
         </div>
         <div class="tech-grid">
-            <div class="tech-item">React</div>
-            <div class="tech-item">Node.js</div>
-            <div class="tech-item">Python</div>
-            <div class="tech-item">PostgreSQL</div>
-            <div class="tech-item">Docker</div>
-            <div class="tech-item">AWS</div>
+            <div class="pill">React</div><div class="pill">Vue.js</div><div class="pill">Angular</div><div class="pill">TypeScript</div>
+            <div class="pill">Node.js</div><div class="pill">Python</div><div class="pill">Java</div><div class="pill">Go</div>
+            <div class="pill">PostgreSQL</div><div class="pill">MongoDB</div><div class="pill">Redis</div>
+            <div class="pill">AWS</div><div class="pill">Azure</div><div class="pill">Docker</div><div class="pill">Kubernetes</div>
         </div>
     </section>
 
     <!-- CTA -->
     <section class="cta-section" id="contact">
         <div class="cta-content">
-            <h2>Bereit für Ihre individuelle Softwarelösung?</h2>
-            <p>Wir verwandeln Ihre Idee in performante, skalierbare Software – sprechen wir darüber.</p>
-            <a href="kontakt.html" class="cta-button-large">Kostenloses Erstgespräch</a>
+            <h2>Bereit für Ihre individuelle <span class="gradient-text">Softwarelösung?</span></h2>
+            <p>Lassen Sie uns Ihre Vision in Code verwandeln</p>
+            <a href="mailto:info@weconn3ct.de" class="btn btn-primary">Kostenloses Erstgespräch</a>
         </div>
     </section>
 
@@ -594,19 +239,18 @@
         <div class="footer-content">
             <div class="footer-grid">
                 <div class="footer-brand">
-                    <h3>wec<span>onn3ct</span></h3>
+                    <img src="Images/properties/logo.png" alt="weconn3ct" class="footer-logo-img">
                     <p>Wir verbinden kreatives Design mit technischer Exzellenz, um digitale Erlebnisse zu schaffen, die Ihr Unternehmen voranbringen.</p>
                 </div>
-                <div class="footer-column">
+                <div>
                     <h4>Unternehmen</h4>
                     <ul class="footer-links">
-                        <li><a href="ueber-uns.html">Über uns</a></li>
-                        <li><a href="ueber-uns.html#team">Team</a></li>
+                        <li><a href="index.html#about">Über uns</a></li>
                         <li><a href="karriere.html">Karriere</a></li>
                         <li><a href="blog.html">Blog</a></li>
                     </ul>
                 </div>
-                <div class="footer-column">
+                <div>
                     <h4>Services</h4>
                     <ul class="footer-links">
                         <li><a href="softwareentwicklung.html">Softwareentwicklung</a></li>
@@ -614,10 +258,10 @@
                         <li><a href="digitale-transformation.html">Digitale Transformation</a></li>
                     </ul>
                 </div>
-                <div class="footer-column">
+                <div>
                     <h4>Kontakt</h4>
                     <ul class="footer-links">
-                        <li><a href="mailto:hello@weconn3ct.com">hello@weconn3ct.com</a></li>
+                        <li><a href="mailto:info@weconn3ct.de">info@weconn3ct.de</a></li>
                         <li><a href="tel:+49123456789">+49 123 456 789</a></li>
                         <li><a href="#">LinkedIn</a></li>
                         <li><a href="#">Instagram</a></li>
@@ -625,25 +269,32 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2025 weconn3ct. Alle Rechte vorbehalten. Made with <img src="images/icons/icon-04.png" alt="Love" class="footer-heart"> in Germany</p>
+                <p>&copy; 2025 weconn3ct. Alle Rechte vorbehalten. Made with <span style="color:#ec4899">♥</span> in Germany</p>
             </div>
         </div>
     </footer>
 
     <script>
-        // Smooth scrolling for same-page anchors
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                const href = this.getAttribute('href');
-                if (href === '#contact') {
-                    e.preventDefault();
-                    const target = document.querySelector(href);
-                    if (target) {
-                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    }
-                }
-            });
-        });
+        // ==================== LOADING SCREEN ====================
+        // Verstecke Loader nach Animation ODER nach Timeout (falls Ressourcen nicht laden)
+        const hideLoader=()=>{const loader=document.getElementById('loader');if(loader && !loader.classList.contains('hidden')){loader.classList.add('hidden');}};
+        // Normaler Fall: Nach 1.8 Sekunden ausblenden
+        setTimeout(hideLoader,1800);
+        // Fallback: Spätestens nach 3 Sekunden ausblenden (falls etwas hängt)
+        setTimeout(hideLoader,3000);
+        // Zusätzlich: Bei window load prüfen
+        window.addEventListener('load',()=>{setTimeout(hideLoader,500)});
+        // Sofort ausblenden wenn DOM ready und Animation durch
+        document.addEventListener('DOMContentLoaded',()=>{setTimeout(hideLoader,1800)});
+        // Cursor
+        const cursor=document.getElementById('cursor'),dot=document.getElementById('cursorDot');let mx=0,my=0,cx=0,cy=0;
+        document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;dot.style.left=mx+'px';dot.style.top=my+'px';});
+        (function anim(){cx+=(mx-cx)*.1;cy+=(my-cy)*.1;cursor.style.left=cx+'px';cursor.style.top=cy+'px';requestAnimationFrame(anim)})();
+        document.querySelectorAll('a,button,.service-card').forEach(el=>{el.addEventListener('mouseenter',()=>cursor.classList.add('hover'));el.addEventListener('mouseleave',()=>cursor.classList.remove('hover'));});
+        // Navbar scroll
+        const navbar=document.getElementById('navbar');window.addEventListener('scroll',()=>{window.pageYOffset>100?navbar.classList.add('scrolled'):navbar.classList.remove('scrolled')});
+        // Smooth scroll
+        document.querySelectorAll('a[href^=\"#\"]').forEach(a=>a.addEventListener('click',e=>{const href=a.getAttribute('href');if(href===\"#contact\"||href===\"#tech\"){e.preventDefault();document.querySelector(href)?.scrollIntoView({behavior:'smooth',block:'start'})}}));
     </script>
 </body>
 </html>
