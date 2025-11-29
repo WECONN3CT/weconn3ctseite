@@ -873,6 +873,17 @@
             background: #0f0f1a;
         }
 
+        .showcase-bg-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.15;
+            z-index: 0;
+        }
+
         .showcase::before {
             content: '';
             position: absolute;
@@ -1470,6 +1481,9 @@
 
     <!-- Showcase Section -->
     <section class="showcase" id="showcase">
+        <video autoplay loop muted playsinline class="showcase-bg-video">
+            <source src="images/properties/Softwareentwicklung.mp4" type="video/mp4">
+        </video>
         <div class="showcase-content">
             <h2 class="showcase-title reveal">Zahlen, die sprechen</h2>
             <div class="showcase-grid">
