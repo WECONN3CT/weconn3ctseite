@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Datenschutzerklärung - WECONN3CT GmbH - Informationen zum Datenschutz">
+    <title>Datenschutz - WECONN3CT</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --primary: #0a0a0f;
+            --primary-light: #1a1a2e;
+            --secondary: #f8f9ff;
+            --accent-purple: #8b5cf6;
+            --accent-blue: #3b82f6;
+            --accent-cyan: #06b6d4;
+            --accent-pink: #ec4899;
+            --text-light: #64748b;
+            --text-lighter: #94a3b8;
+            --gradient-primary: linear-gradient(135deg, #8b5cf6 0%, #3b82f6 50%, #06b6d4 100%);
+            --gradient-glow: linear-gradient(135deg, #8b5cf6 0%, #ec4899 50%, #3b82f6 100%);
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--primary);
+            color: #ffffff;
+            overflow-x: hidden;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ==================== NAVIGATION ==================== */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 20px 0;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            background: rgba(10, 10, 15, 0.9);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Outfit', sans-serif;
+            font-size: 28px;
+            font-weight: 900;
+            color: #fff;
+            text-decoration: none;
+            letter-spacing: -1px;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover { transform: scale(1.05); }
+
+        .logo-img {
+            height: 40px;
+            width: auto;
+            transition: transform 0.3s ease, filter 0.3s ease;
+            display: block;
+        }
+
+        .logo:hover .logo-img {
+            transform: scale(1.05);
+            filter: brightness(1.2);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 50px;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--gradient-primary);
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .nav-links a:hover { color: #fff; }
+        .nav-links a:hover::before { transform: scaleX(1); transform-origin: left; }
+
+        .dropdown { position: relative; }
+        .dropdown > a { display: flex; align-items: center; }
+        .dropdown:hover > a svg { transform: rotate(180deg); }
+
+        .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 20px);
+            left: -20px;
+            background: rgba(10, 10, 15, 0.98);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 16px;
+            min-width: 320px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            z-index: 1001;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            display: block;
+            padding: 16px 20px;
+            color: white !important;
+            text-decoration: none;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            margin-bottom: 8px;
+        }
+
+        .dropdown-item:last-child { margin-bottom: 0; }
+        .dropdown-item:hover { background: rgba(139, 92, 246, 0.1); transform: translateX(5px); }
+        .dropdown-item::before { display: none !important; }
+        .dropdown-item strong { display: block; font-size: 15px; font-weight: 600; margin-bottom: 4px; color: white; }
+        .dropdown-item p { font-size: 13px; color: var(--text-lighter); margin: 0; line-height: 1.4; }
+
+        .mobile-cta {
+            display: none;
+            background: var(--gradient-primary);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+            z-index: 1002;
+        }
+
+        .menu-toggle span {
+            width: 28px;
+            height: 2px;
+            background: white;
+            transition: all 0.3s ease;
+        }
+
+        /* ==================== LEGAL PAGE STYLES ==================== */
+        .legal-page {
+            min-height: 100vh;
+            padding: 140px 60px 80px;
+        }
+
+        .legal-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .legal-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .legal-eyebrow {
+            font-size: 13px;
+            font-weight: 800;
+            letter-spacing: 3px;
+            color: var(--accent-purple);
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+
+        .legal-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: clamp(36px, 5vw, 56px);
+            font-weight: 900;
+            letter-spacing: -2px;
+            margin-bottom: 16px;
+        }
+
+        .legal-content {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 24px;
+            padding: 50px;
+        }
+
+        .legal-content h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            margin-top: 40px;
+            margin-bottom: 16px;
+            color: var(--accent-purple);
+        }
+
+        .legal-content h2:first-child { margin-top: 0; }
+
+        .legal-content h3 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 18px;
+            font-weight: 600;
+            margin-top: 24px;
+            margin-bottom: 12px;
+            color: #fff;
+        }
+
+        .legal-content p {
+            margin-bottom: 16px;
+            color: var(--text-lighter);
+            font-size: 16px;
+            line-height: 1.8;
+        }
+
+        .legal-content ul {
+            margin-bottom: 16px;
+            padding-left: 20px;
+            color: var(--text-lighter);
+        }
+
+        .legal-content li {
+            margin-bottom: 8px;
+            line-height: 1.8;
+        }
+
+        .legal-content strong { color: #fff; font-weight: 600; }
+
+        .legal-content a {
+            color: var(--accent-purple);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .legal-content a:hover { color: var(--accent-blue); }
+
+        .legal-date {
+            margin-top: 40px;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* ==================== PREMIUM FOOTER ==================== */
+        .footer-modern {
+            position: relative;
+            background: var(--primary);
+            padding: 80px 60px 40px;
+            overflow: hidden;
+        }
+
+        .footer-orbs {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .footer-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.3;
+        }
+
+        .footer-orb-1 {
+            width: 400px;
+            height: 400px;
+            background: var(--accent-purple);
+            top: -200px;
+            left: -100px;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .footer-orb-2 {
+            width: 300px;
+            height: 300px;
+            background: var(--accent-blue);
+            bottom: -150px;
+            right: -50px;
+            animation: float 10s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-top {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .footer-brand-modern { display: inline-block; }
+
+        .footer-logo-modern {
+            height: 50px;
+            width: auto;
+            margin-bottom: 16px;
+            transition: transform 0.3s ease;
+        }
+
+        .footer-logo-modern:hover { transform: scale(1.05); }
+
+        .footer-tagline {
+            color: var(--text-lighter);
+            font-size: 16px;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+
+        .footer-divider {
+            position: relative;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.1);
+            margin-bottom: 50px;
+        }
+
+        .divider-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200px;
+            height: 3px;
+            background: var(--gradient-primary);
+            border-radius: 2px;
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.5);
+            animation: glow-pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes glow-pulse {
+            0%, 100% { opacity: 0.5; width: 200px; }
+            50% { opacity: 1; width: 300px; }
+        }
+
+        .footer-main { margin-bottom: 50px; }
+
+        .footer-grid-modern {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+        }
+
+        .footer-col-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 14px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #fff;
+            margin-bottom: 24px;
+        }
+
+        .footer-links-modern {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .footer-links-modern a {
+            color: var(--text-lighter);
+            text-decoration: none;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-links-modern a:hover {
+            color: #fff;
+            transform: translateX(5px);
+        }
+
+        .footer-contact-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-contact-link svg { opacity: 0.6; transition: opacity 0.3s ease; }
+        .footer-contact-link:hover svg { opacity: 1; }
+
+        .footer-social {
+            display: flex;
+            gap: 12px;
+        }
+
+        .social-icon-modern {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-lighter);
+            transition: all 0.3s ease;
+        }
+
+        .social-icon-modern:hover {
+            background: var(--gradient-primary);
+            border-color: transparent;
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom-modern {
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding-top: 30px;
+        }
+
+        .footer-bottom-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-copyright {
+            color: var(--text-lighter);
+            font-size: 14px;
+        }
+
+        .footer-copyright strong { color: #fff; }
+
+        .footer-bottom-links {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .footer-bottom-links a {
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-bottom-links a:hover { color: var(--accent-purple); }
+
+        .footer-dot {
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 12px;
+        }
+
+        .footer-made {
+            color: var(--text-lighter);
+            font-size: 14px;
+        }
+
+        .footer-heart {
+            display: inline-block;
+            animation: heartbeat 1.5s ease-in-out infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        /* ==================== RESPONSIVE ==================== */
+        @media (max-width: 1200px) {
+            .footer-grid-modern { grid-template-columns: repeat(2, 1fr); gap: 40px 60px; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-container { padding: 0 20px; }
+            .nav-links {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: var(--primary);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 30px;
+            }
+            .nav-links.active { display: flex; }
+            .menu-toggle { display: flex; }
+            .mobile-cta { display: block; }
+            .dropdown-menu {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                background: transparent;
+                border: none;
+                box-shadow: none;
+                min-width: auto;
+                padding: 10px 0;
+            }
+
+            .legal-page { padding: 120px 20px 60px; }
+            .legal-content { padding: 30px 20px; }
+            .legal-content h2 { font-size: 20px; }
+
+            .footer-modern { padding: 60px 20px 30px; }
+            .footer-grid-modern { grid-template-columns: 1fr; gap: 40px; text-align: center; }
+            .footer-links-modern { align-items: center; }
+            .footer-social { justify-content: center; }
+            .footer-bottom-content { flex-direction: column; text-align: center; }
+            .footer-bottom-links { flex-wrap: wrap; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="images/logo.png" alt="weconn3ct" class="logo-img">
+            </a>
+            <a href="kontakt.html" class="mobile-cta">Projekt starten</a>
+            <ul class="nav-links" id="navLinks">
+                <li class="dropdown">
+                    <a href="leistungen.html">
+                        Leistungen
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-left: 4px; transition: transform 0.3s ease;">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a href="softwareentwicklung.html" class="dropdown-item">
+                            <div>
+                                <strong>Softwareentwicklung</strong>
+                                <p>Maßgeschneiderte Software-Lösungen</p>
+                            </div>
+                        </a>
+                        <a href="webdesign.html" class="dropdown-item">
+                            <div>
+                                <strong>Webdesign</strong>
+                                <p>Modernes UI/UX Design</p>
+                            </div>
+                        </a>
+                        <a href="digitale-transformation.html" class="dropdown-item">
+                            <div>
+                                <strong>Digitale Transformation</strong>
+                                <p>Prozessoptimierung & Innovation</p>
+                            </div>
+                        </a>
+                    </div>
+                </li>
+                <li><a href="portfolio.html">Projekte</a></li>
+                <li><a href="ueber-uns.html">Über uns</a></li>
+                <li><a href="kontakt.html">Kontakt</a></li>
+            </ul>
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Legal Page Content -->
+    <div class="legal-page">
+        <div class="legal-container">
+            <div class="legal-header">
+                <div class="legal-eyebrow">Rechtliches</div>
+                <h1 class="legal-title">Datenschutzerklärung</h1>
+            </div>
+
+            <div class="legal-content">
+                <h2>1. Datenschutz auf einen Blick</h2>
+
+                <h3>Allgemeine Hinweise</h3>
+                <p>
+                    Die folgenden Hinweise geben einen einfachen Überblick darüber, was mit Ihren personenbezogenen Daten passiert, wenn Sie diese Website besuchen. Personenbezogene Daten sind alle Daten, mit denen Sie persönlich identifiziert werden können. Ausführliche Informationen zum Thema Datenschutz entnehmen Sie unserer unter diesem Text aufgeführten Datenschutzerklärung.
+                </p>
+
+                <h2>2. Verantwortliche Stelle</h2>
+                <p>
+                    Die verantwortliche Stelle für die Datenverarbeitung auf dieser Website ist:
+                </p>
+                <p>
+                    <strong>WECONN3CT GmbH</strong><br>
+                    Thinesh Rajabalah (Geschäftsführer)<br>
+                    Frankenweg 109<br>
+                    53604 Bad Honnef am Rhein<br>
+                    Deutschland
+                </p>
+                <p>
+                    E-Mail: <a href="mailto:info@weconn3ct.de">info@weconn3ct.de</a><br>
+                    Telefon: +49 162 4521879
+                </p>
+                <p>
+                    Verantwortliche Stelle ist die natürliche oder juristische Person, die allein oder gemeinsam mit anderen über die Zwecke und Mittel der Verarbeitung von personenbezogenen Daten (z.B. Namen, E-Mail-Adressen o. Ä.) entscheidet.
+                </p>
+
+                <h2>3. Rechtsgrundlagen der Datenverarbeitung</h2>
+                <p>
+                    Wir verarbeiten Ihre personenbezogenen Daten nur, wenn eine Rechtsgrundlage dies erlaubt. Als Rechtsgrundlagen kommen insbesondere in Betracht:
+                </p>
+                <ul>
+                    <li><strong>Art. 6 Abs. 1 lit. a DSGVO (Einwilligung):</strong> Sie haben Ihre Einwilligung zur Verarbeitung der Sie betreffenden personenbezogenen Daten für einen oder mehrere bestimmte Zwecke gegeben.</li>
+                    <li><strong>Art. 6 Abs. 1 lit. b DSGVO (Vertragserfüllung):</strong> Die Verarbeitung ist für die Erfüllung eines Vertrags, dessen Vertragspartei Sie sind, oder zur Durchführung vorvertraglicher Maßnahmen erforderlich, die auf Ihre Anfrage hin erfolgen.</li>
+                    <li><strong>Art. 6 Abs. 1 lit. c DSGVO (Rechtliche Verpflichtung):</strong> Die Verarbeitung ist zur Erfüllung einer rechtlichen Verpflichtung erforderlich, der wir unterliegen.</li>
+                    <li><strong>Art. 6 Abs. 1 lit. f DSGVO (Berechtigte Interessen):</strong> Die Verarbeitung ist zur Wahrung unserer berechtigten Interessen oder der eines Dritten erforderlich, sofern nicht Ihre Interessen oder Grundrechte und Grundfreiheiten überwiegen.</li>
+                </ul>
+
+                <h2>4. Hosting und Content Delivery</h2>
+                <p>
+                    Unsere Website wird bei einem externen Dienstleister gehostet (Hoster). Die personenbezogenen Daten, die auf dieser Website erfasst werden, werden auf den Servern des Hosters gespeichert. Hierbei kann es sich v. a. um IP-Adressen, Kontaktanfragen, Meta- und Kommunikationsdaten, Vertragsdaten, Kontaktdaten, Namen, Websitezugriffe und sonstige Daten, die über eine Website generiert werden, handeln.
+                </p>
+                <p>
+                    Der Einsatz des Hosters erfolgt zum Zwecke der Vertragserfüllung gegenüber unseren potenziellen und bestehenden Kunden (Art. 6 Abs. 1 lit. b DSGVO) und im Interesse einer sicheren, schnellen und effizienten Bereitstellung unseres Online-Angebots durch einen professionellen Anbieter (Art. 6 Abs. 1 lit. f DSGVO).
+                </p>
+                <p>
+                    <strong>Hinweis:</strong> Bitte ersetzen Sie diesen Platzhalter durch den Namen und die Adresse Ihres Hosting-Providers (z.B. Hetzner, IONOS, Strato, Cloudflare, etc.) sowie dessen Datenschutzinformationen.
+                </p>
+
+                <h2>5. Datenerfassung auf dieser Website</h2>
+
+                <h3>Cookies</h3>
+                <p>
+                    Unsere Internetseiten verwenden so genannte „Cookies". Cookies sind kleine Datenpakete und richten auf Ihrem Endgerät keinen Schaden an. Sie werden entweder vorübergehend für die Dauer einer Sitzung (Session-Cookies) oder dauerhaft (permanente Cookies) auf Ihrem Endgerät gespeichert. Session-Cookies werden nach Ende Ihres Besuchs automatisch gelöscht. Permanente Cookies bleiben auf Ihrem Endgerät gespeichert, bis Sie diese selbst löschen oder eine automatische Löschung durch Ihren Webbrowser erfolgt.
+                </p>
+                <p>
+                    Cookies können von uns (First-Party-Cookies) oder von Drittunternehmen stammen (sog. Third-Party-Cookies). Third-Party-Cookies ermöglichen die Einbindung bestimmter Dienstleistungen von Drittunternehmen innerhalb von Webseiten.
+                </p>
+                <p>
+                    <strong>Rechtsgrundlage:</strong> Technisch notwendige Cookies werden auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO gespeichert. Wir haben ein berechtigtes Interesse an der Speicherung von Cookies zur technisch fehlerfreien und optimierten Bereitstellung unserer Dienste. Sofern eine Einwilligung zur Speicherung von Cookies abgefragt wurde, erfolgt die Speicherung der betreffenden Cookies ausschließlich auf Grundlage dieser Einwilligung (Art. 6 Abs. 1 lit. a DSGVO).
+                </p>
+                <p>
+                    <strong>Speicherdauer:</strong> Session-Cookies werden nach Ende der Browser-Sitzung gelöscht. Permanente Cookies werden je nach Cookie-Typ nach unterschiedlichen Zeiträumen gelöscht (in der Regel zwischen 30 Tagen und 2 Jahren).
+                </p>
+
+                <h3>Cookie-Übersicht</h3>
+                <p>Derzeit verwenden wir folgende Cookies:</p>
+                <ul>
+                    <li><strong>Technisch notwendige Cookies:</strong> Diese Cookies sind für die Grundfunktionen der Website erforderlich und können nicht deaktiviert werden.</li>
+                </ul>
+
+                <h3>Server-Log-Dateien</h3>
+                <p>
+                    Der Provider der Seiten erhebt und speichert automatisch Informationen in so genannten Server-Log-Dateien, die Ihr Browser automatisch an uns übermittelt. Dies sind:
+                </p>
+                <ul>
+                    <li>Browsertyp und Browserversion</li>
+                    <li>Verwendetes Betriebssystem</li>
+                    <li>Referrer URL</li>
+                    <li>Hostname des zugreifenden Rechners</li>
+                    <li>Uhrzeit der Serveranfrage</li>
+                    <li>IP-Adresse</li>
+                </ul>
+                <p>
+                    Eine Zusammenführung dieser Daten mit anderen Datenquellen wird nicht vorgenommen.
+                </p>
+                <p>
+                    <strong>Rechtsgrundlage:</strong> Die Erfassung dieser Daten erfolgt auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO. Der Websitebetreiber hat ein berechtigtes Interesse an der technisch fehlerfreien Darstellung und der Optimierung seiner Website – hierzu müssen die Server-Log-Files erfasst werden.
+                </p>
+                <p>
+                    <strong>Speicherdauer:</strong> Die Server-Log-Dateien werden nach 7 Tagen automatisch gelöscht.
+                </p>
+
+                <h3>Kontaktformular</h3>
+                <p>
+                    Wenn Sie uns per Kontaktformular Anfragen zukommen lassen, werden Ihre Angaben aus dem Anfrageformular inklusive der von Ihnen dort angegebenen Kontaktdaten zwecks Bearbeitung der Anfrage und für den Fall von Anschlussfragen bei uns gespeichert. Diese Daten geben wir nicht ohne Ihre Einwilligung weiter.
+                </p>
+                <p>
+                    <strong>Rechtsgrundlage:</strong> Die Verarbeitung dieser Daten erfolgt auf Grundlage von Art. 6 Abs. 1 lit. b DSGVO, sofern Ihre Anfrage mit der Erfüllung eines Vertrags zusammenhängt oder zur Durchführung vorvertraglicher Maßnahmen erforderlich ist. In allen übrigen Fällen beruht die Verarbeitung auf unserem berechtigten Interesse an der effektiven Bearbeitung der an uns gerichteten Anfragen (Art. 6 Abs. 1 lit. f DSGVO) oder auf Ihrer Einwilligung (Art. 6 Abs. 1 lit. a DSGVO).
+                </p>
+                <p>
+                    <strong>Speicherdauer:</strong> Die von Ihnen im Kontaktformular eingegebenen Daten verbleiben bei uns, bis Sie uns zur Löschung auffordern, Ihre Einwilligung zur Speicherung widerrufen oder der Zweck für die Datenspeicherung entfällt (z.B. nach abgeschlossener Bearbeitung Ihrer Anfrage). Zwingende gesetzliche Bestimmungen – insbesondere Aufbewahrungsfristen – bleiben unberührt.
+                </p>
+
+                <h3>Anfrage per E-Mail, Telefon oder Telefax</h3>
+                <p>
+                    Wenn Sie uns per E-Mail, Telefon oder Telefax kontaktieren, wird Ihre Anfrage inklusive aller daraus hervorgehenden personenbezogenen Daten (Name, Anfrage) zum Zwecke der Bearbeitung Ihres Anliegens bei uns gespeichert und verarbeitet.
+                </p>
+                <p>
+                    <strong>Rechtsgrundlage:</strong> Die Verarbeitung dieser Daten erfolgt auf Grundlage von Art. 6 Abs. 1 lit. b DSGVO, sofern Ihre Anfrage mit der Erfüllung eines Vertrags zusammenhängt oder zur Durchführung vorvertraglicher Maßnahmen erforderlich ist. In allen übrigen Fällen beruht die Verarbeitung auf unserem berechtigten Interesse an der effektiven Bearbeitung der an uns gerichteten Anfragen (Art. 6 Abs. 1 lit. f DSGVO).
+                </p>
+                <p>
+                    <strong>Speicherdauer:</strong> Die von Ihnen an uns per Kontaktanfragen übersandten Daten verbleiben bei uns, bis Sie uns zur Löschung auffordern, Ihre Einwilligung zur Speicherung widerrufen oder der Zweck für die Datenspeicherung entfällt. Zwingende gesetzliche Bestimmungen – insbesondere gesetzliche Aufbewahrungsfristen – bleiben unberührt.
+                </p>
+
+                <h2>6. Externe Dienste und Drittanbieter</h2>
+
+                <h3>Google Fonts (externer Bezug)</h3>
+                <p>
+                    Diese Seite nutzt zur einheitlichen Darstellung von Schriftarten so genannte Google Fonts, die von Google bereitgestellt werden. Beim Aufruf einer Seite lädt Ihr Browser die benötigten Fonts in Ihren Browsercache, um Texte und Schriftarten korrekt anzuzeigen.
+                </p>
+                <p>
+                    Zu diesem Zweck muss der von Ihnen verwendete Browser Verbindung zu den Servern von Google aufnehmen. Hierdurch erlangt Google Kenntnis darüber, dass über Ihre IP-Adresse diese Website aufgerufen wurde. Die Nutzung von Google Fonts erfolgt auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO. Der Websitebetreiber hat ein berechtigtes Interesse an der einheitlichen Darstellung des Schriftbildes auf seiner Website. Sofern eine entsprechende Einwilligung abgefragt wurde, erfolgt die Verarbeitung ausschließlich auf Grundlage von Art. 6 Abs. 1 lit. a DSGVO.
+                </p>
+                <p>
+                    Wenn Ihr Browser Google Fonts nicht unterstützt, wird eine Standardschrift von Ihrem Computer genutzt.
+                </p>
+                <p>
+                    Weitere Informationen zu Google Fonts finden Sie unter <a href="https://developers.google.com/fonts/faq" target="_blank" rel="noopener">https://developers.google.com/fonts/faq</a> und in der Datenschutzerklärung von Google: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">https://policies.google.com/privacy</a>.
+                </p>
+                <p>
+                    Das Unternehmen verfügt über eine Zertifizierung nach dem „EU-US Data Privacy Framework" (DPF). Der DPF ist ein Übereinkommen zwischen der Europäischen Union und den USA, der die Einhaltung europäischer Datenschutzstandards bei Datenverarbeitungen in den USA gewährleisten soll. Jedes nach dem DPF zertifizierte Unternehmen verpflichtet sich, diese Datenschutzstandards einzuhalten.
+                </p>
+
+                <h3>Google Maps</h3>
+                <p>
+                    Auf unserer Kontaktseite bieten wir die Möglichkeit, eine interaktive Karte von Google Maps anzuzeigen.
+                    Diese Karte wird erst nach Ihrer ausdrücklichen Einwilligung geladen (2-Klick-Lösung).
+                </p>
+                <p>
+                    Wenn Sie die Karte laden, wird eine Verbindung zu den Servern von Google in den USA hergestellt.
+                    Dabei wird Ihre IP-Adresse sowie weitere Informationen (Browser, Betriebssystem, Zeitpunkt des Zugriffs)
+                    an Google übertragen.
+                </p>
+                <p>
+                    <strong>Rechtsgrundlage:</strong> Die Einbindung erfolgt auf Grundlage Ihrer Einwilligung gemäß
+                    Art. 6 Abs. 1 lit. a DSGVO. Sie können Ihre Einwilligung jederzeit widerrufen, indem Sie die
+                    Cookie-Einstellungen Ihres Browsers löschen.
+                </p>
+                <p>
+                    <strong>Datenübermittlung in die USA:</strong> Google ist nach dem EU-US Data Privacy Framework (DPF)
+                    zertifiziert und verpflichtet sich damit, europäische Datenschutzstandards einzuhalten.
+                </p>
+                <p>
+                    <strong>Speicherdauer:</strong> Ihre Einwilligung wird für 30 Tage in einem Cookie gespeichert.
+                    Sie können das Cookie jederzeit löschen.
+                </p>
+                <p>
+                    Weitere Informationen zum Datenschutz bei Google Maps finden Sie in der
+                    <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Datenschutzerklärung von Google</a>.
+                </p>
+
+                <h2>7. Ihre Rechte</h2>
+                <p>
+                    Sie haben gegenüber uns folgende Rechte hinsichtlich der Sie betreffenden personenbezogenen Daten:
+                </p>
+
+                <h3>Recht auf Auskunft (Art. 15 DSGVO)</h3>
+                <p>
+                    Sie haben das Recht, eine Bestätigung darüber zu verlangen, ob betreffende Daten verarbeitet werden und auf Auskunft über diese Daten sowie auf weitere Informationen und Kopie der Daten entsprechend den gesetzlichen Vorgaben.
+                </p>
+
+                <h3>Recht auf Berichtigung (Art. 16 DSGVO)</h3>
+                <p>
+                    Sie haben das Recht, die Vervollständigung der Sie betreffenden Daten oder die Berichtigung der Sie betreffenden unrichtigen Daten zu verlangen.
+                </p>
+
+                <h3>Recht auf Löschung (Art. 17 DSGVO)</h3>
+                <p>
+                    Sie haben das Recht zu verlangen, dass Sie betreffende Daten unverzüglich gelöscht werden, bzw. alternativ nach Maßgabe der gesetzlichen Vorgaben eine Einschränkung der Verarbeitung der Daten zu verlangen.
+                </p>
+
+                <h3>Recht auf Einschränkung der Verarbeitung (Art. 18 DSGVO)</h3>
+                <p>
+                    Sie haben das Recht, die Einschränkung der Verarbeitung Ihrer personenbezogenen Daten zu verlangen.
+                </p>
+
+                <h3>Recht auf Datenübertragbarkeit (Art. 20 DSGVO)</h3>
+                <p>
+                    Sie haben das Recht, die Sie betreffenden Daten, die Sie uns bereitgestellt haben, nach Maßgabe der gesetzlichen Vorgaben in einem strukturierten, gängigen und maschinenlesbaren Format zu erhalten oder deren Übermittlung an einen anderen Verantwortlichen zu fordern.
+                </p>
+
+                <h3>Recht auf Widerspruch (Art. 21 DSGVO)</h3>
+                <p>
+                    Sie haben das Recht, aus Gründen, die sich aus Ihrer besonderen Situation ergeben, jederzeit gegen die Verarbeitung der Sie betreffenden personenbezogenen Daten, die aufgrund von Art. 6 Abs. 1 lit. e oder f DSGVO erfolgt, Widerspruch einzulegen. Werden die Sie betreffenden personenbezogenen Daten verarbeitet, um Direktwerbung zu betreiben, haben Sie das Recht, jederzeit Widerspruch gegen die Verarbeitung einzulegen.
+                </p>
+
+                <h3>Recht auf Widerruf der Einwilligung (Art. 7 Abs. 3 DSGVO)</h3>
+                <p>
+                    Sie haben das Recht, erteilte Einwilligungen jederzeit zu widerrufen. Der Widerruf der Einwilligung berührt nicht die Rechtmäßigkeit der bis zum Widerruf erfolgten Verarbeitung.
+                </p>
+
+                <h3>Beschwerderecht bei einer Aufsichtsbehörde (Art. 77 DSGVO)</h3>
+                <p>
+                    Sie haben das Recht, sich bei einer Aufsichtsbehörde zu beschweren, wenn Sie der Ansicht sind, dass die Verarbeitung der Sie betreffenden personenbezogenen Daten gegen die DSGVO verstößt. Die für uns zuständige Aufsichtsbehörde ist:
+                </p>
+                <p>
+                    Landesbeauftragte für Datenschutz und Informationsfreiheit Nordrhein-Westfalen<br>
+                    Kavalleriestraße 2-4<br>
+                    40213 Düsseldorf<br>
+                    Telefon: 0211 38424-0<br>
+                    E-Mail: poststelle@ldi.nrw.de
+                </p>
+
+                <h2>8. SSL- bzw. TLS-Verschlüsselung</h2>
+                <p>
+                    Diese Seite nutzt aus Sicherheitsgründen und zum Schutz der Übertragung vertraulicher Inhalte, wie zum Beispiel Bestellungen oder Anfragen, die Sie an uns als Seitenbetreiber senden, eine SSL- bzw. TLS-Verschlüsselung. Eine verschlüsselte Verbindung erkennen Sie daran, dass die Adresszeile des Browsers von „http://" auf „https://" wechselt und an dem Schloss-Symbol in Ihrer Browserzeile.
+                </p>
+                <p>
+                    Wenn die SSL- bzw. TLS-Verschlüsselung aktiviert ist, können die Daten, die Sie an uns übermitteln, nicht von Dritten mitgelesen werden.
+                </p>
+
+                <h2>9. Widerspruch gegen Werbe-Mails</h2>
+                <p>
+                    Der Nutzung von im Rahmen der Impressumspflicht veröffentlichten Kontaktdaten zur Übersendung von nicht ausdrücklich angeforderter Werbung und Informationsmaterialien wird hiermit widersprochen. Die Betreiber der Seiten behalten sich ausdrücklich rechtliche Schritte im Falle der unverlangten Zusendung von Werbeinformationen, etwa durch Spam-E-Mails, vor.
+                </p>
+
+                <h2>10. Aktualität und Änderung dieser Datenschutzerklärung</h2>
+                <p>
+                    Diese Datenschutzerklärung ist aktuell gültig und hat den Stand Dezember 2024.
+                </p>
+                <p>
+                    Durch die Weiterentwicklung unserer Website und Angebote darüber oder aufgrund geänderter gesetzlicher beziehungsweise behördlicher Vorgaben kann es notwendig werden, diese Datenschutzerklärung zu ändern. Die jeweils aktuelle Datenschutzerklärung kann jederzeit auf dieser Website von Ihnen abgerufen und ausgedruckt werden.
+                </p>
+
+                <p class="legal-date">Stand: Dezember 2024</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer-modern">
+        <div class="footer-orbs">
+            <div class="footer-orb footer-orb-1"></div>
+            <div class="footer-orb footer-orb-2"></div>
+        </div>
+
+        <div class="footer-container">
+            <div class="footer-top">
+                <div class="footer-brand-modern">
+                    <img src="images/logo.png" alt="WECONN3CT Logo" class="footer-logo-modern">
+                    <p class="footer-tagline">Digitale Innovation für jeden erreichbar machen</p>
+                </div>
+            </div>
+
+            <div class="footer-divider">
+                <div class="divider-glow"></div>
+            </div>
+
+            <div class="footer-main">
+                <div class="footer-grid-modern">
+                    <div class="footer-col">
+                        <h4 class="footer-col-title">Unternehmen</h4>
+                        <ul class="footer-links-modern">
+                            <li><a href="ueber-uns.html">Über uns</a></li>
+                            <li><a href="portfolio.html">Projekte</a></li>
+                            <li><a href="kontakt.html">Kontakt</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-col">
+                        <h4 class="footer-col-title">Leistungen</h4>
+                        <ul class="footer-links-modern">
+                            <li><a href="softwareentwicklung.html">Softwareentwicklung</a></li>
+                            <li><a href="webdesign.html">Webdesign & UI/UX</a></li>
+                            <li><a href="digitale-transformation.html">Digitale Transformation</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-col">
+                        <h4 class="footer-col-title">Kontakt</h4>
+                        <ul class="footer-links-modern">
+                            <li>
+                                <a href="mailto:info@weconn3ct.de" class="footer-contact-link">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                        <polyline points="22,6 12,13 2,6"></polyline>
+                                    </svg>
+                                    info@weconn3ct.de
+                                </a>
+                            </li>
+                            <li>
+                                <a href="tel:+491624521879" class="footer-contact-link">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                                    </svg>
+                                    +49 162 4521879
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-col">
+                        <h4 class="footer-col-title">Folge uns</h4>
+                        <div class="footer-social">
+                            <a href="https://de.linkedin.com/company/weconn3ct" target="_blank" rel="noopener" class="social-icon-modern" aria-label="LinkedIn">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/>
+                                </svg>
+                            </a>
+                            <a href="https://www.instagram.com/weconn3ct_gmbh/" target="_blank" rel="noopener" class="social-icon-modern" aria-label="Instagram">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8 1.25 1.25 0 0 1 16 6.75a1.25 1.25 0 0 1 1.25-1.25M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3z"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom-modern">
+                <div class="footer-bottom-content">
+                    <p class="footer-copyright">
+                        &copy; 2025 <strong>weconn3ct</strong>. Alle Rechte vorbehalten.
+                    </p>
+                    <div class="footer-bottom-links">
+                        <a href="impressum.html">Impressum</a>
+                        <span class="footer-dot">•</span>
+                        <a href="datenschutz.html">Datenschutz</a>
+                        <span class="footer-dot">•</span>
+                        <a href="agb.html">AGB</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+        if (menuToggle && navLinks) {
+            menuToggle.addEventListener('click', () => {
+                menuToggle.classList.toggle('active');
+                navLinks.classList.toggle('active');
+            });
+            navLinks.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    menuToggle.classList.remove('active');
+                    navLinks.classList.remove('active');
+                });
+            });
+        }
+    </script>
+</body>
+</html>

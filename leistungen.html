@@ -69,6 +69,60 @@
         .nav-links a:hover{color:#fff}
         .nav-links a:hover::before,.nav-links a.active::before{transform:scaleX(1);transform-origin:left}
 
+        /* Dropdown Styles */
+        .dropdown { position: relative; }
+        .dropdown > a { display: flex; align-items: center; }
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(10px);
+            min-width: 280px;
+            background: rgba(15, 15, 26, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 12px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+        }
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+        }
+        .dropdown:hover > a svg {
+            transform: rotate(180deg);
+        }
+        .dropdown-item {
+            display: block;
+            padding: 12px 20px;
+            border-radius: 10px;
+            text-decoration: none;
+            color: rgba(255, 255, 255, 0.8);
+            transition: all 0.2s ease;
+        }
+        .dropdown-item:hover {
+            background: rgba(139, 92, 246, 0.1);
+            color: #fff;
+        }
+        .dropdown-item::before { display: none; }
+        .dropdown-item strong {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+        .dropdown-item p {
+            font-size: 12px;
+            color: var(--text-lighter);
+            margin: 0;
+        }
+
         .cta-button {
             background: var(--gradient-primary);
             color: white;
@@ -136,155 +190,280 @@
 
         .page-subtitle { font-size:20px; color: var(--text-lighter); line-height:1.8; opacity:0; animation: fadeInUp .8s ease .6s forwards; }
 
-        /* Services Grid */
-        .services-section { padding:120px 60px; background:#0f0f1a; }
+        /* Feature Pills */
+        .feature-pills-container {
+            margin-top: 60px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            align-items: center;
+        }
+
+        .feature-pills {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .pill {
+            padding: 16px 32px;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 2px solid transparent;
+            border-radius: 50px;
+            font-size: 15px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.9);
+            cursor: pointer;
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background-clip: padding-box;
+        }
+
+        .pill::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 50px;
+            padding: 2px;
+            background: linear-gradient(135deg, #8b5cf6 0%, #3b82f6 50%, #06b6d4 100%);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0.6;
+            transition: opacity 0.4s ease;
+        }
+
+        .pill::after {
+            content: attr(data-info);
+            position: absolute;
+            top: calc(100% + 12px);
+            left: 50%;
+            transform: translateX(-50%) translateY(-10px);
+            background: rgba(15, 15, 26, 0.98);
+            backdrop-filter: blur(20px);
+            padding: 12px 20px;
+            border-radius: 12px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-lighter);
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            pointer-events: none;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 1000;
+        }
+
+        .pill:hover {
+            transform: scale(1.05);
+            background: rgba(255, 255, 255, 0.05);
+            box-shadow: 0 8px 32px rgba(139, 92, 246, 0.3);
+            z-index: 100;
+            position: relative;
+        }
+
+        .pill:hover::before {
+            opacity: 1;
+            padding: 3px;
+        }
+
+        .pill:hover::after {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        @media (max-width: 768px) {
+            .feature-pills {
+                gap: 12px;
+            }
+
+            .pill {
+                padding: 12px 24px;
+                font-size: 14px;
+            }
+
+            .pill::after {
+                white-space: normal;
+                max-width: 250px;
+                text-align: center;
+            }
+        }
+
+        /* Service Cards - Neue Version */
+        .services-section {
+            padding: 120px 60px;
+            background: #0f0f1a;
+        }
 
         .services-container {
             max-width: 1400px;
             margin: 0 auto;
         }
 
-        .services-grid {
+        .services-grid-new {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 40px;
-            margin-bottom: 100px;
         }
 
-        .service-detail-card { background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01)); border:1px solid rgba(255,255,255,0.05); border-radius:32px; overflow:hidden; transition: all .5s cubic-bezier(.4,0,.2,1); opacity:0; position:relative; }
-
-        .service-detail-card:hover {
-            transform: translateY(-15px) scale(1.02);
-            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.15);
-        }
-
-        .service-card-header {
-            padding: 48px 40px 32px;
-            background: var(--gradient-primary);
+        .service-card-interactive {
             position: relative;
-            overflow: hidden;
-        }
-
-        .service-detail-card:nth-child(2) .service-card-header {
-            background: var(--gradient-purple);
-        }
-
-        .service-detail-card:nth-child(3) .service-card-header {
-            background: var(--gradient-blue);
-        }
-
-        .service-detail-card:nth-child(4) .service-card-header {
-            background: var(--gradient-green);
-        }
-
-        .service-detail-card:nth-child(5) .service-card-header {
-            background: var(--gradient-orange);
-        }
-
-        .service-detail-card:nth-child(6) .service-card-header {
-            background: var(--gradient-primary);
-        }
-
-        .service-card-header::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -20%;
-            width: 300px;
-            height: 300px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-        }
-
-        .service-icon-large {
-            width: 100px;
-            height: 100px;
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(10px);
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            border-radius: 24px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 48px;
-            margin-bottom: 24px;
-            position: relative;
-            z-index: 1;
-            transition: transform 0.5s ease;
-        }
-
-        .service-detail-card:hover .service-icon-large {
-            transform: scale(1.1) rotate(-5deg);
-        }
-
-        .service-card-header h3 {
-            font-family: 'Outfit', sans-serif;
-            font-size: 32px;
-            font-weight: 800;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 32px;
+            padding: 48px;
+            text-decoration: none;
             color: white;
-            margin-bottom: 12px;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-style: preserve-3d;
+            cursor: pointer;
+        }
+
+        .service-card-gradient {
+            position: absolute;
+            inset: 0;
+            border-radius: 32px;
+            padding: 2px;
+            background: linear-gradient(135deg, #8b5cf6 0%, #3b82f6 50%, #06b6d4 100%);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .service-card-interactive:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.3);
+        }
+
+        .service-card-interactive:hover .service-card-gradient {
+            opacity: 1;
+        }
+
+        .service-card-content {
             position: relative;
             z-index: 1;
         }
 
-        .service-card-header p {
-            color: rgba(255, 255, 255, 0.9);
-            font-size: 16px;
-            position: relative;
-            z-index: 1;
-            line-height: 1.6;
+        .service-card-interactive h3 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            letter-spacing: -0.5px;
         }
 
-        .service-card-body { padding:40px; }
+        .service-description {
+            color: var(--text-lighter);
+            line-height: 1.7;
+            margin-bottom: 32px;
+            font-size: 15px;
+        }
 
-        .service-features {
+        .service-feature-list {
             list-style: none;
             margin-bottom: 32px;
         }
 
-        .service-features li { padding:16px 0; border-bottom:1px solid rgba(255,255,255,0.08); display:flex; align-items:center; gap:16px; color: var(--text-lighter); }
+        .service-feature-list li {
+            padding: 12px 0;
+            color: rgba(255, 255, 255, 0.9);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
 
-        .service-features li:last-child {
+        .service-feature-list li:last-child {
             border-bottom: none;
         }
 
-        .check-icon {
-            width: 24px;
-            height: 24px;
-            background: var(--gradient-primary);
-            border-radius: 50%;
+        .service-feature-list .check {
+            color: var(--accent-purple);
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .service-meta {
+            display: flex;
+            gap: 24px;
+            margin-bottom: 32px;
+            padding-top: 24px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .meta-item {
             display: flex;
             align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: 700;
+            gap: 8px;
             font-size: 14px;
-            flex-shrink: 0;
+            color: var(--text-lighter);
         }
 
-        .service-cta {
-            display: block;
-            text-align: center;
-            padding: 16px 32px;
-            background: var(--gradient-primary);
-            color: white;
-            text-decoration: none;
+        .meta-icon {
+            font-size: 18px;
+        }
+
+        .service-cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 28px;
+            background: rgba(139, 92, 246, 0.1);
+            border: 1px solid rgba(139, 92, 246, 0.3);
             border-radius: 50px;
             font-weight: 600;
+            font-size: 15px;
             transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3);
         }
 
-        .service-cta:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(139, 92, 246, 0.4);
+        .service-card-interactive:hover .service-cta-btn {
+            background: rgba(139, 92, 246, 0.2);
+            border-color: rgba(139, 92, 246, 0.5);
+            transform: translateX(4px);
         }
 
-        /* Process Section */
-        .process-section { padding:120px 60px; background:#0f0f1a; }
+        .service-cta-btn .arrow {
+            transition: transform 0.3s ease;
+        }
+
+        .service-card-interactive:hover .arrow {
+            transform: translateX(6px);
+        }
+
+        /* Tilt Effect - Fortgeschritten */
+        @media (min-width: 1024px) {
+            .service-card-interactive {
+                transition: all 0.3s ease, transform 0.1s ease;
+            }
+        }
+
+        @media (max-width: 968px) {
+            .services-grid-new {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+
+            .service-card-interactive {
+                padding: 32px;
+            }
+        }
+
+        /* Process Section - New Design */
+        .process-section {
+            padding: 120px 60px;
+            background: var(--primary);
+        }
 
         .process-container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
         }
 
@@ -317,196 +496,208 @@
             margin: 0 auto;
         }
 
-        .process-timeline {
+        /* Progress Line */
+        .progress-line-container {
             position: relative;
-        }
-
-        .process-timeline::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 4px;
-            height: 100%;
-            background: linear-gradient(180deg, var(--accent-purple) 0%, var(--accent-blue) 100%);
-            border-radius: 4px;
-        }
-
-        .process-step {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 80px;
-            margin-bottom: 80px;
-            opacity: 0;
-        }
-
-        .process-step:nth-child(even) .process-content {
-            grid-column: 2;
-            grid-row: 1;
-        }
-
-        .process-step:nth-child(even) .process-number {
-            grid-column: 1;
-            grid-row: 1;
-        }
-
-        .process-content { background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01)); border:1px solid rgba(255,255,255,0.06); padding:48px; border-radius:24px; transition: all .5s ease; position:relative; }
-
-        .process-content:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.12);
-        }
-
-        .process-content h3 {
-            font-family: 'Outfit', sans-serif;
-            font-size: 32px;
-            font-weight: 700;
-            margin-bottom: 16px;
-        }
-
-        .process-content p { color: var(--text-lighter); line-height:1.8; font-size:16px; }
-
-        .process-number {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-        }
-
-        .number-circle {
-            width: 120px;
-            height: 120px;
-            background: var(--gradient-primary);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Outfit', sans-serif;
-            font-size: 48px;
-            font-weight: 800;
-            color: white;
-            box-shadow: 0 20px 60px rgba(139, 92, 246, 0.4);
-            z-index: 10;
-            position: relative;
-        }
-
-        /* Pricing Section */
-        .pricing-section { padding:120px 60px; background:#0f0f1a; }
-
-        .pricing-container {
             max-width: 1200px;
-            margin: 0 auto;
+            margin: 80px auto 60px;
+            height: 4px;
         }
 
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 40px;
-            margin-top: 60px;
-        }
-
-        .pricing-card { background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01)); border:1px solid rgba(255,255,255,0.06); border-radius:32px; padding:48px; transition: all .5s ease; opacity:0; position:relative; overflow:hidden; }
-
-        .pricing-card::before {
-            content: '';
+        .progress-line {
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
-            height: 6px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+        }
+
+        .progress-line-fill {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 4px;
+            width: 0%;
             background: var(--gradient-primary);
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.5s ease;
+            border-radius: 4px;
+            transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .pricing-card:hover::before {
-            transform: scaleX(1);
+        /* Process Cards Grid */
+        .process-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 24px;
+            max-width: 1400px;
+            margin: 0 auto;
         }
 
-        .pricing-card:hover {
-            transform: translateY(-10px);
-            border-color: rgba(139, 92, 246, 0.3);
-            box-shadow: 0 30px 80px rgba(139, 92, 246, 0.15);
-        }
-
-        .pricing-card.featured {
-            background: var(--gradient-primary);
-            color: white;
-            border-color: transparent;
-            box-shadow: 0 30px 80px rgba(139, 92, 246, 0.3);
-        }
-
-        .pricing-card.featured h3,
-        .pricing-card.featured .pricing-amount {
-            color: white;
-        }
-
-        .pricing-card.featured p,
-        .pricing-card.featured .pricing-features li {
-            color: rgba(255, 255, 255, 0.9);
-        }
-
-        .pricing-card.featured .check-icon {
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        .pricing-header h3 {
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 12px;
-        }
-
-        .pricing-description {
-            color: var(--text-lighter);
-            font-size: 15px;
-            margin-bottom: 32px;
-        }
-
-        .pricing-amount { font-family:'Outfit', sans-serif; font-size:56px; font-weight:800; color:#fff; margin-bottom:8px; display:flex; align-items:baseline; gap:8px; }
-
-        .pricing-amount span { font-size:20px; font-weight:500; color: var(--text-lighter); }
-
-        .pricing-period { color: var(--text-lighter); font-size:14px; margin-bottom:32px; }
-
-        .pricing-features {
-            list-style: none;
-            margin-bottom: 32px;
-        }
-
-        .pricing-features li {
-            padding: 12px 0;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            color: var(--text-lighter);
-        }
-
-        .pricing-button {
-            width: 100%;
-            padding: 16px;
-            background: var(--gradient-primary);
-            color: white;
-            border: none;
-            border-radius: 50px;
-            font-size: 16px;
-            font-weight: 600;
+        .process-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 24px;
+            padding: 32px 24px;
             cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            min-height: 360px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .process-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 24px;
+            padding: 2px;
+            background: var(--gradient-primary);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .process-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            z-index: 10;
+        }
+
+        .process-card:hover::before {
+            opacity: 1;
+        }
+
+        .card-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 16px;
+            letter-spacing: -0.5px;
+        }
+
+        .card-details {
+            opacity: 1;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card-details p {
+            color: var(--text-lighter);
+            line-height: 1.7;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        /* Mini Pills in Process Cards */
+        .card-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: auto;
+        }
+
+        .mini-pill {
+            display: inline-block;
+            padding: 8px 16px;
+            background: rgba(139, 92, 246, 0.1);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.9);
             transition: all 0.3s ease;
-            text-decoration: none;
-            display: block;
-            text-align: center;
+            cursor: default;
         }
 
-        .pricing-card.featured .pricing-button {
-            background: white;
-            color: var(--accent-purple);
+        .mini-pill:hover {
+            background: rgba(139, 92, 246, 0.15);
+            border-color: rgba(139, 92, 246, 0.5);
+            transform: translateY(-2px);
         }
 
-        .pricing-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.4);
+        /* Different colors per card */
+        .process-card:nth-child(1) .mini-pill {
+            background: rgba(139, 92, 246, 0.1);
+            border-color: rgba(139, 92, 246, 0.3);
+        }
+        .process-card:nth-child(1) .mini-pill:hover {
+            background: rgba(139, 92, 246, 0.15);
+            border-color: rgba(139, 92, 246, 0.5);
+        }
+
+        .process-card:nth-child(2) .mini-pill {
+            background: rgba(59, 130, 246, 0.1);
+            border-color: rgba(59, 130, 246, 0.3);
+        }
+        .process-card:nth-child(2) .mini-pill:hover {
+            background: rgba(59, 130, 246, 0.15);
+            border-color: rgba(59, 130, 246, 0.5);
+        }
+
+        .process-card:nth-child(3) .mini-pill {
+            background: rgba(6, 182, 212, 0.1);
+            border-color: rgba(6, 182, 212, 0.3);
+        }
+        .process-card:nth-child(3) .mini-pill:hover {
+            background: rgba(6, 182, 212, 0.15);
+            border-color: rgba(6, 182, 212, 0.5);
+        }
+
+        .process-card:nth-child(4) .mini-pill {
+            background: rgba(16, 185, 129, 0.1);
+            border-color: rgba(16, 185, 129, 0.3);
+        }
+        .process-card:nth-child(4) .mini-pill:hover {
+            background: rgba(16, 185, 129, 0.15);
+            border-color: rgba(16, 185, 129, 0.5);
+        }
+
+        .process-card:nth-child(5) .mini-pill {
+            background: rgba(251, 146, 60, 0.1);
+            border-color: rgba(251, 146, 60, 0.3);
+        }
+        .process-card:nth-child(5) .mini-pill:hover {
+            background: rgba(251, 146, 60, 0.15);
+            border-color: rgba(251, 146, 60, 0.5);
+        }
+
+        /* Process Section Responsive */
+        @media (max-width: 1200px) {
+            .process-cards-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .process-cards-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .process-card {
+                min-height: auto;
+            }
+
+            .card-details {
+                opacity: 1;
+            }
+
+            .progress-line-container {
+                margin: 60px auto 40px;
+            }
+
+            .mini-pill {
+                font-size: 12px;
+                padding: 6px 12px;
+            }
         }
 
         /* CTA Section */
@@ -551,6 +742,142 @@
         .cta-button-large:hover {
             transform: translateY(-5px) scale(1.05);
             box-shadow: 0 30px 80px rgba(0, 0, 0, 0.3);
+        }
+
+        /* CTA Info Box */
+        .cta-info-box {
+            max-width: 500px;
+            margin: 48px auto;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 32px;
+        }
+
+        .info-box-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
+            font-size: 18px;
+        }
+
+        .info-icon {
+            font-size: 28px;
+        }
+
+        /* Info Box Steps */
+        .info-box-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .info-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            padding: 24px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .info-step:hover {
+            background: rgba(255, 255, 255, 0.04);
+            transform: translateX(4px);
+        }
+
+        .step-number {
+            flex-shrink: 0;
+            width: 40px;
+            height: 40px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Outfit', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: white;
+        }
+
+        .step-content {
+            flex: 1;
+        }
+
+        .step-content strong {
+            display: block;
+            font-size: 16px;
+            margin-bottom: 6px;
+            color: white;
+        }
+
+        .step-content p {
+            font-size: 14px;
+            color: var(--text-lighter);
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .step-divider {
+            text-align: center;
+            font-size: 24px;
+            color: var(--accent-purple);
+            padding: 8px 0;
+            font-weight: 700;
+        }
+
+        .info-box-footer {
+            margin-top: 24px;
+            padding-top: 24px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            text-align: center;
+        }
+
+        .footer-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: 50px;
+            font-size: 15px;
+            font-weight: 600;
+            color: #10b981;
+        }
+
+        .badge-icon {
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        @media (max-width: 768px) {
+            .cta-info-box {
+                padding: 24px;
+            }
+
+            .info-step {
+                padding: 20px;
+                gap: 16px;
+            }
+
+            .step-number {
+                width: 36px;
+                height: 36px;
+                font-size: 16px;
+            }
+
+            .step-content strong {
+                font-size: 15px;
+            }
+
+            .step-content p {
+                font-size: 13px;
+            }
         }
 
         /* Footer */
@@ -693,6 +1020,350 @@
         .bottom-nav-item.active::before { content:''; position:absolute; top:0; left:50%; transform:translateX(-50%); width:40px; height:3px; background:var(--gradient-primary); border-radius:0 0 4px 4px; }
         @media (max-width:768px){ .bottom-nav{display:flex;} .nav-links{display:none !important;} .nav-container{padding:0 20px;} nav{padding:12px 0 !important;} .logo-img{height:32px;} body{padding-bottom:80px;} footer{padding-bottom:100px;} .mobile-cta{display:flex; position:fixed; top:12px; right:20px; background:var(--gradient-primary); color:#fff; padding:10px 20px; border-radius:50px; font-size:13px; font-weight:600; text-decoration:none; z-index:1001; box-shadow:0 4px 20px rgba(139,92,246,.4);} }
         @media (min-width:769px){ .mobile-cta{display:none;} }
+
+        /* ==================== PREMIUM FOOTER ==================== */
+        .footer-modern {
+            position: relative;
+            background: var(--primary);
+            color: #fff;
+            padding: 100px 0 0;
+            margin-top: 0;
+            overflow: hidden;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .footer-orbs {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+            pointer-events: none;
+            opacity: 0.4;
+        }
+
+        .footer-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            animation: float 25s ease-in-out infinite;
+        }
+
+        .footer-orb-1 {
+            width: 500px;
+            height: 500px;
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.3), rgba(59, 130, 246, 0.2));
+            top: -20%;
+            left: -10%;
+        }
+
+        .footer-orb-2 {
+            width: 400px;
+            height: 400px;
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.3), rgba(139, 92, 246, 0.2));
+            bottom: -20%;
+            right: -10%;
+            animation-delay: -10s;
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 60px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-top {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .footer-brand-modern {
+            display: inline-block;
+        }
+
+        .footer-logo-modern {
+            height: 45px;
+            width: auto;
+            margin-bottom: 16px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            transition: transform 0.3s ease, filter 0.3s ease;
+        }
+
+        .footer-logo-modern:hover {
+            transform: scale(1.05);
+            filter: brightness(1.2);
+        }
+
+        .footer-tagline {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.6);
+            font-weight: 400;
+            letter-spacing: 0.5px;
+        }
+
+        .footer-divider {
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.5), transparent);
+            position: relative;
+            margin-bottom: 60px;
+        }
+
+        .divider-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent);
+            filter: blur(30px);
+            animation: glow-pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes glow-pulse {
+            0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
+            50% { opacity: 1; transform: translate(-50%, -50%) scale(1.2); }
+        }
+
+        .footer-main {
+            margin-bottom: 60px;
+        }
+
+        .footer-grid-modern {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 60px;
+        }
+
+        .footer-col-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 20px;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .footer-links-modern {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-links-modern li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links-modern a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 400;
+            transition: all 0.3s ease;
+            display: inline-block;
+            position: relative;
+        }
+
+        .footer-links-modern a::before {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-primary);
+            transition: width 0.3s ease;
+        }
+
+        .footer-links-modern a:hover {
+            color: #fff;
+            transform: translateX(5px);
+        }
+
+        .footer-links-modern a:hover::before {
+            width: 100%;
+        }
+
+        .footer-contact-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-contact-link svg {
+            opacity: 0.7;
+            transition: all 0.3s ease;
+        }
+
+        .footer-contact-link:hover svg {
+            opacity: 1;
+            stroke: var(--accent-purple);
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .social-icon-modern {
+            width: 44px;
+            height: 44px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-icon-modern::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--gradient-primary);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .social-icon-modern svg {
+            position: relative;
+            z-index: 1;
+            transition: all 0.4s ease;
+        }
+
+        .social-icon-modern:hover {
+            transform: translateY(-5px);
+            border-color: rgba(139, 92, 246, 0.5);
+            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3);
+        }
+
+        .social-icon-modern:hover::before {
+            opacity: 1;
+        }
+
+        .social-icon-modern:hover svg {
+            color: #fff;
+            transform: scale(1.1);
+        }
+
+        .footer-bottom-modern {
+            padding: 30px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .footer-bottom-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-copyright {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+            margin: 0;
+        }
+
+        .footer-copyright strong {
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .footer-bottom-links {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .footer-bottom-links a {
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-bottom-links a:hover {
+            color: var(--accent-purple);
+        }
+
+        .footer-dot {
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 12px;
+        }
+
+        .footer-made {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+            margin: 0;
+        }
+
+        .footer-heart {
+            color: #ef4444;
+            animation: heartbeat 1.5s ease-in-out infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            10%, 30% { transform: scale(1.1); }
+            20%, 40% { transform: scale(1); }
+        }
+
+        @media (max-width: 1200px) {
+            .footer-grid-modern {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 40px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .footer-container {
+                padding: 0 30px;
+            }
+
+            .footer-modern {
+                padding: 80px 0 0;
+                padding-bottom: 100px;
+            }
+
+            .footer-grid-modern {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .footer-top {
+                margin-bottom: 40px;
+            }
+
+            .footer-main {
+                margin-bottom: 40px;
+            }
+
+            .footer-bottom-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 16px;
+            }
+
+            .footer-bottom-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
     </style>
 </head>
 <body>
@@ -711,11 +1382,38 @@
         <div class="nav-container">
             <a href="index.html" class="logo"><img src="images/logo.png" alt="WECONN3CT Logo" class="logo-img"></a>
             <a href="kontakt.html" class="mobile-cta">Projekt starten</a>
-            <ul class="nav-links">
-                <li><a href="leistungen.html" class="active">Leistungen</a></li>
+            <ul class="nav-links" id="navLinks">
+                <li class="dropdown">
+                    <a href="leistungen.html" class="active">
+                        Leistungen
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-left: 4px; transition: transform 0.3s ease;">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a href="softwareentwicklung.html" class="dropdown-item">
+                            <div>
+                                <strong>Softwareentwicklung</strong>
+                                <p>Maßgeschneiderte Software-Lösungen</p>
+                            </div>
+                        </a>
+                        <a href="webdesign.html" class="dropdown-item">
+                            <div>
+                                <strong>Webdesign</strong>
+                                <p>Modernes UI/UX Design</p>
+                            </div>
+                        </a>
+                        <a href="digitale-transformation.html" class="dropdown-item">
+                            <div>
+                                <strong>Digitale Transformation</strong>
+                                <p>Prozessoptimierung & Innovation</p>
+                            </div>
+                        </a>
+                    </div>
+                </li>
                 <li><a href="portfolio.html">Projekte</a></li>
                 <li><a href="ueber-uns.html">Über uns</a></li>
-                <li><a href="kontakt.html" class="cta-button">Kontakt</a></li>
+                <li><a href="kontakt.html">Kontakt</a></li>
             </ul>
         </div>
     </nav>
@@ -737,216 +1435,83 @@
                 Von der ersten Idee bis zur erfolgreichen Umsetzung – wir bieten umfassende digitale Lösungen,<br>
                 die Ihr Unternehmen nachhaltig voranbringen
             </p>
+
+            <div class="feature-pills-container">
+                <div class="feature-pills">
+                    <div class="pill" data-info="Individuelle Lösungen für deine Anforderungen">Maßgeschneidert</div>
+                    <div class="pill" data-info="Agile Entwicklung in 2-4 Wochen">Schnell</div>
+                    <div class="pill" data-info="Premium Code & modernes Design">Qualität</div>
+                    <div class="pill" data-info="DSGVO-konform & geschützt">Sicher</div>
+                    <div class="pill" data-info="Neueste Technologien & Best Practices">Modern</div>
+                    <div class="pill" data-info="KI-Integration & Cutting-Edge Tech">Innovativ</div>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- Services Section -->
     <section class="services-section">
         <div class="services-container">
-            <div class="services-grid">
-                <!-- Service 1 -->
-                <div class="service-detail-card reveal">
-                    <div class="service-card-header">
-                        <div class="service-icon-large">📱</div>
-                        <h3>App-Entwicklung</h3>
-                        <p>Native & Cross-Platform Apps für iOS und Android</p>
-                    </div>
-                    <div class="service-card-body">
-                        <ul class="service-features">
-                            <li>
-                                <span class="check-icon">✓</span>
-                                Native iOS & Android Entwicklung
-                            </li>
-                            <li>
-                                <span class="check-icon">✓</span>
-                                React Native & Flutter
-                            </li>
-                            <li>
-                                <span class="check-icon">✓</span>
-                                Progressive Web Apps (PWA)
-                            </li>
-                            <li>
-                                <span class="check-icon">✓</span>
-                                App Store Optimierung
-                            </li>
-                            <li>
-                                <span class="check-icon">✓</span>
-                                Backend & API Integration
-                            </li>
+            <div class="services-grid-new">
+                <!-- Service Card 1 -->
+                <a href="softwareentwicklung.html" class="service-card-interactive">
+                    <div class="service-card-content">
+                        <h3>Softwareentwicklung</h3>
+                        <p class="service-description">
+                            Maßgeschneiderte Software-Lösungen für dein Business. Von der Idee bis zum fertigen Produkt.
+                        </p>
+                        <ul class="service-feature-list">
+                            <li><span class="check">✓</span> Custom Applications</li>
+                            <li><span class="check">✓</span> API Development</li>
+                            <li><span class="check">✓</span> Cloud Integration</li>
+                            <li><span class="check">✓</span> Mobile Apps</li>
                         </ul>
-                        <a href="kontakt.html" class="service-cta">Projekt besprechen</a>
+                        <div class="service-cta-btn">
+                            Mehr erfahren <span class="arrow">→</span>
+                        </div>
                     </div>
-                </div>
+                    <div class="service-card-gradient"></div>
+                </a>
 
-                <!-- Service 2 -->
-                <div class="service-detail-card reveal">
-                    <div class="service-card-header">
-                        <div class="service-icon-large">🌐</div>
-                        <h3>Website-Entwicklung</h3>
-                        <p>Moderne Websites, die konvertieren und begeistern</p>
-                    </div>
-                    <div class="service-card-body">
-                        <ul class="service-features">
-                            <li>
-                                <span class="check-icon">✓</span>
-                                Responsive Webdesign
-                            </li>
-                            <li>
-                                <span class="check-icon">✓</span>
-                                E-Commerce Lösungen
-                            </li>
-                            <li>
-                                <span class="check-icon">✓</span>
-                                CMS Integration (WordPress, Shopify)
-                            </li>
-                            <li>
-                                <span class="check-icon">✓</span>
-                                SEO & Performance-Optimierung
-                            </li>
-                            <li>
-                                <span class="check-icon">✓</span>
-                                Wartung & Support
-                            </li>
+                <!-- Service Card 2 -->
+                <a href="webdesign.html" class="service-card-interactive">
+                    <div class="service-card-content">
+                        <h3>Webdesign & UI/UX</h3>
+                        <p class="service-description">
+                            Moderne Designs die begeistern und konvertieren. Responsive und performance-optimiert.
+                        </p>
+                        <ul class="service-feature-list">
+                            <li><span class="check">✓</span> Responsive Webdesign</li>
+                            <li><span class="check">✓</span> E-Commerce Lösungen</li>
+                            <li><span class="check">✓</span> CMS Integration</li>
+                            <li><span class="check">✓</span> SEO-Optimierung</li>
                         </ul>
-                        <a href="kontakt.html" class="service-cta">Projekt besprechen</a>
+                        <div class="service-cta-btn">
+                            Mehr erfahren <span class="arrow">→</span>
+                        </div>
                     </div>
-                </div>
+                    <div class="service-card-gradient"></div>
+                </a>
 
-                <!-- Service 3 -->
-                <div class="service-detail-card reveal">
-                    <div class="service-card-header">
-                        <div class="service-icon-large">⚙️</div>
-                        <h3>Software-Lösungen</h3>
-                        <p>Maßgeschneiderte Software für Ihre Prozesse</p>
-                    </div>
-                    <div class="service-card-body">
-                        <ul class="service-features">
-                            <li>
-                                <span class="check-icon">✓</span>
-                                Custom Software Development
-                            </li>
-                            <li>
-                                <span class="check-icon">✓</span>
-                                Enterprise-Systeme
-                            </li>
-                            <li>
-                                <span class="check-icon">✓</span>
-                                API-Entwicklung & Integration
-                            </li>
-                            <li>
-                                <span class="check-icon">✓</span>
-                                Cloud-Infrastruktur
-                            </li>
-                            <li>
-                                <span class="check-icon">✓</span>
-                                DevOps & Automatisierung
-                            </li>
+                <!-- Service Card 3 -->
+                <a href="digitale-transformation.html" class="service-card-interactive">
+                    <div class="service-card-content">
+                        <h3>Digitale Transformation</h3>
+                        <p class="service-description">
+                            Prozesse digitalisieren und optimieren. Automatisierung für mehr Effizienz.
+                        </p>
+                        <ul class="service-feature-list">
+                            <li><span class="check">✓</span> Prozessautomatisierung</li>
+                            <li><span class="check">✓</span> Cloud Migration</li>
+                            <li><span class="check">✓</span> KI-Integration</li>
+                            <li><span class="check">✓</span> Digitale Strategie</li>
                         </ul>
-                        <a href="kontakt.html" class="service-cta">Projekt besprechen</a>
+                        <div class="service-cta-btn">
+                            Mehr erfahren <span class="arrow">→</span>
+                        </div>
                     </div>
-                </div>
-
-                <!-- Service 4 -->
-                <div class="service-detail-card reveal">
-                    <div class="service-card-header">
-                        <div class="service-icon-large">🤖</div>
-                        <h3>KI-Integration</h3>
-                        <p>Intelligente Lösungen powered by AI</p>
-                    </div>
-                    <div class="service-card-body">
-                        <ul class="service-features">
-                            <li>
-                                <span class="check-icon">✓</span>
-                                Machine Learning Integration
-                            </li>
-                            <li>
-                                <span class="check-icon">✓</span>
-                                Chatbots & Virtuelle Assistenten
-                            </li>
-                            <li>
-                                <span class="check-icon">✓</span>
-                                Datenanalyse & Predictions
-                            </li>
-                            <li>
-                                <span class="check-icon">✓</span>
-                                Computer Vision
-                            </li>
-                            <li>
-                                <span class="check-icon">✓</span>
-                                Natural Language Processing
-                            </li>
-                        </ul>
-                        <a href="kontakt.html" class="service-cta">Projekt besprechen</a>
-                    </div>
-                </div>
-
-                <!-- Service 5 -->
-                <div class="service-detail-card reveal">
-                    <div class="service-card-header">
-                        <div class="service-icon-large">🎨</div>
-                        <h3>UX/UI Design</h3>
-                        <p>Designs, die Nutzer lieben und verstehen</p>
-                    </div>
-                    <div class="service-card-body">
-                        <ul class="service-features">
-                            <li>
-                                <span class="check-icon">✓</span>
-                                User Research & Testing
-                            </li>
-                            <li>
-                                <span class="check-icon">✓</span>
-                                Wireframing & Prototyping
-                            </li>
-                            <li>
-                                <span class="check-icon">✓</span>
-                                Interface Design
-                            </li>
-                            <li>
-                                <span class="check-icon">✓</span>
-                                Design Systems
-                            </li>
-                            <li>
-                                <span class="check-icon">✓</span>
-                                Brand Identity
-                            </li>
-                        </ul>
-                        <a href="kontakt.html" class="service-cta">Projekt besprechen</a>
-                    </div>
-                </div>
-
-                <!-- Service 6 -->
-                <div class="service-detail-card reveal">
-                    <div class="service-card-header">
-                        <div class="service-icon-large">🔧</div>
-                        <h3>Wartung & Support</h3>
-                        <p>Zuverlässiger Service, wenn du ihn brauchst</p>
-                    </div>
-                    <div class="service-card-body">
-                        <ul class="service-features">
-                            <li>
-                                <span class="check-icon">✓</span>
-                                24/7 Monitoring
-                            </li>
-                            <li>
-                                <span class="check-icon">✓</span>
-                                Regelmäßige Updates
-                            </li>
-                            <li>
-                                <span class="check-icon">✓</span>
-                                Bug-Fixing & Optimierung
-                            </li>
-                            <li>
-                                <span class="check-icon">✓</span>
-                                Security Patches
-                            </li>
-                            <li>
-                                <span class="check-icon">✓</span>
-                                Performance-Tuning
-                            </li>
-                        </ul>
-                        <a href="kontakt.html" class="service-cta">Projekt besprechen</a>
-                    </div>
-                </div>
+                    <div class="service-card-gradient"></div>
+                </a>
             </div>
         </div>
     </section>
@@ -962,146 +1527,72 @@
                 </p>
             </div>
 
-            <div class="process-timeline">
-                <div class="process-step reveal">
-                    <div class="process-content">
-                        <h3>🎯 Discovery & Strategie</h3>
-                        <p>
-                            Wir beginnen mit einem ausführlichen Gespräch über deine Vision, Ziele und Zielgruppe. 
-                            Gemeinsam entwickeln wir eine maßgeschneiderte Strategie für dein Projekt.
-                        </p>
-                    </div>
-                    <div class="process-number">
-                        <div class="number-circle">01</div>
-                    </div>
-                </div>
-
-                <div class="process-step reveal">
-                    <div class="process-content">
-                        <h3>✏️ Design & Konzept</h3>
-                        <p>
-                            Unsere Designer kreieren moderne, intuitive Interfaces mit Fokus auf beste User Experience. 
-                            Du erhältst interaktive Prototypen zur Freigabe.
-                        </p>
-                    </div>
-                    <div class="process-number">
-                        <div class="number-circle">02</div>
-                    </div>
-                </div>
-
-                <div class="process-step reveal">
-                    <div class="process-content">
-                        <h3>⚡ Entwicklung</h3>
-                        <p>
-                            Unser Entwicklerteam setzt das Design mit modernsten Technologien um. 
-                            Agile Sprints sorgen für schnelle Fortschritte und regelmäßiges Feedback.
-                        </p>
-                    </div>
-                    <div class="process-number">
-                        <div class="number-circle">03</div>
-                    </div>
-                </div>
-
-                <div class="process-step reveal">
-                    <div class="process-content">
-                        <h3>✅ Testing & QA</h3>
-                        <p>
-                            Umfassende Tests auf allen Geräten und Browsern garantieren fehlerfreie Performance. 
-                            Wir optimieren Geschwindigkeit, Sicherheit und Accessibility.
-                        </p>
-                    </div>
-                    <div class="process-number">
-                        <div class="number-circle">04</div>
-                    </div>
-                </div>
-
-                <div class="process-step reveal">
-                    <div class="process-content">
-                        <h3>🚀 Launch & Support</h3>
-                        <p>
-                            Nach dem erfolgreichen Launch stehen wir dir mit Wartung, Updates und Support zur Seite. 
-                            Dein Erfolg ist unser langfristiges Ziel.
-                        </p>
-                    </div>
-                    <div class="process-number">
-                        <div class="number-circle">05</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Pricing Section -->
-    <section class="pricing-section">
-        <div class="pricing-container">
-            <div class="section-header">
-                <div class="section-eyebrow">PREISE & PAKETE</div>
-                <h2 class="section-title">Transparent & Fair</h2>
-                <p class="section-description">
-                    Wähle das Paket, das am besten zu deinem Projekt passt. Alle Pakete sind individuell anpassbar.
-                </p>
+            <!-- Progress Line -->
+            <div class="progress-line-container">
+                <div class="progress-line"></div>
+                <div class="progress-line-fill"></div>
             </div>
 
-            <div class="pricing-grid">
-                <div class="pricing-card reveal">
-                    <div class="pricing-header">
-                        <h3>Starter</h3>
-                        <p class="pricing-description">Perfekt für kleine Projekte und Start-ups</p>
+            <!-- Process Cards -->
+            <div class="process-cards-grid">
+                <div class="process-card">
+                    <div class="card-title">Discovery</div>
+                    <div class="card-details">
+                        <p>Wir beginnen mit einem ausführlichen Gespräch über deine Vision, Ziele und Zielgruppe.</p>
+                        <div class="card-pills">
+                            <span class="mini-pill">Requirement Analysis</span>
+                            <span class="mini-pill">Zielgruppen-Research</span>
+                            <span class="mini-pill">Projekt-Roadmap</span>
+                        </div>
                     </div>
-                    <div class="pricing-amount">
-                        €2.500
-                        <span>ab</span>
-                    </div>
-                    <div class="pricing-period">Einmalzahlung</div>
-                    <ul class="pricing-features">
-                        <li><span class="check-icon">✓</span> Landing Page oder kleine Website</li>
-                        <li><span class="check-icon">✓</span> Responsive Design</li>
-                        <li><span class="check-icon">✓</span> SEO-Optimierung</li>
-                        <li><span class="check-icon">✓</span> 2 Revisionsrunden</li>
-                        <li><span class="check-icon">✓</span> 30 Tage Support</li>
-                    </ul>
-                    <a href="kontakt.html" class="pricing-button">Jetzt starten</a>
                 </div>
 
-                <div class="pricing-card featured reveal">
-                    <div class="pricing-header">
-                        <h3>Professional</h3>
-                        <p class="pricing-description">Ideal für etablierte Unternehmen</p>
+                <div class="process-card">
+                    <div class="card-title">Design</div>
+                    <div class="card-details">
+                        <p>Unsere Designer kreieren moderne, intuitive Interfaces mit Fokus auf beste User Experience.</p>
+                        <div class="card-pills">
+                            <span class="mini-pill">UI/UX Design</span>
+                            <span class="mini-pill">Interaktive Prototypen</span>
+                            <span class="mini-pill">Design System</span>
+                        </div>
                     </div>
-                    <div class="pricing-amount">
-                        €8.500
-                        <span>ab</span>
-                    </div>
-                    <div class="pricing-period">Einmalzahlung</div>
-                    <ul class="pricing-features">
-                        <li><span class="check-icon">✓</span> Umfangreiche Website oder App</li>
-                        <li><span class="check-icon">✓</span> Custom Design & UX</li>
-                        <li><span class="check-icon">✓</span> CMS Integration</li>
-                        <li><span class="check-icon">✓</span> Unbegrenzte Revisionen</li>
-                        <li><span class="check-icon">✓</span> 90 Tage Premium Support</li>
-                        <li><span class="check-icon">✓</span> Analytics Setup</li>
-                    </ul>
-                    <a href="kontakt.html" class="pricing-button">Jetzt starten</a>
                 </div>
 
-                <div class="pricing-card reveal">
-                    <div class="pricing-header">
-                        <h3>Enterprise</h3>
-                        <p class="pricing-description">Für komplexe Anforderungen</p>
+                <div class="process-card">
+                    <div class="card-title">Entwicklung</div>
+                    <div class="card-details">
+                        <p>Unser Team setzt das Design mit modernsten Technologien um. Agile Sprints sorgen für schnelle Fortschritte.</p>
+                        <div class="card-pills">
+                            <span class="mini-pill">Clean Code</span>
+                            <span class="mini-pill">Agile Sprints</span>
+                            <span class="mini-pill">Regular Updates</span>
+                        </div>
                     </div>
-                    <div class="pricing-amount">
-                        Individual
+                </div>
+
+                <div class="process-card">
+                    <div class="card-title">Testing</div>
+                    <div class="card-details">
+                        <p>Umfassende Tests auf allen Geräten und Browsern garantieren fehlerfreie Performance.</p>
+                        <div class="card-pills">
+                            <span class="mini-pill">Cross-Browser Testing</span>
+                            <span class="mini-pill">Performance Optimierung</span>
+                            <span class="mini-pill">Security Checks</span>
+                        </div>
                     </div>
-                    <div class="pricing-period">Nach Aufwand</div>
-                    <ul class="pricing-features">
-                        <li><span class="check-icon">✓</span> Enterprise Software</li>
-                        <li><span class="check-icon">✓</span> KI-Integration</li>
-                        <li><span class="check-icon">✓</span> Dedicated Team</li>
-                        <li><span class="check-icon">✓</span> Agile Development</li>
-                        <li><span class="check-icon">✓</span> 24/7 Priority Support</li>
-                        <li><span class="check-icon">✓</span> SLA Garantien</li>
-                    </ul>
-                    <a href="kontakt.html" class="pricing-button">Angebot anfordern</a>
+                </div>
+
+                <div class="process-card">
+                    <div class="card-title">Launch</div>
+                    <div class="card-details">
+                        <p>Nach dem erfolgreichen Launch stehen wir dir mit Wartung, Updates und Support zur Seite.</p>
+                        <div class="card-pills">
+                            <span class="mini-pill">Deployment</span>
+                            <span class="mini-pill">Dokumentation</span>
+                            <span class="mini-pill">Support & Wartung</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1113,48 +1604,151 @@
         <div class="cta-content">
             <h2>Bereit durchzustarten?</h2>
             <p>Lass uns dein Projekt besprechen und eine maßgeschneiderte Lösung entwickeln</p>
-            <a href="kontakt.html" class="cta-button-large">Kostenloses Erstgespräch</a>
+
+            <div class="cta-info-box">
+                <div class="info-box-header">
+                    <span class="info-icon">💡</span>
+                    <strong>So funktioniert's</strong>
+                </div>
+                <div class="info-box-steps">
+                    <div class="info-step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <strong>Kurzes Erstgespräch</strong>
+                            <p>Wir lernen uns kennen und besprechen deine Idee (ca. 30 Min)</p>
+                        </div>
+                    </div>
+                    <div class="step-divider">↓</div>
+                    <div class="info-step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <strong>Plan & Strategie</strong>
+                            <p>Wir analysieren deine Anforderungen und entwickeln einen Plan</p>
+                        </div>
+                    </div>
+                    <div class="step-divider">↓</div>
+                    <div class="info-step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <strong>Individuelles Angebot</strong>
+                            <p>Du erhältst ein maßgeschneidertes Angebot – transparent & fair</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="info-box-footer">
+                    <div class="footer-badge">
+                        <span class="badge-icon">✓</span>
+                        <span>100% kostenlos & unverbindlich</span>
+                    </div>
+                </div>
+            </div>
+
+            <a href="kontakt.html" class="cta-button-large">Jetzt Erstgespräch vereinbaren</a>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer>
-        <div class="footer-content">
-            <div class="footer-grid">
-                <div class="footer-brand">
-                    <h3>wec<span>onn3ct</span></h3>
-                    <p>Wir verbinden kreatives Design mit technischer Exzellenz, um digitale Erlebnisse zu schaffen, die Ihr Unternehmen voranbringen.</p>
-                </div>
-                <div class="footer-column">
-                    <h4>Unternehmen</h4>
-                    <ul class="footer-links">
-                        <li><a href="ueber-uns.html">Über uns</a></li>
-                        <li><a href="ueber-uns.html#team">Team</a></li>
-                        <li><a href="karriere.html">Karriere</a></li>
-                        <li><a href="blog.html">Blog</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h4>Services</h4>
-                    <ul class="footer-links">
-                        <li><a href="leistungen.html">Webentwicklung</a></li>
-                        <li><a href="leistungen.html">App-Entwicklung</a></li>
-                        <li><a href="leistungen.html">UI/UX Design</a></li>
-                        <li><a href="leistungen.html">Beratung</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h4>Kontakt</h4>
-                    <ul class="footer-links">
-                        <li><a href="mailto:hello@weconn3ct.com">hello@weconn3ct.com</a></li>
-                        <li><a href="tel:+49123456789">+49 123 456 789</a></li>
-                        <li><a href="#">LinkedIn</a></li>
-                        <li><a href="#">Instagram</a></li>
-                    </ul>
+    <footer class="footer-modern">
+        <!-- Gradient Orbs Background -->
+        <div class="footer-orbs">
+            <div class="footer-orb footer-orb-1"></div>
+            <div class="footer-orb footer-orb-2"></div>
+        </div>
+
+        <div class="footer-container">
+            <!-- Top Section mit Logo -->
+            <div class="footer-top">
+                <div class="footer-brand-modern">
+                    <img src="images/logo.png" alt="WECONN3CT Logo" class="footer-logo-modern">
+                    <p class="footer-tagline">Digitale Innovation für jeden erreichbar machen</p>
                 </div>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 weconn3ct. Alle Rechte vorbehalten. Made with ❤️ in Germany</p>
+
+            <!-- Divider mit Glow -->
+            <div class="footer-divider">
+                <div class="divider-glow"></div>
+            </div>
+
+            <!-- Main Footer Content -->
+            <div class="footer-main">
+                <div class="footer-grid-modern">
+                    <!-- Column 1: Über uns -->
+                    <div class="footer-col">
+                        <h4 class="footer-col-title">Unternehmen</h4>
+                        <ul class="footer-links-modern">
+                            <li><a href="ueber-uns.html">Über uns</a></li>
+                            <li><a href="portfolio.html">Projekte</a></li>
+                            <li><a href="kontakt.html">Kontakt</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Column 2: Leistungen -->
+                    <div class="footer-col">
+                        <h4 class="footer-col-title">Leistungen</h4>
+                        <ul class="footer-links-modern">
+                            <li><a href="softwareentwicklung.html">Softwareentwicklung</a></li>
+                            <li><a href="webdesign.html">Webdesign & UI/UX</a></li>
+                            <li><a href="digitale-transformation.html">Digitale Transformation</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Column 3: Kontakt -->
+                    <div class="footer-col">
+                        <h4 class="footer-col-title">Kontakt</h4>
+                        <ul class="footer-links-modern">
+                            <li>
+                                <a href="mailto:info@weconn3ct.de" class="footer-contact-link">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                        <polyline points="22,6 12,13 2,6"></polyline>
+                                    </svg>
+                                    info@weconn3ct.de
+                                </a>
+                            </li>
+                            <li>
+                                <a href="tel:+491624521879" class="footer-contact-link">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                                    </svg>
+                                    +49 162 4521879
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Column 4: Social Media -->
+                    <div class="footer-col">
+                        <h4 class="footer-col-title">Folge uns</h4>
+                        <div class="footer-social">
+                            <a href="https://de.linkedin.com/company/weconn3ct" target="_blank" rel="noopener" class="social-icon-modern" aria-label="LinkedIn">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/>
+                                </svg>
+                            </a>
+                            <a href="https://www.instagram.com/weconn3ct_gmbh/" target="_blank" rel="noopener" class="social-icon-modern" aria-label="Instagram">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8 1.25 1.25 0 0 1 16 6.75a1.25 1.25 0 0 1 1.25-1.25M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3z"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Section -->
+            <div class="footer-bottom-modern">
+                <div class="footer-bottom-content">
+                    <p class="footer-copyright">
+                        &copy; 2025 <strong>weconn3ct</strong>. Alle Rechte vorbehalten.
+                    </p>
+                    <div class="footer-bottom-links">
+                        <a href="impressum.html">Impressum</a>
+                        <span class="footer-dot">•</span>
+                        <a href="datenschutz.html">Datenschutz</a>
+                        <span class="footer-dot">•</span>
+                        <a href="agb.html">AGB</a>
+                    </div>
+                </div>
             </div>
         </div>
     </footer>
@@ -1336,19 +1930,26 @@
             });
         }
 
-        // ==================== TILT EFFECT FOR CARDS ====================
-        const tiltCards = document.querySelectorAll('.service-card');
-        tiltCards.forEach(card => {
+        // ==================== SERVICE CARDS TILT EFFECT ====================
+        const serviceCards = document.querySelectorAll('.service-card-interactive');
+
+        serviceCards.forEach(card => {
             card.addEventListener('mousemove', (e) => {
+                if (window.innerWidth < 1024) return;
+
                 const rect = card.getBoundingClientRect();
                 const x = e.clientX - rect.left;
                 const y = e.clientY - rect.top;
+
                 const centerX = rect.width / 2;
                 const centerY = rect.height / 2;
-                const rotateX = (y - centerY) / 20;
-                const rotateY = (centerX - x) / 20;
-                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-15px)`;
+
+                const rotateX = (y - centerY) / 15;
+                const rotateY = (centerX - x) / 15;
+
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-12px)`;
             });
+
             card.addEventListener('mouseleave', () => {
                 card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
             });
@@ -1373,6 +1974,37 @@
                 alert('Vielen Dank für Ihre Nachricht! Wir melden uns bald bei Ihnen.');
                 this.reset();
             });
+        }
+
+        // ==================== PROGRESS LINE ANIMATION ====================
+        const progressLineFill = document.querySelector('.progress-line-fill');
+        const processSection = document.querySelector('.process-section');
+
+        if (progressLineFill && processSection) {
+            const animateProgressLine = () => {
+                const sectionTop = processSection.getBoundingClientRect().top;
+                const sectionHeight = processSection.offsetHeight;
+                const windowHeight = window.innerHeight;
+
+                if (sectionTop < windowHeight && sectionTop + sectionHeight > 0) {
+                    const progress = Math.min(Math.max((windowHeight - sectionTop) / windowHeight, 0), 1);
+                    progressLineFill.style.width = (progress * 100) + '%';
+                }
+            };
+
+            let ticking = false;
+            window.addEventListener('scroll', () => {
+                if (!ticking) {
+                    requestAnimationFrame(() => {
+                        animateProgressLine();
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
+            });
+
+            // Initial call
+            animateProgressLine();
         }
     </script>
 </body>

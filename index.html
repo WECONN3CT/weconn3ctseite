@@ -254,6 +254,82 @@
             transform-origin: left;
         }
 
+        /* Dropdown Menu Styles */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown > a {
+            display: flex;
+            align-items: center;
+        }
+
+        .dropdown:hover > a svg {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 20px);
+            left: -20px;
+            background: rgba(10, 10, 15, 0.98);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 16px;
+            min-width: 320px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            z-index: 1001;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            display: block;
+            padding: 16px 20px;
+            color: white !important;
+            text-decoration: none;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            margin-bottom: 8px;
+        }
+
+        .dropdown-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .dropdown-item:hover {
+            background: rgba(139, 92, 246, 0.1);
+            transform: translateX(5px);
+        }
+
+        .dropdown-item::before {
+            display: none !important;
+        }
+
+        .dropdown-item strong {
+            display: block;
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 4px;
+            color: white;
+        }
+
+        .dropdown-item p {
+            font-size: 13px;
+            color: var(--text-lighter);
+            margin: 0;
+            line-height: 1.4;
+        }
+
         .nav-cta {
             background: var(--gradient-primary);
             color: white !important;
@@ -405,85 +481,14 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 30px;
-            perspective: 1200px;
         }
-        .device-laptop {
-            position: relative;
-            width: 560px;
-            max-width: 100%;
-            transform: rotateY(-8deg) rotateX(2deg);
-            transition: transform 0.6s ease;
+        .hero-image {
+            width: 140%;
+            max-width: 900px;
+            height: auto;
+            border-radius: 24px;
+            box-shadow: 0 40px 100px rgba(0,0,0,0.5);
         }
-        .device-laptop:hover {
-            transform: rotateY(-2deg) rotateX(0deg) translateY(-6px);
-        }
-        .laptop-frame {
-            background: linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03));
-            border: 1px solid rgba(255,255,255,0.12);
-            border-radius: 16px;
-            padding: 14px;
-            box-shadow: 0 30px 80px rgba(0,0,0,0.5);
-        }
-        .laptop-screen {
-            background: #09090f;
-            border-radius: 10px;
-            overflow: hidden;
-            height: 320px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .screen-content {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-        .laptop-base {
-            margin: 8px auto 0;
-            width: 90%;
-            height: 14px;
-            background: linear-gradient(180deg, rgba(255,255,255,0.12), rgba(255,255,255,0.02));
-            border-radius: 0 0 12px 12px;
-            border: 1px solid rgba(255,255,255,0.08);
-            transform: perspective(1000px) rotateX(30deg);
-        }
-        .device-phone {
-            position: absolute;
-            right: -20px;
-            bottom: -20px;
-            width: 160px;
-            transform: rotateY(12deg) rotateX(-2deg);
-            transition: transform 0.6s ease;
-        }
-        .device-phone:hover {
-            transform: rotateY(8deg) rotateX(0deg) translateY(-6px);
-        }
-        .phone-frame {
-            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.04));
-            border: 1px solid rgba(255,255,255,0.12);
-            border-radius: 28px;
-            padding: 10px;
-            box-shadow: 0 30px 80px rgba(0,0,0,0.5);
-        }
-        .phone-notch {
-            height: 14px;
-            width: 70px;
-            background: rgba(255,255,255,0.12);
-            border-radius: 0 0 12px 12px;
-            margin: 0 auto 8px;
-        }
-        .phone-screen {
-            background: #09090f;
-            border-radius: 20px;
-            overflow: hidden;
-            height: 310px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
         .hero-badge {
             display: inline-flex;
             align-items: center;
@@ -566,6 +571,214 @@
             animation: fadeInUp 1s ease 0.6s forwards;
         }
 
+        /* Hero Pills */
+        .hero-pills-container {
+            margin-top: 48px;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.8s forwards;
+        }
+        .hero-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+        }
+        .hero-pill {
+            position: relative;
+            padding: 14px 28px;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 2px solid transparent;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.9);
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background-clip: padding-box;
+        }
+        .hero-pill::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 50px;
+            padding: 2px;
+            background: linear-gradient(135deg, #8b5cf6 0%, #3b82f6 50%, #06b6d4 100%);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0.6;
+            transition: opacity 0.4s ease;
+        }
+        .hero-pill:hover {
+            background: rgba(139, 92, 246, 0.1);
+            transform: translateY(-2px);
+            z-index: 1000;
+        }
+        .hero-pill:hover::before {
+            opacity: 1;
+        }
+        .hero-pill::after {
+            content: attr(data-info);
+            position: absolute;
+            top: calc(100% + 12px);
+            left: 50%;
+            transform: translateX(-50%) translateY(-10px);
+            background: rgba(15, 15, 26, 0.98);
+            backdrop-filter: blur(20px);
+            padding: 12px 20px;
+            border-radius: 12px;
+            font-size: 13px;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.8);
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            pointer-events: none;
+            z-index: 100;
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+        .hero-pill:hover::after {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* Portfolio Highlights */
+        .portfolio-highlights {
+            padding: 120px 60px;
+            background: var(--primary);
+        }
+        .portfolio-grid-home {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 32px;
+            max-width: 1400px;
+            margin: 60px auto;
+        }
+        .portfolio-item-home {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 24px;
+            overflow: hidden;
+            text-decoration: none;
+            color: white;
+            transition: all 0.4s ease;
+        }
+        .portfolio-item-home:hover {
+            transform: translateY(-8px);
+            border-color: rgba(139, 92, 246, 0.3);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+        .portfolio-image-wrapper {
+            aspect-ratio: 16/9;
+            background: linear-gradient(135deg, #1a1a2e 0%, #0a0a0f 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+        }
+        .portfolio-logo-placeholder {
+            font-family: 'Outfit', sans-serif;
+            font-size: 20px;
+            font-weight: 800;
+            color: rgba(255, 255, 255, 0.3);
+            text-align: center;
+        }
+        .portfolio-info-home {
+            padding: 24px;
+        }
+        .portfolio-info-home h3 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        .portfolio-info-home p {
+            color: var(--text-lighter);
+            font-size: 14px;
+            margin-bottom: 16px;
+        }
+        .portfolio-tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .tag {
+            padding: 6px 12px;
+            background: rgba(139, 92, 246, 0.1);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            border-radius: 50px;
+            font-size: 12px;
+        }
+        .portfolio-cta {
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        /* Process Section Home */
+        .process-section-home {
+            padding: 120px 60px;
+            background: #0f0f1a;
+        }
+        .progress-line-wrapper {
+            max-width: 1200px;
+            margin: 60px auto 40px;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+        }
+        .progress-line {
+            height: 100%;
+            background: var(--gradient-primary);
+            border-radius: 3px;
+            width: 100%;
+        }
+        .process-grid-home {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 24px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .process-step-home {
+            text-align: center;
+            padding: 32px 20px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+        .process-step-home:hover {
+            transform: translateY(-8px);
+            border-color: rgba(139, 92, 246, 0.3);
+        }
+        .step-number-home {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Outfit', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            margin: 0 auto 20px;
+        }
+        .process-step-home h3 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+        .process-step-home p {
+            font-size: 14px;
+            color: var(--text-lighter);
+        }
+
         .btn {
             padding: 18px 42px;
             border-radius: 60px;
@@ -575,9 +788,11 @@
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: 10px;
             position: relative;
             overflow: hidden;
+            min-width: 200px;
         }
 
         .btn-primary {
@@ -660,6 +875,127 @@
         @keyframes scrollBounce {
             0%, 100% { top: 8px; opacity: 1; }
             50% { top: 28px; opacity: 0; }
+        }
+
+        /* ==================== COMPACT LOGO STRIP (Under Hero) ==================== */
+        .logo-strip {
+            padding: 60px 0;
+            background: linear-gradient(180deg, var(--primary) 0%, rgba(15, 15, 26, 0.5) 100%);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .logo-strip::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent 0%, rgba(139, 92, 246, 0.3) 50%, transparent 100%);
+        }
+
+        .logo-strip-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .logo-strip-label {
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-lighter);
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        .logo-strip-marquee {
+            display: flex;
+            gap: 80px;
+            overflow: hidden;
+            user-select: none;
+            mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+            -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+        }
+
+        .logo-strip-content {
+            display: flex;
+            gap: 80px;
+            animation: scroll-strip 40s linear infinite;
+            flex-shrink: 0;
+            align-items: center;
+        }
+
+        @keyframes scroll-strip {
+            from { transform: translateX(0); }
+            to { transform: translateX(-100%); }
+        }
+
+        .logo-strip-item {
+            flex-shrink: 0;
+            width: 160px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 20px;
+        }
+
+        .logo-strip-item img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            filter: brightness(0) invert(1) opacity(0.4);
+            transition: all 0.3s ease;
+            transform: scale(1.4);
+        }
+
+        .logo-strip-marquee:hover .logo-strip-content {
+            animation-play-state: paused;
+        }
+
+        .logo-strip-item:hover img {
+            filter: brightness(0) invert(1) opacity(0.8);
+            transform: scale(1.5);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .logo-strip {
+                padding: 40px 0;
+            }
+            
+            .logo-strip-label {
+                font-size: 11px;
+                margin-bottom: 20px;
+            }
+            
+            .logo-strip-item {
+                width: 100px;
+                height: 50px;
+            }
+            
+            .logo-strip-marquee {
+                gap: 50px;
+            }
+            
+            .logo-strip-content {
+                gap: 50px;
+                animation-duration: 30s;
+            }
+
+            .hero-pill {
+                padding: 12px 24px;
+                font-size: 13px;
+            }
+
+            .hero-pill::after {
+                white-space: normal;
+                max-width: 250px;
+                text-align: center;
+            }
         }
 
         /* ==================== SERVICES SECTION ==================== */
@@ -870,15 +1206,18 @@
             transform: translateX(5px);
         }
 
-        /* ==================== SHOWCASE / STATS SECTION ==================== */
-        .showcase {
+        /* ==================== COMBINED STATS & CTA SECTION ==================== */
+        .combined-section {
             padding: 150px 60px;
             position: relative;
             overflow: hidden;
             background: #0f0f1a;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
         }
 
-        .showcase-bg-video {
+        .combined-bg-video {
             position: absolute;
             top: 0;
             left: 0;
@@ -889,7 +1228,7 @@
             z-index: 0;
         }
 
-        .showcase::before {
+        .combined-section::before {
             content: '';
             position: absolute;
             top: 50%;
@@ -899,192 +1238,310 @@
             height: 1000px;
             background: radial-gradient(circle, rgba(139, 92, 246, 0.1) 0%, transparent 60%);
             pointer-events: none;
+            z-index: 0;
         }
 
-        .showcase-content {
+        .combined-container {
             max-width: 1400px;
             margin: 0 auto;
+            width: 100%;
             position: relative;
             z-index: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 80px;
         }
 
-        .showcase-title {
-            font-family: 'Outfit', sans-serif;
-            font-size: clamp(40px, 6vw, 80px);
-            font-weight: 800;
-            letter-spacing: -3px;
-            margin-bottom: 80px;
+        /* Stats Section - Top */
+        .stats-section {
             text-align: center;
+        }
+
+        .stats-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: clamp(40px, 5vw, 56px);
+            font-weight: 800;
+            letter-spacing: -2px;
+            margin-bottom: 60px;
             opacity: 0;
             transform: translateY(30px);
             transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .showcase-title.active {
+        .reveal.active .stats-title {
             opacity: 1;
             transform: translateY(0);
         }
 
-        .showcase-grid {
+        .stats-grid-horizontal {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
-        .showcase-item {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 32px;
-            padding: 50px 40px;
-            text-align: center;
-            opacity: 0;
-            transform: translateY(50px);
+        .stat-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 24px;
+            padding: 50px 30px;
             transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(30px);
         }
 
-        .showcase-item:hover {
+        .stat-card.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(59, 130, 246, 0.05) 100%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .stat-card:hover {
             transform: translateY(-10px);
             border-color: rgba(139, 92, 246, 0.3);
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 20px 60px rgba(139, 92, 246, 0.2);
         }
 
-        .showcase-number {
+        .stat-card:hover::before {
+            opacity: 1;
+        }
+
+        .stat-number {
             font-family: 'Outfit', sans-serif;
-            font-size: clamp(56px, 8vw, 80px);
-            font-weight: 900;
+            font-size: clamp(48px, 6vw, 72px);
+            font-weight: 800;
             background: var(--gradient-primary);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            line-height: 1;
             margin-bottom: 16px;
+            letter-spacing: -2px;
+            position: relative;
+            z-index: 1;
         }
 
-        .showcase-item h3 {
+        .stat-card h3 {
             font-family: 'Outfit', sans-serif;
             font-size: 24px;
             font-weight: 700;
             margin-bottom: 12px;
-        }
-
-        .showcase-item p {
-            color: var(--text-lighter);
-            font-size: 16px;
-            line-height: 1.6;
-        }
-
-        /* ==================== CTA SECTION ==================== */
-        .cta-section {
-            padding: 180px 60px;
-            position: relative;
-            overflow: hidden;
-            background: linear-gradient(180deg, #0f0f1a 0%, var(--primary) 100%);
-        }
-
-        .cta-orb {
-            position: absolute;
-            width: 800px;
-            height: 800px;
-            border-radius: 50%;
-            filter: blur(120px);
-            opacity: 0.3;
-            background: var(--gradient-glow);
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            animation: ctaPulse 8s ease-in-out infinite;
-        }
-
-        @keyframes ctaPulse {
-            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.3; }
-            50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.5; }
-        }
-
-        .cta-content {
-            max-width: 900px;
-            margin: 0 auto;
-            text-align: center;
+            letter-spacing: -0.5px;
             position: relative;
             z-index: 1;
         }
 
-        .cta-content h2 {
-            font-family: 'Outfit', sans-serif;
-            font-size: clamp(44px, 7vw, 80px);
-            font-weight: 900;
-            line-height: 1.1;
-            letter-spacing: -3px;
-            margin-bottom: 24px;
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .cta-content h2 .gradient-text {
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .cta-content p {
-            font-size: 22px;
+        .stat-card p {
             color: var(--text-lighter);
-            margin-bottom: 50px;
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.1s;
+            font-size: 16px;
+            line-height: 1.6;
+            position: relative;
+            z-index: 1;
         }
 
-        .cta-content.active h2,
-        .cta-content.active p {
+        /* Horizontal Divider */
+        .horizontal-divider {
+            width: 400px;
+            height: 2px;
+            margin: 0 auto;
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                rgba(139, 92, 246, 0.3) 20%,
+                rgba(139, 92, 246, 0.6) 50%,
+                rgba(139, 92, 246, 0.3) 80%,
+                transparent 100%
+            );
+            position: relative;
+        }
+
+        .horizontal-divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 20px;
+            height: 20px;
+            background: var(--accent-purple);
+            border-radius: 50%;
+            box-shadow: 0 0 30px rgba(139, 92, 246, 0.6);
+            animation: pulse-dot 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+            50% { transform: translate(-50%, -50%) scale(1.3); opacity: 0.7; }
+        }
+
+        /* CTA Section - Bottom */
+        .cta-section-bottom {
+            text-align: center;
+            position: relative;
+            padding: 0 20px;
+        }
+
+        .cta-orb {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            filter: blur(60px);
+            animation: float 8s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -45%) scale(1.1); }
+        }
+
+        .cta-content-centered {
+            position: relative;
+            z-index: 1;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.2s;
+        }
+
+        .reveal.active .cta-content-centered {
             opacity: 1;
             transform: translateY(0);
+        }
+
+        .cta-content-centered h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: clamp(40px, 5vw, 56px);
+            font-weight: 800;
+            letter-spacing: -2px;
+            margin-bottom: 24px;
+            line-height: 1.2;
+        }
+
+        .cta-content-centered p {
+            font-size: 20px;
+            color: var(--text-lighter);
+            margin-bottom: 40px;
+            line-height: 1.6;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .cta-button-large {
             display: inline-flex;
             align-items: center;
             gap: 12px;
+            padding: 20px 40px;
             background: var(--gradient-primary);
             color: white;
-            padding: 22px 50px;
-            border-radius: 60px;
-            font-size: 18px;
-            font-weight: 700;
             text-decoration: none;
-            box-shadow: 0 20px 60px rgba(139, 92, 246, 0.4);
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 18px;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 10px 40px rgba(139, 92, 246, 0.3);
             position: relative;
             overflow: hidden;
-            opacity: 0;
-            transform: translateY(30px);
         }
 
         .cta-button-large::before {
             content: '';
             position: absolute;
             top: 0;
-            left: -100%;
+            left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            transition: left 0.6s ease;
-        }
-
-        .cta-button-large:hover::before {
-            left: 100%;
-        }
-
-        .cta-content.active .cta-button-large {
-            opacity: 1;
-            transform: translateY(0);
-            transition-delay: 0.2s;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
         }
 
         .cta-button-large:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 30px 80px rgba(139, 92, 246, 0.6);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 50px rgba(139, 92, 246, 0.5);
+        }
+
+        .cta-button-large:hover::before {
+            opacity: 1;
+        }
+
+        .cta-button-large svg {
+            transition: transform 0.4s ease;
+        }
+
+        .cta-button-large:hover svg {
+            transform: translateX(5px);
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .stats-grid-horizontal {
+                gap: 30px;
+            }
+            
+            .stat-card {
+                padding: 40px 25px;
+            }
+        }
+
+        @media (max-width: 968px) {
+            .combined-section {
+                padding: 100px 30px;
+                min-height: auto;
+            }
+            
+            .combined-container {
+                gap: 60px;
+            }
+            
+            .stats-grid-horizontal {
+                grid-template-columns: 1fr;
+                gap: 25px;
+                max-width: 500px;
+            }
+            
+            .stat-card {
+                padding: 35px 25px;
+            }
+            
+            .horizontal-divider {
+                width: 250px;
+            }
+            
+            .stats-title {
+                margin-bottom: 40px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .combined-section {
+                padding: 80px 30px;
+            }
+            
+            .combined-container {
+                gap: 50px;
+            }
+            
+            .horizontal-divider {
+                width: 200px;
+            }
         }
 
         /* ==================== FOOTER ==================== */
@@ -1211,10 +1668,14 @@
             .showcase-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
-            
+
             .footer-grid {
                 grid-template-columns: 1fr 1fr;
                 gap: 40px;
+            }
+
+            .process-grid-home {
+                grid-template-columns: repeat(3, 1fr);
             }
         }
 
@@ -1267,19 +1728,6 @@
             .hero-text {
                 text-align: center;
             }
-            .device-laptop {
-                transform: none;
-                width: 100%;
-            }
-            .laptop-screen {
-                height: 240px;
-            }
-            .device-phone {
-                position: static;
-                width: 140px;
-                transform: none;
-                margin-top: 16px;
-            }
 
             .services,
             .showcase,
@@ -1289,6 +1737,11 @@
 
             .services-grid,
             .showcase-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .portfolio-grid-home,
+            .process-grid-home {
                 grid-template-columns: 1fr;
             }
 
@@ -1331,6 +1784,350 @@
         .bottom-nav-item.active::before { content:''; position:absolute; top:0; left:50%; transform:translateX(-50%); width:40px; height:3px; background:var(--gradient-primary); border-radius:0 0 4px 4px; }
         @media (max-width:768px){ .bottom-nav{display:flex;} .nav-links{display:none !important;} .nav-container{padding:0 20px;} nav{padding:12px 0 !important;} .logo-img{height:32px;} body{padding-bottom:80px;} footer{padding-bottom:100px;} .mobile-cta{display:flex; position:fixed; top:12px; right:20px; background:var(--gradient-primary); color:#fff; padding:10px 20px; border-radius:50px; font-size:13px; font-weight:600; text-decoration:none; z-index:1001; box-shadow:0 4px 20px rgba(139,92,246,.4);} }
         @media (min-width:769px){ .mobile-cta{display:none;} }
+
+        /* ==================== PREMIUM FOOTER ==================== */
+        .footer-modern {
+            position: relative;
+            background: var(--primary);
+            color: #fff;
+            padding: 100px 0 0;
+            margin-top: 0;
+            overflow: hidden;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .footer-orbs {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+            pointer-events: none;
+            opacity: 0.4;
+        }
+
+        .footer-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            animation: float 25s ease-in-out infinite;
+        }
+
+        .footer-orb-1 {
+            width: 500px;
+            height: 500px;
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.3), rgba(59, 130, 246, 0.2));
+            top: -20%;
+            left: -10%;
+        }
+
+        .footer-orb-2 {
+            width: 400px;
+            height: 400px;
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.3), rgba(139, 92, 246, 0.2));
+            bottom: -20%;
+            right: -10%;
+            animation-delay: -10s;
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 60px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-top {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .footer-brand-modern {
+            display: inline-block;
+        }
+
+        .footer-logo-modern {
+            height: 45px;
+            width: auto;
+            margin-bottom: 16px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            transition: transform 0.3s ease, filter 0.3s ease;
+        }
+
+        .footer-logo-modern:hover {
+            transform: scale(1.05);
+            filter: brightness(1.2);
+        }
+
+        .footer-tagline {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.6);
+            font-weight: 400;
+            letter-spacing: 0.5px;
+        }
+
+        .footer-divider {
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.5), transparent);
+            position: relative;
+            margin-bottom: 60px;
+        }
+
+        .divider-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent);
+            filter: blur(30px);
+            animation: glow-pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes glow-pulse {
+            0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
+            50% { opacity: 1; transform: translate(-50%, -50%) scale(1.2); }
+        }
+
+        .footer-main {
+            margin-bottom: 60px;
+        }
+
+        .footer-grid-modern {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 60px;
+        }
+
+        .footer-col-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 20px;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .footer-links-modern {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-links-modern li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links-modern a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 400;
+            transition: all 0.3s ease;
+            display: inline-block;
+            position: relative;
+        }
+
+        .footer-links-modern a::before {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-primary);
+            transition: width 0.3s ease;
+        }
+
+        .footer-links-modern a:hover {
+            color: #fff;
+            transform: translateX(5px);
+        }
+
+        .footer-links-modern a:hover::before {
+            width: 100%;
+        }
+
+        .footer-contact-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-contact-link svg {
+            opacity: 0.7;
+            transition: all 0.3s ease;
+        }
+
+        .footer-contact-link:hover svg {
+            opacity: 1;
+            stroke: var(--accent-purple);
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .social-icon-modern {
+            width: 44px;
+            height: 44px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-icon-modern::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--gradient-primary);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .social-icon-modern svg {
+            position: relative;
+            z-index: 1;
+            transition: all 0.4s ease;
+        }
+
+        .social-icon-modern:hover {
+            transform: translateY(-5px);
+            border-color: rgba(139, 92, 246, 0.5);
+            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3);
+        }
+
+        .social-icon-modern:hover::before {
+            opacity: 1;
+        }
+
+        .social-icon-modern:hover svg {
+            color: #fff;
+            transform: scale(1.1);
+        }
+
+        .footer-bottom-modern {
+            padding: 30px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .footer-bottom-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-copyright {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+            margin: 0;
+        }
+
+        .footer-copyright strong {
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .footer-bottom-links {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .footer-bottom-links a {
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-bottom-links a:hover {
+            color: var(--accent-purple);
+        }
+
+        .footer-dot {
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 12px;
+        }
+
+        .footer-made {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+            margin: 0;
+        }
+
+        .footer-heart {
+            color: #ef4444;
+            animation: heartbeat 1.5s ease-in-out infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            10%, 30% { transform: scale(1.1); }
+            20%, 40% { transform: scale(1); }
+        }
+
+        @media (max-width: 1200px) {
+            .footer-grid-modern {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 40px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .footer-container {
+                padding: 0 30px;
+            }
+
+            .footer-modern {
+                padding: 80px 0 0;
+                padding-bottom: 100px;
+            }
+
+            .footer-grid-modern {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .footer-top {
+                margin-bottom: 40px;
+            }
+
+            .footer-main {
+                margin-bottom: 40px;
+            }
+
+            .footer-bottom-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 16px;
+            }
+
+            .footer-bottom-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1356,11 +2153,37 @@
             </a>
             <a href="kontakt.html" class="mobile-cta">Projekt starten</a>
             <ul class="nav-links" id="navLinks">
-                <li><a href="index.html#services" class="active">Services</a></li>
-                <li><a href="softwareentwicklung.html">Software</a></li>
-                <li><a href="webdesign.html">Design</a></li>
-                <li><a href="digitale-transformation.html">Transformation</a></li>
-                <li><a href="#contact" class="nav-cta">Kontakt</a></li>
+                <li class="dropdown">
+                    <a href="leistungen.html">
+                        Leistungen
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-left: 4px; transition: transform 0.3s ease;">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a href="softwareentwicklung.html" class="dropdown-item">
+                            <div>
+                                <strong>Softwareentwicklung</strong>
+                                <p>Maßgeschneiderte Software-Lösungen</p>
+                            </div>
+                        </a>
+                        <a href="webdesign.html" class="dropdown-item">
+                            <div>
+                                <strong>Webdesign</strong>
+                                <p>Modernes UI/UX Design</p>
+                            </div>
+                        </a>
+                        <a href="digitale-transformation.html" class="dropdown-item">
+                            <div>
+                                <strong>Digitale Transformation</strong>
+                                <p>Prozessoptimierung & Innovation</p>
+                            </div>
+                        </a>
+                    </div>
+                </li>
+                <li><a href="portfolio.html">Projekte</a></li>
+                <li><a href="ueber-uns.html">Über uns</a></li>
+                <li><a href="kontakt.html">Kontakt</a></li>
             </ul>
             <div class="menu-toggle" id="menuToggle">
                 <span></span>
@@ -1381,9 +2204,6 @@
         
         <div class="hero-content hero-content-split">
             <div class="hero-text">
-                <div class="hero-badge">
-                    Made with Passion in Germany
-                </div>
                 <h1 class="hero-title">
                     <span class="line">Deine Idee.</span>
                     <span class="line"><span class="gradient-text">Digital umgesetzt.</span></span>
@@ -1399,33 +2219,81 @@
                             <path d="M5 12h14M12 5l7 7-7 7"/>
                         </svg>
                     </a>
-                    <a href="#services" class="btn btn-secondary">
+                    <a href="leistungen.html" class="btn btn-secondary">
                         Mehr erfahren
+                        <svg class="btn-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
                     </a>
+                </div>
+                <div class="hero-pills-container">
+                    <div class="hero-pills">
+                        <div class="hero-pill" data-info="Individuelle Lösungen für deine Anforderungen">Maßgeschneidert</div>
+                        <div class="hero-pill" data-info="Agile Entwicklung in 2-4 Wochen">Schnell</div>
+                        <div class="hero-pill" data-info="Premium Code & modernes Design">Qualität</div>
+                        <div class="hero-pill" data-info="DSGVO-konform & geschützt">Sicher</div>
+                        <div class="hero-pill" data-info="Neueste Technologien & Best Practices">Modern</div>
+                        <div class="hero-pill" data-info="KI-Integration & Cutting-Edge Tech">Innovativ</div>
+                    </div>
                 </div>
             </div>
             <div class="hero-devices">
-                <div class="device-laptop">
-                    <div class="laptop-frame">
-                        <div class="laptop-screen">
-                            <img src="images/properties/Entrix.png" alt="Entrix Dashboard" class="screen-content">
-                        </div>
-                    </div>
-                    <div class="laptop-base"></div>
-                </div>
-                <div class="device-phone">
-                    <div class="phone-frame">
-                        <div class="phone-notch"></div>
-                        <div class="phone-screen">
-                            <img src="images/properties/TDDSmartphone.png" alt="TDD App" class="screen-content">
-                        </div>
-                    </div>
-                </div>
+                <img src="images/projects/MacHero.png" alt="WECONN3CT Projekte" class="hero-image">
             </div>
         </div>
         
         <div class="scroll-indicator">
             <div class="scroll-indicator-inner"></div>
+        </div>
+    </section>
+
+    <!-- Compact Logo Strip -->
+    <section class="logo-strip">
+        <div class="logo-strip-container">
+            <p class="logo-strip-label">Partner, die auf uns setzen</p>
+            <div class="logo-strip-marquee">
+                <div class="logo-strip-content">
+                    <div class="logo-strip-item">
+                        <img src="images/projects/1.png" alt="Partner 1" style="filter: none !important;">
+                    </div>
+                    <div class="logo-strip-item">
+                        <img src="images/projects/2.png" alt="Partner 2" style="filter: none !important; transform: scale(0.85);">
+                    </div>
+                    <div class="logo-strip-item">
+                        <img src="images/projects/becker.png" alt="Partner 3" style="filter: none !important; transform: scale(0.8);">
+                    </div>
+                    <div class="logo-strip-item">
+                        <img src="images/projects/bg-bau.png" alt="Partner 4" style="filter: none !important;">
+                    </div>
+                    <div class="logo-strip-item">
+                        <img src="images/projects/barutimmo.jpeg" alt="Partner 5" style="filter: none !important;">
+                    </div>
+                    <div class="logo-strip-item">
+                        <img src="images/projects/persopro.png?v=3" alt="Partner 6" style="filter: none !important; transform: scale(1.3);">
+                    </div>
+                </div>
+                <!-- Duplicate for seamless loop -->
+                <div class="logo-strip-content" aria-hidden="true">
+                    <div class="logo-strip-item">
+                        <img src="images/projects/1.png" alt="Partner 1" style="filter: none !important;">
+                    </div>
+                    <div class="logo-strip-item">
+                        <img src="images/projects/2.png" alt="Partner 2" style="filter: none !important; transform: scale(0.85);">
+                    </div>
+                    <div class="logo-strip-item">
+                        <img src="images/projects/becker.png" alt="Partner 3" style="filter: none !important; transform: scale(0.8);">
+                    </div>
+                    <div class="logo-strip-item">
+                        <img src="images/projects/bg-bau.png" alt="Partner 4" style="filter: none !important;">
+                    </div>
+                    <div class="logo-strip-item">
+                        <img src="images/projects/barutimmo.jpeg" alt="Partner 5" style="filter: none !important;">
+                    </div>
+                    <div class="logo-strip-item">
+                        <img src="images/projects/persopro.png?v=3" alt="Partner 6" style="filter: none !important; transform: scale(1.3);">
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -1440,8 +2308,10 @@
         </div>
         <div class="services-grid">
             <div class="service-card">
-                <div class="service-icon">
-                    <img src="images/properties/Karte-Softwareentwicklung.png" alt="Softwareentwicklung" class="service-icon-img">
+                <div class="service-icon" style="overflow: hidden; padding: 0;">
+                    <video autoplay loop muted playsinline style="width: 100%; height: 100%; object-fit: cover; border-radius: 20px; filter: none; display: block;">
+                        <source src="images/properties/Softwareentwicklung.mp4" type="video/mp4">
+                    </video>
                 </div>
                 <h3>Softwareentwicklung</h3>
                 <p>Maßgeschneiderte Softwarelösungen, die perfekt auf Ihre Geschäftsprozesse abgestimmt sind. Von Web-Apps bis zu komplexen Enterprise-Systemen.</p>
@@ -1453,8 +2323,10 @@
                 </a>
             </div>
             <div class="service-card">
-                <div class="service-icon">
-                    <img src="images/icons/icon-02.png" alt="Webdesign" class="service-icon-img">
+                <div class="service-icon" style="overflow: hidden; padding: 0;">
+                    <video autoplay loop muted playsinline style="width: 100%; height: 100%; object-fit: cover; border-radius: 20px; filter: none; display: block;">
+                        <source src="images/properties/Art&Design.mp4" type="video/mp4">
+                    </video>
                 </div>
                 <h3>Webdesign & UI/UX</h3>
                 <p>Atemberaubende Designs mit perfekter User Experience. Wir schaffen digitale Erlebnisse, die Ihre Nutzer lieben werden.</p>
@@ -1466,8 +2338,10 @@
                 </a>
             </div>
             <div class="service-card">
-                <div class="service-icon">
-                    <img src="images/icons/icon-03.png" alt="Digitale Transformation" class="service-icon-img">
+                <div class="service-icon" style="overflow: hidden; padding: 0;">
+                    <video autoplay loop muted playsinline style="width: 100%; height: 100%; object-fit: cover; border-radius: 20px; filter: none; display: block;">
+                        <source src="images/properties/Digital-Transform.mp4" type="video/mp4">
+                    </video>
                 </div>
                 <h3>Digitale Transformation</h3>
                 <p>Bringen Sie Ihr Unternehmen ins digitale Zeitalter. Wir optimieren Ihre Prozesse und schaffen neue Wachstumschancen.</p>
@@ -1481,86 +2355,282 @@
         </div>
     </section>
 
-    <!-- Showcase Section -->
-    <section class="showcase" id="showcase">
-        <video autoplay loop muted playsinline class="showcase-bg-video">
-            <source src="images/properties/Softwareentwicklung.mp4" type="video/mp4">
-        </video>
-        <div class="showcase-content">
-            <h2 class="showcase-title reveal">Zahlen, die sprechen</h2>
-            <div class="showcase-grid">
-                <div class="showcase-item">
-                    <div class="showcase-number" data-count="150">0</div>
-                    <h3>Erfolgreiche Projekte</h3>
-                    <p>Zufriedene Kunden aus verschiedensten Branchen</p>
-                </div>
-                <div class="showcase-item">
-                    <div class="showcase-number" data-count="98" data-suffix="%">0</div>
-                    <h3>Kundenzufriedenheit</h3>
-                    <p>Exzellenz in jedem Detail unserer Arbeit</p>
-                </div>
-                <div class="showcase-item">
-                    <div class="showcase-number" data-text="24/7">24/7</div>
-                    <h3>Support</h3>
-                    <p>Immer für Sie da, wenn Sie uns brauchen</p>
-                </div>
-            </div>
+    <!-- Portfolio Highlights -->
+    <section class="portfolio-highlights">
+        <div class="section-header reveal">
+            <div class="section-eyebrow">Unsere Arbeit</div>
+            <h2 class="section-title">Projekte, die begeistern</h2>
+            <p class="section-description">
+                Ein Einblick in unsere erfolgreichsten Projekte
+            </p>
         </div>
-    </section>
 
-    <!-- CTA Section -->
-    <section class="cta-section" id="contact">
-        <div class="cta-orb"></div>
-        <div class="cta-content reveal">
-            <h2>Bereit für Ihr<br><span class="gradient-text">nächstes Projekt?</span></h2>
-            <p>Lassen Sie uns gemeinsam etwas Außergewöhnliches schaffen</p>
-            <a href="mailto:info@weconn3ct.de" class="cta-button-large">
-                Jetzt Kontakt aufnehmen
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <div class="portfolio-grid-home">
+            <a href="portfolio.html" class="portfolio-item-home reveal">
+                <div class="portfolio-image-wrapper" style="position: relative; overflow: hidden; padding: 0; background: #f5c518;">
+                    <img src="images/projects/ordable-vertical.png" alt="ORDABLE" loading="lazy" style="width: 100%; height: 100%; object-fit: contain; position: absolute; top: 0; left: 0; transform: scale(1.3);">
+                </div>
+                <div class="portfolio-info-home">
+                    <h3>ORDABLE</h3>
+                    <p>Restaurant Management System</p>
+                    <div class="portfolio-tags">
+                        <span class="tag">Software</span>
+                        <span class="tag">50+ Standorte</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="portfolio.html" class="portfolio-item-home reveal">
+                <div class="portfolio-image-wrapper" style="position: relative; overflow: hidden; padding: 0; background: #ffffff;">
+                    <img src="images/projects/schornipro.jpeg" alt="Schornsteinfeger Pro" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0;">
+                </div>
+                <div class="portfolio-info-home">
+                    <h3>Schornsteinfeger Pro</h3>
+                    <p>Branchen-Management-Software</p>
+                    <div class="portfolio-tags">
+                        <span class="tag">Software</span>
+                        <span class="tag">B2B</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="portfolio.html" class="portfolio-item-home reveal">
+                <div class="portfolio-image-wrapper" style="position: relative; overflow: hidden; padding: 0; background: #ffffff;">
+                    <img src="images/projects/traustdudichteam.png" alt="Traust du Dich?" loading="lazy" style="width: 100%; height: 100%; object-fit: contain; position: absolute; top: 0; left: 0;">
+                </div>
+                <div class="portfolio-info-home">
+                    <h3>Traust du Dich?</h3>
+                    <p>Challenge & Gamification App</p>
+                    <div class="portfolio-tags">
+                        <span class="tag">Mobile App</span>
+                        <span class="tag">iOS</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="portfolio.html" class="portfolio-item-home reveal">
+                <div class="portfolio-image-wrapper" style="position: relative; overflow: hidden; padding: 0; background: #ffffff;">
+                    <img src="images/projects/3neu.png?v=2" alt="Dreamtales" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0;">
+                </div>
+                <div class="portfolio-info-home">
+                    <h3>Dreamtales</h3>
+                    <p>KI-gestützte Storytelling App</p>
+                    <div class="portfolio-tags">
+                        <span class="tag">Mobile App</span>
+                        <span class="tag">KI</span>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="portfolio-cta reveal">
+            <a href="portfolio.html" class="btn btn-primary">
+                Alle Projekte ansehen
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M5 12h14M12 5l7 7-7 7"/>
                 </svg>
             </a>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer id="about">
-        <div class="footer-content">
-            <div class="footer-grid">
-                <div class="footer-brand">
-                    <img src="images/logo.png" alt="weconn3ct" class="footer-logo-img">
-                    <p>Wir verbinden kreatives Design mit technischer Exzellenz, um digitale Erlebnisse zu schaffen, die Ihr Unternehmen voranbringen.</p>
-                </div>
-                <div class="footer-column">
-                    <h4>Unternehmen</h4>
-                    <ul class="footer-links">
-                        <li><a href="#">Über uns</a></li>
-                        <li><a href="#">Team</a></li>
-                        <li><a href="#">Karriere</a></li>
-                        <li><a href="#">Blog</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h4>Services</h4>
-                    <ul class="footer-links">
-                        <li><a href="softwareentwicklung.html">Softwareentwicklung</a></li>
-                        <li><a href="webdesign.html">Webdesign</a></li>
-                        <li><a href="digitale-transformation.html">Transformation</a></li>
-                        <li><a href="#">Beratung</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h4>Kontakt</h4>
-                    <ul class="footer-links">
-                        <li><a href="mailto:info@weconn3ct.de">info@weconn3ct.de</a></li>
-                        <li><a href="tel:+49123456789">+49 123 456 789</a></li>
-                        <li><a href="#">LinkedIn</a></li>
-                        <li><a href="#">Instagram</a></li>
-                    </ul>
+    <!-- Process Section -->
+    <section class="process-section-home">
+        <div class="section-header reveal">
+            <div class="section-eyebrow">Unser Prozess</div>
+            <h2 class="section-title">So arbeiten wir</h2>
+            <p class="section-description">
+                Ein bewährter Prozess für Ihren Erfolg
+            </p>
+        </div>
+
+        <div class="progress-line-wrapper">
+            <div class="progress-line"></div>
+        </div>
+
+        <div class="process-grid-home">
+            <div class="process-step-home reveal">
+                <div class="step-number-home">1</div>
+                <h3>Discovery</h3>
+                <p>Analyse Ihrer Anforderungen und Ziele</p>
+            </div>
+
+            <div class="process-step-home reveal">
+                <div class="step-number-home">2</div>
+                <h3>Design</h3>
+                <p>Kreative Konzepte und Prototypen</p>
+            </div>
+
+            <div class="process-step-home reveal">
+                <div class="step-number-home">3</div>
+                <h3>Entwicklung</h3>
+                <p>Agile Umsetzung mit modernsten Technologien</p>
+            </div>
+
+            <div class="process-step-home reveal">
+                <div class="step-number-home">4</div>
+                <h3>Testing</h3>
+                <p>Umfassende Qualitätssicherung</p>
+            </div>
+
+            <div class="process-step-home reveal">
+                <div class="step-number-home">5</div>
+                <h3>Launch</h3>
+                <p>Erfolgreicher Go-Live mit Support</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Combined Stats & CTA Section -->
+    <section class="combined-section" id="showcase">
+        <video autoplay loop muted playsinline class="combined-bg-video">
+            <source src="images/properties/Global.mp4" type="video/mp4">
+        </video>
+        
+        <div class="combined-container">
+            <!-- Stats Section - Top -->
+            <div class="stats-section">
+                <h2 class="stats-title reveal">Zahlen, die sprechen</h2>
+                <div class="stats-grid-horizontal">
+                    <div class="stat-card">
+                        <div class="stat-number" data-count="150">0</div>
+                        <h3>Erfolgreiche Projekte</h3>
+                        <p>Zufriedene Kunden aus verschiedensten Branchen</p>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" data-count="98" data-suffix="%">0</div>
+                        <h3>Kundenzufriedenheit</h3>
+                        <p>Exzellenz in jedem Detail unserer Arbeit</p>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" data-text="24/7">24/7</div>
+                        <h3>Support</h3>
+                        <p>Immer für Sie da, wenn Sie uns brauchen</p>
+                    </div>
                 </div>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 weconn3ct. Alle Rechte vorbehalten. Made with <span class="heart">♥</span> in Germany</p>
+
+            <!-- Horizontal Divider -->
+            <div class="horizontal-divider"></div>
+
+            <!-- CTA Section - Bottom -->
+            <div class="cta-section-bottom">
+                <div class="cta-orb"></div>
+                <div class="cta-content-centered reveal">
+                    <h2>Bereit für Ihr<br><span class="gradient-text">nächstes Projekt?</span></h2>
+                    <p>Lassen Sie uns gemeinsam etwas Außergewöhnliches schaffen</p>
+                    <a href="/cdn-cgi/l/email-protection#1b72757d745b6c7e7874757528786f357f7e" class="cta-button-large">
+                        Jetzt Kontakt aufnehmen
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer-modern">
+        <!-- Gradient Orbs Background -->
+        <div class="footer-orbs">
+            <div class="footer-orb footer-orb-1"></div>
+            <div class="footer-orb footer-orb-2"></div>
+        </div>
+
+        <div class="footer-container">
+            <!-- Top Section mit Logo -->
+            <div class="footer-top">
+                <div class="footer-brand-modern">
+                    <img src="images/logo.png" alt="WECONN3CT Logo" class="footer-logo-modern">
+                    <p class="footer-tagline">Digitale Innovation für jeden erreichbar machen</p>
+                </div>
+            </div>
+
+            <!-- Divider mit Glow -->
+            <div class="footer-divider">
+                <div class="divider-glow"></div>
+            </div>
+
+            <!-- Main Footer Content -->
+            <div class="footer-main">
+                <div class="footer-grid-modern">
+                    <!-- Column 1: Über uns -->
+                    <div class="footer-col">
+                        <h4 class="footer-col-title">Unternehmen</h4>
+                        <ul class="footer-links-modern">
+                            <li><a href="ueber-uns.html">Über uns</a></li>
+                            <li><a href="portfolio.html">Projekte</a></li>
+                            <li><a href="kontakt.html">Kontakt</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Column 2: Leistungen -->
+                    <div class="footer-col">
+                        <h4 class="footer-col-title">Leistungen</h4>
+                        <ul class="footer-links-modern">
+                            <li><a href="softwareentwicklung.html">Softwareentwicklung</a></li>
+                            <li><a href="webdesign.html">Webdesign & UI/UX</a></li>
+                            <li><a href="digitale-transformation.html">Digitale Transformation</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Column 3: Kontakt -->
+                    <div class="footer-col">
+                        <h4 class="footer-col-title">Kontakt</h4>
+                        <ul class="footer-links-modern">
+                            <li>
+                                <a href="mailto:info@weconn3ct.de" class="footer-contact-link">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                        <polyline points="22,6 12,13 2,6"></polyline>
+                                    </svg>
+                                    info@weconn3ct.de
+                                </a>
+                            </li>
+                            <li>
+                                <a href="tel:+491624521879" class="footer-contact-link">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                                    </svg>
+                                    +49 162 4521879
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Column 4: Social Media -->
+                    <div class="footer-col">
+                        <h4 class="footer-col-title">Folge uns</h4>
+                        <div class="footer-social">
+                            <a href="https://de.linkedin.com/company/weconn3ct" target="_blank" rel="noopener" class="social-icon-modern" aria-label="LinkedIn">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/>
+                                </svg>
+                            </a>
+                            <a href="https://www.instagram.com/weconn3ct_gmbh/" target="_blank" rel="noopener" class="social-icon-modern" aria-label="Instagram">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8 1.25 1.25 0 0 1 16 6.75a1.25 1.25 0 0 1 1.25-1.25M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3z"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Section -->
+            <div class="footer-bottom-modern">
+                <div class="footer-bottom-content">
+                    <p class="footer-copyright">
+                        &copy; 2025 <strong>weconn3ct</strong>. Alle Rechte vorbehalten.
+                    </p>
+                    <div class="footer-bottom-links">
+                        <a href="impressum.html">Impressum</a>
+                        <span class="footer-dot">•</span>
+                        <a href="datenschutz.html">Datenschutz</a>
+                        <span class="footer-dot">•</span>
+                        <a href="agb.html">AGB</a>
+                    </div>
+                </div>
             </div>
         </div>
     </footer>
@@ -1633,7 +2703,7 @@
             animateCursor();
 
             // Cursor hover effect
-            document.querySelectorAll('a, button, .service-card, .showcase-item, .project-card, .blog-card, .job-card, .team-card, .info-card, .faq-item').forEach(el => {
+        document.querySelectorAll('a, button, .service-card, .stat-card, .project-card, .blog-card, .job-card, .team-card, .info-card, .faq-item').forEach(el => {
                 el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
                 el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
             });
@@ -1668,7 +2738,7 @@
         }
 
         // ==================== SCROLL REVEAL ====================
-        const revealElements = document.querySelectorAll('.reveal, .service-card, .showcase-item, .project-card, .blog-card');
+        const revealElements = document.querySelectorAll('.reveal, .service-card, .stat-card, .project-card, .blog-card');
         const revealOnScroll = () => {
             revealElements.forEach((element, index) => {
                 const elementTop = element.getBoundingClientRect().top;
@@ -1700,11 +2770,11 @@
         });
 
         // ==================== ANIMATED COUNTER (if exists) ====================
-        const counters = document.querySelectorAll('.showcase-number[data-count]');
+        const counters = document.querySelectorAll('.stat-number[data-count]');
         let countersStarted = false;
         const startCounters = () => {
             if (countersStarted) return;
-            const showcaseSection = document.querySelector('.showcase');
+            const showcaseSection = document.querySelector('.combined-section');
             if (!showcaseSection) return;
             const sectionTop = showcaseSection.getBoundingClientRect().top;
             if (sectionTop < window.innerHeight - 200) {

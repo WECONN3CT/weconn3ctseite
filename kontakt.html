@@ -43,6 +43,60 @@
         .nav-links a::before{content:'';position:absolute;bottom:0;left:0;width:100%;height:2px;background:var(--gradient-primary);transform:scaleX(0);transform-origin:right;transition:transform .4s cubic-bezier(.4,0,.2,1)}
         .nav-links a:hover{color:#fff}
         .nav-links a:hover::before,.nav-links a.active::before{transform:scaleX(1);transform-origin:left}
+
+        /* Dropdown Styles */
+        .dropdown { position: relative; }
+        .dropdown > a { display: flex; align-items: center; }
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(10px);
+            min-width: 280px;
+            background: rgba(15, 15, 26, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 12px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+        }
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+        }
+        .dropdown:hover > a svg {
+            transform: rotate(180deg);
+        }
+        .dropdown-item {
+            display: block;
+            padding: 12px 20px;
+            border-radius: 10px;
+            text-decoration: none;
+            color: rgba(255, 255, 255, 0.8);
+            transition: all 0.2s ease;
+        }
+        .dropdown-item:hover {
+            background: rgba(139, 92, 246, 0.1);
+            color: #fff;
+        }
+        .dropdown-item::before { display: none; }
+        .dropdown-item strong {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+        .dropdown-item p {
+            font-size: 12px;
+            color: var(--text-lighter);
+            margin: 0;
+        }
         .cta-button{background:var(--gradient-primary);color:#fff;padding:12px 28px;border-radius:50px;text-decoration:none;font-weight:600;box-shadow:0 10px 40px rgba(139,92,246,.3)}
  
         /* Hero/Page Header */
@@ -139,6 +193,227 @@
 
         .info-icon { width:60px; height:60px; background: linear-gradient(135deg, rgba(139,92,246,.2), rgba(139,92,246,.05)); border:1px solid rgba(139,92,246,.3); border-radius:16px; display:flex; align-items:center; justify-content:center; font-size:28px; flex-shrink:0; }
 
+        /* ===== Animated Contact Icons ===== */
+        .icon-wrapper-contact { width: 32px; height: 32px; position: relative; }
+
+        /* --- Email Icon: Envelope --- */
+        .icon-email { width: 100%; height: 100%; position: relative; }
+        .icon-email .envelope {
+            position: absolute;
+            width: 28px;
+            height: 20px;
+            border: 2px solid #8b5cf6;
+            border-radius: 3px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(139, 92, 246, 0.1);
+        }
+        .icon-email .envelope-flap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        .icon-email .envelope-flap::before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-left: 12px solid transparent;
+            border-right: 12px solid transparent;
+            border-top: 10px solid #8b5cf6;
+        }
+        .icon-email .envelope-line {
+            position: absolute;
+            height: 2px;
+            background: #a78bfa;
+            border-radius: 1px;
+            animation: emailLines 2s ease-in-out infinite;
+        }
+        .icon-email .line-1 { width: 14px; top: 8px; left: 7px; animation-delay: 0s; }
+        .icon-email .line-2 { width: 10px; top: 12px; left: 9px; animation-delay: 0.2s; }
+        @keyframes emailLines {
+            0%, 100% { opacity: 0.4; transform: scaleX(0.8); }
+            50% { opacity: 1; transform: scaleX(1); }
+        }
+        .info-card:hover .icon-email .envelope {
+            animation: envelopeBounce 0.5s ease;
+        }
+        @keyframes envelopeBounce {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -50%) scale(1.1); }
+        }
+
+        /* --- Phone Icon: Smartphone --- */
+        .icon-phone { width: 100%; height: 100%; position: relative; }
+        .icon-phone .phone-body {
+            position: absolute;
+            width: 16px;
+            height: 26px;
+            border: 2px solid #8b5cf6;
+            border-radius: 4px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(139, 92, 246, 0.1);
+        }
+        .icon-phone .phone-screen {
+            position: absolute;
+            width: 10px;
+            height: 16px;
+            background: linear-gradient(180deg, rgba(139, 92, 246, 0.3) 0%, rgba(99, 102, 241, 0.2) 100%);
+            border-radius: 1px;
+            top: 3px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .icon-phone .phone-button {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #8b5cf6;
+            border-radius: 50%;
+            bottom: 2px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .icon-phone .signal-wave {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            border: 2px solid transparent;
+            border-top-color: #a78bfa;
+            border-right-color: #a78bfa;
+            border-radius: 50%;
+            top: 0;
+            right: 2px;
+            transform: rotate(45deg);
+            animation: signalPulse 1.5s ease-out infinite;
+        }
+        .icon-phone .signal-wave:nth-child(2) {
+            width: 12px;
+            height: 12px;
+            top: -2px;
+            right: 0;
+            animation-delay: 0.3s;
+            opacity: 0.6;
+        }
+        @keyframes signalPulse {
+            0% { opacity: 0; transform: rotate(45deg) scale(0.5); }
+            50% { opacity: 1; }
+            100% { opacity: 0; transform: rotate(45deg) scale(1.2); }
+        }
+
+        /* --- Location Icon: Map Pin --- */
+        .icon-location { width: 100%; height: 100%; position: relative; }
+        .icon-location .pin {
+            position: absolute;
+            width: 18px;
+            height: 24px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: pinBounce 2s ease-in-out infinite;
+        }
+        .icon-location .pin-head {
+            width: 18px;
+            height: 18px;
+            background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%);
+            border-radius: 50% 50% 50% 0;
+            transform: rotate(-45deg);
+            position: relative;
+        }
+        .icon-location .pin-head::before {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #0f0f1a;
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .icon-location .pin-shadow {
+            position: absolute;
+            width: 12px;
+            height: 4px;
+            background: rgba(139, 92, 246, 0.3);
+            border-radius: 50%;
+            bottom: -2px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: shadowPulse 2s ease-in-out infinite;
+        }
+        @keyframes pinBounce {
+            0%, 100% { transform: translate(-50%, -50%) translateY(0); }
+            50% { transform: translate(-50%, -50%) translateY(-4px); }
+        }
+        @keyframes shadowPulse {
+            0%, 100% { transform: translateX(-50%) scale(1); opacity: 0.3; }
+            50% { transform: translateX(-50%) scale(0.7); opacity: 0.5; }
+        }
+
+        /* --- Social Icon: Chat Bubbles --- */
+        .icon-social { width: 100%; height: 100%; position: relative; }
+        .icon-social .bubble {
+            position: absolute;
+            background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%);
+            border-radius: 10px;
+        }
+        .icon-social .bubble-1 {
+            width: 20px;
+            height: 14px;
+            top: 4px;
+            left: 2px;
+            border-bottom-left-radius: 4px;
+        }
+        .icon-social .bubble-1::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 4px;
+            border-width: 4px;
+            border-style: solid;
+            border-color: #8b5cf6 transparent transparent #8b5cf6;
+        }
+        .icon-social .bubble-2 {
+            width: 16px;
+            height: 12px;
+            bottom: 4px;
+            right: 2px;
+            background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+            border-bottom-right-radius: 4px;
+        }
+        .icon-social .bubble-2::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            right: 4px;
+            border-width: 4px;
+            border-style: solid;
+            border-color: #6366f1 #6366f1 transparent transparent;
+        }
+        .icon-social .dot {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            animation: typingDot 1.4s ease-in-out infinite;
+        }
+        .icon-social .dot-1 { top: 9px; left: 6px; animation-delay: 0s; }
+        .icon-social .dot-2 { top: 9px; left: 11px; animation-delay: 0.2s; }
+        .icon-social .dot-3 { top: 9px; left: 16px; animation-delay: 0.4s; }
+        @keyframes typingDot {
+            0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+            30% { transform: translateY(-2px); opacity: 1; }
+        }
+
         .info-content h3 {
             font-size: 18px;
             font-weight: 700;
@@ -197,7 +472,7 @@
             transform: translateY(0);
         }
 
-        /* Map Section */
+        /* Map Section - 2-Klick-Lösung */
         .map-section { padding:120px 60px; background:#0f0f1a; }
 
         .map-container {
@@ -214,22 +489,159 @@
             margin-bottom: 24px;
         }
 
-        .map-container p {
+        .map-container > p {
             font-size: 20px;
             color: var(--text-lighter);
             margin-bottom: 60px;
         }
 
-        .map-placeholder { width:100%; height:500px; background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01)); border:1px solid rgba(255,255,255,0.05); border-radius:32px; display:flex; align-items:center; justify-content:center; font-size:100px; position:relative; overflow:hidden; }
+        /* Map Consent Overlay */
+        .map-consent-overlay {
+            width: 100%;
+            height: 500px;
+            background: linear-gradient(135deg, rgba(15, 15, 26, 0.95), rgba(10, 10, 15, 0.98));
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 32px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 60px;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(20px);
+        }
 
-        .map-placeholder::before {
+        .map-consent-overlay::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(139, 92, 246, 0.05) 0%, rgba(59, 130, 246, 0.05) 100%);
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.1) 0%, transparent 70%);
+            animation: mapPulse 4s ease-in-out infinite;
+        }
+
+        @keyframes mapPulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        .map-consent-content {
+            position: relative;
+            z-index: 1;
+            max-width: 600px;
+            text-align: center;
+        }
+
+        .map-icon {
+            font-size: 80px;
+            margin-bottom: 24px;
+            opacity: 0.8;
+        }
+
+        .map-consent-content h3 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: #fff;
+        }
+
+        .map-consent-content p {
+            font-size: 16px;
+            color: var(--text-lighter);
+            line-height: 1.6;
+            margin-bottom: 32px;
+        }
+
+        .map-consent-button {
+            background: var(--gradient-primary);
+            color: #fff;
+            padding: 16px 40px;
+            border-radius: 50px;
+            border: none;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 40px rgba(139, 92, 246, 0.4);
+            font-family: 'Inter', sans-serif;
+        }
+
+        .map-consent-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 50px rgba(139, 92, 246, 0.6);
+        }
+
+        .map-consent-button:active {
+            transform: translateY(0);
+        }
+
+        .map-privacy-note {
+            margin-top: 20px;
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .map-privacy-note a {
+            color: var(--accent-cyan);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.3s ease;
+        }
+
+        .map-privacy-note a:hover {
+            border-bottom-color: var(--accent-cyan);
+        }
+
+        /* Actual Map Container */
+        .map-embed {
+            width: 100%;
+            height: 500px;
+            border-radius: 32px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+            display: none;
+        }
+
+        .map-embed.active {
+            display: block;
+            animation: fadeInMap 0.5s ease;
+        }
+
+        @keyframes fadeInMap {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .map-embed iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+            filter: grayscale(20%) contrast(1.1);
+        }
+
+        /* Responsive Map */
+        @media (max-width: 768px) {
+            .map-consent-overlay,
+            .map-embed {
+                height: 400px;
+                padding: 40px 20px;
+            }
+
+            .map-icon {
+                font-size: 60px;
+            }
+
+            .map-consent-content h3 {
+                font-size: 24px;
+            }
+
+            .map-consent-content p {
+                font-size: 14px;
+            }
         }
 
         /* FAQ Section */
@@ -469,6 +881,350 @@
         .bottom-nav-item.active::before { content:''; position:absolute; top:0; left:50%; transform:translateX(-50%); width:40px; height:3px; background:var(--gradient-primary); border-radius:0 0 4px 4px; }
         @media (max-width:768px){ .bottom-nav{display:flex;} .nav-links{display:none !important;} .nav-container{padding:0 20px;} nav{padding:12px 0 !important;} .logo-img{height:32px;} body{padding-bottom:80px;} footer{padding-bottom:100px;} .mobile-cta{display:flex; position:fixed; top:12px; right:20px; background:var(--gradient-primary); color:#fff; padding:10px 20px; border-radius:50px; font-size:13px; font-weight:600; text-decoration:none; z-index:1001; box-shadow:0 4px 20px rgba(139,92,246,.4);} }
         @media (min-width:769px){ .mobile-cta{display:none;} }
+
+        /* ==================== PREMIUM FOOTER ==================== */
+        .footer-modern {
+            position: relative;
+            background: var(--primary);
+            color: #fff;
+            padding: 100px 0 0;
+            margin-top: 0;
+            overflow: hidden;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .footer-orbs {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+            pointer-events: none;
+            opacity: 0.4;
+        }
+
+        .footer-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            animation: float 25s ease-in-out infinite;
+        }
+
+        .footer-orb-1 {
+            width: 500px;
+            height: 500px;
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.3), rgba(59, 130, 246, 0.2));
+            top: -20%;
+            left: -10%;
+        }
+
+        .footer-orb-2 {
+            width: 400px;
+            height: 400px;
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.3), rgba(139, 92, 246, 0.2));
+            bottom: -20%;
+            right: -10%;
+            animation-delay: -10s;
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 60px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-top {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .footer-brand-modern {
+            display: inline-block;
+        }
+
+        .footer-logo-modern {
+            height: 45px;
+            width: auto;
+            margin-bottom: 16px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            transition: transform 0.3s ease, filter 0.3s ease;
+        }
+
+        .footer-logo-modern:hover {
+            transform: scale(1.05);
+            filter: brightness(1.2);
+        }
+
+        .footer-tagline {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.6);
+            font-weight: 400;
+            letter-spacing: 0.5px;
+        }
+
+        .footer-divider {
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.5), transparent);
+            position: relative;
+            margin-bottom: 60px;
+        }
+
+        .divider-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent);
+            filter: blur(30px);
+            animation: glow-pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes glow-pulse {
+            0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
+            50% { opacity: 1; transform: translate(-50%, -50%) scale(1.2); }
+        }
+
+        .footer-main {
+            margin-bottom: 60px;
+        }
+
+        .footer-grid-modern {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 60px;
+        }
+
+        .footer-col-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 20px;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .footer-links-modern {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-links-modern li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links-modern a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 400;
+            transition: all 0.3s ease;
+            display: inline-block;
+            position: relative;
+        }
+
+        .footer-links-modern a::before {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-primary);
+            transition: width 0.3s ease;
+        }
+
+        .footer-links-modern a:hover {
+            color: #fff;
+            transform: translateX(5px);
+        }
+
+        .footer-links-modern a:hover::before {
+            width: 100%;
+        }
+
+        .footer-contact-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-contact-link svg {
+            opacity: 0.7;
+            transition: all 0.3s ease;
+        }
+
+        .footer-contact-link:hover svg {
+            opacity: 1;
+            stroke: var(--accent-purple);
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .social-icon-modern {
+            width: 44px;
+            height: 44px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-icon-modern::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--gradient-primary);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .social-icon-modern svg {
+            position: relative;
+            z-index: 1;
+            transition: all 0.4s ease;
+        }
+
+        .social-icon-modern:hover {
+            transform: translateY(-5px);
+            border-color: rgba(139, 92, 246, 0.5);
+            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3);
+        }
+
+        .social-icon-modern:hover::before {
+            opacity: 1;
+        }
+
+        .social-icon-modern:hover svg {
+            color: #fff;
+            transform: scale(1.1);
+        }
+
+        .footer-bottom-modern {
+            padding: 30px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .footer-bottom-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-copyright {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+            margin: 0;
+        }
+
+        .footer-copyright strong {
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .footer-bottom-links {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .footer-bottom-links a {
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-bottom-links a:hover {
+            color: var(--accent-purple);
+        }
+
+        .footer-dot {
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 12px;
+        }
+
+        .footer-made {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+            margin: 0;
+        }
+
+        .footer-heart {
+            color: #ef4444;
+            animation: heartbeat 1.5s ease-in-out infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            10%, 30% { transform: scale(1.1); }
+            20%, 40% { transform: scale(1); }
+        }
+
+        @media (max-width: 1200px) {
+            .footer-grid-modern {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 40px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .footer-container {
+                padding: 0 30px;
+            }
+
+            .footer-modern {
+                padding: 80px 0 0;
+                padding-bottom: 100px;
+            }
+
+            .footer-grid-modern {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .footer-top {
+                margin-bottom: 40px;
+            }
+
+            .footer-main {
+                margin-bottom: 40px;
+            }
+
+            .footer-bottom-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 16px;
+            }
+
+            .footer-bottom-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
     </style>
 </head>
 <body>
@@ -487,11 +1243,38 @@
         <div class="nav-container">
             <a href="index.html" class="logo"><img src="images/logo.png" alt="WECONN3CT Logo" class="logo-img"></a>
             <a href="kontakt.html" class="mobile-cta">Projekt starten</a>
-            <ul class="nav-links">
-                <li><a href="leistungen.html">Leistungen</a></li>
+            <ul class="nav-links" id="navLinks">
+                <li class="dropdown">
+                    <a href="leistungen.html">
+                        Leistungen
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-left: 4px; transition: transform 0.3s ease;">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a href="softwareentwicklung.html" class="dropdown-item">
+                            <div>
+                                <strong>Softwareentwicklung</strong>
+                                <p>Maßgeschneiderte Software-Lösungen</p>
+                            </div>
+                        </a>
+                        <a href="webdesign.html" class="dropdown-item">
+                            <div>
+                                <strong>Webdesign</strong>
+                                <p>Modernes UI/UX Design</p>
+                            </div>
+                        </a>
+                        <a href="digitale-transformation.html" class="dropdown-item">
+                            <div>
+                                <strong>Digitale Transformation</strong>
+                                <p>Prozessoptimierung & Innovation</p>
+                            </div>
+                        </a>
+                    </div>
+                </li>
                 <li><a href="portfolio.html">Projekte</a></li>
                 <li><a href="ueber-uns.html">Über uns</a></li>
-                <li><a href="kontakt.html" class="cta-button active">Kontakt</a></li>
+                <li><a href="kontakt.html" class="active">Kontakt</a></li>
             </ul>
         </div>
     </nav>
@@ -529,40 +1312,80 @@
  
                 <div class="info-cards">
                     <div class="info-card">
-                        <div class="info-icon">📧</div>
+                        <div class="info-icon">
+                            <div class="icon-wrapper-contact">
+                                <div class="icon-email">
+                                    <div class="envelope">
+                                        <div class="envelope-flap"></div>
+                                        <div class="envelope-line line-1"></div>
+                                        <div class="envelope-line line-2"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="info-content">
                             <h3>E-Mail</h3>
-                            <p><a href="mailto:hello@weconn3ct.com">hello@weconn3ct.com</a></p>
+                            <p><a href="mailto:info@weconn3ct.de">info@weconn3ct.de</a></p>
                             <p style="font-size: 14px; color: var(--text-lighter);">Antwort innerhalb von 24 Stunden</p>
                         </div>
                     </div>
- 
+
                     <div class="info-card">
-                        <div class="info-icon">📱</div>
+                        <div class="info-icon">
+                            <div class="icon-wrapper-contact">
+                                <div class="icon-phone">
+                                    <div class="signal-wave"></div>
+                                    <div class="signal-wave"></div>
+                                    <div class="phone-body">
+                                        <div class="phone-screen"></div>
+                                        <div class="phone-button"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="info-content">
                             <h3>Telefon</h3>
-                            <p><a href="tel:+49123456789">+49 123 456 789</a></p>
+                            <p><a href="tel:+491624521879">+49 162 4521879</a></p>
                             <p style="font-size: 14px; color: var(--text-lighter);">Mo-Fr, 9:00 - 18:00 Uhr</p>
                         </div>
                     </div>
- 
+
                     <div class="info-card">
-                        <div class="info-icon">📍</div>
+                        <div class="info-icon">
+                            <div class="icon-wrapper-contact">
+                                <div class="icon-location">
+                                    <div class="pin">
+                                        <div class="pin-head"></div>
+                                    </div>
+                                    <div class="pin-shadow"></div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="info-content">
                             <h3>Office</h3>
-                            <p>Hauptstraße 123<br>53000 Bad Honnef, Deutschland</p>
+                            <p>Frankenweg 109<br>53604 Bad Honnef am Rhein<br>Germany</p>
                             <p style="font-size: 14px; color: var(--text-lighter);">Termin nach Vereinbarung</p>
                         </div>
                     </div>
- 
+
                     <div class="info-card">
-                        <div class="info-icon">💬</div>
+                        <div class="info-icon">
+                            <div class="icon-wrapper-contact">
+                                <div class="icon-social">
+                                    <div class="bubble bubble-1">
+                                        <div class="dot dot-1"></div>
+                                        <div class="dot dot-2"></div>
+                                        <div class="dot dot-3"></div>
+                                    </div>
+                                    <div class="bubble bubble-2"></div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="info-content">
                             <h3>Social Media</h3>
                             <p>
-                                <a href="#" style="margin-right: 16px;">LinkedIn</a>
-                                <a href="#" style="margin-right: 16px;">Instagram</a>
-                                <a href="#">Twitter</a>
+                                <a href="https://de.linkedin.com/company/weconn3ct" target="_blank" rel="noopener" style="margin-right: 16px;">LinkedIn</a>
+                                <a href="https://www.instagram.com/weconn3ct_gmbh/" target="_blank" rel="noopener">Instagram</a>
                             </p>
                             <p style="font-size: 14px; color: var(--text-lighter);">Folge uns für Updates & Insights</p>
                         </div>
@@ -619,15 +1442,35 @@
         </div>
     </section>
  
-    <!-- Map Section -->
+    <!-- Map Section mit 2-Klick-Lösung (DSGVO-konform) -->
     <section class="map-section">
         <div class="map-container">
             <h2>Besuche uns in Bad Honnef</h2>
             <p>
                 Unser Office liegt im schönen Rheinland – umgeben von Natur und Inspiration
             </p>
-            <div class="map-placeholder">
-                🗺️
+
+            <!-- Einwilligungs-Overlay (wird initial angezeigt) -->
+            <div class="map-consent-overlay" id="mapConsent">
+                <div class="map-consent-content">
+                    <div class="map-icon">📍</div>
+                    <h3>Karte anzeigen</h3>
+                    <p>
+                        Um die interaktive Karte anzuzeigen, wird eine Verbindung zu Google Maps hergestellt.
+                        Dabei werden Daten wie Ihre IP-Adresse an Google übermittelt.
+                    </p>
+                    <button class="map-consent-button" onclick="loadGoogleMap()">
+                        Karte laden & Route planen
+                    </button>
+                    <p class="map-privacy-note">
+                        Mehr Informationen in unserer <a href="datenschutz.html">Datenschutzerklärung</a>
+                    </p>
+                </div>
+            </div>
+
+            <!-- Google Maps Embed (wird nach Einwilligung angezeigt) -->
+            <div class="map-embed" id="mapEmbed">
+                <!-- Map wird per JavaScript geladen -->
             </div>
         </div>
     </section>
@@ -717,50 +1560,114 @@
             <h2>Bereit durchzustarten?</h2>
             <p>Buche jetzt dein kostenloses Erstgespräch oder schreib uns direkt</p>
             <div class="cta-buttons">
-                <a href="mailto:hello@weconn3ct.com" class="cta-button-large">E-Mail schreiben</a>
-                <a href="tel:+49123456789" class="cta-button-large cta-button-secondary">Anrufen</a>
+                <a href="mailto:info@weconn3ct.de" class="cta-button-large">E-Mail schreiben</a>
+                <a href="tel:+491624521879" class="cta-button-large cta-button-secondary">Anrufen</a>
             </div>
         </div>
     </section>
  
     <!-- Footer -->
-    <footer>
-        <div class="footer-content">
-            <div class="footer-grid">
-                <div class="footer-brand">
-                    <h3>wec<span>onn3ct</span></h3>
-                    <p>Wir verbinden kreatives Design mit technischer Exzellenz, um digitale Erlebnisse zu schaffen, die Ihr Unternehmen voranbringen.</p>
-                </div>
-                <div class="footer-column">
-                    <h4>Unternehmen</h4>
-                    <ul class="footer-links">
-                        <li><a href="ueber-uns.html">Über uns</a></li>
-                        <li><a href="ueber-uns.html#team">Team</a></li>
-                        <li><a href="karriere.html">Karriere</a></li>
-                        <li><a href="blog.html">Blog</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h4>Services</h4>
-                    <ul class="footer-links">
-                        <li><a href="leistungen.html">Webentwicklung</a></li>
-                        <li><a href="leistungen.html">App-Entwicklung</a></li>
-                        <li><a href="leistungen.html">UI/UX Design</a></li>
-                        <li><a href="leistungen.html">Beratung</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h4>Kontakt</h4>
-                    <ul class="footer-links">
-                        <li><a href="mailto:hello@weconn3ct.com">hello@weconn3ct.com</a></li>
-                        <li><a href="tel:+49123456789">+49 123 456 789</a></li>
-                        <li><a href="#">LinkedIn</a></li>
-                        <li><a href="#">Instagram</a></li>
-                    </ul>
+    <footer class="footer-modern">
+        <!-- Gradient Orbs Background -->
+        <div class="footer-orbs">
+            <div class="footer-orb footer-orb-1"></div>
+            <div class="footer-orb footer-orb-2"></div>
+        </div>
+
+        <div class="footer-container">
+            <!-- Top Section mit Logo -->
+            <div class="footer-top">
+                <div class="footer-brand-modern">
+                    <img src="images/logo.png" alt="WECONN3CT Logo" class="footer-logo-modern">
+                    <p class="footer-tagline">Digitale Innovation für jeden erreichbar machen</p>
                 </div>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 weconn3ct. Alle Rechte vorbehalten. Made with ❤️ in Germany</p>
+
+            <!-- Divider mit Glow -->
+            <div class="footer-divider">
+                <div class="divider-glow"></div>
+            </div>
+
+            <!-- Main Footer Content -->
+            <div class="footer-main">
+                <div class="footer-grid-modern">
+                    <!-- Column 1: Über uns -->
+                    <div class="footer-col">
+                        <h4 class="footer-col-title">Unternehmen</h4>
+                        <ul class="footer-links-modern">
+                            <li><a href="ueber-uns.html">Über uns</a></li>
+                            <li><a href="portfolio.html">Projekte</a></li>
+                            <li><a href="kontakt.html">Kontakt</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Column 2: Leistungen -->
+                    <div class="footer-col">
+                        <h4 class="footer-col-title">Leistungen</h4>
+                        <ul class="footer-links-modern">
+                            <li><a href="softwareentwicklung.html">Softwareentwicklung</a></li>
+                            <li><a href="webdesign.html">Webdesign & UI/UX</a></li>
+                            <li><a href="digitale-transformation.html">Digitale Transformation</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Column 3: Kontakt -->
+                    <div class="footer-col">
+                        <h4 class="footer-col-title">Kontakt</h4>
+                        <ul class="footer-links-modern">
+                            <li>
+                                <a href="mailto:info@weconn3ct.de" class="footer-contact-link">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                        <polyline points="22,6 12,13 2,6"></polyline>
+                                    </svg>
+                                    info@weconn3ct.de
+                                </a>
+                            </li>
+                            <li>
+                                <a href="tel:+491624521879" class="footer-contact-link">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                                    </svg>
+                                    +49 162 4521879
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Column 4: Social Media -->
+                    <div class="footer-col">
+                        <h4 class="footer-col-title">Folge uns</h4>
+                        <div class="footer-social">
+                            <a href="https://de.linkedin.com/company/weconn3ct" target="_blank" rel="noopener" class="social-icon-modern" aria-label="LinkedIn">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/>
+                                </svg>
+                            </a>
+                            <a href="https://www.instagram.com/weconn3ct_gmbh/" target="_blank" rel="noopener" class="social-icon-modern" aria-label="Instagram">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8 1.25 1.25 0 0 1 16 6.75a1.25 1.25 0 0 1 1.25-1.25M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3z"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Section -->
+            <div class="footer-bottom-modern">
+                <div class="footer-bottom-content">
+                    <p class="footer-copyright">
+                        &copy; 2025 <strong>weconn3ct</strong>. Alle Rechte vorbehalten.
+                    </p>
+                    <div class="footer-bottom-links">
+                        <a href="impressum.html">Impressum</a>
+                        <span class="footer-dot">•</span>
+                        <a href="datenschutz.html">Datenschutz</a>
+                        <span class="footer-dot">•</span>
+                        <a href="agb.html">AGB</a>
+                    </div>
+                </div>
             </div>
         </div>
     </footer>
@@ -982,6 +1889,51 @@
             const servicesItem = document.querySelector('.bottom-nav-item[data-page="leistungen"]');
             if (servicesItem) servicesItem.classList.add('active');
         }
+
+        // ==================== GOOGLE MAPS 2-KLICK-LÖSUNG ====================
+        function loadGoogleMap() {
+            // Einwilligung in Cookie speichern (30 Tage gültig)
+            const expiryDate = new Date();
+            expiryDate.setDate(expiryDate.getDate() + 30);
+            document.cookie = `googleMapsConsent=true; expires=${expiryDate.toUTCString()}; path=/; SameSite=Strict`;
+
+            // Overlay ausblenden
+            const consentOverlay = document.getElementById('mapConsent');
+            consentOverlay.style.display = 'none';
+
+            // Google Maps einbinden
+            const mapEmbed = document.getElementById('mapEmbed');
+            const iframe = document.createElement('iframe');
+
+            // Adresse: Frankenweg 109, 53604 Bad Honnef am Rhein
+            iframe.src = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2515.8406744924376!2d7.226089!3d50.643833!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47bee6a5c8c8e6e5%3A0x0!2sFrankenweg%20109%2C%2053604%20Bad%20Honnef!5e0!3m2!1sde!2sde!4v1703500000000';
+
+            iframe.width = '100%';
+            iframe.height = '100%';
+            iframe.style.border = '0';
+            iframe.allowFullscreen = true;
+            iframe.loading = 'lazy';
+            iframe.referrerPolicy = 'no-referrer-when-downgrade';
+
+            mapEmbed.appendChild(iframe);
+            mapEmbed.classList.add('active');
+        }
+
+        // Prüfen, ob Einwilligung bereits erteilt wurde
+        function checkMapConsent() {
+            const cookies = document.cookie.split(';');
+            const hasConsent = cookies.some(cookie => {
+                return cookie.trim().startsWith('googleMapsConsent=true');
+            });
+
+            if (hasConsent) {
+                // Automatisch laden, wenn Einwilligung gespeichert
+                loadGoogleMap();
+            }
+        }
+
+        // Bei Seitenload prüfen
+        document.addEventListener('DOMContentLoaded', checkMapConsent);
     </script>
 </body>
 </html>

@@ -35,7 +35,90 @@
         .nav-links a::before { content:''; position:absolute; bottom:0; left:0; width:100%; height:2px; background: var(--gradient-primary); transform: scaleX(0); transform-origin:right; transition: transform .4s cubic-bezier(.4,0,.2,1); }
         .nav-links a:hover { color:#fff; }
         .nav-links a:hover::before, .nav-links a.active::before { transform: scaleX(1); transform-origin:left; }
+
+        /* Dropdown Styles */
+        .dropdown { position: relative; }
+        .dropdown > a { display: flex; align-items: center; }
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(10px);
+            min-width: 280px;
+            background: rgba(15, 15, 26, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 12px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+        }
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+        }
+        .dropdown:hover > a svg {
+            transform: rotate(180deg);
+        }
+        .dropdown-item {
+            display: block;
+            padding: 12px 20px;
+            border-radius: 10px;
+            text-decoration: none;
+            color: rgba(255, 255, 255, 0.8);
+            transition: all 0.2s ease;
+        }
+        .dropdown-item:hover {
+            background: rgba(139, 92, 246, 0.1);
+            color: #fff;
+        }
+        .dropdown-item::before { display: none; }
+        .dropdown-item strong {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+        .dropdown-item p {
+            font-size: 12px;
+            color: var(--text-lighter);
+            margin: 0;
+        }
         .cta-button { background: var(--gradient-primary); color:#fff; padding:12px 28px; border-radius: 50px; text-decoration:none; font-weight:600; box-shadow:0 4px 20px rgba(139,92,246,.3); }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            padding: 100px 60px 20px;
+            font-size: 14px;
+            color: var(--text-lighter);
+            background: var(--primary);
+            position: relative;
+            z-index: 1;
+        }
+        .breadcrumb a {
+            color: var(--text-lighter);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .breadcrumb a:hover {
+            color: var(--accent-purple);
+        }
+        .breadcrumb span {
+            color: var(--accent-purple);
+            font-weight: 600;
+        }
+        @media (max-width: 768px) {
+            .breadcrumb {
+                padding: 80px 20px 16px;
+                font-size: 12px;
+            }
+        }
+
         .hero { min-height: 70vh; display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden; padding:140px 60px 80px; text-align:center; }
         .hero-orbs{position:absolute;inset:0;overflow:hidden;pointer-events:none}
         .orb{position:absolute;border-radius:50%;filter:blur(80px);opacity:.5;animation:float 20s ease-in-out infinite}
@@ -54,15 +137,341 @@
         .services-grid { max-width:1400px; margin:0 auto; display:grid; grid-template-columns: repeat(4,1fr); gap:30px; }
         .service-card { background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01)); border:1px solid rgba(255,255,255,0.05); padding:40px; border-radius:28px; transition: all .5s ease; }
         .service-card:hover { transform: translateY(-8px); box-shadow: 0 30px 60px rgba(0,0,0,0.3); }
-        .service-icon { width:80px; height:80px; border-radius:24px; display:flex; align-items:center; justify-content:center; background: linear-gradient(135deg, rgba(139,92,246,.2), rgba(139,92,246,.05)); border:1px solid rgba(139,92,246,.3); margin-bottom:22px; }
+        .service-icon { width:80px; height:80px; border-radius:24px; display:flex; align-items:center; justify-content:center; background: linear-gradient(135deg, rgba(139,92,246,.2), rgba(139,92,246,.05)); border:1px solid rgba(139,92,246,.3); margin-bottom:22px; position: relative; overflow: hidden; }
         .service-icon-img { width:40px; height:40px; object-fit: contain; filter: brightness(0) invert(1); }
+
+        /* ==================== ANIMATED SERVICE ICONS ==================== */
+
+        /* UI Design Icon - Floating Layers */
+        .icon-ui-design {
+            position: relative;
+            width: 44px;
+            height: 44px;
+        }
+        .icon-ui-design .layer {
+            position: absolute;
+            border-radius: 6px;
+            border: 2px solid;
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.3), rgba(59, 130, 246, 0.1));
+            animation: floatLayers 3s ease-in-out infinite;
+        }
+        .icon-ui-design .layer-1 {
+            width: 36px;
+            height: 28px;
+            bottom: 0;
+            left: 4px;
+            border-color: #8b5cf6;
+            animation-delay: 0s;
+        }
+        .icon-ui-design .layer-2 {
+            width: 30px;
+            height: 22px;
+            bottom: 8px;
+            left: 7px;
+            border-color: #3b82f6;
+            animation-delay: 0.2s;
+        }
+        .icon-ui-design .layer-3 {
+            width: 24px;
+            height: 16px;
+            bottom: 16px;
+            left: 10px;
+            border-color: #06b6d4;
+            animation-delay: 0.4s;
+        }
+        .icon-ui-design .cursor {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            top: 2px;
+            right: 0;
+            animation: cursorMove 2s ease-in-out infinite;
+        }
+        .icon-ui-design .cursor::before {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-top: 10px solid #fff;
+            transform: rotate(-30deg);
+        }
+        @keyframes floatLayers {
+            0%, 100% { transform: translateY(0) scale(1); opacity: 1; }
+            50% { transform: translateY(-3px) scale(1.02); opacity: 0.8; }
+        }
+        @keyframes cursorMove {
+            0%, 100% { transform: translate(0, 0); }
+            25% { transform: translate(-8px, 12px); }
+            50% { transform: translate(-15px, 8px); }
+            75% { transform: translate(-5px, 15px); }
+        }
+
+        /* UX Design Icon - User with Flow Paths */
+        .icon-ux-design {
+            position: relative;
+            width: 44px;
+            height: 44px;
+        }
+        .icon-ux-design .user-head {
+            position: absolute;
+            width: 14px;
+            height: 14px;
+            background: linear-gradient(135deg, #8b5cf6, #3b82f6);
+            border-radius: 50%;
+            top: 4px;
+            left: 6px;
+            animation: userPulse 2s ease-in-out infinite;
+        }
+        .icon-ux-design .user-body {
+            position: absolute;
+            width: 20px;
+            height: 12px;
+            background: linear-gradient(135deg, #8b5cf6, #3b82f6);
+            border-radius: 10px 10px 4px 4px;
+            top: 20px;
+            left: 3px;
+            animation: userPulse 2s ease-in-out infinite 0.1s;
+        }
+        .icon-ux-design .flow-dot {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: #06b6d4;
+            border-radius: 50%;
+            right: 4px;
+            animation: flowPulse 1.5s ease-in-out infinite;
+        }
+        .icon-ux-design .flow-dot:nth-child(3) { top: 6px; animation-delay: 0s; }
+        .icon-ux-design .flow-dot:nth-child(4) { top: 18px; animation-delay: 0.3s; }
+        .icon-ux-design .flow-dot:nth-child(5) { top: 30px; animation-delay: 0.6s; }
+        .icon-ux-design .flow-line {
+            position: absolute;
+            width: 2px;
+            height: 28px;
+            right: 6px;
+            top: 6px;
+            background: linear-gradient(180deg, #06b6d4, transparent);
+            animation: flowLine 1.5s ease-in-out infinite;
+        }
+        @keyframes userPulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.4); }
+            50% { transform: scale(1.05); box-shadow: 0 0 15px 3px rgba(139, 92, 246, 0.2); }
+        }
+        @keyframes flowPulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.5); opacity: 0.5; }
+        }
+        @keyframes flowLine {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        /* Responsive Icon - Morphing Devices */
+        .icon-responsive {
+            position: relative;
+            width: 44px;
+            height: 44px;
+        }
+        .icon-responsive .device {
+            position: absolute;
+            border: 2px solid;
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.05);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .icon-responsive .desktop {
+            width: 28px;
+            height: 20px;
+            left: 0;
+            top: 8px;
+            border-color: #8b5cf6;
+            animation: deviceGlow 2s ease-in-out infinite;
+        }
+        .icon-responsive .desktop::after {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 4px;
+            background: #8b5cf6;
+            bottom: -6px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 0 0 2px 2px;
+        }
+        .icon-responsive .tablet {
+            width: 14px;
+            height: 18px;
+            right: 6px;
+            top: 4px;
+            border-color: #3b82f6;
+            animation: deviceGlow 2s ease-in-out infinite 0.3s;
+        }
+        .icon-responsive .phone {
+            width: 8px;
+            height: 14px;
+            right: 0;
+            bottom: 4px;
+            border-color: #06b6d4;
+            animation: deviceGlow 2s ease-in-out infinite 0.6s;
+        }
+        .icon-responsive .phone::before {
+            content: '';
+            position: absolute;
+            width: 4px;
+            height: 2px;
+            background: #06b6d4;
+            bottom: 2px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 1px;
+        }
+        .icon-responsive .sync-wave {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 2px solid rgba(139, 92, 246, 0.3);
+            border-radius: 50%;
+            animation: syncPulse 2s ease-out infinite;
+        }
+        @keyframes deviceGlow {
+            0%, 100% { box-shadow: 0 0 5px rgba(139, 92, 246, 0.3), inset 0 0 5px rgba(139, 92, 246, 0.1); }
+            50% { box-shadow: 0 0 15px rgba(139, 92, 246, 0.5), inset 0 0 10px rgba(139, 92, 246, 0.2); }
+        }
+        @keyframes syncPulse {
+            0% { transform: scale(0.5); opacity: 1; }
+            100% { transform: scale(1.5); opacity: 0; }
+        }
+
+        /* Design System Icon - Grid Components */
+        .icon-design-system {
+            position: relative;
+            width: 44px;
+            height: 44px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            gap: 3px;
+            padding: 2px;
+        }
+        .icon-design-system .grid-item {
+            border-radius: 3px;
+            animation: gridPop 2s ease-in-out infinite;
+        }
+        .icon-design-system .grid-item:nth-child(1) { background: #8b5cf6; animation-delay: 0s; grid-column: span 2; }
+        .icon-design-system .grid-item:nth-child(2) { background: #3b82f6; animation-delay: 0.1s; }
+        .icon-design-system .grid-item:nth-child(3) { background: #06b6d4; animation-delay: 0.2s; }
+        .icon-design-system .grid-item:nth-child(4) { background: #3b82f6; animation-delay: 0.3s; grid-column: span 2; }
+        .icon-design-system .grid-item:nth-child(5) { background: #8b5cf6; animation-delay: 0.4s; }
+        .icon-design-system .grid-item:nth-child(6) { background: #06b6d4; animation-delay: 0.5s; }
+        .icon-design-system .grid-item:nth-child(7) { background: #3b82f6; animation-delay: 0.6s; grid-column: span 2; }
+        @keyframes gridPop {
+            0%, 100% { transform: scale(1); opacity: 0.7; }
+            50% { transform: scale(0.9); opacity: 1; }
+        }
+
+        /* Hover Effects for Service Icons */
+        .service-card:hover .icon-ui-design .layer { animation-duration: 1.5s; }
+        .service-card:hover .icon-ux-design .flow-dot { animation-duration: 0.8s; }
+        .service-card:hover .icon-responsive .sync-wave { animation-duration: 1s; }
+        .service-card:hover .icon-design-system .grid-item { animation-duration: 1s; }
         .service-card h3 { font-family:'Outfit', sans-serif; font-size:22px; font-weight:700; margin-bottom:10px; }
         .three-grid { max-width:1200px; margin:0 auto; display:grid; grid-template-columns: repeat(3,1fr); gap:24px; }
         .point-card { background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01)); border:1px solid rgba(255,255,255,0.06); border-radius:20px; padding:28px; }
         .point-card:hover { transform: translateY(-6px); box-shadow: 0 20px 60px rgba(139,92,246,.15); }
-        .stats-grid { max-width:1100px; margin:0 auto; display:grid; grid-template-columns: repeat(3,1fr); gap:24px; }
-        .stat { background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01)); border-radius:20px; padding:28px; border:1px solid rgba(255,255,255,.06); text-align:center; }
-        .stat .num { font-family:'Outfit', sans-serif; font-size: 36px; font-weight:800; color:#fff; margin-bottom:6px; }
+        /* Stats Section - Premium Style */
+        .stats-section-web {
+            padding: 120px 60px;
+            background: linear-gradient(180deg, #0f0f1a 0%, #1a1a2e 50%, var(--primary) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        .stats-section-web .stats-orb {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            opacity: 0.15;
+            background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+        }
+        .stats-container-web {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        .stats-grid-web {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 60px;
+            text-align: center;
+        }
+        .stat-item-web {
+            color: white;
+            padding: 40px 30px;
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(59, 130, 246, 0.05) 100%);
+            border-radius: 24px;
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        .stat-item-web::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.15) 0%, rgba(59, 130, 246, 0.1) 100%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        .stat-item-web:hover {
+            transform: translateY(-8px);
+            border-color: rgba(139, 92, 246, 0.5);
+            box-shadow: 0 20px 60px rgba(139, 92, 246, 0.25);
+        }
+        .stat-item-web:hover::before {
+            opacity: 1;
+        }
+        .stat-number-web {
+            font-family: 'Outfit', sans-serif;
+            font-size: clamp(32px, 4vw, 48px);
+            font-weight: 800;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, #fff 0%, #a78bfa 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: inline-block;
+            font-variant-numeric: tabular-nums;
+            letter-spacing: -1px;
+            position: relative;
+            z-index: 1;
+        }
+        .stat-label-web {
+            font-size: 16px;
+            color: rgba(255,255,255,0.75);
+            line-height: 1.5;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            position: relative;
+            z-index: 1;
+        }
+        @media (max-width: 768px) {
+            .stats-section-web { padding: 80px 20px; }
+            .stats-grid-web { grid-template-columns: 1fr; gap: 20px; }
+            .stat-item-web { padding: 30px 20px; }
+            .stat-number-web { font-size: 32px; }
+            .stat-label-web { font-size: 14px; letter-spacing: 2px; }
+        }
         .cta-section { padding:160px 60px; position:relative; overflow:hidden; background: linear-gradient(180deg, #0f0f1a 0%, var(--primary) 100%); text-align:center; }
         .cta-orb{position:absolute;width:800px;height:800px;border-radius:50%;filter:blur(120px);opacity:.3;background:var(--gradient-primary);top:50%;left:50%;transform:translate(-50%,-50%)}
         .cta-section h2 { font-family:'Outfit', sans-serif; font-size: clamp(42px,6vw,72px); font-weight:900; color:#fff; margin-bottom:16px; }
@@ -85,6 +494,675 @@
         .bottom-nav-item.active::before { content:''; position:absolute; top:0; left:50%; transform:translateX(-50%); width:40px; height:3px; background:var(--gradient-primary); border-radius:0 0 4px 4px; }
         @media (max-width:768px){ .bottom-nav{display:flex;} .nav-links{display:none !important;} .nav-container{padding:0 20px;} nav{padding:12px 0 !important;} .logo-img{height:32px;} body{padding-bottom:80px;} footer{padding-bottom:100px;} .mobile-cta{display:flex; position:fixed; top:12px; right:20px; background:var(--gradient-primary); color:#fff; padding:10px 20px; border-radius:50px; font-size:13px; font-weight:600; text-decoration:none; z-index:1001; box-shadow:0 4px 20px rgba(139,92,246,.4);} }
         @media (min-width:769px){ .mobile-cta{display:none;} }
+
+        /* ==================== PREMIUM FOOTER ==================== */
+        .footer-modern {
+            position: relative;
+            background: var(--primary);
+            color: #fff;
+            padding: 100px 0 0;
+            margin-top: 0;
+            overflow: hidden;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .footer-orbs {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+            pointer-events: none;
+            opacity: 0.4;
+        }
+
+        .footer-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            animation: float 25s ease-in-out infinite;
+        }
+
+        .footer-orb-1 {
+            width: 500px;
+            height: 500px;
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.3), rgba(59, 130, 246, 0.2));
+            top: -20%;
+            left: -10%;
+        }
+
+        .footer-orb-2 {
+            width: 400px;
+            height: 400px;
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.3), rgba(139, 92, 246, 0.2));
+            bottom: -20%;
+            right: -10%;
+            animation-delay: -10s;
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 60px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-top {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .footer-brand-modern {
+            display: inline-block;
+        }
+
+        .footer-logo-modern {
+            height: 45px;
+            width: auto;
+            margin-bottom: 16px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            transition: transform 0.3s ease, filter 0.3s ease;
+        }
+
+        .footer-logo-modern:hover {
+            transform: scale(1.05);
+            filter: brightness(1.2);
+        }
+
+        .footer-tagline {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.6);
+            font-weight: 400;
+            letter-spacing: 0.5px;
+        }
+
+        .footer-divider {
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.5), transparent);
+            position: relative;
+            margin-bottom: 60px;
+        }
+
+        .divider-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent);
+            filter: blur(30px);
+            animation: glow-pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes glow-pulse {
+            0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
+            50% { opacity: 1; transform: translate(-50%, -50%) scale(1.2); }
+        }
+
+        .footer-main {
+            margin-bottom: 60px;
+        }
+
+        .footer-grid-modern {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 60px;
+        }
+
+        .footer-col-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 20px;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .footer-links-modern {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-links-modern li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links-modern a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 400;
+            transition: all 0.3s ease;
+            display: inline-block;
+            position: relative;
+        }
+
+        .footer-links-modern a::before {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-primary);
+            transition: width 0.3s ease;
+        }
+
+        .footer-links-modern a:hover {
+            color: #fff;
+            transform: translateX(5px);
+        }
+
+        .footer-links-modern a:hover::before {
+            width: 100%;
+        }
+
+        .footer-contact-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-contact-link svg {
+            opacity: 0.7;
+            transition: all 0.3s ease;
+        }
+
+        .footer-contact-link:hover svg {
+            opacity: 1;
+            stroke: var(--accent-purple);
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .social-icon-modern {
+            width: 44px;
+            height: 44px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-icon-modern::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--gradient-primary);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .social-icon-modern svg {
+            position: relative;
+            z-index: 1;
+            transition: all 0.4s ease;
+        }
+
+        .social-icon-modern:hover {
+            transform: translateY(-5px);
+            border-color: rgba(139, 92, 246, 0.5);
+            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3);
+        }
+
+        .social-icon-modern:hover::before {
+            opacity: 1;
+        }
+
+        .social-icon-modern:hover svg {
+            color: #fff;
+            transform: scale(1.1);
+        }
+
+        .footer-bottom-modern {
+            padding: 30px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .footer-bottom-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-copyright {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+            margin: 0;
+        }
+
+        .footer-copyright strong {
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .footer-bottom-links {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .footer-bottom-links a {
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-bottom-links a:hover {
+            color: var(--accent-purple);
+        }
+
+        .footer-dot {
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 12px;
+        }
+
+        .footer-made {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+            margin: 0;
+        }
+
+        .footer-heart {
+            color: #ef4444;
+            animation: heartbeat 1.5s ease-in-out infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            10%, 30% { transform: scale(1.1); }
+            20%, 40% { transform: scale(1); }
+        }
+
+        @media (max-width: 1200px) {
+            .footer-grid-modern {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 40px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .footer-container {
+                padding: 0 30px;
+            }
+
+            .footer-modern {
+                padding: 80px 0 0;
+                padding-bottom: 100px;
+            }
+
+            .footer-grid-modern {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .footer-top {
+                margin-bottom: 40px;
+            }
+
+            .footer-main {
+                margin-bottom: 40px;
+            }
+
+            .footer-bottom-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 16px;
+            }
+
+            .footer-bottom-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+
+        /* ==================== REFERENZEN SLIDER SECTION ==================== */
+        .references-section {
+            padding: 120px 60px;
+            background: var(--primary);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .references-slider-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .slider-wrapper {
+            position: relative;
+            overflow: hidden;
+            border-radius: 24px;
+        }
+
+        .slider-track {
+            display: flex;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reference-slide {
+            min-width: 100%;
+            display: flex;
+            gap: 40px;
+            padding: 60px;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            align-items: center;
+        }
+
+        .reference-slide:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .reference-image {
+            flex: 0 0 55%;
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            transition: transform 0.4s ease;
+        }
+
+        .reference-image:hover {
+            transform: scale(1.02);
+        }
+
+        .reference-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 16px;
+        }
+
+        .reference-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .reference-header {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 16px;
+        }
+
+        .reference-client {
+            font-family: 'Outfit', sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 4px;
+        }
+
+        .reference-project-type {
+            font-size: 16px;
+            color: var(--text-lighter);
+        }
+
+        .reference-process h4 {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--accent-purple);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+        }
+
+        .reference-process ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .reference-process li {
+            font-size: 15px;
+            color: rgba(255, 255, 255, 0.8);
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .reference-process li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--accent-purple);
+            font-weight: bold;
+        }
+
+        .reference-metrics {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .metric-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 16px;
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.12) 0%, rgba(59, 130, 246, 0.08) 100%);
+            border-radius: 50px;
+            border: 1px solid rgba(139, 92, 246, 0.25);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .metric-item::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.25) 0%, rgba(59, 130, 246, 0.15) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .metric-item:hover {
+            border-color: rgba(139, 92, 246, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(139, 92, 246, 0.25);
+        }
+
+        .metric-item:hover::before {
+            opacity: 1;
+        }
+
+        .metric-icon {
+            width: 18px;
+            height: 18px;
+            position: relative;
+            z-index: 1;
+            color: #a78bfa;
+        }
+
+        .metric-value {
+            font-family: 'Outfit', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            color: #fff;
+            position: relative;
+            z-index: 1;
+            white-space: nowrap;
+        }
+
+        .metric-label {
+            display: none;
+        }
+
+        .reference-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 28px;
+            background: var(--gradient-primary);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3);
+        }
+
+        .reference-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px rgba(139, 92, 246, 0.4);
+        }
+
+        .reference-cta svg {
+            width: 16px;
+            height: 16px;
+            transition: transform 0.3s ease;
+        }
+
+        .reference-cta:hover svg {
+            transform: translateX(4px);
+        }
+
+        /* Slider Navigation */
+        .slider-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .slider-nav:hover {
+            background: rgba(139, 92, 246, 0.2);
+            border-color: rgba(139, 92, 246, 0.4);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .slider-nav.prev {
+            left: -25px;
+        }
+
+        .slider-nav.next {
+            right: -25px;
+        }
+
+        .slider-nav svg {
+            width: 24px;
+            height: 24px;
+            stroke: #fff;
+        }
+
+        /* Slider Dots */
+        .slider-dots {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 40px;
+        }
+
+        .slider-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .slider-dot:hover {
+            background: rgba(255, 255, 255, 0.4);
+        }
+
+        .slider-dot.active {
+            background: var(--accent-purple);
+            width: 32px;
+            border-radius: 6px;
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .references-section {
+                padding: 80px 30px;
+            }
+
+            .reference-slide {
+                flex-direction: column !important;
+                padding: 40px 30px;
+                gap: 30px;
+            }
+
+            .reference-image {
+                flex: 0 0 100%;
+            }
+
+            .reference-metrics {
+                gap: 8px;
+            }
+
+            .metric-item {
+                padding: 8px 12px;
+            }
+
+            .metric-icon {
+                width: 14px;
+                height: 14px;
+            }
+
+            .metric-value {
+                font-size: 11px;
+            }
+
+            .reference-client {
+                font-size: 24px;
+            }
+
+            .slider-nav {
+                width: 40px;
+                height: 40px;
+            }
+
+            .slider-nav.prev {
+                left: 10px;
+            }
+
+            .slider-nav.next {
+                right: 10px;
+            }
+        }
     </style>
     <meta name="description" content="Webdesign & UI/UX von weconn3ct – Ästhetik trifft Funktionalität. Pixel-perfekte Interfaces, nutzerzentrierte Konzepte und responsive Websites.">
 </head>
@@ -100,11 +1178,37 @@
             <a href="index.html" class="logo"><img src="images/logo.png" alt="weconn3ct" class="logo-img"></a>
             <a href="kontakt.html" class="mobile-cta">Projekt starten</a>
             <ul class="nav-links" id="navLinks">
-                <li><a href="index.html#services">Services</a></li>
-                <li><a href="softwareentwicklung.html">Software</a></li>
-                <li><a href="webdesign.html" class="active">Design</a></li>
-                <li><a href="digitale-transformation.html">Transformation</a></li>
-                <li><a href="#contact" class="cta-button">Kontakt</a></li>
+                <li class="dropdown">
+                    <a href="leistungen.html" class="active">
+                        Leistungen
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-left: 4px; transition: transform 0.3s ease;">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a href="softwareentwicklung.html" class="dropdown-item">
+                            <div>
+                                <strong>Softwareentwicklung</strong>
+                                <p>Maßgeschneiderte Software-Lösungen</p>
+                            </div>
+                        </a>
+                        <a href="webdesign.html" class="dropdown-item">
+                            <div>
+                                <strong>Webdesign</strong>
+                                <p>Modernes UI/UX Design</p>
+                            </div>
+                        </a>
+                        <a href="digitale-transformation.html" class="dropdown-item">
+                            <div>
+                                <strong>Digitale Transformation</strong>
+                                <p>Prozessoptimierung & Innovation</p>
+                            </div>
+                        </a>
+                    </div>
+                </li>
+                <li><a href="portfolio.html">Projekte</a></li>
+                <li><a href="ueber-uns.html">Über uns</a></li>
+                <li><a href="kontakt.html">Kontakt</a></li>
             </ul>
         </div>
     </nav>
@@ -132,22 +1236,55 @@
         </div>
         <div class="services-grid">
             <div class="service-card">
-                <div class="service-icon"><img src="images/icons/icon-02.png" alt="UI Design" class="service-icon-img"></div>
+                <div class="service-icon">
+                    <div class="icon-ui-design">
+                        <div class="layer layer-1"></div>
+                        <div class="layer layer-2"></div>
+                        <div class="layer layer-3"></div>
+                        <div class="cursor"></div>
+                    </div>
+                </div>
                 <h3>UI Design</h3>
                 <p>Pixel-perfekte Interfaces mit Wow-Effekt – durchdacht bis ins Detail und markenkonform.</p>
             </div>
             <div class="service-card">
-                <div class="service-icon"><img src="images/icons/icon-02.png" alt="UX Design" class="service-icon-img"></div>
+                <div class="service-icon">
+                    <div class="icon-ux-design">
+                        <div class="user-head"></div>
+                        <div class="user-body"></div>
+                        <div class="flow-dot"></div>
+                        <div class="flow-dot"></div>
+                        <div class="flow-dot"></div>
+                        <div class="flow-line"></div>
+                    </div>
+                </div>
                 <h3>UX Design</h3>
                 <p>Nutzerzentrierte Konzepte für optimale Usability, klare Flows und hohe Zufriedenheit.</p>
             </div>
             <div class="service-card">
-                <div class="service-icon"><img src="images/icons/icon-02.png" alt="Responsive Websites" class="service-icon-img"></div>
+                <div class="service-icon">
+                    <div class="icon-responsive">
+                        <div class="sync-wave"></div>
+                        <div class="device desktop"></div>
+                        <div class="device tablet"></div>
+                        <div class="device phone"></div>
+                    </div>
+                </div>
                 <h3>Responsive Websites</h3>
                 <p>Perfekt auf jedem Gerät – schnell, barrierearm und suchmaschinenfreundlich.</p>
             </div>
             <div class="service-card">
-                <div class="service-icon"><img src="images/icons/icon-02.png" alt="Design-Systeme" class="service-icon-img"></div>
+                <div class="service-icon">
+                    <div class="icon-design-system">
+                        <div class="grid-item"></div>
+                        <div class="grid-item"></div>
+                        <div class="grid-item"></div>
+                        <div class="grid-item"></div>
+                        <div class="grid-item"></div>
+                        <div class="grid-item"></div>
+                        <div class="grid-item"></div>
+                    </div>
+                </div>
                 <h3>Design-Systeme</h3>
                 <p>Konsistente Komponenten und Guidelines für skalierbare Produkte und Teams.</p>
             </div>
@@ -175,23 +1312,225 @@
         </div>
     </section>
 
-    <section class="section" id="showcase">
-        <div class="section-header">
-            <h2 class="section-title">Design, das Ergebnisse liefert</h2>
+    <section class="stats-section-web" id="showcase">
+        <div class="stats-orb"></div>
+        <div class="stats-container-web">
+            <div class="section-header" style="margin-bottom: 60px;">
+                <h2 class="section-title">Erfahrung trifft Innovation</h2>
+            </div>
+            <div class="stats-grid-web">
+                <div class="stat-item-web">
+                    <div class="stat-number-web" data-target="20" data-suffix="+" data-prefix="">0</div>
+                    <div class="stat-label-web">Erfolgreiche Projekte</div>
+                </div>
+                <div class="stat-item-web">
+                    <div class="stat-number-web" data-target="50" data-suffix="+" data-prefix="">0</div>
+                    <div class="stat-label-web">Jahre Teamerfahrung</div>
+                </div>
+                <div class="stat-item-web">
+                    <div class="stat-number-web" data-target="8" data-suffix="" data-prefix="">0</div>
+                    <div class="stat-label-web">Experten im Team</div>
+                </div>
+            </div>
         </div>
-        <div class="stats-grid">
-            <div class="stat">
-                <div class="num">+40%</div>
-                <div>höhere Conversion-Rates</div>
+    </section>
+
+    <!-- Referenzen Slider Section -->
+    <section class="references-section section" id="referenzen">
+        <div class="section-header">
+            <h2 class="section-title">Unsere Web-Projekte</h2>
+            <p class="section-description">Erfolgreiche Websites, die Kunden begeistern und Ergebnisse liefern</p>
+        </div>
+
+        <div class="references-slider-container">
+            <div class="slider-wrapper">
+                <div class="slider-track" id="sliderTrack">
+
+                    <!-- Slide 1: Malerbetrieb Becker -->
+                    <div class="reference-slide">
+                        <div class="reference-image">
+                            <img src="images/referenzen/maler-becker.jpg?v=2" alt="Malerbetrieb Becker Website" onerror="this.src='https://via.placeholder.com/800x600/1a1a2e/8b5cf6?text=Malerbetrieb+Becker'">
+                        </div>
+                        <div class="reference-content">
+                            <div class="reference-header">
+                                <h3 class="reference-client">Malerbetrieb Becker</h3>
+                                <p class="reference-project-type">Corporate Website mit Vorher/Nachher-Galerie</p>
+                            </div>
+                            <div class="reference-process">
+                                <h4>Prozess</h4>
+                                <ul>
+                                    <li>Zielgruppenanalyse & Wettbewerbsrecherche</li>
+                                    <li>Modernes UI/UX Design mit Portfolio-Fokus</li>
+                                    <li>Responsive Entwicklung & Performance-Optimierung</li>
+                                </ul>
+                            </div>
+                            <div class="reference-metrics">
+                                <div class="metric-item">
+                                    <svg class="metric-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+                                    <span class="metric-value">Portfolio-Galerie</span>
+                                </div>
+                                <div class="metric-item">
+                                    <svg class="metric-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12" y2="18"/></svg>
+                                    <span class="metric-value">Responsive</span>
+                                </div>
+                                <div class="metric-item">
+                                    <svg class="metric-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v14c0 1.1.9 2 2 2h3"/><path d="M16 3h3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-3"/><line x1="12" y1="20" x2="12" y2="4"/></svg>
+                                    <span class="metric-value">Vorher/Nachher</span>
+                                </div>
+                            </div>
+                            <a href="https://www.maler-becker-bonn.de/" target="_blank" rel="noopener" class="reference-cta">
+                                Website besuchen
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                                    <polyline points="12 5 19 12 12 19"></polyline>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Slide 2: Schornsteinfeger Mertes -->
+                    <div class="reference-slide">
+                        <div class="reference-image">
+                            <img src="images/referenzen/schornsteinfeger-mertes.jpg?v=2" alt="Schornsteinfeger Mertes Website" onerror="this.src='https://via.placeholder.com/800x600/1a1a2e/3b82f6?text=Schornsteinfeger+Mertes'">
+                        </div>
+                        <div class="reference-content">
+                            <div class="reference-header">
+                                <h3 class="reference-client">Schornsteinfegermeister Michael Mertes</h3>
+                                <p class="reference-project-type">Professionelle Service-Website mit Video-Header</p>
+                            </div>
+                            <div class="reference-process">
+                                <h4>Prozess</h4>
+                                <ul>
+                                    <li>Brand Identity & Trust-Building Konzept</li>
+                                    <li>Video-Integration & TÜV-Siegel Darstellung</li>
+                                    <li>Mobile-First Development & SEO-Optimierung</li>
+                                </ul>
+                            </div>
+                            <div class="reference-metrics">
+                                <div class="metric-item">
+                                    <svg class="metric-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+                                    <span class="metric-value">Video-Header</span>
+                                </div>
+                                <div class="metric-item">
+                                    <svg class="metric-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                                    <span class="metric-value">SEO-Optimiert</span>
+                                </div>
+                                <div class="metric-item">
+                                    <svg class="metric-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+                                    <span class="metric-value">TÜV-Zertifiziert</span>
+                                </div>
+                            </div>
+                            <a href="https://schornsteinfeger-mertes.de/" target="_blank" rel="noopener" class="reference-cta">
+                                Website besuchen
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                                    <polyline points="12 5 19 12 12 19"></polyline>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Slide 3: PersoPro -->
+                    <div class="reference-slide">
+                        <div class="reference-image">
+                            <img src="images/referenzen/persopro.jpg?v=2" alt="PersoPro Website" onerror="this.src='https://via.placeholder.com/800x600/1a1a2e/06b6d4?text=PersoPro'">
+                        </div>
+                        <div class="reference-content">
+                            <div class="reference-header">
+                                <h3 class="reference-client">PersoPro Personalvermittlung</h3>
+                                <p class="reference-project-type">B2B-Plattform für Gastronomie-Personal</p>
+                            </div>
+                            <div class="reference-process">
+                                <h4>Prozess</h4>
+                                <ul>
+                                    <li>Conversion-optimiertes UX Design</li>
+                                    <li>Moderne UI mit Team-Präsentation</li>
+                                    <li>Performance & Lead-Generation Optimierung</li>
+                                </ul>
+                            </div>
+                            <div class="reference-metrics">
+                                <div class="metric-item">
+                                    <svg class="metric-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                                    <span class="metric-value">B2B-Plattform</span>
+                                </div>
+                                <div class="metric-item">
+                                    <svg class="metric-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
+                                    <span class="metric-value">Matching-System</span>
+                                </div>
+                                <div class="metric-item">
+                                    <svg class="metric-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+                                    <span class="metric-value">Analytics</span>
+                                </div>
+                            </div>
+                            <a href="https://www.perso-pro.de/" target="_blank" rel="noopener" class="reference-cta">
+                                Website besuchen
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                                    <polyline points="12 5 19 12 12 19"></polyline>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Slide 4: BG BAU -->
+                    <div class="reference-slide">
+                        <div class="reference-image">
+                            <img src="images/referenzen/bgbau.jpg?v=2" alt="BG BAU Website" onerror="this.src='https://via.placeholder.com/800x600/1a1a2e/ec4899?text=BG+BAU'">
+                        </div>
+                        <div class="reference-content">
+                            <div class="reference-header">
+                                <h3 class="reference-client">BG BAU Malerfachbetrieb</h3>
+                                <p class="reference-project-type">Familienbetrieb Website mit Portfolio</p>
+                            </div>
+                            <div class="reference-process">
+                                <h4>Prozess</h4>
+                                <ul>
+                                    <li>Authentisches Branding & Storytelling</li>
+                                    <li>Galerie-System für Vorher/Nachher</li>
+                                    <li>Formular-Integration & Mobile Optimierung</li>
+                                </ul>
+                            </div>
+                            <div class="reference-metrics">
+                                <div class="metric-item">
+                                    <svg class="metric-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+                                    <span class="metric-value">Portfolio</span>
+                                </div>
+                                <div class="metric-item">
+                                    <svg class="metric-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="13.5" cy="6.5" r="2.5"/><circle cx="19" cy="17" r="2"/><circle cx="6" cy="12" r="3"/><path d="M9 12h6"/><path d="M15 9l2 5"/></svg>
+                                    <span class="metric-value">Modern Design</span>
+                                </div>
+                                <div class="metric-item">
+                                    <svg class="metric-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+                                    <span class="metric-value">6 Fachbereiche</span>
+                                </div>
+                            </div>
+                            <a href="https://bgbaumaler.de/" target="_blank" rel="noopener" class="reference-cta">
+                                Website besuchen
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                                    <polyline points="12 5 19 12 12 19"></polyline>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
             </div>
-            <div class="stat">
-                <div class="num">-60%</div>
-                <div>geringere Absprungraten</div>
-            </div>
-            <div class="stat">
-                <div class="num">&lt;3 Sek.</div>
-                <div>durchschnittliche Ladezeit</div>
-            </div>
+
+            <!-- Navigation Arrows -->
+            <button class="slider-nav prev" onclick="changeSlide(-1)" aria-label="Vorheriges Projekt">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+            </button>
+            <button class="slider-nav next" onclick="changeSlide(1)" aria-label="Nächstes Projekt">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+            </button>
+
+            <!-- Dots Navigation -->
+            <div class="slider-dots" id="sliderDots"></div>
         </div>
     </section>
 
@@ -202,42 +1541,108 @@
         <a href="kontakt.html" class="button-primary" style="background:#fff;color:#8b5cf6;">Design-Beratung anfragen</a>
     </section>
 
-    <footer>
-        <div class="footer-content">
-            <div class="footer-grid">
-                <div>
-                    <img src="images/logo.png" alt="weconn3ct" style="height:48px;width:auto;margin-bottom:20px;display:block">
-                    <p>Wir verbinden kreatives Design mit technischer Exzellenz, um digitale Erlebnisse zu schaffen, die Ihr Unternehmen voranbringen.</p>
-                </div>
-                <div>
-                    <h4>Unternehmen</h4>
-                    <ul class="footer-links">
-                        <li><a href="ueber-uns.html">Über uns</a></li>
-                        <li><a href="ueber-uns.html#team">Team</a></li>
-                        <li><a href="karriere.html">Karriere</a></li>
-                        <li><a href="blog.html">Blog</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4>Services</h4>
-                    <ul class="footer-links">
-                        <li><a href="softwareentwicklung.html">Softwareentwicklung</a></li>
-                        <li><a href="webdesign.html">Webdesign & UI/UX</a></li>
-                        <li><a href="digitale-transformation.html">Digitale Transformation</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4>Kontakt</h4>
-                    <ul class="footer-links">
-                        <li><a href="mailto:hello@weconn3ct.com">hello@weconn3ct.com</a></li>
-                        <li><a href="tel:+49123456789">+49 123 456 789</a></li>
-                        <li><a href="#">LinkedIn</a></li>
-                        <li><a href="#">Instagram</a></li>
-                    </ul>
+    <!-- Footer -->
+    <footer class="footer-modern">
+        <!-- Gradient Orbs Background -->
+        <div class="footer-orbs">
+            <div class="footer-orb footer-orb-1"></div>
+            <div class="footer-orb footer-orb-2"></div>
+        </div>
+
+        <div class="footer-container">
+            <!-- Top Section mit Logo -->
+            <div class="footer-top">
+                <div class="footer-brand-modern">
+                    <img src="images/logo.png" alt="WECONN3CT Logo" class="footer-logo-modern">
+                    <p class="footer-tagline">Digitale Innovation für jeden erreichbar machen</p>
                 </div>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 weconn3ct. Alle Rechte vorbehalten. Made with <img src="images/icons/icon-04.png" alt="Love" class="footer-heart"> in Germany</p>
+
+            <!-- Divider mit Glow -->
+            <div class="footer-divider">
+                <div class="divider-glow"></div>
+            </div>
+
+            <!-- Main Footer Content -->
+            <div class="footer-main">
+                <div class="footer-grid-modern">
+                    <!-- Column 1: Über uns -->
+                    <div class="footer-col">
+                        <h4 class="footer-col-title">Unternehmen</h4>
+                        <ul class="footer-links-modern">
+                            <li><a href="ueber-uns.html">Über uns</a></li>
+                            <li><a href="portfolio.html">Projekte</a></li>
+                            <li><a href="kontakt.html">Kontakt</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Column 2: Leistungen -->
+                    <div class="footer-col">
+                        <h4 class="footer-col-title">Leistungen</h4>
+                        <ul class="footer-links-modern">
+                            <li><a href="softwareentwicklung.html">Softwareentwicklung</a></li>
+                            <li><a href="webdesign.html">Webdesign & UI/UX</a></li>
+                            <li><a href="digitale-transformation.html">Digitale Transformation</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Column 3: Kontakt -->
+                    <div class="footer-col">
+                        <h4 class="footer-col-title">Kontakt</h4>
+                        <ul class="footer-links-modern">
+                            <li>
+                                <a href="mailto:info@weconn3ct.de" class="footer-contact-link">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                        <polyline points="22,6 12,13 2,6"></polyline>
+                                    </svg>
+                                    info@weconn3ct.de
+                                </a>
+                            </li>
+                            <li>
+                                <a href="tel:+491624521879" class="footer-contact-link">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                                    </svg>
+                                    +49 162 4521879
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Column 4: Social Media -->
+                    <div class="footer-col">
+                        <h4 class="footer-col-title">Folge uns</h4>
+                        <div class="footer-social">
+                            <a href="https://de.linkedin.com/company/weconn3ct" target="_blank" rel="noopener" class="social-icon-modern" aria-label="LinkedIn">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/>
+                                </svg>
+                            </a>
+                            <a href="https://www.instagram.com/weconn3ct_gmbh/" target="_blank" rel="noopener" class="social-icon-modern" aria-label="Instagram">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8 1.25 1.25 0 0 1 16 6.75a1.25 1.25 0 0 1 1.25-1.25M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3z"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Section -->
+            <div class="footer-bottom-modern">
+                <div class="footer-bottom-content">
+                    <p class="footer-copyright">
+                        &copy; 2025 <strong>weconn3ct</strong>. Alle Rechte vorbehalten.
+                    </p>
+                    <div class="footer-bottom-links">
+                        <a href="impressum.html">Impressum</a>
+                        <span class="footer-dot">•</span>
+                        <a href="datenschutz.html">Datenschutz</a>
+                        <span class="footer-dot">•</span>
+                        <a href="agb.html">AGB</a>
+                    </div>
+                </div>
             </div>
         </div>
     </footer>
@@ -395,6 +1800,66 @@
         };
         window.addEventListener('scroll', startCounters);
 
+        // ==================== STATS COUNTER (Premium Style) ====================
+        const statNumbersWeb = document.querySelectorAll('.stat-number-web');
+        let statsWebAnimated = false;
+
+        const animateStatsWeb = () => {
+            if (statsWebAnimated) return;
+
+            const statsSection = document.querySelector('.stats-section-web');
+            if (!statsSection) return;
+
+            const rect = statsSection.getBoundingClientRect();
+            const isVisible = rect.top < window.innerHeight - 100 && rect.bottom > 0;
+
+            if (isVisible) {
+                statsWebAnimated = true;
+
+                statNumbersWeb.forEach(stat => {
+                    const target = parseInt(stat.getAttribute('data-target'));
+                    const suffix = stat.getAttribute('data-suffix') || '';
+                    const prefix = stat.getAttribute('data-prefix') || '';
+                    const duration = 2000;
+                    let startTime = null;
+
+                    const animate = (timestamp) => {
+                        if (!startTime) startTime = timestamp;
+                        const elapsed = timestamp - startTime;
+                        const progress = Math.min(elapsed / duration, 1);
+
+                        // Smooth easing
+                        const eased = 1 - Math.pow(1 - progress, 3);
+                        const current = Math.round(eased * target);
+
+                        stat.textContent = prefix + current + suffix;
+
+                        if (progress < 1) {
+                            requestAnimationFrame(animate);
+                        } else {
+                            stat.textContent = prefix + target + suffix;
+                        }
+                    };
+
+                    requestAnimationFrame(animate);
+                });
+            }
+        };
+
+        // Intersection Observer für Stats
+        const statsWebObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateStatsWeb();
+                }
+            });
+        }, { threshold: 0.3 });
+
+        const statsSectionWeb = document.querySelector('.stats-section-web');
+        if (statsSectionWeb) {
+            statsWebObserver.observe(statsSectionWeb);
+        }
+
         // ==================== PARALLAX ORBS (if exists) ====================
         const orbs = document.querySelectorAll('.orb');
         if (orbs.length > 0) {
@@ -458,6 +1923,99 @@
             document.querySelectorAll('.bottom-nav-item').forEach(i => i.classList.remove('active'));
             const servicesItem = document.querySelector('.bottom-nav-item[data-page="leistungen"]');
             if (servicesItem) servicesItem.classList.add('active');
+        }
+
+        // ==================== REFERENZEN SLIDER ====================
+        let currentSlide = 0;
+        const sliderTrack = document.getElementById('sliderTrack');
+        const slides = document.querySelectorAll('.reference-slide');
+        const dotsContainer = document.getElementById('sliderDots');
+        const totalSlides = slides.length;
+        let autoPlayInterval;
+
+        // Create dots
+        if (dotsContainer && totalSlides > 0) {
+            for (let i = 0; i < totalSlides; i++) {
+                const dot = document.createElement('div');
+                dot.classList.add('slider-dot');
+                if (i === 0) dot.classList.add('active');
+                dot.addEventListener('click', () => goToSlide(i));
+                dotsContainer.appendChild(dot);
+            }
+        }
+
+        const dots = document.querySelectorAll('.slider-dot');
+
+        function updateSlider() {
+            if (sliderTrack) {
+                sliderTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
+            }
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlide);
+            });
+        }
+
+        function changeSlide(direction) {
+            currentSlide = (currentSlide + direction + totalSlides) % totalSlides;
+            updateSlider();
+            resetAutoPlay();
+        }
+
+        function goToSlide(index) {
+            currentSlide = index;
+            updateSlider();
+            resetAutoPlay();
+        }
+
+        function autoPlay() {
+            autoPlayInterval = setInterval(() => {
+                changeSlide(1);
+            }, 5000);
+        }
+
+        function resetAutoPlay() {
+            clearInterval(autoPlayInterval);
+            autoPlay();
+        }
+
+        // Pause on hover
+        const sliderWrapper = document.querySelector('.slider-wrapper');
+        if (sliderWrapper) {
+            sliderWrapper.addEventListener('mouseenter', () => {
+                clearInterval(autoPlayInterval);
+            });
+            sliderWrapper.addEventListener('mouseleave', () => {
+                autoPlay();
+            });
+        }
+
+        // Touch/Swipe support
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        if (sliderWrapper) {
+            sliderWrapper.addEventListener('touchstart', (e) => {
+                touchStartX = e.changedTouches[0].screenX;
+            });
+
+            sliderWrapper.addEventListener('touchend', (e) => {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+            });
+        }
+
+        function handleSwipe() {
+            if (touchEndX < touchStartX - 50) {
+                changeSlide(1);
+            }
+            if (touchEndX > touchStartX + 50) {
+                changeSlide(-1);
+            }
+        }
+
+        // Start autoplay
+        if (totalSlides > 0) {
+            autoPlay();
         }
     </script>
 </body>
