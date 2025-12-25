@@ -2044,13 +2044,16 @@
             .orbit-2 { width: 260px; height: 260px; margin: -130px 0 0 -130px; }
             .orbit-3 { width: 360px; height: 360px; margin: -180px 0 0 -180px; }
             .center-logo { width: 60px; height: 60px; padding: 10px; }
-            .planet { width: 45px; height: 45px; }
-            .planet.p1 { top: -22px; margin-left: -22px; }
-            .planet.p2 { right: -22px; margin-top: -22px; }
-            .planet.p3 { bottom: -22px; margin-left: -22px; }
-            .planet.p4 { left: -22px; margin-top: -22px; }
-            .planet-content { padding: 8px; }
+            /* Larger touch targets on mobile */
+            .planet { width: 50px; height: 50px; min-width: 44px; min-height: 44px; }
+            .planet.p1 { top: -25px; margin-left: -25px; }
+            .planet.p2 { right: -25px; margin-top: -25px; }
+            .planet.p3 { bottom: -25px; margin-left: -25px; }
+            .planet.p4 { left: -25px; margin-top: -25px; }
+            .planet-content { padding: 10px; }
             .planet-label { font-size: 8px; padding: 2px 6px; bottom: -30px; }
+            /* Slow down animation on mobile for easier tapping */
+            .orbit-3d { animation-duration: 40s !important; }
         }
 
         /* ==================== PLANET DETAIL PANEL ==================== */
@@ -4303,21 +4306,28 @@
                     }
                 }
 
-                // Add click listeners to planets
+                // Add click and touch listeners to planets
                 document.querySelectorAll('.planet').forEach(planet => {
                     planet.style.cursor = 'pointer';
-                    planet.addEventListener('click', (e) => {
+
+                    // Handle both click and touch
+                    function handlePlanetInteraction(e) {
+                        e.preventDefault();
                         e.stopPropagation();
                         if (selectedPlanet === planet) {
                             closeDetailPanel();
                         } else {
                             openDetailPanel(planet);
                         }
-                    });
+                    }
+
+                    planet.addEventListener('click', handlePlanetInteraction);
+                    planet.addEventListener('touchend', handlePlanetInteraction, { passive: false });
                 });
 
-                // Close button
+                // Close button - support both click and touch
                 detailClose.addEventListener('click', closeDetailPanel);
+                detailClose.addEventListener('touchend', (e) => { e.preventDefault(); closeDetailPanel(); }, { passive: false });
 
                 // Close on click outside
                 document.addEventListener('click', (e) => {
@@ -4377,17 +4387,23 @@
 
                 document.querySelectorAll('.planet').forEach(planet => {
                     planet.style.cursor = 'pointer';
-                    planet.addEventListener('click', (e) => {
+
+                    function handlePlanetInteractionBasic(e) {
+                        e.preventDefault();
                         e.stopPropagation();
                         if (selectedPlanet === planet) {
                             closeDetailPanelBasic();
                         } else {
                             openDetailPanelBasic(planet);
                         }
-                    });
+                    }
+
+                    planet.addEventListener('click', handlePlanetInteractionBasic);
+                    planet.addEventListener('touchend', handlePlanetInteractionBasic, { passive: false });
                 });
 
                 detailClose.addEventListener('click', closeDetailPanelBasic);
+                detailClose.addEventListener('touchend', (e) => { e.preventDefault(); closeDetailPanelBasic(); }, { passive: false });
 
                 document.addEventListener('click', (e) => {
                     if (detailPanel.classList.contains('active') &&
