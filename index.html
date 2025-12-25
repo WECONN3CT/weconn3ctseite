@@ -1755,6 +1755,15 @@
                 visibility: visible;
                 transform: translateX(0);
                 display: flex !important;
+                touch-action: none;
+                overscroll-behavior: contain;
+            }
+
+            body.menu-open {
+                overflow: hidden !important;
+                position: fixed !important;
+                width: 100% !important;
+                height: 100% !important;
             }
 
             .nav-links li {
@@ -2953,11 +2962,13 @@
             menuToggle.addEventListener('click', () => {
                 menuToggle.classList.toggle('active');
                 navLinks.classList.toggle('active');
+                document.body.classList.toggle('menu-open');
             });
             navLinks.querySelectorAll('a').forEach(link => {
                 link.addEventListener('click', () => {
                     menuToggle.classList.remove('active');
                     navLinks.classList.remove('active');
+                    document.body.classList.remove('menu-open');
                 });
             });
         }
