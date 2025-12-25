@@ -1908,7 +1908,27 @@
             }
         }
         /* ==================== BOTTOM NAVIGATION (Mobile) ==================== */
-        .bottom-nav { display:none; position:fixed; bottom:0; left:0; right:0; background:rgba(10,10,15,.95); backdrop-filter:blur(20px) saturate(180%); -webkit-backdrop-filter:blur(20px) saturate(180%); border-top:1px solid rgba(255,255,255,.1); padding:8px 0; padding-bottom:calc(8px + env(safe-area-inset-bottom)); z-index:1000; justify-content:space-around; align-items:center; }
+        .bottom-nav {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(10,10,15,.95);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border-top: 1px solid rgba(255,255,255,.1);
+            padding: 8px 0;
+            padding-bottom: calc(8px + env(safe-area-inset-bottom));
+            z-index: 1000;
+            justify-content: space-around;
+            align-items: center;
+            transform: translateY(0);
+            transition: transform 0.3s ease-in-out;
+        }
+        .bottom-nav.hidden {
+            transform: translateY(100%);
+        }
         .bottom-nav-item { display:flex; flex-direction:column; align-items:center; gap:4px; padding:8px 16px; color:var(--text-lighter); text-decoration:none; font-size:11px; font-weight:600; transition:all .3s ease; position:relative; }
         .bottom-nav-item svg { width:24px; height:24px; transition:all .3s ease; }
         .bottom-nav-item:hover, .bottom-nav-item.active { color:#fff; }
@@ -2998,6 +3018,42 @@
             const servicesItem = document.querySelector('.bottom-nav-item[data-page="leistungen"]');
             if (servicesItem) servicesItem.classList.add('active');
         }
+
+        // ==================== BOTTOM NAV AUTO-HIDE ON SCROLL ====================
+        (function() {
+            const bottomNav = document.getElementById('bottomNav');
+            if (!bottomNav) return;
+
+            let lastScroll = 0;
+            const scrollThreshold = 5;
+
+            window.addEventListener('scroll', () => {
+                const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+
+                // Always show nav at top of page (first 100px)
+                if (currentScroll <= 100) {
+                    bottomNav.classList.remove('hidden');
+                    lastScroll = currentScroll;
+                    return;
+                }
+
+                // Check scroll direction with threshold
+                if (Math.abs(currentScroll - lastScroll) < scrollThreshold) {
+                    return;
+                }
+
+                // Scrolling down - hide nav
+                if (currentScroll > lastScroll) {
+                    bottomNav.classList.add('hidden');
+                }
+                // Scrolling up - show nav
+                else {
+                    bottomNav.classList.remove('hidden');
+                }
+
+                lastScroll = currentScroll;
+            }, { passive: true });
+        })();
     </script>
 </body>
 </html>
