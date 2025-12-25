@@ -224,6 +224,26 @@
                 opacity: 0 !important;
                 pointer-events: none !important;
             }
+
+            /* Force all animated elements to be visible on mobile */
+            .hero-title,
+            .hero-subtitle,
+            .hero-buttons,
+            .hero-pills-container,
+            .hero-devices,
+            .section-eyebrow,
+            .section-title,
+            .section-description,
+            .service-card,
+            .stat-card,
+            .stats-title,
+            .cta-content-centered,
+            .reveal,
+            .reveal.active {
+                opacity: 1 !important;
+                visibility: visible !important;
+                transform: none !important;
+            }
         }
 
         .nav-links a {
