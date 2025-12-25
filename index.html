@@ -215,6 +215,17 @@
             align-items: center;
         }
 
+        /* Force hide nav-links on mobile screens */
+        @media (max-width: 768px) {
+            .nav-links,
+            .nav-links.active {
+                display: none !important;
+                visibility: hidden !important;
+                opacity: 0 !important;
+                pointer-events: none !important;
+            }
+        }
+
         .nav-links a {
             color: rgba(255, 255, 255, 0.7);
             text-decoration: none;
