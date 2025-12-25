@@ -1568,11 +1568,30 @@
             .combined-section {
                 padding: 80px 30px;
             }
-            
+
+            .combined-section::after {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(10, 10, 15, 0.7);
+                z-index: 0;
+            }
+
+            .combined-bg-video {
+                object-fit: contain;
+                object-position: center;
+                transform: scale(0.6);
+                opacity: 0.25;
+            }
+
             .combined-container {
                 gap: 50px;
+                z-index: 2;
             }
-            
+
             .horizontal-divider {
                 width: 200px;
             }
