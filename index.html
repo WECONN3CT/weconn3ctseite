@@ -1852,13 +1852,26 @@
             .hero-content-split {
                 flex-direction: column;
                 text-align: center;
-                gap: 30px;
+                gap: 20px;
             }
             .hero-text {
+                display: contents;
+            }
+            .hero-title {
+                order: 1;
+            }
+            .hero-subtitle {
+                order: 2;
                 text-align: center;
             }
             .hero-devices {
-                order: -1;
+                order: 3;
+            }
+            .hero-buttons {
+                order: 4;
+            }
+            .hero-pills-container {
+                order: 5;
             }
 
             .services,
@@ -1940,8 +1953,8 @@
                 box-shadow: 0 20px 60px rgba(0,0,0,0.4);
             }
             .hero-devices {
-                order: -1;
-                margin-bottom: 20px;
+                margin-bottom: 10px;
+                margin-top: 10px;
             }
             .hero-pills-container {
                 margin-top: 30px;
