@@ -2333,13 +2333,13 @@
             .planet-detail-panel {
                 position: fixed;
                 top: auto;
-                bottom: 0;
-                left: 0;
-                right: 0;
-                width: 100%;
-                max-height: 60vh;
-                transform: translateY(100%);
-                border-radius: 24px 24px 0 0;
+                bottom: calc(70px + env(safe-area-inset-bottom));
+                left: 10px;
+                right: 10px;
+                width: auto;
+                max-height: 50vh;
+                transform: translateY(calc(100% + 80px));
+                border-radius: 24px;
                 overflow-y: auto;
             }
             .planet-detail-panel.active {
