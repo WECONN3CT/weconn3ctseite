@@ -2343,13 +2343,15 @@
 
         @media (max-width: 1024px) {
             .planet-detail-panel {
-                position: fixed;
-                top: auto;
-                bottom: calc(80px + env(safe-area-inset-bottom));
-                left: 15px;
-                right: 15px;
-                width: auto;
-                max-height: 55vh;
+                position: fixed !important;
+                top: 50% !important;
+                bottom: auto !important;
+                left: 50% !important;
+                right: auto !important;
+                transform: translate(-50%, -50%) !important;
+                width: calc(100% - 30px) !important;
+                max-width: 400px;
+                max-height: 70vh;
                 border-radius: 24px;
                 overflow-y: auto;
                 opacity: 0;
@@ -2358,6 +2360,7 @@
             .planet-detail-panel.active {
                 visibility: visible;
                 z-index: 1100;
+                opacity: 1;
             }
             .solar-system-wrapper.panel-active .solar-system-container {
                 transform: translateY(-15%) scale(0.65);
@@ -4352,12 +4355,19 @@
                     // Prevent background scroll on mobile
                     document.body.style.overflow = 'hidden';
 
-                    // Check if mobile (use y animation) or desktop (use x animation)
+                    // Check if mobile (only opacity) or desktop (x animation)
                     const isMobile = window.innerWidth <= 1024;
-                    gsap.fromTo(detailPanel,
-                        { opacity: 0, x: isMobile ? 0 : 50, y: isMobile ? 100 : 0 },
-                        { opacity: 1, x: 0, y: 0, duration: 0.5, ease: 'power3.out' }
-                    );
+                    if (isMobile) {
+                        gsap.fromTo(detailPanel,
+                            { opacity: 0, scale: 0.9 },
+                            { opacity: 1, scale: 1, duration: 0.4, ease: 'power3.out' }
+                        );
+                    } else {
+                        gsap.fromTo(detailPanel,
+                            { opacity: 0, x: 50 },
+                            { opacity: 1, x: 0, duration: 0.5, ease: 'power3.out' }
+                        );
+                    }
 
                     gsap.fromTo('.detail-planet-preview',
                         { scale: 0.5, opacity: 0 },
@@ -4381,17 +4391,30 @@
                     // Re-enable background scroll
                     document.body.style.overflow = '';
 
-                    gsap.to(detailPanel, {
-                        opacity: 0,
-                        x: isMobile ? 0 : 50,
-                        y: isMobile ? 100 : 0,
-                        duration: 0.4,
-                        ease: 'power3.in',
-                        onComplete: () => {
-                            detailPanel.classList.remove('active');
-                            wrapper.classList.remove('panel-active');
-                        }
-                    });
+                    if (isMobile) {
+                        gsap.to(detailPanel, {
+                            opacity: 0,
+                            scale: 0.9,
+                            duration: 0.3,
+                            ease: 'power3.in',
+                            onComplete: () => {
+                                detailPanel.classList.remove('active');
+                                wrapper.classList.remove('panel-active');
+                                gsap.set(detailPanel, { clearProps: 'scale' });
+                            }
+                        });
+                    } else {
+                        gsap.to(detailPanel, {
+                            opacity: 0,
+                            x: 50,
+                            duration: 0.4,
+                            ease: 'power3.in',
+                            onComplete: () => {
+                                detailPanel.classList.remove('active');
+                                wrapper.classList.remove('panel-active');
+                            }
+                        });
+                    }
 
                     if (selectedPlanet) {
                         selectedPlanet.classList.remove('selected');
