@@ -583,18 +583,21 @@
                 font-size: 18px;
                 margin-top: 32px;
                 margin-bottom: 12px;
+                hyphens: auto;
+                -webkit-hyphens: auto;
+                word-wrap: break-word;
             }
             .legal-content p {
-                font-size: 14px;
-                line-height: 1.7;
+                font-size: 15px;
+                line-height: 1.75;
                 word-wrap: break-word;
                 overflow-wrap: break-word;
+                hyphens: auto;
+                -webkit-hyphens: auto;
             }
             .legal-content a {
-                word-break: break-all;
-            }
-            .legal-content strong {
-                display: inline;
+                word-break: break-word;
+                overflow-wrap: break-word;
             }
 
             .footer-modern { padding: 60px 20px 30px; }
@@ -611,21 +614,19 @@
             .legal-title { font-size: 26px; }
             .legal-eyebrow { font-size: 10px; margin-bottom: 12px; }
             .legal-content {
-                padding: 22px 16px;
+                padding: 22px 18px;
                 border-radius: 16px;
             }
             .legal-content h2 {
-                font-size: 16px;
+                font-size: 17px;
                 margin-top: 28px;
                 margin-bottom: 10px;
+                line-height: 1.4;
             }
             .legal-content p {
-                font-size: 13px;
-                line-height: 1.65;
+                font-size: 14px;
+                line-height: 1.7;
                 margin-bottom: 14px;
-            }
-            .legal-content a {
-                font-size: 13px;
             }
             .footer-modern { padding: 50px 16px 24px; }
         }
@@ -717,11 +718,12 @@
 
                 <h2>Umsatzsteuer-ID</h2>
                 <p>
-                    Umsatzsteuer-Identifikationsnummer gemäß §27 a Umsatzsteuergesetz:<br>
+                    Umsatzsteuer-Identifikationsnummer<br>
+                    gemäß §27 a Umsatzsteuergesetz:<br>
                     DE452538080
                 </p>
 
-                <h2>Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV</h2>
+                <h2>Verantwortlich für den Inhalt<br><span style="font-size: 0.85em;">nach § 55 Abs. 2 RStV</span></h2>
                 <p>
                     Thinesh Rajabalah<br>
                     Frankenweg 109<br>
@@ -735,7 +737,7 @@
                     Unsere E-Mail-Adresse finden Sie oben im Impressum.
                 </p>
 
-                <h2>Verbraucherstreitbeilegung/Universalschlichtungsstelle</h2>
+                <h2>Verbraucherstreitbeilegung/<wbr>Universalschlichtungsstelle</h2>
                 <p>
                     Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.
                 </p>
