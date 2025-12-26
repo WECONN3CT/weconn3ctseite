@@ -35,6 +35,30 @@
         .nav-links a:hover { color:#fff; }
         .nav-links a:hover::before, .nav-links a.active::before { transform: scaleX(1); transform-origin:left; }
 
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+        .menu-toggle span {
+            width: 28px;
+            height: 2px;
+            background: #fff;
+            transition: all 0.3s ease;
+        }
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+
         /* Dropdown Styles */
         .dropdown { position: relative; }
         .dropdown > a { display: flex; align-items: center; }
