@@ -2071,6 +2071,15 @@
             /* Stop animations on tablet for better performance */
             .orbit-3d { animation: none !important; }
             .planet-content { animation: none !important; }
+            /* Stagger planets on different orbits for visual separation */
+            .orbit-2 .planet.p1 { top: 15%; right: -27px; left: auto; margin-top: 0; margin-left: 0; }
+            .orbit-2 .planet.p2 { top: auto; bottom: 15%; right: -27px; margin-top: 0; }
+            .orbit-2 .planet.p3 { bottom: 15%; left: -27px; right: auto; margin-left: 0; }
+            .orbit-2 .planet.p4 { top: 15%; left: -27px; margin-top: 0; }
+            .orbit-3 .planet.p1 { top: -27px; left: 25%; margin-left: 0; }
+            .orbit-3 .planet.p2 { top: 25%; right: -27px; margin-top: 0; }
+            .orbit-3 .planet.p3 { bottom: -27px; right: 25%; left: auto; margin-left: 0; }
+            .orbit-3 .planet.p4 { bottom: 25%; left: -27px; margin-top: 0; top: auto; }
         }
         @media(max-width: 480px) {
             .solar-system-container { height: 400px; }
@@ -2098,6 +2107,15 @@
             /* Stop animations on mobile for better performance */
             .orbit-3d { animation: none !important; }
             .planet-content { animation: none !important; }
+            /* Stagger planets on different orbits for visual separation */
+            .orbit-2 .planet.p1 { top: 15%; right: -25px; left: auto; margin-top: 0; margin-left: 0; }
+            .orbit-2 .planet.p2 { top: auto; bottom: 15%; right: -25px; margin-top: 0; }
+            .orbit-2 .planet.p3 { bottom: 15%; left: -25px; right: auto; margin-left: 0; }
+            .orbit-2 .planet.p4 { top: 15%; left: -25px; margin-top: 0; }
+            .orbit-3 .planet.p1 { top: -25px; left: 25%; margin-left: 0; }
+            .orbit-3 .planet.p2 { top: 25%; right: -25px; margin-top: 0; }
+            .orbit-3 .planet.p3 { bottom: -25px; right: 25%; left: auto; margin-left: 0; }
+            .orbit-3 .planet.p4 { bottom: 25%; left: -25px; margin-top: 0; top: auto; }
         }
 
         /* ==================== PLANET DETAIL PANEL ==================== */
@@ -2326,6 +2344,7 @@
             }
             .planet-detail-panel.active {
                 transform: translateY(0);
+                z-index: 1100;
             }
             .solar-system-wrapper.panel-active .solar-system-container {
                 transform: translateY(-15%) scale(0.65);
