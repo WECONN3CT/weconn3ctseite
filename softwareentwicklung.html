@@ -2333,17 +2333,18 @@
             .planet-detail-panel {
                 position: fixed;
                 top: auto;
-                bottom: calc(70px + env(safe-area-inset-bottom));
-                left: 10px;
-                right: 10px;
+                bottom: calc(80px + env(safe-area-inset-bottom));
+                left: 15px;
+                right: 15px;
                 width: auto;
-                max-height: 50vh;
-                transform: translateY(calc(100% + 80px));
+                max-height: 55vh;
                 border-radius: 24px;
                 overflow-y: auto;
+                opacity: 0;
+                visibility: hidden;
             }
             .planet-detail-panel.active {
-                transform: translateY(0);
+                visibility: visible;
                 z-index: 1100;
             }
             .solar-system-wrapper.panel-active .solar-system-container {
@@ -4336,9 +4337,11 @@
                     wrapper.classList.add('panel-active');
                     detailPanel.classList.add('active');
 
+                    // Check if mobile (use y animation) or desktop (use x animation)
+                    const isMobile = window.innerWidth <= 1024;
                     gsap.fromTo(detailPanel,
-                        { opacity: 0, x: 50 },
-                        { opacity: 1, x: 0, duration: 0.5, ease: 'power3.out' }
+                        { opacity: 0, x: isMobile ? 0 : 50, y: isMobile ? 100 : 0 },
+                        { opacity: 1, x: 0, y: 0, duration: 0.5, ease: 'power3.out' }
                     );
 
                     gsap.fromTo('.detail-planet-preview',
@@ -4358,9 +4361,11 @@
                 }
 
                 function closeDetailPanel() {
+                    const isMobile = window.innerWidth <= 1024;
                     gsap.to(detailPanel, {
                         opacity: 0,
-                        x: 50,
+                        x: isMobile ? 0 : 50,
+                        y: isMobile ? 100 : 0,
                         duration: 0.4,
                         ease: 'power3.in',
                         onComplete: () => {
