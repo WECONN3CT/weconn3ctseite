@@ -1439,7 +1439,8 @@
  
             <!-- Contact Form -->
             <div class="contact-form">
-                <form id="contactForm">
+                <form id="contactForm" action="https://formspree.io/f/mwvkpall" method="POST">
+                    <input type="hidden" name="_subject" value="Neue Kontaktanfrage von WECONN3CT Website">
                     <div class="form-row">
                         <div class="form-group">
                             <label for="firstName">Vorname *</label>
@@ -1465,13 +1466,13 @@
                         <label for="service">Interessiert an *</label>
                         <select id="service" name="service" required>
                             <option value="">Bitte wählen...</option>
-                            <option value="app">📱 App-Entwicklung</option>
-                            <option value="web">🌐 Website-Entwicklung</option>
-                            <option value="software">⚙️ Software-Lösungen</option>
-                            <option value="ai">🤖 KI-Integration</option>
-                            <option value="design">🎨 UX/UI Design</option>
-                            <option value="support">🔧 Wartung & Support</option>
-                            <option value="other">💡 Anderes</option>
+                            <option value="App-Entwicklung">📱 App-Entwicklung</option>
+                            <option value="Website-Entwicklung">🌐 Website-Entwicklung</option>
+                            <option value="Software-Lösungen">⚙️ Software-Lösungen</option>
+                            <option value="KI-Integration">🤖 KI-Integration</option>
+                            <option value="UX/UI Design">🎨 UX/UI Design</option>
+                            <option value="Wartung & Support">🔧 Wartung & Support</option>
+                            <option value="Anderes">💡 Anderes</option>
                         </select>
                     </div>
  
@@ -1913,13 +1914,50 @@
             });
         });
 
-        // ==================== FORM SUBMISSION (if exists) ====================
+        // ==================== FORM SUBMISSION (Formspree) ====================
         const contactForm = document.getElementById('contactForm');
         if (contactForm) {
-            contactForm.addEventListener('submit', (e)=>{
+            contactForm.addEventListener('submit', async (e) => {
                 e.preventDefault();
-                alert('Vielen Dank für deine Nachricht! Wir melden uns innerhalb von 24 Stunden bei dir. 🚀');
-                contactForm.reset();
+                const submitBtn = contactForm.querySelector('.submit-button');
+                const originalText = submitBtn.textContent;
+
+                // Loading state
+                submitBtn.textContent = 'Wird gesendet...';
+                submitBtn.disabled = true;
+
+                try {
+                    const response = await fetch(contactForm.action, {
+                        method: 'POST',
+                        body: new FormData(contactForm),
+                        headers: { 'Accept': 'application/json' }
+                    });
+
+                    if (response.ok) {
+                        // Success
+                        submitBtn.textContent = '✅ Gesendet!';
+                        submitBtn.style.background = 'linear-gradient(135deg, #10b981 0%, #059669 100%)';
+                        contactForm.reset();
+
+                        setTimeout(() => {
+                            submitBtn.textContent = originalText;
+                            submitBtn.style.background = '';
+                            submitBtn.disabled = false;
+                        }, 3000);
+                    } else {
+                        throw new Error('Fehler beim Senden');
+                    }
+                } catch (error) {
+                    // Error
+                    submitBtn.textContent = '❌ Fehler - Nochmal versuchen';
+                    submitBtn.style.background = 'linear-gradient(135deg, #ef4444 0%, #dc2626 100%)';
+
+                    setTimeout(() => {
+                        submitBtn.textContent = originalText;
+                        submitBtn.style.background = '';
+                        submitBtn.disabled = false;
+                    }, 3000);
+                }
             });
         }
         // ==================== BOTTOM NAV ACTIVE STATE ====================
