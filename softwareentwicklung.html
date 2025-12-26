@@ -11,8 +11,10 @@
         /* Premium Design – identisch zu index.html (gekürzt nicht) */
         *{margin:0;padding:0;box-sizing:border-box}
         :root{--primary:#0a0a0f;--primary-light:#1a1a2e;--secondary:#f8f9ff;--accent-purple:#8b5cf6;--accent-blue:#3b82f6;--accent-cyan:#06b6d4;--accent-pink:#ec4899;--text-light:#64748b;--text-lighter:#94a3b8;--gradient-primary:linear-gradient(135deg,#8b5cf6 0%,#3b82f6 50%,#06b6d4 100%);--gradient-glow:linear-gradient(135deg,#8b5cf6 0%,#ec4899 50%,#3b82f6 100%);--glass-bg:rgba(255,255,255,0.03);--glass-border:rgba(255,255,255,0.1)}
-        html{scroll-behavior:smooth}
-        body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--primary);color:#fff;overflow-x:hidden;line-height:1.6;-webkit-font-smoothing:antialiased}
+        html{scroll-behavior:smooth;-webkit-overflow-scrolling:touch}
+        body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--primary);color:#fff;overflow-x:hidden;line-height:1.6;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility}
+        *{-webkit-tap-highlight-color:transparent}
+        section{will-change:transform;transform:translateZ(0)}
         .loader{position:fixed;inset:0;background:var(--primary);display:flex;align-items:center;justify-content:center;z-index:9999;transition:opacity .6s ease,visibility .6s ease}
         .loader.hidden{opacity:0;visibility:hidden;pointer-events:none}
         .loader-logo-img{height:60px;width:auto;animation:pulse 1.5s ease-in-out infinite;margin-bottom:10px}
@@ -193,7 +195,12 @@
         .footer-bottom{border-top:1px solid rgba(255,255,255,.05);padding-top:40px;text-align:center}
         .footer-bottom p{color:var(--text-lighter);font-size:14px;display:flex;align-items:center;justify-content:center;gap:8px}
         @media(max-width:1200px){.services-grid{grid-template-columns:repeat(2,1fr)}.footer-grid{grid-template-columns:1fr 1fr;gap:40px}}
-        @media(max-width:768px){.nav-container{padding:0 30px}.services-grid{grid-template-columns:1fr}.section{padding:100px 30px}.breadcrumb{padding:10px 30px}.cta-section{padding:120px 30px}.footer-grid{grid-template-columns:1fr}.usp-emoji{font-size:48px}.pricing-emoji{font-size:40px}.services-grid[style*="repeat(3, 1fr)"]{grid-template-columns:1fr !important}}
+        @media(max-width:768px){.nav-container{padding:0 30px}.services-grid{grid-template-columns:1fr}.section{padding:100px 30px}.breadcrumb{padding:10px 30px}.cta-section{padding:120px 30px}.footer-grid{grid-template-columns:1fr}.usp-emoji{font-size:48px}.pricing-emoji{font-size:40px}.services-grid[style*="repeat(3, 1fr)"]{grid-template-columns:1fr !important}
+            /* Mobile Scroll Performance */
+            *{-webkit-backface-visibility:hidden;backface-visibility:hidden}
+            .glass-card,.service-card{backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+            section{transform:none;will-change:auto}
+        }
         /* ==================== BOTTOM NAVIGATION (Mobile) ==================== */
         .bottom-nav{display:none;position:fixed;bottom:0;left:0;right:0;background:rgba(10,10,15,.95);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);border-top:1px solid rgba(255,255,255,.1);padding:8px 0;padding-bottom:calc(8px + env(safe-area-inset-bottom));z-index:1000;justify-content:space-around;align-items:center}
         .bottom-nav-item{display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px 16px;color:var(--text-lighter);text-decoration:none;font-size:11px;font-weight:600;transition:all .3s ease;position:relative}
@@ -3886,7 +3893,7 @@
                 } else {
                     navbar.classList.remove('scrolled');
                 }
-            });
+            }, { passive: true });
         }
 
         // ==================== MOBILE MENU ====================
@@ -3922,7 +3929,7 @@
                 }
             });
         };
-        window.addEventListener('scroll', revealOnScroll);
+        window.addEventListener('scroll', revealOnScroll, { passive: true });
         window.addEventListener('load', revealOnScroll);
 
         // ==================== SMOOTH SCROLL ====================
@@ -3968,7 +3975,7 @@
                 });
             }
         };
-        window.addEventListener('scroll', startCounters);
+        window.addEventListener('scroll', startCounters, { passive: true });
 
         // ==================== STATS COUNTER ANIMATION (Premium Style) ====================
         const statNumbersSW = document.querySelectorAll('.stat-number-sw');
@@ -4186,7 +4193,7 @@
 
                 window.addEventListener('scroll', () => {
                     scrollY = window.scrollY;
-                });
+                }, { passive: true });
 
                 document.addEventListener('mousemove', (e) => {
                     targetRotationX = (e.clientY / window.innerHeight - 0.5) * 0.5;
