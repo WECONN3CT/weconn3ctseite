@@ -4342,6 +4342,9 @@
                     wrapper.classList.add('panel-active');
                     detailPanel.classList.add('active');
 
+                    // Prevent background scroll on mobile
+                    document.body.style.overflow = 'hidden';
+
                     // Check if mobile (use y animation) or desktop (use x animation)
                     const isMobile = window.innerWidth <= 1024;
                     gsap.fromTo(detailPanel,
@@ -4367,6 +4370,10 @@
 
                 function closeDetailPanel() {
                     const isMobile = window.innerWidth <= 1024;
+
+                    // Re-enable background scroll
+                    document.body.style.overflow = '';
+
                     gsap.to(detailPanel, {
                         opacity: 0,
                         x: isMobile ? 0 : 50,
@@ -4460,11 +4467,18 @@
 
                     wrapper.classList.add('panel-active');
                     detailPanel.classList.add('active');
+
+                    // Prevent background scroll
+                    document.body.style.overflow = 'hidden';
                 }
 
                 function closeDetailPanelBasic() {
                     detailPanel.classList.remove('active');
                     wrapper.classList.remove('panel-active');
+
+                    // Re-enable background scroll
+                    document.body.style.overflow = '';
+
                     if (selectedPlanet) {
                         selectedPlanet.classList.remove('selected');
                         selectedPlanet = null;
