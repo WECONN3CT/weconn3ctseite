@@ -2062,13 +2062,15 @@
             .planet-short { font-size: 8px; }
             .planet-label { font-size: 9px; padding: 3px 8px; bottom: -35px; }
             .planet::before, .planet::after { display: none; }
-            /* Show label on touch/active */
-            .planet:active .planet-label,
-            .planet.touched .planet-label {
+            /* Labels always visible on tablet */
+            .planet-label {
                 opacity: 1;
                 visibility: visible;
                 background: rgba(139, 92, 246, 0.3);
             }
+            /* Stop animations on tablet for better performance */
+            .orbit-3d { animation: none !important; }
+            .planet-content { animation: none !important; }
         }
         @media(max-width: 480px) {
             .solar-system-container { height: 400px; }
@@ -2084,16 +2086,18 @@
             .planet.p4 { left: -25px; margin-top: -25px; }
             .planet-content { padding: 8px; }
             .planet-short { font-size: 7px; }
-            .planet-label { font-size: 8px; padding: 2px 6px; bottom: -30px; }
-            /* Show label on touch/active */
-            .planet:active .planet-label,
-            .planet.touched .planet-label {
+            /* Labels always visible on mobile */
+            .planet-label {
+                font-size: 8px;
+                padding: 2px 6px;
+                bottom: -30px;
                 opacity: 1;
                 visibility: visible;
                 background: rgba(139, 92, 246, 0.3);
             }
-            /* Slow down animation on mobile for easier tapping */
-            .orbit-3d { animation-duration: 40s !important; }
+            /* Stop animations on mobile for better performance */
+            .orbit-3d { animation: none !important; }
+            .planet-content { animation: none !important; }
         }
 
         /* ==================== PLANET DETAIL PANEL ==================== */
