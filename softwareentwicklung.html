@@ -2059,8 +2059,16 @@
             .planet.p3 { bottom: -27px; margin-left: -27px; }
             .planet.p4 { left: -27px; margin-top: -27px; }
             .planet-content { padding: 10px; }
+            .planet-short { font-size: 8px; }
             .planet-label { font-size: 9px; padding: 3px 8px; bottom: -35px; }
             .planet::before, .planet::after { display: none; }
+            /* Show label on touch/active */
+            .planet:active .planet-label,
+            .planet.touched .planet-label {
+                opacity: 1;
+                visibility: visible;
+                background: rgba(139, 92, 246, 0.3);
+            }
         }
         @media(max-width: 480px) {
             .solar-system-container { height: 400px; }
@@ -2074,8 +2082,16 @@
             .planet.p2 { right: -25px; margin-top: -25px; }
             .planet.p3 { bottom: -25px; margin-left: -25px; }
             .planet.p4 { left: -25px; margin-top: -25px; }
-            .planet-content { padding: 10px; }
+            .planet-content { padding: 8px; }
+            .planet-short { font-size: 7px; }
             .planet-label { font-size: 8px; padding: 2px 6px; bottom: -30px; }
+            /* Show label on touch/active */
+            .planet:active .planet-label,
+            .planet.touched .planet-label {
+                opacity: 1;
+                visibility: visible;
+                background: rgba(139, 92, 246, 0.3);
+            }
             /* Slow down animation on mobile for easier tapping */
             .orbit-3d { animation-duration: 40s !important; }
         }
@@ -4341,6 +4357,12 @@
                 document.querySelectorAll('.planet').forEach(planet => {
                     planet.style.cursor = 'pointer';
 
+                    // Show label on touch for mobile
+                    planet.addEventListener('touchstart', () => {
+                        document.querySelectorAll('.planet').forEach(p => p.classList.remove('touched'));
+                        planet.classList.add('touched');
+                    }, { passive: true });
+
                     // Handle both click and touch
                     function handlePlanetInteraction(e) {
                         e.preventDefault();
@@ -4418,6 +4440,12 @@
 
                 document.querySelectorAll('.planet').forEach(planet => {
                     planet.style.cursor = 'pointer';
+
+                    // Show label on touch for mobile
+                    planet.addEventListener('touchstart', () => {
+                        document.querySelectorAll('.planet').forEach(p => p.classList.remove('touched'));
+                        planet.classList.add('touched');
+                    }, { passive: true });
 
                     function handlePlanetInteractionBasic(e) {
                         e.preventDefault();
