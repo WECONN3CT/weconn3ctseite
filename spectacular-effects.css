@@ -1,0 +1,146 @@
+/* SPECTACULAR EFFECTS CSS - Cleaned */
+
+/* Particle Canvas */
+#particles-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Aurora Effect */
+.aurora {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+    opacity: 0.4;
+}
+
+.aurora-beam {
+    position: absolute;
+    width: 200%;
+    height: 300px;
+    background: linear-gradient(90deg,
+        transparent 0%,
+        rgba(139, 92, 246, 0.3) 20%,
+        rgba(59, 130, 246, 0.4) 40%,
+        rgba(6, 182, 212, 0.3) 60%,
+        rgba(236, 72, 153, 0.2) 80%,
+        transparent 100%
+    );
+    filter: blur(60px);
+    animation: auroraMove 15s ease-in-out infinite;
+}
+
+.aurora-beam:nth-child(1) { top: -100px; animation-delay: 0s; }
+.aurora-beam:nth-child(2) { top: 100px; animation-delay: -5s; opacity: 0.6; }
+.aurora-beam:nth-child(3) { top: 300px; animation-delay: -10s; opacity: 0.4; }
+
+@keyframes auroraMove {
+    0%, 100% { transform: translateX(-30%) rotate(-5deg) scaleY(1); }
+    50% { transform: translateX(-50%) rotate(-3deg) scaleY(0.8); }
+}
+
+/* Floating Shapes */
+.floating-shapes {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.floating-shape {
+    position: absolute;
+    opacity: 0.1;
+    animation: floatShape 20s linear infinite;
+}
+
+.floating-shape.circle {
+    width: 100px;
+    height: 100px;
+    border: 2px solid #8b5cf6;
+    border-radius: 50%;
+}
+
+.floating-shape.square {
+    width: 80px;
+    height: 80px;
+    border: 2px solid #06b6d4;
+    transform: rotate(45deg);
+}
+
+.floating-shape.triangle {
+    width: 0;
+    height: 0;
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    border-bottom: 86px solid rgba(236, 72, 153, 0.3);
+}
+
+@keyframes floatShape {
+    0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.1; }
+    90% { opacity: 0.1; }
+    100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+}
+
+/* Glow Text */
+.glow-text {
+    text-shadow: 0 0 20px rgba(139, 92, 246, 0.5), 0 0 40px rgba(139, 92, 246, 0.3);
+}
+
+/* Shimmer Card Effect */
+.shimmer-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.shimmer-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+    animation: shimmer 3s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+
+/* Magnetic Button */
+.btn-magnetic {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Page Transition */
+body {
+    animation: pageIn 0.8s ease-out;
+}
+
+@keyframes pageIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .aurora { opacity: 0.2; }
+    .floating-shapes { display: none; }
+    #particles-canvas { opacity: 0.5; }
+}
