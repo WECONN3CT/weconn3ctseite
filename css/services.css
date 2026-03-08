@@ -1,0 +1,2269 @@
+/* ================================
+   SERVICES - Bento Grid Layout
+   ================================ */
+
+/* --------------------------------
+   Animate on Scroll – Premium Spring + Blur
+   -------------------------------- */
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(40px) scale(0.97);
+    filter: blur(4px);
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                filter 0.55s ease;
+    will-change: opacity, transform, filter;
+}
+
+.animate-on-scroll.is-visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0px);
+}
+
+/* --------------------------------
+   Hero Section
+   -------------------------------- */
+.services-hero {
+    position: relative;
+    height: 100vh;
+    min-height: 620px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    text-align: center;
+    /* Subtiler Hintergrund-Gradient */
+    background: radial-gradient(ellipse 120% 80% at 50% 0%, rgba(46, 62, 232, 0.05) 0%, transparent 60%),
+                radial-gradient(ellipse 80% 60% at 80% 100%, rgba(157, 78, 221, 0.06) 0%, transparent 55%),
+                linear-gradient(180deg, #f4f7ff 0%, #eef2ff 50%, #f8faff 100%);
+    /* Navbar-Offset damit Inhalt nicht unter der Navbar hängt */
+    padding-top: 80px;
+    padding-bottom: 120px;
+}
+
+.services-hero__orb-1 {
+    position: absolute;
+    top: -120px;
+    right: -200px;
+    width: 800px;
+    height: 800px;
+    background: radial-gradient(circle, rgba(46, 62, 232, 0.13) 0%, transparent 65%);
+    border-radius: 50%;
+    filter: blur(100px);
+    animation: orb-float 14s ease-in-out infinite;
+    pointer-events: none;
+}
+
+.services-hero__orb-2 {
+    position: absolute;
+    bottom: -100px;
+    left: -160px;
+    width: 700px;
+    height: 700px;
+    background: radial-gradient(circle, rgba(157, 78, 221, 0.11) 0%, transparent 65%);
+    border-radius: 50%;
+    filter: blur(90px);
+    animation: orb-float 18s ease-in-out infinite reverse;
+    pointer-events: none;
+}
+
+/* 3. Orb – subtil in der Mitte unten */
+.services-hero__orb-3 {
+    position: absolute;
+    bottom: -60px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+    height: 300px;
+    background: radial-gradient(ellipse, rgba(46, 62, 232, 0.07) 0%, transparent 70%);
+    border-radius: 50%;
+    filter: blur(60px);
+    pointer-events: none;
+}
+
+@keyframes orb-float {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33%       { transform: translate(30px, -40px) scale(1.08); }
+    66%       { transform: translate(-20px, 20px) scale(0.94); }
+}
+
+.services-hero__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(46, 62, 232, 0.06);
+    border: 1px solid rgba(46, 62, 232, 0.18);
+    color: #2E3EE8;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 6px 16px;
+    border-radius: 100px;
+    margin-bottom: 24px;
+}
+
+.services-hero__badge-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #2E3EE8;
+    animation: ping-dot 1.8s ease-in-out infinite;
+}
+
+@keyframes ping-dot {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50%       { opacity: 0.4; transform: scale(1.5); }
+}
+
+.services-hero__title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(2.2rem, 5.5vw, 3.8rem);
+    font-weight: 700;
+    line-height: 1.2;
+    color: #1E293B;
+    letter-spacing: -0.03em;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.services-hero__title .gradient-word {
+    background: linear-gradient(135deg, #2E3EE8 0%, #9D4EDD 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.services-hero__sub {
+    font-size: 1.15rem;
+    color: #64748b;
+    max-width: 720px;
+    margin: 0.8rem auto 2rem;
+    line-height: 1.7;
+}
+
+/* CTA-Buttons in der Hero */
+.services-hero__ctas {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    flex-wrap: wrap;
+}
+
+.services-hero__btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, #60a5fa, #1d4ed8, #2E3EE8);
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.95rem;
+    padding: 14px 32px;
+    border-radius: 100px;
+    text-decoration: none;
+    box-shadow: 0 8px 24px rgba(46, 62, 232, 0.32);
+    transition: transform 0.22s ease, box-shadow 0.22s ease;
+}
+
+.services-hero__btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 36px rgba(46, 62, 232, 0.44);
+}
+
+.services-hero__btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(186,107,248,0.5) 100%);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    color: #374151;
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 14px 28px;
+    border-radius: 100px;
+    text-decoration: none;
+    border: 1px solid rgba(186, 107, 248, 0.3);
+    transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.services-hero__btn-secondary:hover {
+    background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(186,107,248,0.5) 100%);
+    border-color: rgba(186, 107, 248, 0.3);
+}
+
+/* Scroll-Indikator am unteren Rand der Hero */
+.services-hero__scroll {
+    position: absolute;
+    bottom: 36px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    opacity: 0.55;
+    transition: opacity 0.2s ease;
+}
+
+.services-hero__scroll:hover {
+    opacity: 1;
+}
+
+.services-hero__scroll-label {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #64748b;
+}
+
+.services-hero__scroll-arrow {
+    width: 28px;
+    height: 28px;
+    animation: bounce-scroll-s 2s ease-in-out infinite;
+    color: #64748b;
+}
+
+.services-hero__scroll-arrow svg {
+    width: 100%;
+    height: 100%;
+}
+
+@keyframes bounce-scroll-s {
+    0%, 100% { transform: translateY(0); }
+    50%       { transform: translateY(6px); }
+}
+
+/* --------------------------------
+   Bento Grid
+   -------------------------------- */
+.services-section {
+    padding: 80px 0 100px;
+    position: relative;
+    /* Subtle colored mesh so glass cards have something to blur against */
+    background:
+        radial-gradient(ellipse 900px 700px at 15% 40%, rgba(46, 62, 232, 0.07) 0%, transparent 65%),
+        radial-gradient(ellipse 700px 500px at 85% 25%, rgba(157, 78, 221, 0.07) 0%, transparent 65%),
+        radial-gradient(ellipse 600px 500px at 55% 85%, rgba(14, 165, 233, 0.05) 0%, transparent 65%),
+        linear-gradient(180deg, #f8faff 0%, #eef2ff 50%, #f8faff 100%);
+}
+
+.services-bento-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto;
+    gap: 1.25rem;
+    overflow: visible;
+}
+
+/* Explicit layout (HTML order: App, KI, Web, Software, UX, Wartung):
+   Row 1: App (col 1-2) | KI (col 3)
+   Row 2: Web (col 1)   | Software (col 2-3)
+   Row 3: UX (col 1-2)  | Wartung (col 3)
+*/
+.service-card:nth-child(1) { grid-column: 1 / span 2; grid-row: 1; z-index: 6; } /* App – Nocken rechts+unten */
+.service-card:nth-child(2) { grid-column: 3 / span 1; grid-row: 1; z-index: 4; } /* KI  – Nocken unten, Kerbe links */
+.service-card:nth-child(3) { grid-column: 1 / span 1; grid-row: 2; z-index: 5; } /* Web – Nocken rechts+unten, Kerbe oben */
+.service-card:nth-child(4) { grid-column: 2 / span 2; grid-row: 2; z-index: 3; } /* Soft – Nocken unten, Kerben links+oben */
+.service-card:nth-child(5) { grid-column: 1 / span 2; grid-row: 3; z-index: 2; } /* UX  – Nocken rechts, Kerbe oben */
+.service-card:nth-child(6) { grid-column: 3 / span 1; grid-row: 3; z-index: 1; } /* War – Kerben oben+links */
+
+/* --------------------------------
+   Service Card Base – Glassmorphism
+   -------------------------------- */
+.service-card {
+    position: relative;
+    /* Frosted glass */
+    background: rgba(255, 255, 255, 0.72);
+    backdrop-filter: blur(24px) saturate(160%);
+    -webkit-backdrop-filter: blur(24px) saturate(160%);
+    /* Glass border: inner highlight + outer subtle stroke */
+    border: 1px solid rgba(255, 255, 255, 0.88);
+    border-radius: 24px;
+    padding: 2rem;
+    overflow: hidden;
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+                box-shadow 0.4s ease,
+                border-color 0.3s ease,
+                background 0.3s ease;
+    cursor: default;
+    overflow: visible; /* Puzzle-Nocken dürfen über die Karte hinausragen */
+    min-height: 280px;
+    display: flex;
+    flex-direction: column;
+    /* Base glass shadow */
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.9),  /* top highlight */
+        0 8px 32px rgba(0, 0, 0, 0.06),
+        0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+/* Mouse-follow spotlight */
+.service-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 24px;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    background: radial-gradient(
+        circle 280px at var(--mouse-x, 50%) var(--mouse-y, 20%),
+        var(--card-spotlight, rgba(46, 62, 232, 0.10)),
+        transparent 70%
+    );
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Static corner glow */
+.service-card::after {
+    content: '';
+    position: absolute;
+    top: -30px;
+    right: -30px;
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    background: var(--card-glow, radial-gradient(circle, rgba(46, 62, 232, 0.09), transparent 70%));
+    filter: blur(50px);
+    pointer-events: none;
+    z-index: 0;
+    transition: opacity 0.4s ease;
+}
+
+.service-card:hover {
+    transform: translateY(-8px) scale(1.01);
+    background: rgba(255, 255, 255, 0.88);
+    border-color: rgba(255, 255, 255, 0.95);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 1),
+        0 24px 64px var(--card-shadow, rgba(46, 62, 232, 0.18)),
+        0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+/* Puzzle-Modus:
+   – backdrop-filter deaktiviert → Tab-Bereiche sehen identisch zur Karte aus
+   – opakes Weiß als Hintergrund → einheitliche Farbe über den gesamten Puzzle-Umriss
+   – filter: drop-shadow() folgt dem clip-path (box-shadow wird weggekürzt) */
+.service-card.puzzle-active {
+    background: rgba(255, 255, 255, 0.97);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    box-shadow: none;
+    filter:
+        drop-shadow(0 6px 22px rgba(0, 0, 0, 0.08))
+        drop-shadow(0 2px 6px rgba(0, 0, 0, 0.05));
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+                filter 0.4s ease;
+}
+
+.service-card.puzzle-active:hover {
+    filter:
+        drop-shadow(0 18px 44px var(--card-shadow, rgba(46, 62, 232, 0.2)))
+        drop-shadow(0 4px 12px rgba(0, 0, 0, 0.07));
+}
+
+.service-card:hover::before {
+    opacity: 1;
+}
+
+/* Color variants per service */
+.service-card--app {
+    --card-spotlight: rgba(46, 62, 232, 0.09);
+    --card-glow: radial-gradient(circle, rgba(46, 62, 232, 0.10), transparent 70%);
+    --card-shadow: rgba(46, 62, 232, 0.18);
+    --card-icon-from: #2E3EE8;
+    --card-icon-to: #9D4EDD;
+    --card-number-color: #2E3EE8;
+}
+
+.service-card--web {
+    --card-spotlight: rgba(14, 165, 233, 0.09);
+    --card-glow: radial-gradient(circle, rgba(14, 165, 233, 0.10), transparent 70%);
+    --card-shadow: rgba(14, 165, 233, 0.18);
+    --card-icon-from: #2E3EE8;
+    --card-icon-to: #0ea5e9;
+    --card-number-color: #0ea5e9;
+}
+
+.service-card--ki {
+    --card-spotlight: rgba(157, 78, 221, 0.09);
+    --card-glow: radial-gradient(circle, rgba(157, 78, 221, 0.10), transparent 70%);
+    --card-shadow: rgba(157, 78, 221, 0.18);
+    --card-icon-from: #9D4EDD;
+    --card-icon-to: #ec4899;
+    --card-number-color: #9D4EDD;
+}
+
+.service-card--software {
+    --card-spotlight: rgba(99, 102, 241, 0.09);
+    --card-glow: radial-gradient(circle, rgba(99, 102, 241, 0.10), transparent 70%);
+    --card-shadow: rgba(99, 102, 241, 0.18);
+    --card-icon-from: #2E3EE8;
+    --card-icon-to: #6366f1;
+    --card-number-color: #6366f1;
+}
+
+.service-card--ux {
+    --card-spotlight: rgba(157, 78, 221, 0.09);
+    --card-glow: radial-gradient(circle, rgba(249, 115, 22, 0.10), transparent 70%);
+    --card-shadow: rgba(249, 115, 22, 0.18);
+    --card-icon-from: #9D4EDD;
+    --card-icon-to: #f97316;
+    --card-number-color: #f97316;
+}
+
+.service-card--support {
+    --card-spotlight: rgba(100, 116, 139, 0.09);
+    --card-glow: radial-gradient(circle, rgba(100, 116, 139, 0.10), transparent 70%);
+    --card-shadow: rgba(46, 62, 232, 0.14);
+    --card-icon-from: #64748b;
+    --card-icon-to: #2E3EE8;
+    --card-number-color: #64748b;
+}
+
+/* Card content (above pseudo-elements) */
+.service-card__inner {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.service-card__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 1.25rem;
+}
+
+.service-card__number {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--card-number-color, #2E3EE8);
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(8px);
+    padding: 4px 12px;
+    border-radius: 100px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+
+.service-card__icon {
+    width: 54px;
+    height: 54px;
+    border-radius: 16px;
+    background: linear-gradient(145deg, var(--card-icon-from, #2E3EE8), var(--card-icon-to, #9D4EDD));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    /* iOS-style icon shadow */
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.35),
+        0 8px 20px rgba(0, 0, 0, 0.18),
+        0 2px 6px rgba(0, 0, 0, 0.12);
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+}
+
+.service-card:hover .service-card__icon {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.4),
+        0 12px 28px rgba(0, 0, 0, 0.22),
+        0 3px 8px rgba(0, 0, 0, 0.12);
+}
+
+.service-card__icon svg {
+    width: 26px;
+    height: 26px;
+    stroke: rgba(255, 255, 255, 0.95);
+    filter: drop-shadow(0 1px 2px rgba(0,0,0,0.15));
+}
+
+.service-card__title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 4px;
+    line-height: 1.2;
+}
+
+.service-card__tagline {
+    font-size: 0.9rem;
+    color: #94a3b8;
+    margin-bottom: 1.25rem;
+    line-height: 1.5;
+}
+
+.service-card__features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 1.25rem;
+}
+
+.service-card__feature-pill {
+    font-size: 0.74rem;
+    font-weight: 500;
+    color: #475569;
+    background: rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(8px);
+    padding: 4px 11px;
+    border-radius: 100px;
+    white-space: nowrap;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    transition: background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.service-card__feature-pill:hover {
+    background: rgba(255, 255, 255, 0.85);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+.service-card__footer {
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.service-card__tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.service-card__tech-badge {
+    font-size: 0.67rem;
+    font-weight: 600;
+    color: #64748b;
+    background: rgba(255, 255, 255, 0.55);
+    border: 1px solid rgba(226, 232, 240, 0.7);
+    backdrop-filter: blur(6px);
+    padding: 3px 9px;
+    border-radius: 7px;
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    letter-spacing: 0.01em;
+}
+
+.service-card__cta {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--card-number-color, #2E3EE8);
+    text-decoration: none;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    transition: gap 0.2s ease;
+    flex-shrink: 0;
+}
+
+.service-card__cta:hover {
+    gap: 8px;
+}
+
+/* --------------------------------
+   Process Section – Horizontal Sticky Scroll
+   -------------------------------- */
+.process-hx-section {
+    /* KEIN overflow: hidden hier! Das bricht position: sticky */
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+    background: linear-gradient(160deg, #f4f7ff 0%, #eef2ff 55%, #f4f7ff 100%);
+}
+
+/* ---- Scroll-Wrapper: gibt Scroll-Raum für 3 Übergänge ---- */
+.process-hx-wrapper {
+    height: 550vh;
+    position: relative;
+}
+
+/* ---- Sticky inner: bleibt im Viewport ---- */
+.process-hx-sticky {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Ambient Glow im Hintergrund */
+.process-hx-sticky::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(ellipse 70% 60% at 20% 40%, rgba(99,102,241,0.07) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 50% at 80% 60%, rgba(14,165,233,0.05) 0%, transparent 60%);
+    pointer-events: none;
+}
+
+/* ---- Header ---- */
+.process-hx-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2.5rem 3rem 1.2rem;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 2;
+}
+
+.process-hx-badge {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #2E3EE8;
+    opacity: 0.7;
+}
+
+.process-hx-heading {
+    font-size: clamp(1.4rem, 2.5vw, 2rem);
+    font-weight: 800;
+    color: #0f172a;
+    letter-spacing: -0.025em;
+    line-height: 1.2;
+    /* Position: mittig */
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.process-hx-heading em {
+    font-family: 'Pacifico', cursive;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1.45em;
+    background: linear-gradient(135deg, #2E3EE8, #9D4EDD);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.process-hx-counter {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: rgba(100, 116, 139, 0.6);
+    letter-spacing: 0.04em;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.process-hx-counter #hxCurrent {
+    color: #2E3EE8;
+    font-size: 1rem;
+}
+
+.process-hx-counter__sep {
+    opacity: 0.4;
+}
+
+/* ---- Viewport: nimmt den restlichen Platz ---- */
+.process-hx-viewport {
+    flex: 1;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+}
+
+/* ---- Stack: alle 4 Karten absolut übereinander ---- */
+.process-hx-stack {
+    position: absolute;
+    inset: 0;
+}
+
+/* ---- Die eigentliche Karte (JS positioniert via transform) ---- */
+.process-hx-card {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: min(900px, 88vw);
+    height: min(480px, 72vh);
+    border-radius: 28px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.25),
+        0 6px 16px rgba(0, 0, 0, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    will-change: transform;
+}
+
+/* Pre-JS Initialzustand: Karte 0 sichtbar, Rest off-screen rechts.
+   JS überschreibt diese Transforms sobald es läuft. */
+.process-hx-card[data-card="0"] {
+    transform: translateY(-50%);
+    z-index: 4;
+}
+
+/* ---- Holographic Card (Karte 01) ---- */
+.holo-card {
+    --pointer-x: 50%;
+    --pointer-y: 50%;
+    --pointer-from-center: 0;
+    --pointer-from-top: 0.5;
+    --pointer-from-left: 0.5;
+    --background-x: 50%;
+    --background-y: 50%;
+    --rotate-x: 0deg;
+    --rotate-y: 0deg;
+    /* Default mask: <> Icon */
+    --holo-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpolyline points='16 18 22 12 16 6' stroke='white' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpolyline points='8 6 2 12 8 18' stroke='white' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    --holo-mask-size: 400px 400px;
+    --holo-mask-position: 95% 57%;
+    perspective: 800px;
+    transform-style: preserve-3d;
+}
+
+/* Karte 02: Globus-Icon */
+.holo-card[data-card="1"] {
+    --holo-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='10' stroke='white' stroke-width='2' fill='none'/%3E%3Cline x1='2' y1='12' x2='22' y2='12' stroke='white' stroke-width='2'/%3E%3Cpath d='M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z' stroke='white' stroke-width='2' fill='none'/%3E%3C/svg%3E");
+}
+
+/* Karte 03: Fingerprint-Icon */
+.holo-card[data-card="2"] {
+    --holo-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 10a2 2 0 0 0-2 2c0 1.02-.1 2.51-.26 4' stroke='white' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M14 13.12c0 2.38 0 6.38-1 8.88' stroke='white' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M17.29 21.02c.12-.6.43-2.3.5-3.02' stroke='white' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M2 12a10 10 0 0 1 18-6' stroke='white' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M2 16h.01' stroke='white' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M21.8 16c.2-2 .131-5.354 0-6' stroke='white' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M5 19.5C5.5 18 6 15 6 12a6 6 0 0 1 .34-2' stroke='white' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M8.65 22c.21-.66.45-1.32.57-2' stroke='white' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M9 6.8a6 6 0 0 1 9 5.2v2' stroke='white' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+/* Karte 04: Sparkle/KI-Icon */
+.holo-card[data-card="3"] {
+    --holo-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.937A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.062 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.062a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z' stroke='white' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M20 3v4M22 5h-4' stroke='white' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+/* Karte 05: Shield-Icon */
+.holo-card[data-card="4"] {
+    --holo-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z' stroke='white' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpolyline points='9 12 11 14 15 10' stroke='white' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+.holo-card .process-hx-card__body {
+    z-index: 6;
+}
+
+.holo-card .process-hx-card__watermark {
+    z-index: 1;
+}
+
+.holo-card .process-hx-card__glow {
+    z-index: 1;
+}
+
+/* Dynamischer Schatten folgt der Maus */
+.holo-card.active {
+    box-shadow:
+        rgba(0, 0, 0, 0.6) calc((var(--pointer-from-left) * 10px) - 3px)
+        calc((var(--pointer-from-top) * 20px) - 6px) 20px -5px,
+        0 20px 50px rgba(0, 0, 0, 0.25),
+        0 6px 16px rgba(0, 0, 0, 0.15);
+    transition: box-shadow 0.1s ease;
+}
+
+/* ---- Holographic Shine (exakt wie pc-shine aus ProfileCard) ---- */
+.holo-shine {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    border-radius: inherit;
+    overflow: hidden;
+
+    --space: 5%;
+    --angle: -45deg;
+    --sunpillar-1: hsl(2, 100%, 73%);
+    --sunpillar-2: hsl(53, 100%, 69%);
+    --sunpillar-3: hsl(93, 100%, 69%);
+    --sunpillar-4: hsl(176, 100%, 76%);
+    --sunpillar-5: hsl(228, 100%, 74%);
+    --sunpillar-6: hsl(283, 100%, 73%);
+
+    /* Icon-Maske: per CSS-Variable pro Karte konfigurierbar */
+    -webkit-mask-image: var(--holo-mask);
+    mask-image: var(--holo-mask);
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: var(--holo-mask-size);
+    mask-size: var(--holo-mask-size);
+    -webkit-mask-position: var(--holo-mask-position);
+    mask-position: var(--holo-mask-position);
+    -webkit-mask-mode: luminance;
+    mask-mode: luminance;
+
+    /* Regenbogen-Gradient (wie pc-shine) */
+    background-image:
+        repeating-linear-gradient(
+            0deg,
+            var(--sunpillar-1) calc(var(--space) * 1),
+            var(--sunpillar-2) calc(var(--space) * 2),
+            var(--sunpillar-3) calc(var(--space) * 3),
+            var(--sunpillar-4) calc(var(--space) * 4),
+            var(--sunpillar-5) calc(var(--space) * 5),
+            var(--sunpillar-6) calc(var(--space) * 6),
+            var(--sunpillar-1) calc(var(--space) * 7)
+        ),
+        repeating-linear-gradient(
+            var(--angle),
+            #0e152e 0%,
+            hsl(180, 10%, 60%) 3.8%,
+            hsl(180, 29%, 66%) 4.5%,
+            hsl(180, 10%, 60%) 5.2%,
+            #0e152e 10%,
+            #0e152e 12%
+        ),
+        radial-gradient(
+            farthest-corner circle at var(--pointer-x) var(--pointer-y),
+            hsla(0, 0%, 0%, 0.1) 12%,
+            hsla(0, 0%, 0%, 0.15) 20%,
+            hsla(0, 0%, 0%, 0.25) 120%
+        );
+    background-position:
+        0 var(--background-y),
+        var(--background-x) var(--background-y),
+        center;
+    background-blend-mode: color, hard-light;
+    background-size: 500% 500%, 300% 300%, 200% 200%;
+    background-repeat: repeat;
+
+    mix-blend-mode: color-dodge;
+    filter: brightness(0.66) contrast(1.33) saturate(0.33) opacity(0.5);
+    animation: holo-shine-anim 18s linear infinite;
+    animation-play-state: running;
+    transition: filter 0.8s ease;
+}
+
+/* ::before – Luminosity-Layer (wie pc-shine::before) */
+.holo-shine::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(
+            45deg,
+            var(--sunpillar-4),
+            var(--sunpillar-5),
+            var(--sunpillar-6),
+            var(--sunpillar-1),
+            var(--sunpillar-2),
+            var(--sunpillar-3)
+        ),
+        radial-gradient(
+            circle at var(--pointer-x) var(--pointer-y),
+            hsl(0, 0%, 70%) 0%,
+            hsla(0, 0%, 30%, 0.2) 90%
+        );
+    background-size: 250% 250%, 100% 100%;
+    background-position:
+        var(--pointer-x) var(--pointer-y),
+        center;
+    background-blend-mode: color-dodge;
+    filter: brightness(calc(2 - var(--pointer-from-center)))
+            contrast(calc(var(--pointer-from-center) + 2))
+            saturate(calc(0.5 + var(--pointer-from-center)));
+    mix-blend-mode: luminosity;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+}
+
+/* ::after – Difference-Layer (wie pc-shine::after) */
+.holo-shine::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+        repeating-linear-gradient(
+            0deg,
+            var(--sunpillar-1) calc(var(--space) * 1),
+            var(--sunpillar-2) calc(var(--space) * 2),
+            var(--sunpillar-3) calc(var(--space) * 3),
+            var(--sunpillar-4) calc(var(--space) * 4),
+            var(--sunpillar-5) calc(var(--space) * 5),
+            var(--sunpillar-6) calc(var(--space) * 6),
+            var(--sunpillar-1) calc(var(--space) * 7)
+        ),
+        repeating-linear-gradient(
+            var(--angle),
+            #0e152e 0%,
+            hsl(180, 10%, 60%) 3.8%,
+            hsl(180, 29%, 66%) 4.5%,
+            hsl(180, 10%, 60%) 5.2%,
+            #0e152e 10%,
+            #0e152e 12%
+        );
+    background-position:
+        0 var(--background-y),
+        calc(var(--background-x) * 0.4) calc(var(--background-y) * 0.5);
+    background-size: 200% 300%, 700% 700%;
+    mix-blend-mode: difference;
+    filter: brightness(0.8) contrast(1.5);
+    opacity: 0;
+    transition: opacity 0.8s ease;
+}
+
+/* Hover: intensiver + Sublayer einblenden */
+.holo-card.active .holo-shine {
+    filter: brightness(0.85) contrast(1.5) saturate(0.5);
+    animation-play-state: paused;
+}
+
+.holo-card.active .holo-shine::before,
+.holo-card.active .holo-shine::after {
+    opacity: 1;
+}
+
+@keyframes holo-shine-anim {
+    0%   { background-position: 0 var(--background-y), 0 0, center; }
+    100% { background-position: 0 var(--background-y), 90% 90%, center; }
+}
+
+/* Glare-Layer: folgt dem Mauszeiger, in Kartenfarbe */
+.holo-glare {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    pointer-events: none;
+    border-radius: inherit;
+    overflow: hidden;
+    background-image: radial-gradient(
+        farthest-corner circle at var(--pointer-x) var(--pointer-y),
+        var(--holo-glare-bright, hsl(248, 25%, 80%)) 12%,
+        var(--holo-glare-dark, hsla(207, 40%, 30%, 0.8)) 90%
+    );
+    mix-blend-mode: overlay;
+    filter: brightness(0.8) contrast(1.2);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+/* Glare-Farben pro Karte */
+.holo-card[data-card="0"] { --holo-glare-bright: hsla(239, 84%, 80%, 1); --holo-glare-dark: hsla(239, 50%, 25%, 0.8); }
+.holo-card[data-card="1"] { --holo-glare-bright: hsla(263, 80%, 80%, 1); --holo-glare-dark: hsla(263, 50%, 25%, 0.8); }
+.holo-card[data-card="2"] { --holo-glare-bright: hsla(293, 80%, 82%, 1); --holo-glare-dark: hsla(293, 50%, 28%, 0.8); }
+.holo-card[data-card="3"] { --holo-glare-bright: hsla(199, 85%, 78%, 1); --holo-glare-dark: hsla(199, 50%, 25%, 0.8); }
+.holo-card[data-card="4"] { --holo-glare-bright: hsla(160, 75%, 75%, 1); --holo-glare-dark: hsla(160, 50%, 22%, 0.8); }
+
+.holo-card.active .holo-glare {
+    opacity: 1;
+}
+
+/* ---- Holographic Title Text ---- */
+.holo-card .process-hx-card__title {
+    position: relative;
+    background-image:
+        radial-gradient(
+            circle at var(--pointer-x) var(--pointer-y),
+            var(--holo-t3) 0%,
+            var(--holo-t2) 20%,
+            transparent 50%
+        ),
+        linear-gradient(
+            90deg,
+            var(--holo-t1) 0%,
+            var(--holo-t2) 25%,
+            var(--holo-t3) 50%,
+            var(--holo-t2) 75%,
+            var(--holo-t1) 100%
+        );
+    background-size: 300% 300%, 200% 100%;
+    background-position: var(--pointer-x) var(--pointer-y), 0% 0;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: holo-title-idle 8s linear infinite;
+    transition: filter 0.4s ease;
+    filter: brightness(0.9) saturate(0.7);
+}
+
+.holo-card.active .process-hx-card__title {
+    animation-play-state: paused;
+    filter: brightness(1.15) saturate(1);
+}
+
+@keyframes holo-title-idle {
+    0%   { background-position: 0% 0; }
+    100% { background-position: 200% 0; }
+}
+
+/* Karte 01: Indigo */
+.holo-card[data-card="0"] { --holo-t1: #6366f1; --holo-t2: #c7d2fe; --holo-t3: #ffffff; }
+/* Karte 02: Violet */
+.holo-card[data-card="1"] { --holo-t1: #8b5cf6; --holo-t2: #ddd6fe; --holo-t3: #ffffff; }
+/* Karte 03: Fuchsia */
+.holo-card[data-card="2"] { --holo-t1: #d946ef; --holo-t2: #f5d0fe; --holo-t3: #ffffff; }
+/* Karte 04: Sky */
+.holo-card[data-card="3"] { --holo-t1: #0ea5e9; --holo-t2: #bae6fd; --holo-t3: #ffffff; }
+/* Karte 05: Emerald */
+.holo-card[data-card="4"] { --holo-t1: #10b981; --holo-t2: #a7f3d0; --holo-t3: #ffffff; }
+
+.process-hx-card[data-card="1"],
+.process-hx-card[data-card="2"],
+.process-hx-card[data-card="3"] {
+    transform: translateX(110vw) translateY(-50%);
+}
+
+/* Glow-Overlay (pro Karte via inline style) */
+.process-hx-card__glow {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+/* Große Wasserzeichen-Zahl */
+.process-hx-card__watermark {
+    position: absolute;
+    left: -0.08em;
+    bottom: -0.18em;
+    font-size: clamp(9rem, 22vw, 18rem);
+    font-weight: 900;
+    line-height: 1;
+    color: rgba(255, 255, 255, 0.03);
+    letter-spacing: -0.05em;
+    pointer-events: none;
+    user-select: none;
+}
+
+/* Karten-Inhalt */
+.process-hx-card__body {
+    position: relative;
+    z-index: 1;
+    height: 100%;
+    padding: 2.5rem 3rem;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Oberste Zeile: Step-Label + Icon */
+.process-hx-card__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+}
+
+.process-hx-card__step {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+}
+
+.process-hx-card__icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 16px;
+    border: 1px solid;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.process-hx-card__title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: -0.035em;
+    line-height: 1.1;
+    margin-bottom: 1.1rem;
+}
+
+.process-hx-card__desc {
+    font-size: 0.95rem;
+    color: rgba(203, 213, 225, 0.75);
+    line-height: 1.75;
+    max-width: 540px;
+    margin-bottom: auto;
+}
+
+/* Pills als horizontale Bullet-Punkte */
+.process-hx-card__pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-top: 1.8rem;
+}
+
+.process-hx-card__pills span {
+    font-size: 0.78rem;
+    font-weight: 600;
+    border: 1px solid;
+    padding: 5px 14px;
+    border-radius: 100px;
+    letter-spacing: 0.01em;
+}
+
+/* ---- Footer: Fortschrittsbalken + Dots ---- */
+.process-hx-footer {
+    padding: 1rem 3rem 1.5rem;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    position: relative;
+    z-index: 2;
+}
+
+.process-hx-progress {
+    height: 2px;
+    background: rgba(0, 0, 0, 0.08);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.process-hx-progress__fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #6366f1, #8b5cf6, #d946ef, #0ea5e9);
+    border-radius: 2px;
+    transition: width 0.1s linear;
+}
+
+.process-hx-dots {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.process-hx-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 100px;
+    background: rgba(46, 62, 232, 0.18);
+    transition: width 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
+                background 0.35s ease;
+}
+
+.process-hx-dot.active {
+    width: 24px;
+    background: #2E3EE8;
+}
+
+/* ---- Mobile: Karten vertikal gestapelt ---- */
+@media (max-width: 768px) {
+    .process-hx-wrapper {
+        height: auto;
+    }
+    .process-hx-sticky {
+        position: relative;
+        height: auto;
+        overflow: visible;
+    }
+    .process-hx-header {
+        padding: 2.5rem 1.25rem 1rem;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+    .process-hx-heading {
+        position: relative;
+        left: auto;
+        transform: none;
+    }
+    .process-hx-counter {
+        display: none;
+    }
+    .process-hx-viewport {
+        overflow: visible;
+        min-height: 0;
+    }
+    .process-hx-stack {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+        padding: 0 1.25rem 1.25rem;
+    }
+    .process-hx-card {
+        position: relative;
+        top: auto;
+        left: auto;
+        transform: none !important;
+        width: 100%;
+        height: auto;
+        min-height: 320px;
+        border-radius: 22px;
+        will-change: auto;
+    }
+    .process-hx-card__body {
+        padding: 1.75rem 1.5rem;
+    }
+    .process-hx-card__title {
+        font-size: 1.75rem;
+    }
+    .process-hx-card__watermark {
+        font-size: 7rem;
+    }
+    .process-hx-footer {
+        padding: 1.5rem 1.25rem 2rem;
+    }
+    .process-hx-dots {
+        display: none;
+    }
+}
+
+/* --------------------------------
+   Stats Bar
+   -------------------------------- */
+.stats-bar {
+    padding: 60px 0;
+    border-top: 1px solid #f0f0f5;
+    border-bottom: 1px solid #f0f0f5;
+}
+
+.stats-bar__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    text-align: center;
+}
+
+.stats-bar__number {
+    font-size: 2.5rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #2E3EE8, #9D4EDD);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+    margin-bottom: 8px;
+}
+
+.stats-bar__label {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: #94a3b8;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+/* --------------------------------
+   FAQ Section – Modern Premium
+   -------------------------------- */
+.faq-section {
+    padding: 96px 0 112px;
+    position: relative;
+    background: #fff;
+    overflow: hidden;
+}
+
+/* Subtle background mesh */
+.faq-bg {
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(ellipse 70% 50% at 80% 20%, rgba(157, 78, 221, 0.05) 0%, transparent 70%),
+        radial-gradient(ellipse 60% 40% at 10% 80%, rgba(46, 62, 232, 0.05) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.faq-header {
+    text-align: center;
+    margin-bottom: 64px;
+}
+
+/* List */
+.faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-bottom: 48px;
+}
+
+/* ---- Each FAQ Item ---- */
+.faq-item {
+    position: relative;
+    border-bottom: 1px solid #f1f5f9;
+    border-radius: 0;
+    transition: background 0.3s ease, border 0.3s ease, border-radius 0.35s ease,
+                box-shadow 0.35s ease, margin 0.35s ease;
+}
+
+.faq-item:first-child {
+    border-top: 1px solid #f1f5f9;
+}
+
+/* Hover */
+.faq-item:hover {
+    background: rgba(246, 248, 255, 0.7);
+}
+
+/* Open: rounded glow around the whole item (question + answer), no hard border */
+.faq-item.open {
+    background: rgba(249, 247, 255, 0.88);
+    border-color: transparent;
+    border-radius: 16px;
+    box-shadow: 0 0 0 4px rgba(157, 78, 221, 0.07),
+                0 4px 28px rgba(157, 78, 221, 0.12);
+    margin: 8px 0;
+}
+
+/* ---- Trigger Button ---- */
+.faq-trigger {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding: 26px 24px;
+    background: none;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    text-align: left;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.faq-trigger:focus,
+.faq-trigger:focus-visible {
+    outline: none;
+    box-shadow: none;
+}
+
+/* Number badge */
+.faq-trigger__num {
+    flex-shrink: 0;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: #d1d5db;
+    font-variant-numeric: tabular-nums;
+    width: 24px;
+    transition: color 0.3s ease;
+}
+
+.faq-item.open .faq-trigger__num {
+    color: #2E3EE8;
+}
+
+/* Question text */
+.faq-trigger__q {
+    flex: 1;
+    font-size: 1.02rem;
+    font-weight: 600;
+    color: #374151;
+    line-height: 1.5;
+    transition: color 0.25s ease;
+}
+
+.faq-item.open .faq-trigger__q {
+    color: #111827;
+}
+
+/* Icon – small circle, + rotates 45° to become × */
+.faq-trigger__icon {
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1.5px solid #e5e7eb;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #9ca3af;
+    transition: border-color 0.25s ease, color 0.25s ease, background 0.25s ease;
+}
+
+.faq-trigger__icon svg {
+    width: 14px;
+    height: 14px;
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Open: icon rotates, gets primary color */
+.faq-item.open .faq-trigger__icon {
+    border-color: rgba(46, 62, 232, 0.3);
+    background: rgba(46, 62, 232, 0.06);
+    color: #2E3EE8;
+}
+
+.faq-item.open .faq-trigger__icon svg {
+    transform: rotate(45deg);
+}
+
+/* ---- Answer Panel – grid trick for smooth height ---- */
+.faq-answer {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.faq-item.open .faq-answer {
+    grid-template-rows: 1fr;
+}
+
+.faq-answer__inner {
+    overflow: hidden;
+    /* Indent to align under the question text */
+    padding: 0 24px 0 66px;
+    opacity: 0;
+    transition: opacity 0.3s ease, padding-bottom 0.3s ease;
+}
+
+.faq-item.open .faq-answer__inner {
+    opacity: 1;
+    padding-bottom: 28px;
+    transition: opacity 0.35s ease 0.08s, padding-bottom 0.3s ease;
+}
+
+.faq-answer__inner p {
+    font-size: 0.93rem;
+    color: #6b7280;
+    line-height: 1.85;
+    max-width: 600px;
+}
+
+.faq-answer__inner p strong {
+    color: #374151;
+    font-weight: 600;
+}
+
+/* ---- Footer Card ---- */
+.faq-footer {
+    margin-top: 48px;
+}
+
+.faq-footer__card {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: linear-gradient(135deg, rgba(46, 62, 232, 0.05) 0%, rgba(157, 78, 221, 0.05) 100%);
+    border: 1px solid rgba(46, 62, 232, 0.12);
+    border-radius: 20px;
+    padding: 28px 32px;
+}
+
+.faq-footer__icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #2E3EE8, #9D4EDD);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    flex-shrink: 0;
+    box-shadow: 0 6px 20px rgba(46, 62, 232, 0.25);
+}
+
+.faq-footer__title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 2px;
+}
+
+.faq-footer__sub {
+    font-size: 0.85rem;
+    color: #64748b;
+}
+
+.faq-footer__btn {
+    margin-left: auto;
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, #2E3EE8, #9D4EDD);
+    color: #fff;
+    font-weight: 600;
+    font-size: 0.9rem;
+    padding: 12px 24px;
+    border-radius: 12px;
+    text-decoration: none;
+    box-shadow: 0 4px 16px rgba(46, 62, 232, 0.28);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.faq-footer__btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(46, 62, 232, 0.38);
+}
+
+@media (max-width: 600px) {
+    .faq-trigger {
+        padding: 22px 16px;
+        gap: 14px;
+    }
+    .faq-trigger__num { display: none; }
+    .faq-answer__inner { padding-left: 16px; }
+    .faq-footer__card {
+        flex-wrap: wrap;
+        gap: 16px;
+        padding: 20px;
+    }
+    .faq-footer__btn { margin-left: 0; width: 100%; justify-content: center; }
+}
+
+/* --------------------------------
+   CTA Section
+   -------------------------------- */
+.cta-section {
+    background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%);
+    padding: 100px 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.cta-section::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 300px;
+    background: radial-gradient(ellipse, rgba(46, 62, 232, 0.25) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.cta-section__title {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 16px;
+    line-height: 1.1;
+}
+
+.cta-section__sub {
+    font-size: 1.05rem;
+    color: #94a3b8;
+    margin-bottom: 40px;
+}
+
+.cta-btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, #2E3EE8, #9D4EDD);
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.95rem;
+    padding: 14px 32px;
+    border-radius: 12px;
+    text-decoration: none;
+    box-shadow: 0 8px 24px rgba(46, 62, 232, 0.35);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.cta-btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(46, 62, 232, 0.45);
+}
+
+.cta-btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,0.08);
+    color: #fff;
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 14px 32px;
+    border-radius: 12px;
+    text-decoration: none;
+    border: 1px solid rgba(255,255,255,0.15);
+    transition: background 0.2s ease;
+}
+
+.cta-btn-secondary:hover {
+    background: rgba(255,255,255,0.14);
+}
+
+/* --------------------------------
+   Section Header
+   -------------------------------- */
+.section-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.section-badge {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #2E3EE8;
+    margin-bottom: 12px;
+}
+
+.section-title {
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 800;
+    color: #0f172a;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin-bottom: 12px;
+}
+
+.section-sub {
+    font-size: 1rem;
+    color: #64748b;
+    max-width: 500px;
+    margin: 0 auto;
+    line-height: 1.7;
+}
+
+/* --------------------------------
+   Responsive
+   -------------------------------- */
+@media (max-width: 600px) {
+    .services-hero {
+        min-height: 100svh; /* dynamic viewport height für Mobile-Browser */
+        padding-top: 70px;
+    }
+    .services-hero__ctas {
+        flex-direction: column;
+        align-items: stretch;
+        max-width: 280px;
+        margin: 0 auto;
+    }
+    .services-hero__btn-primary,
+    .services-hero__btn-secondary {
+        justify-content: center;
+    }
+    .services-hero__scroll {
+        bottom: 24px;
+    }
+}
+@media (max-width: 900px) {
+    .services-bento-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* Reset explicit positioning to auto-flow in 2-col grid */
+    .service-card:nth-child(1),
+    .service-card:nth-child(2),
+    .service-card:nth-child(3),
+    .service-card:nth-child(4),
+    .service-card:nth-child(5),
+    .service-card:nth-child(6) {
+        grid-column: span 1;
+        grid-row: auto;
+    }
+
+    /* Wide cards in 2-col still span both */
+    .service-card:nth-child(1),
+    .service-card:nth-child(4),
+    .service-card:nth-child(5) {
+        grid-column: span 2;
+    }
+
+    .case-studies-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .process-steps {
+        flex-wrap: wrap;
+        gap: 2rem;
+    }
+
+    .process-step:not(:last-child)::after {
+        display: none;
+    }
+
+    .process-step {
+        flex: 0 0 calc(50% - 1rem);
+    }
+
+    .stats-bar__grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .services-bento-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .service-card:nth-child(1),
+    .service-card:nth-child(2),
+    .service-card:nth-child(3),
+    .service-card:nth-child(4),
+    .service-card:nth-child(5),
+    .service-card:nth-child(6) {
+        grid-column: 1;
+        grid-row: auto;
+        min-height: 240px;
+    }
+
+    .case-studies-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .process-step {
+        flex: 0 0 100%;
+    }
+
+    .stats-bar__grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .cta-section {
+        padding: 60px 0;
+    }
+}
+
+/* --------------------------------
+   Services-Seite: Glow-Section Korrekturen
+   -------------------------------- */
+
+/* hero-scroll-wrapper: Animation endet bei ~100vh Scroll,
+   danach soll die sticky Hero-Section direkt mitlaufen */
+.hero-scroll-wrapper {
+    min-height: 200vh;
+}
+
+/* Den weißen Overlay-Layer entfernen (auf der Homepage gewünscht,
+   auf der Services-Seite überdeckt er die unteren Karten) */
+#showcase-glow-section::after {
+    display: none;
+}
+
+/* Dezenterer, schmalerer Glow für die Services-Seite */
+#showcase-glow-container {
+    background: linear-gradient(
+        135deg,
+        rgba(139, 92, 246, 0.35) 0%,
+        rgba(99, 102, 241, 0.25) 50%,
+        rgba(139, 92, 246, 0.35) 100%
+    );
+    box-shadow:
+        0 0 40px rgba(139, 92, 246, 0.2),
+        0 0 80px rgba(99, 102, 241, 0.12),
+        0 20px 40px rgba(0, 0, 0, 0.08);
+}
+
+/* --------------------------------
+   Bento-Grid: 4 Spalten, 2 Reihen
+   Reihe 1: App (breit) | KI | Web
+   Reihe 2: Software | UX (breit) | Wartung
+   Spiegelsymmetrisches Layout
+   -------------------------------- */
+.showcase-glow-inner .services-bento-grid {
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, auto);
+    gap: 0.875rem;
+}
+
+.showcase-glow-inner .service-card:nth-child(1) { grid-column: 1 / span 2; grid-row: 1; } /* App – breit */
+.showcase-glow-inner .service-card:nth-child(2) { grid-column: 3;          grid-row: 1; } /* KI  – schmal */
+.showcase-glow-inner .service-card:nth-child(3) { grid-column: 4;          grid-row: 1; } /* Web – schmal */
+.showcase-glow-inner .service-card:nth-child(4) { grid-column: 1;          grid-row: 2; } /* Soft – schmal */
+.showcase-glow-inner .service-card:nth-child(5) { grid-column: 2 / span 2; grid-row: 2; } /* UX  – breit */
+.showcase-glow-inner .service-card:nth-child(6) { grid-column: 4;          grid-row: 2; } /* Wartung – schmal */
+
+/* --------------------------------
+   Karten: Icon oben links, Titel darunter, kein Header-Wrapper
+   -------------------------------- */
+.showcase-glow-inner .service-card {
+    min-height: 0;
+    padding: 1.4rem 1.5rem;
+    border-radius: 20px;
+    text-align: left;
+}
+
+.showcase-glow-inner .service-card__inner {
+    text-align: left;
+}
+
+/* Icon: steht jetzt direkt oben, kein justify-content: space-between mehr */
+.showcase-glow-inner .service-card__icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 13px;
+    margin-bottom: 0.9rem;
+    /* Icon linksbündig (kein auto margin) */
+    align-self: flex-start;
+    flex-shrink: 0;
+}
+
+.showcase-glow-inner .service-card__icon svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* Header-Div existiert in neuen Karten nicht mehr, aber falls noch vorhanden: */
+.showcase-glow-inner .service-card__header {
+    display: none;
+}
+
+.showcase-glow-inner .service-card__title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.showcase-glow-inner .service-card__tagline {
+    font-size: 0.8rem;
+    margin-bottom: 0.8rem;
+    line-height: 1.5;
+}
+
+.showcase-glow-inner .service-card__features {
+    gap: 5px;
+    margin-bottom: 0.75rem;
+    justify-content: flex-start;
+}
+
+.showcase-glow-inner .service-card__feature-pill {
+    font-size: 0.67rem;
+    padding: 2px 9px;
+}
+
+.showcase-glow-inner .service-card__tech-badge {
+    font-size: 0.62rem;
+    padding: 2px 7px;
+}
+
+.showcase-glow-inner .service-card__cta {
+    font-size: 0.8rem;
+}
+
+/* ================================
+   CTA Booking Section
+   ================================ */
+.cta-booking {
+    position: relative;
+    padding: 120px 0;
+    background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%);
+    overflow: hidden;
+}
+
+.cta-booking__orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(100px);
+    opacity: 0.3;
+    pointer-events: none;
+}
+
+.cta-booking__orb--1 {
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, #6366f1, transparent 70%);
+    top: -150px;
+    right: -100px;
+}
+
+.cta-booking__orb--2 {
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, #9D4EDD, transparent 70%);
+    bottom: -120px;
+    left: -80px;
+}
+
+.cta-booking__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+}
+
+.cta-booking__content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.cta-booking__headline {
+    font-size: 2.75rem;
+    font-weight: 800;
+    color: #fff;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+}
+
+.cta-booking__accent {
+    font-family: 'Pacifico', cursive;
+    font-size: 1.15em;
+    letter-spacing: 0.07em;
+    background: linear-gradient(135deg, #a78bfa, #e879f9);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.cta-booking__subtext {
+    font-size: 1.125rem;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.7;
+    max-width: 480px;
+}
+
+.cta-booking__trust {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
+
+.cta-booking__trust-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.cta-booking__trust-icon {
+    width: 22px;
+    height: 22px;
+    color: #a78bfa;
+    flex-shrink: 0;
+}
+
+/* Calendly Container */
+.cta-booking__calendly-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.cta-booking__calendly {
+    width: 100%;
+    min-height: 600px;
+    border-radius: 20px;
+    border: 1px solid rgba(139, 92, 246, 0.25);
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    overflow: hidden;
+    position: relative;
+}
+
+.cta-booking__calendly-placeholder {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.25rem;
+    color: rgba(255, 255, 255, 0.35);
+    font-size: 0.95rem;
+}
+
+.cta-booking__calendar-icon {
+    width: 48px;
+    height: 48px;
+    opacity: 0.4;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .cta-booking {
+        padding: 80px 0;
+    }
+
+    .cta-booking__grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+    }
+
+    .cta-booking__headline {
+        font-size: 2rem;
+    }
+
+    .cta-booking__subtext {
+        font-size: 1rem;
+    }
+
+    .cta-booking__calendly {
+        min-height: 500px;
+    }
+
+    .cta-booking__orb--1 {
+        width: 300px;
+        height: 300px;
+        top: -80px;
+        right: -60px;
+    }
+
+    .cta-booking__orb--2 {
+        width: 250px;
+        height: 250px;
+        bottom: -60px;
+        left: -40px;
+    }
+}
+
+/* ================================================================
+   MOBILE OPTIMIERUNG – Services (max-width: 767px)
+   ================================================================ */
+@media (max-width: 767px) {
+
+    /* --- Hero Section -------------------------------------------- */
+    .services-hero {
+        padding-top: 100px;
+        padding-bottom: 80px;
+        min-height: auto;
+        height: auto;
+    }
+
+    .services-hero__orb-1 {
+        width: 350px;
+        height: 350px;
+        top: -60px;
+        right: -80px;
+    }
+
+    .services-hero__orb-2 {
+        width: 300px;
+        height: 300px;
+        bottom: -50px;
+        left: -60px;
+    }
+
+    .services-hero__orb-3 {
+        width: 300px;
+        height: 150px;
+    }
+
+    .services-hero__ctas {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+    }
+
+    .services-hero__btn-primary,
+    .services-hero__btn-secondary {
+        width: 100%;
+        justify-content: center;
+        min-height: 48px;
+    }
+
+    /* --- Showcase-Glow Container (Kernleistungen) --------------- */
+
+    /* Container: kompakter Glow, weniger Radius */
+    #showcase-glow-container {
+        border-radius: 20px;
+        box-shadow:
+            0 0 30px rgba(139, 92, 246, 0.15),
+            0 0 50px rgba(99, 102, 241, 0.08),
+            0 8px 20px rgba(0, 0, 0, 0.06);
+    }
+
+    /* Inner: minimales Padding, kein Overflow */
+    .showcase-glow-inner {
+        padding: 24px 16px 28px !important;
+        border-radius: 18px;
+        min-height: auto !important;
+        overflow: hidden !important;
+    }
+
+    /* Section Header im Container */
+    .showcase-glow-inner .text-center.mb-8 {
+        margin-bottom: 20px !important;
+    }
+
+    .section-title {
+        font-size: 1.5rem;
+    }
+
+    .section-sub {
+        font-size: 0.88rem;
+        line-height: 1.5;
+    }
+
+    /* --- Bento Grid → Single Column ----------------------------- */
+
+    /* KRITISCH: Die 4-Spalten auf 1 Spalte umstellen */
+    .showcase-glow-inner .services-bento-grid {
+        grid-template-columns: 1fr !important;
+        grid-template-rows: auto !important;
+        gap: 12px !important;
+    }
+
+    /* Alle grid-column/row Zuweisungen zurücksetzen */
+    .showcase-glow-inner .service-card:nth-child(1),
+    .showcase-glow-inner .service-card:nth-child(2),
+    .showcase-glow-inner .service-card:nth-child(3),
+    .showcase-glow-inner .service-card:nth-child(4),
+    .showcase-glow-inner .service-card:nth-child(5),
+    .showcase-glow-inner .service-card:nth-child(6) {
+        grid-column: 1 !important;
+        grid-row: auto !important;
+    }
+
+    /* --- Service Cards: Mobile-optimiertes Layout ---------------- */
+
+    .showcase-glow-inner .service-card {
+        padding: 20px !important;
+        border-radius: 16px;
+        min-height: auto;
+    }
+
+    /* Icon + Titel horizontal nebeneinander (spart vertikalen Platz) */
+    .showcase-glow-inner .service-card__inner {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+    }
+
+    /* Icon-Titel-Zeile: Icon links, Titel rechts daneben */
+    .showcase-glow-inner .service-card__icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 12px;
+        margin-bottom: 12px;
+    }
+
+    .showcase-glow-inner .service-card__icon svg {
+        width: 18px;
+        height: 18px;
+    }
+
+    .showcase-glow-inner .service-card__title {
+        font-size: 1.05rem;
+        margin-bottom: 2px;
+    }
+
+    .showcase-glow-inner .service-card__tagline {
+        font-size: 0.82rem;
+        margin-bottom: 10px;
+        color: #64748b;
+    }
+
+    /* Feature-Pills: kompakter */
+    .showcase-glow-inner .service-card__features {
+        gap: 5px;
+        margin-bottom: 12px;
+    }
+
+    .showcase-glow-inner .service-card__feature-pill {
+        font-size: 0.68rem;
+        padding: 3px 10px;
+    }
+
+    /* Footer: Tech-Badges + CTA */
+    .showcase-glow-inner .service-card__footer {
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .showcase-glow-inner .service-card__tech {
+        gap: 4px;
+    }
+
+    .showcase-glow-inner .service-card__tech-badge {
+        font-size: 0.6rem;
+        padding: 2px 7px;
+    }
+
+    /* CTA: Mindest-Tap-Target */
+    .showcase-glow-inner .service-card__cta {
+        font-size: 0.82rem;
+        min-height: 44px;
+        display: inline-flex;
+        align-items: center;
+    }
+
+    /* Spotlight-Effekt und Corner-Glow auf mobile deaktivieren (Performance) */
+    .service-card::before,
+    .service-card::after {
+        display: none;
+    }
+
+    /* Puzzle clip-path auf mobile deaktivieren (Performance + Overflow) */
+    .service-card.puzzle-active {
+        clip-path: none !important;
+    }
+
+    /* Hover-Effekt auf mobile subtiler */
+    .service-card:hover {
+        transform: none;
+    }
+
+    /* --- Stats-Bar ------------------------------------------------ */
+    .stats-bar__number {
+        font-size: 1.8rem;
+    }
+
+    .stats-bar__label {
+        font-size: 0.7rem;
+    }
+
+    /* --- Hero-Scroll-Wrapper auf Services-Seite ------------------- */
+    .hero-scroll-wrapper {
+        min-height: 150vh;
+    }
+}
+
+/* ================================================================
+   MOBILE OPTIMIERUNG – Services (max-width: 480px)
+   ================================================================ */
+@media (max-width: 480px) {
+
+    /* Container noch kompakter */
+    .showcase-glow-inner {
+        padding: 16px 12px 20px !important;
+    }
+
+    #showcase-glow-container {
+        border-radius: 14px;
+    }
+
+    .showcase-glow-inner {
+        border-radius: 12px;
+    }
+
+    /* Cards: noch weniger Padding */
+    .showcase-glow-inner .service-card {
+        padding: 16px !important;
+        border-radius: 14px;
+    }
+
+    .showcase-glow-inner .services-bento-grid {
+        gap: 10px !important;
+    }
+
+    /* Icon etwas kleiner */
+    .showcase-glow-inner .service-card__icon {
+        width: 36px;
+        height: 36px;
+        border-radius: 10px;
+    }
+
+    .showcase-glow-inner .service-card__icon svg {
+        width: 16px;
+        height: 16px;
+    }
+
+    .showcase-glow-inner .service-card__title {
+        font-size: 0.95rem;
+    }
+
+    .showcase-glow-inner .service-card__tagline {
+        font-size: 0.78rem;
+    }
+
+    .section-title {
+        font-size: 1.3rem;
+    }
+
+    .section-sub {
+        font-size: 0.82rem;
+    }
+
+    .section-badge {
+        font-size: 0.65rem;
+    }
+}
+

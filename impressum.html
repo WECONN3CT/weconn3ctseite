@@ -3,878 +3,247 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Impressum - WECONN3CT GmbH - Rechtliche Informationen und Kontaktdaten">
-    <title>Impressum - WECONN3CT</title>
+    <title>Impressum | WECONN3CT.App</title>
+    <meta name="description" content="Impressum der WECONN3CT.App - Softwareentwicklung aus Bad Honnef, Deutschland.">
+    <meta name="robots" content="noindex, follow">
+    <link rel="canonical" href="https://weconn3ct.de/impressum">
+
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="js/tailwind.config.js"></script>
+
+    <!-- Google Fonts - Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        :root {
-            --primary: #0a0a0f;
-            --primary-light: #1a1a2e;
-            --secondary: #f8f9ff;
-            --accent-purple: #8b5cf6;
-            --accent-blue: #3b82f6;
-            --accent-cyan: #06b6d4;
-            --accent-pink: #ec4899;
-            --text-light: #64748b;
-            --text-lighter: #94a3b8;
-            --gradient-primary: linear-gradient(135deg, #8b5cf6 0%, #3b82f6 50%, #06b6d4 100%);
-            --gradient-glow: linear-gradient(135deg, #8b5cf6 0%, #ec4899 50%, #3b82f6 100%);
-            --glass-bg: rgba(255, 255, 255, 0.03);
-            --glass-border: rgba(255, 255, 255, 0.1);
-        }
-
-        html { scroll-behavior: smooth; }
-
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--primary);
-            color: #ffffff;
-            overflow-x: hidden;
-            line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        /* ==================== NAVIGATION ==================== */
-        nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            padding: 20px 0;
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            background: rgba(10, 10, 15, 0.9);
-            backdrop-filter: blur(20px) saturate(180%);
-            -webkit-backdrop-filter: blur(20px) saturate(180%);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .nav-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 60px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-family: 'Outfit', sans-serif;
-            font-size: 28px;
-            font-weight: 900;
-            color: #fff;
-            text-decoration: none;
-            letter-spacing: -1px;
-            transition: transform 0.3s ease;
-        }
-
-        .logo:hover { transform: scale(1.05); }
-
-        .logo-img {
-            height: 40px;
-            width: auto;
-            transition: transform 0.3s ease, filter 0.3s ease;
-            display: block;
-        }
-
-        .logo:hover .logo-img {
-            transform: scale(1.05);
-            filter: brightness(1.2);
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 50px;
-            list-style: none;
-            align-items: center;
-        }
-
-        .nav-links a {
-            color: rgba(255, 255, 255, 0.7);
-            text-decoration: none;
-            font-size: 15px;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            position: relative;
-            padding: 5px 0;
-        }
-
-        .nav-links a::before {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: var(--gradient-primary);
-            transform: scaleX(0);
-            transform-origin: right;
-            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .nav-links a:hover { color: #fff; }
-        .nav-links a:hover::before { transform: scaleX(1); transform-origin: left; }
-
-        .dropdown { position: relative; }
-        .dropdown > a { display: flex; align-items: center; }
-        .dropdown:hover > a svg { transform: rotate(180deg); }
-
-        .dropdown-menu {
-            position: absolute;
-            top: calc(100% + 20px);
-            left: -20px;
-            background: rgba(10, 10, 15, 0.98);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 16px;
-            padding: 16px;
-            min-width: 320px;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(-10px);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            z-index: 1001;
-        }
-
-        .dropdown:hover .dropdown-menu {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-
-        .dropdown-item {
-            display: block;
-            padding: 16px 20px;
-            color: white !important;
-            text-decoration: none;
-            border-radius: 12px;
-            transition: all 0.3s ease;
-            margin-bottom: 8px;
-        }
-
-        .dropdown-item:last-child { margin-bottom: 0; }
-        .dropdown-item:hover { background: rgba(139, 92, 246, 0.1); transform: translateX(5px); }
-        .dropdown-item::before { display: none !important; }
-        .dropdown-item strong { display: block; font-size: 15px; font-weight: 600; margin-bottom: 4px; color: white; }
-        .dropdown-item p { font-size: 13px; color: var(--text-lighter); margin: 0; line-height: 1.4; }
-
-        .mobile-cta {
-            display: none;
-            background: var(--gradient-primary);
-            color: white;
-            padding: 10px 20px;
-            border-radius: 50px;
-            font-size: 14px;
-            font-weight: 600;
-            text-decoration: none;
-        }
-
-        .menu-toggle {
-            display: none;
-            flex-direction: column;
-            gap: 6px;
-            cursor: pointer;
-            z-index: 1002;
-        }
-
-        .menu-toggle span {
-            width: 28px;
-            height: 2px;
-            background: white;
-            transition: all 0.3s ease;
-        }
-
-        /* ==================== LEGAL PAGE STYLES ==================== */
-        .legal-page {
-            min-height: 100vh;
-            padding: 140px 60px 80px;
-        }
-
-        .legal-container {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .legal-header {
-            text-align: center;
-            margin-bottom: 60px;
-        }
-
-        .legal-eyebrow {
-            font-size: 13px;
-            font-weight: 800;
-            letter-spacing: 3px;
-            color: var(--accent-purple);
-            text-transform: uppercase;
-            margin-bottom: 16px;
-        }
-
-        .legal-title {
-            font-family: 'Outfit', sans-serif;
-            font-size: clamp(36px, 5vw, 56px);
-            font-weight: 900;
-            letter-spacing: -2px;
-            margin-bottom: 16px;
-        }
-
-        .legal-content {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 24px;
-            padding: 50px;
-        }
-
-        .legal-content h2 {
-            font-family: 'Outfit', sans-serif;
-            font-size: 24px;
-            font-weight: 700;
-            margin-top: 40px;
-            margin-bottom: 16px;
-            color: var(--accent-purple);
-        }
-
-        .legal-content h2:first-child { margin-top: 0; }
-
-        .legal-content h3 {
-            font-family: 'Outfit', sans-serif;
-            font-size: 18px;
-            font-weight: 600;
-            margin-top: 24px;
-            margin-bottom: 12px;
-            color: #fff;
-        }
-
-        .legal-content p {
-            margin-bottom: 16px;
-            color: var(--text-lighter);
-            font-size: 16px;
-            line-height: 1.8;
-        }
-
-        .legal-content strong { color: #fff; font-weight: 600; }
-
-        .legal-content a {
-            color: var(--accent-purple);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .legal-content a:hover { color: var(--accent-blue); }
-
-        /* ==================== PREMIUM FOOTER ==================== */
-        .footer-modern {
-            position: relative;
-            background: var(--primary);
-            padding: 80px 60px 40px;
-            overflow: hidden;
-        }
-
-        .footer-orbs {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            pointer-events: none;
-            overflow: hidden;
-        }
-
-        .footer-orb {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(80px);
-            opacity: 0.3;
-        }
-
-        .footer-orb-1 {
-            width: 400px;
-            height: 400px;
-            background: var(--accent-purple);
-            top: -200px;
-            left: -100px;
-            animation: float 8s ease-in-out infinite;
-        }
-
-        .footer-orb-2 {
-            width: 300px;
-            height: 300px;
-            background: var(--accent-blue);
-            bottom: -150px;
-            right: -50px;
-            animation: float 10s ease-in-out infinite reverse;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(5deg); }
-        }
-
-        .footer-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
-        }
-
-        .footer-top {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-
-        .footer-brand-modern { display: inline-block; }
-
-        .footer-logo-modern {
-            height: 50px;
-            width: auto;
-            margin-bottom: 16px;
-            transition: transform 0.3s ease;
-        }
-
-        .footer-logo-modern:hover { transform: scale(1.05); }
-
-        .footer-tagline {
-            color: var(--text-lighter);
-            font-size: 16px;
-            max-width: 300px;
-            margin: 0 auto;
-        }
-
-        .footer-divider {
-            position: relative;
-            height: 1px;
-            background: rgba(255, 255, 255, 0.1);
-            margin-bottom: 50px;
-        }
-
-        .divider-glow {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 200px;
-            height: 3px;
-            background: var(--gradient-primary);
-            border-radius: 2px;
-            box-shadow: 0 0 20px rgba(139, 92, 246, 0.5);
-            animation: glow-pulse 3s ease-in-out infinite;
-        }
-
-        @keyframes glow-pulse {
-            0%, 100% { opacity: 0.5; width: 200px; }
-            50% { opacity: 1; width: 300px; }
-        }
-
-        .footer-main { margin-bottom: 50px; }
-
-        .footer-grid-modern {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 40px;
-        }
-
-        .footer-col-title {
-            font-family: 'Outfit', sans-serif;
-            font-size: 14px;
-            font-weight: 800;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: #fff;
-            margin-bottom: 24px;
-        }
-
-        .footer-links-modern {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 14px;
-        }
-
-        .footer-links-modern a {
-            color: var(--text-lighter);
-            text-decoration: none;
-            font-size: 15px;
-            transition: all 0.3s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .footer-links-modern a:hover {
-            color: #fff;
-            transform: translateX(5px);
-        }
-
-        .footer-contact-link {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .footer-contact-link svg { opacity: 0.6; transition: opacity 0.3s ease; }
-        .footer-contact-link:hover svg { opacity: 1; }
-
-        .footer-social {
-            display: flex;
-            gap: 12px;
-        }
-
-        .social-icon-modern {
-            width: 44px;
-            height: 44px;
-            border-radius: 12px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-lighter);
-            transition: all 0.3s ease;
-        }
-
-        .social-icon-modern:hover {
-            background: var(--gradient-primary);
-            border-color: transparent;
-            color: white;
-            transform: translateY(-3px);
-        }
-
-        .footer-bottom-modern {
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            padding-top: 30px;
-        }
-
-        .footer-bottom-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-
-        .footer-copyright {
-            color: var(--text-lighter);
-            font-size: 14px;
-        }
-
-        .footer-copyright strong { color: #fff; }
-
-        .footer-bottom-links {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .footer-bottom-links a {
-            color: rgba(255, 255, 255, 0.6);
-            text-decoration: none;
-            font-size: 14px;
-            transition: color 0.3s ease;
-        }
-
-        .footer-bottom-links a:hover { color: var(--accent-purple); }
-
-        .footer-dot {
-            color: rgba(255, 255, 255, 0.3);
-            font-size: 12px;
-        }
-
-        .footer-made {
-            color: var(--text-lighter);
-            font-size: 14px;
-        }
-
-        .footer-heart {
-            display: inline-block;
-            animation: heartbeat 1.5s ease-in-out infinite;
-        }
-
-        @keyframes heartbeat {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.2); }
-        }
-
-        /* ==================== RESPONSIVE ==================== */
-        @media (max-width: 1200px) {
-            .footer-grid-modern { grid-template-columns: repeat(2, 1fr); gap: 40px 60px; }
-        }
-
-        @media (max-width: 768px) {
-            .nav-container { padding: 0 20px; }
-            .nav-links {
-                position: fixed;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                background: linear-gradient(135deg, #0a0a0f 0%, #12121a 50%, #0a0a0f 100%);
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                gap: 40px;
-                opacity: 0;
-                visibility: hidden;
-                transform: translateX(100%);
-                transition: all .4s cubic-bezier(.4,0,.2,1);
-                z-index: 999;
-                overflow: hidden;
-            }
-            .nav-links::before {
-                content: '';
-                position: absolute;
-                top: -50%;
-                left: -50%;
-                width: 200%;
-                height: 200%;
-                background: radial-gradient(circle at 30% 20%, rgba(99,102,241,.08) 0%, transparent 50%),
-                            radial-gradient(circle at 70% 80%, rgba(168,85,247,.08) 0%, transparent 50%);
-                pointer-events: none;
-            }
-            .nav-links.active { opacity: 1; visibility: visible; transform: translateX(0); display: flex !important; touch-action: none; overscroll-behavior: contain; }
-            body.menu-open { overflow: hidden !important; position: fixed !important; width: 100% !important; height: 100% !important; }
-            .nav-links li { opacity: 0; transform: translateY(20px); transition: all .3s ease; }
-            .nav-links.active li { opacity: 1; transform: translateY(0); }
-            .nav-links.active li:nth-child(1) { transition-delay: .1s; }
-            .nav-links.active li:nth-child(2) { transition-delay: .15s; }
-            .nav-links.active li:nth-child(3) { transition-delay: .2s; }
-            .nav-links.active li:nth-child(4) { transition-delay: .25s; }
-            .nav-links.active li:nth-child(5) { transition-delay: .3s; }
-            .nav-links.active li:nth-child(6) { transition-delay: .35s; }
-            .nav-links a { font-size: 28px; font-weight: 700; letter-spacing: 1px; padding: 12px 30px; border-radius: 12px; transition: all .3s ease; position: relative; }
-            .nav-links a:hover, .nav-links a:active { background: linear-gradient(135deg, rgba(99,102,241,.2), rgba(168,85,247,.2)); transform: scale(1.05); }
-            .nav-links a::before { display: none; }
-            .menu-toggle { display: flex; z-index: 1001; }
-            .mobile-cta { display: none; }
-            body { padding-bottom: 0; }
-            .dropdown-menu {
-                position: static;
-                opacity: 1;
-                visibility: visible;
-                transform: none;
-                background: transparent;
-                border: none;
-                box-shadow: none;
-                min-width: auto;
-                padding: 10px 0;
-                display: flex;
-                flex-direction: column;
-                gap: 10px;
-            }
-            .dropdown-item { font-size: 16px; padding: 8px 20px; }
-            .dropdown-item strong { font-size: 16px; }
-            .dropdown-item p { display: none; }
-
-            .legal-page { padding: 120px 15px 60px; }
-            .legal-container { padding: 0; }
-            .legal-header { margin-bottom: 40px; }
-            .legal-title { font-size: 32px; letter-spacing: -1px; }
-            .legal-eyebrow { font-size: 11px; letter-spacing: 2px; }
-            .legal-content {
-                padding: 28px 20px;
-                border-radius: 20px;
-                overflow-x: hidden;
-            }
-            .legal-content h2 {
-                font-size: 18px;
-                margin-top: 32px;
-                margin-bottom: 12px;
-                hyphens: auto;
-                -webkit-hyphens: auto;
-                word-wrap: break-word;
-            }
-            .legal-content p {
-                font-size: 15px;
-                line-height: 1.75;
-                word-wrap: break-word;
-                overflow-wrap: break-word;
-                hyphens: auto;
-                -webkit-hyphens: auto;
-            }
-            .legal-content a {
-                word-break: break-word;
-                overflow-wrap: break-word;
-            }
-
-            .footer-modern { padding: 60px 20px 30px; }
-            .footer-grid-modern { grid-template-columns: 1fr; gap: 40px; text-align: center; }
-            .footer-links-modern { align-items: center; }
-            .footer-social { justify-content: center; }
-            .footer-bottom-content { flex-direction: column; text-align: center; }
-            .footer-bottom-links { flex-wrap: wrap; justify-content: center; }
-        }
-
-        @media (max-width: 480px) {
-            .legal-page { padding: 110px 12px 40px; }
-            .legal-header { margin-bottom: 30px; }
-            .legal-title { font-size: 26px; }
-            .legal-eyebrow { font-size: 10px; margin-bottom: 12px; }
-            .legal-content {
-                padding: 22px 18px;
-                border-radius: 16px;
-            }
-            .legal-content h2 {
-                font-size: 17px;
-                margin-top: 28px;
-                margin-bottom: 10px;
-                line-height: 1.4;
-            }
-            .legal-content p {
-                font-size: 14px;
-                line-height: 1.7;
-                margin-bottom: 14px;
-            }
-            .footer-modern { padding: 50px 16px 24px; }
-        }
-    </style>
-    <link rel="stylesheet" href="spectacular-effects.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
-    <!-- Navigation -->
+<body class="bg-white text-gray-900 antialiased selection:bg-primary-500 selection:text-white overflow-x-hidden font-sans">
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[9999] focus:bg-primary-500 focus:text-white focus:px-4 focus:py-2 focus:rounded-lg">Zum Inhalt springen</a>
+
+    <!-- NAVIGATION -->
+    <div class="navbar-wrapper">
     <nav id="navbar">
-        <div class="nav-container">
-            <a href="index.html" class="logo">
-                <img src="images/logo.png" alt="weconn3ct" class="logo-img">
-            </a>
-            <a href="kontakt.html" class="mobile-cta">Projekt starten</a>
-            <ul class="nav-links" id="navLinks">
-                <li class="dropdown">
-                    <a href="leistungen.html">
-                        Leistungen
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-left: 4px; transition: transform 0.3s ease;">
-                            <polyline points="6 9 12 15 18 9"></polyline>
-                        </svg>
-                    </a>
-                    <div class="dropdown-menu">
-                        <a href="softwareentwicklung.html" class="dropdown-item">
-                            <div>
-                                <strong>Softwareentwicklung</strong>
-                                <p>Maßgeschneiderte Software-Lösungen</p>
-                            </div>
-                        </a>
-                        <a href="webdesign.html" class="dropdown-item">
-                            <div>
-                                <strong>Webdesign</strong>
-                                <p>Modernes UI/UX Design</p>
-                            </div>
-                        </a>
-                        <a href="digitale-transformation.html" class="dropdown-item">
-                            <div>
-                                <strong>Digitale Transformation</strong>
-                                <p>Prozessoptimierung & Innovation</p>
-                            </div>
-                        </a>
-                    </div>
-                </li>
-                <li><a href="portfolio.html">Projekte</a></li>
-                <li><a href="ueber-uns.html">Über uns</a></li>
-                <li><a href="kontakt.html">Kontakt</a></li>
+        <div class="navbar-container">
+            <a href="index.html" class="navbar-logo"><img src="assets/logo.png" alt="WECONN3CT.App" class="navbar-logo-img"></a>
+
+            <ul class="navbar-menu" id="navbarMenu">
+                <li><a href="index.html" class="navbar-link">Home</a></li>
+                <li><a href="services.html" class="navbar-link">Services</a></li>
+                <li><a href="projekte.html" class="navbar-link">Projekte</a></li>
+                <li><a href="about.html" class="navbar-link">Über uns</a></li>
+                <li><a href="contact.html" class="navbar-link">Kontakt</a></li>
+                <li class="navbar-cta"><a href="https://calendly.com/weconn3ct/30min" target="_blank" rel="noopener noreferrer" class="navbar-link">Termin buchen</a></li>
             </ul>
-            <div class="menu-toggle" id="menuToggle">
-                <span></span>
-                <span></span>
-                <span></span>
+
+            <div class="navbar-right">
+                <a href="https://calendly.com/weconn3ct/30min" target="_blank" rel="noopener noreferrer" class="navbar-cta-right">Termin buchen</a>
             </div>
+
+            <button class="navbar-toggle" id="navbarToggle" aria-label="Menü öffnen" aria-expanded="false" aria-controls="navbarMenu">
+                <span class="navbar-toggle-icon"></span>
+            </button>
         </div>
     </nav>
-
-    <!-- Legal Page Content -->
-    <div class="legal-page">
-        <div class="legal-container">
-            <div class="legal-header">
-                <div class="legal-eyebrow">Rechtliches</div>
-                <h1 class="legal-title">Impressum</h1>
-            </div>
-
-            <div class="legal-content">
-                <h2>Angaben gemäß § 5 TMG</h2>
-                <p>
-                    <strong>WECONN3CT GmbH</strong><br>
-                    Frankenweg 109<br>
-                    53604 Bad Honnef am Rhein<br>
-                    Deutschland
-                </p>
-
-                <h2>Vertreten durch</h2>
-                <p>
-                    <strong>Geschäftsführer:</strong> Thinesh Rajabalah
-                </p>
-
-                <h2>Kontakt</h2>
-                <p>
-                    <strong>E-Mail:</strong> <a href="mailto:info@weconn3ct.de">info@weconn3ct.de</a><br>
-                    <strong>Telefon:</strong> <a href="tel:+491624521879">+49 162 4521879</a>
-                </p>
-
-                <h2>Registereintrag</h2>
-                <p>
-                    <strong>Eintragung im Handelsregister:</strong><br>
-                    Registergericht: Amtsgericht Siegburg<br>
-                    Registernummer: HRB 18313
-                </p>
-
-                <h2>Umsatzsteuer-ID</h2>
-                <p>
-                    Umsatzsteuer-Identifikationsnummer<br>
-                    gemäß §27 a Umsatzsteuergesetz:<br>
-                    DE452538080
-                </p>
-
-                <h2>Verantwortlich für den Inhalt<br><span style="font-size: 0.85em;">nach § 55 Abs. 2 RStV</span></h2>
-                <p>
-                    Thinesh Rajabalah<br>
-                    Frankenweg 109<br>
-                    53604 Bad Honnef am Rhein
-                </p>
-
-                <h2>EU-Streitschlichtung</h2>
-                <p>
-                    Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit:<br>
-                    <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener">https://ec.europa.eu/consumers/odr</a><br>
-                    Unsere E-Mail-Adresse finden Sie oben im Impressum.
-                </p>
-
-                <h2>Verbraucherstreitbeilegung/<wbr>Universalschlichtungsstelle</h2>
-                <p>
-                    Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.
-                </p>
-
-                <h2>Haftungsausschluss</h2>
-                <p>
-                    <strong>Haftung für Inhalte:</strong> Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen.
-                </p>
-                <p>
-                    <strong>Haftung für Links:</strong> Unser Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte wir keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich.
-                </p>
-
-                <h2>Urheberrecht</h2>
-                <p>
-                    Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers.
-                </p>
-            </div>
-        </div>
     </div>
 
-    <!-- Footer -->
-    <footer class="footer-modern">
-        <div class="footer-orbs">
-            <div class="footer-orb footer-orb-1"></div>
-            <div class="footer-orb footer-orb-2"></div>
-        </div>
+    <main id="main-content">
+    <!-- Content -->
+    <section class="pt-40 pb-24">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-12">
+                <h1 class="text-4xl font-bold text-gray-900 mb-4">Impressum</h1>
+                <p class="text-gray-600">Angaben gemäß § 5 TMG</p>
+            </div>
 
-        <div class="footer-container">
-            <div class="footer-top">
-                <div class="footer-brand-modern">
-                    <img src="images/logo.png" alt="WECONN3CT Logo" class="footer-logo-modern">
-                    <p class="footer-tagline">Digitale Innovation für jeden erreichbar machen</p>
+            <div class="prose prose-lg max-w-none">
+                <div class="space-y-8">
+                    <!-- Anbieter -->
+                    <div class="bg-gray-50 rounded-2xl p-8 border border-gray-100">
+                        <h2 class="text-xl font-bold text-gray-900 mb-4">Anbieter</h2>
+                        <p class="text-gray-700 leading-relaxed">
+                            <strong>WECONN3CT.App</strong><br>
+                            [Ihr vollständiger Name / Firmenname]<br>
+                            [Straße und Hausnummer]<br>
+                            53604 Bad Honnef<br>
+                            Deutschland
+                        </p>
+                    </div>
+
+                    <!-- Kontakt -->
+                    <div class="bg-gray-50 rounded-2xl p-8 border border-gray-100">
+                        <h2 class="text-xl font-bold text-gray-900 mb-4">Kontakt</h2>
+                        <p class="text-gray-700 leading-relaxed">
+                            E-Mail: <a href="mailto:info@weconn3ct.de" class="text-primary-500 hover:underline">info@weconn3ct.de</a><br>
+                            Website: <a href="https://weconn3ct.de" class="text-primary-500 hover:underline">www.weconn3ct.de</a>
+                        </p>
+                    </div>
+
+                    <!-- Vertretungsberechtigter -->
+                    <div class="bg-gray-50 rounded-2xl p-8 border border-gray-100">
+                        <h2 class="text-xl font-bold text-gray-900 mb-4">Vertretungsberechtigter</h2>
+                        <p class="text-gray-700 leading-relaxed">
+                            [Geschäftsführer / Inhaber Name]
+                        </p>
+                    </div>
+
+                    <!-- Registereintrag (falls zutreffend) -->
+                    <div class="bg-gray-50 rounded-2xl p-8 border border-gray-100">
+                        <h2 class="text-xl font-bold text-gray-900 mb-4">Registereintrag</h2>
+                        <p class="text-gray-700 leading-relaxed">
+                            [Handelsregister: Amtsgericht XY]<br>
+                            [Registernummer: HRB XXXXX]
+                        </p>
+                        <p class="text-sm text-gray-500 mt-4">
+                            <em>Hinweis: Bitte ergänzen Sie diese Angaben mit Ihren tatsächlichen Registerdaten oder entfernen Sie diesen Abschnitt, falls nicht zutreffend.</em>
+                        </p>
+                    </div>
+
+                    <!-- Umsatzsteuer-ID -->
+                    <div class="bg-gray-50 rounded-2xl p-8 border border-gray-100">
+                        <h2 class="text-xl font-bold text-gray-900 mb-4">Umsatzsteuer-Identifikationsnummer</h2>
+                        <p class="text-gray-700 leading-relaxed">
+                            USt-IdNr. gemäß § 27a Umsatzsteuergesetz:<br>
+                            [DE XXXXXXXXX]
+                        </p>
+                    </div>
+
+                    <!-- Verantwortlich für Inhalte -->
+                    <div class="bg-gray-50 rounded-2xl p-8 border border-gray-100">
+                        <h2 class="text-xl font-bold text-gray-900 mb-4">Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV</h2>
+                        <p class="text-gray-700 leading-relaxed">
+                            [Name des Verantwortlichen]<br>
+                            [Adresse wie oben]
+                        </p>
+                    </div>
+
+                    <!-- Streitschlichtung -->
+                    <div class="bg-gray-50 rounded-2xl p-8 border border-gray-100">
+                        <h2 class="text-xl font-bold text-gray-900 mb-4">Streitschlichtung</h2>
+                        <p class="text-gray-700 leading-relaxed mb-4">
+                            Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit:
+                            <a href="https://ec.europa.eu/consumers/odr/" target="_blank" rel="noopener" class="text-primary-500 hover:underline">https://ec.europa.eu/consumers/odr/</a>
+                        </p>
+                        <p class="text-gray-700 leading-relaxed">
+                            Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.
+                        </p>
+                    </div>
+
+                    <!-- Haftungsausschluss -->
+                    <div class="bg-gray-50 rounded-2xl p-8 border border-gray-100">
+                        <h2 class="text-xl font-bold text-gray-900 mb-4">Haftung für Inhalte</h2>
+                        <p class="text-gray-700 leading-relaxed mb-4">
+                            Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen.
+                        </p>
+                        <p class="text-gray-700 leading-relaxed">
+                            Verpflichtungen zur Entfernung oder Sperrung der Nutzung von Informationen nach den allgemeinen Gesetzen bleiben hiervon unberührt. Eine diesbezügliche Haftung ist jedoch erst ab dem Zeitpunkt der Kenntnis einer konkreten Rechtsverletzung möglich. Bei Bekanntwerden von entsprechenden Rechtsverletzungen werden wir diese Inhalte umgehend entfernen.
+                        </p>
+                    </div>
+
+                    <!-- Haftung für Links -->
+                    <div class="bg-gray-50 rounded-2xl p-8 border border-gray-100">
+                        <h2 class="text-xl font-bold text-gray-900 mb-4">Haftung für Links</h2>
+                        <p class="text-gray-700 leading-relaxed">
+                            Unser Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte wir keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich. Die verlinkten Seiten wurden zum Zeitpunkt der Verlinkung auf mögliche Rechtsverstöße überprüft. Rechtswidrige Inhalte waren zum Zeitpunkt der Verlinkung nicht erkennbar. Eine permanente inhaltliche Kontrolle der verlinkten Seiten ist jedoch ohne konkrete Anhaltspunkte einer Rechtsverletzung nicht zumutbar. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Links umgehend entfernen.
+                        </p>
+                    </div>
+
+                    <!-- Urheberrecht -->
+                    <div class="bg-gray-50 rounded-2xl p-8 border border-gray-100">
+                        <h2 class="text-xl font-bold text-gray-900 mb-4">Urheberrecht</h2>
+                        <p class="text-gray-700 leading-relaxed">
+                            Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers. Downloads und Kopien dieser Seite sind nur für den privaten, nicht kommerziellen Gebrauch gestattet. Soweit die Inhalte auf dieser Seite nicht vom Betreiber erstellt wurden, werden die Urheberrechte Dritter beachtet. Insbesondere werden Inhalte Dritter als solche gekennzeichnet. Sollten Sie trotzdem auf eine Urheberrechtsverletzung aufmerksam werden, bitten wir um einen entsprechenden Hinweis. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Inhalte umgehend entfernen.
+                        </p>
+                    </div>
                 </div>
-            </div>
 
-            <div class="footer-divider">
-                <div class="divider-glow"></div>
-            </div>
-
-            <div class="footer-main">
-                <div class="footer-grid-modern">
-                    <div class="footer-col">
-                        <h4 class="footer-col-title">Unternehmen</h4>
-                        <ul class="footer-links-modern">
-                            <li><a href="ueber-uns.html">Über uns</a></li>
-                            <li><a href="portfolio.html">Projekte</a></li>
-                            <li><a href="kontakt.html">Kontakt</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="footer-col">
-                        <h4 class="footer-col-title">Leistungen</h4>
-                        <ul class="footer-links-modern">
-                            <li><a href="softwareentwicklung.html">Softwareentwicklung</a></li>
-                            <li><a href="webdesign.html">Webdesign & UI/UX</a></li>
-                            <li><a href="digitale-transformation.html">Digitale Transformation</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="footer-col">
-                        <h4 class="footer-col-title">Kontakt</h4>
-                        <ul class="footer-links-modern">
-                            <li>
-                                <a href="mailto:info@weconn3ct.de" class="footer-contact-link">
-                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                                        <polyline points="22,6 12,13 2,6"></polyline>
-                                    </svg>
-                                    info@weconn3ct.de
-                                </a>
-                            </li>
-                            <li>
-                                <a href="tel:+491624521879" class="footer-contact-link">
-                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-                                    </svg>
-                                    +49 162 4521879
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div class="footer-col">
-                        <h4 class="footer-col-title">Folge uns</h4>
-                        <div class="footer-social">
-                            <a href="https://de.linkedin.com/company/weconn3ct" target="_blank" rel="noopener" class="social-icon-modern" aria-label="LinkedIn">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                                    <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/>
-                                </svg>
-                            </a>
-                            <a href="https://www.instagram.com/weconn3ct_gmbh/" target="_blank" rel="noopener" class="social-icon-modern" aria-label="Instagram">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                                    <path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8 1.25 1.25 0 0 1 16 6.75a1.25 1.25 0 0 1 1.25-1.25M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3z"/>
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="footer-bottom-modern">
-                <div class="footer-bottom-content">
-                    <p class="footer-copyright">
-                        &copy; 2025 <strong>weconn3ct</strong>. Alle Rechte vorbehalten.
+                <!-- Hinweis -->
+                <div class="mt-12 p-6 bg-primary-50 rounded-xl border border-primary-100">
+                    <p class="text-primary-700 text-sm">
+                        <strong>Hinweis:</strong> Bitte ersetzen Sie die Platzhalter [in eckigen Klammern] mit Ihren tatsächlichen Unternehmensdaten. Bei Fragen zur korrekten rechtlichen Gestaltung wenden Sie sich bitte an einen Rechtsanwalt.
                     </p>
-                    <div class="footer-bottom-links">
-                        <a href="impressum.html">Impressum</a>
-                        <span class="footer-dot">•</span>
-                        <a href="datenschutz.html">Datenschutz</a>
-                        <span class="footer-dot">•</span>
-                        <a href="agb.html">AGB</a>
-                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    </main>
+
+    <footer class="relative bg-gray-950 overflow-hidden">
+        <div class="absolute -top-40 left-1/4 w-[600px] h-[600px] bg-primary-600/5 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute -bottom-20 right-1/4 w-[400px] h-[400px] bg-accent-500/5 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="h-px bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="pt-16 pb-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12">
+                <div class="lg:col-span-3 flex flex-col">
+                    <a href="index.html" class="inline-block mb-4">
+                        <img src="assets/logo.png" alt="WECONN3CT.App" class="h-14 brightness-0 invert opacity-90 hover:opacity-100 transition-opacity">
+                    </a>
+                    <p class="text-gray-500 text-sm leading-relaxed max-w-xs">
+                        Apps, Websites & Software – schnell, KI-gestützt und 100% Made in Germany.
+                    </p>
+                </div>
+                <div class="lg:col-span-2 lg:col-start-5">
+                    <h4 class="text-white text-xs font-semibold uppercase tracking-widest mb-5">Navigation</h4>
+                    <ul class="space-y-3">
+                        <li><a href="about.html" class="text-gray-500 hover:text-white transition-colors text-sm">Über uns</a></li>
+                        <li><a href="services.html" class="text-gray-500 hover:text-white transition-colors text-sm">Services</a></li>
+                        <li><a href="projekte.html" class="text-gray-500 hover:text-white transition-colors text-sm">Projekte</a></li>
+                        <li><a href="contact.html" class="text-gray-500 hover:text-white transition-colors text-sm">Kontakt</a></li>
+                    </ul>
+                </div>
+                <div class="lg:col-span-2">
+                    <h4 class="text-white text-xs font-semibold uppercase tracking-widest mb-5">Services</h4>
+                    <ul class="space-y-3">
+                        <li><a href="services.html" class="text-gray-500 hover:text-white transition-colors text-sm">App-Entwicklung</a></li>
+                        <li><a href="services.html" class="text-gray-500 hover:text-white transition-colors text-sm">Web-Entwicklung</a></li>
+                        <li><a href="services.html" class="text-gray-500 hover:text-white transition-colors text-sm">KI & Automatisierung</a></li>
+                        <li><a href="services.html" class="text-gray-500 hover:text-white transition-colors text-sm">Branding</a></li>
+                    </ul>
+                </div>
+                <div class="lg:col-span-3">
+                    <h4 class="text-white text-xs font-semibold uppercase tracking-widest mb-5">Kontakt</h4>
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3">
+                            <svg class="w-4 h-4 text-gray-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            </svg>
+                            <span class="text-gray-500 text-sm">Bad Honnef, Deutschland</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <svg class="w-4 h-4 text-gray-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                            </svg>
+                            <a href="mailto:info@weconn3ct.de" class="text-gray-500 hover:text-primary-400 transition-colors text-sm">info@weconn3ct.de</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-white/10"></div>
+            <div class="flex justify-center gap-4 pt-10 pb-6">
+                <a href="https://de.linkedin.com/company/weconn3ct" target="_blank" rel="noopener noreferrer" class="social-icon-glass group">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                </a>
+                <a href="https://www.instagram.com/weconn3ct_gmbh/" target="_blank" rel="noopener noreferrer" class="social-icon-glass social-icon-instagram group">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                </a>
+            </div>
+            <div class="pb-8 flex flex-col items-center gap-3">
+                <p class="text-gray-600 text-sm">&copy; 2026 WECONN3CT – Software made in Germany</p>
+                <div class="flex items-center gap-6">
+                    <a href="impressum.html" class="text-gray-600 hover:text-gray-400 text-sm transition-colors">Impressum</a>
+                    <a href="datenschutz.html" class="text-gray-600 hover:text-gray-400 text-sm transition-colors">Datenschutz</a>
                 </div>
             </div>
         </div>
     </footer>
 
-    <script>
-        // Mobile Menu Toggle
-        const menuToggle = document.getElementById('menuToggle');
-        const navLinks = document.getElementById('navLinks');
-        if (menuToggle && navLinks) {
-            menuToggle.addEventListener('click', () => {
-                menuToggle.classList.toggle('active');
-                navLinks.classList.toggle('active');
-                document.body.classList.toggle('menu-open');
-            });
-            navLinks.querySelectorAll('a').forEach(link => {
-                link.addEventListener('click', () => {
-                    menuToggle.classList.remove('active');
-                    navLinks.classList.remove('active');
-                    document.body.classList.remove('menu-open');
-                });
-            });
-        }
-    </script>
-    <script src="spectacular-effects.js"></script>
+    <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/navbar.js"></script>
 </body>
 </html>
