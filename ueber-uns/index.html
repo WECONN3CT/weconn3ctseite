@@ -538,7 +538,7 @@
                         class="w-full"
                         style="aspect-ratio:16/9; object-fit:cover; display:block;"
                     >
-                        <source src="fingerprint.mp4" type="video/mp4">
+                        <source src="/fingerprint.mp4" type="video/mp4">
                     </video>
 
                     <div id="fingerprint-hotspots" class="fingerprint-hotspots">
@@ -814,7 +814,7 @@
             (function(idx) {
                 var img = new Image();
                 img.onload = function () { if (idx === 0) paint(0, true); };
-                img.src = 'frames/frame_' + padded(idx + 1) + '.jpg';
+                img.src = '/frames/frame_' + padded(idx + 1) + '.jpg';
                 images[idx] = img;
             })(i);
         }
