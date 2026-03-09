@@ -61,8 +61,9 @@
     const menu = document.getElementById('navbarMenu');
     if (!menu) return;
 
+    const isMobile = window.innerWidth < 768;
     const options = {
-      borderRadius: 9999,
+      borderRadius: isMobile ? 24 : 9999,
       borderWidth: 0.07,
       brightness: 50,
       opacity: 0.85,

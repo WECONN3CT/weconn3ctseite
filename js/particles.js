@@ -55,9 +55,7 @@
         var img = new Image();
         img.onload = function() {
             var loadingEl = document.getElementById('loading'); if (loadingEl) loadingEl.style.display = 'none';
-            var isMobile = window.innerWidth < 768;
-            var particleData = extractParticles(img, isMobile ? 600 : 1000, 0.06);
-            if (isMobile) { particleData = particleData.filter(function(_, i) { return i % 3 === 0; }); }
+            var particleData = extractParticles(img, 1000, 0.06);
             initScene(particleData);
         };
         img.src = logoSrc;
@@ -69,7 +67,7 @@
             var renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
             
             renderer.setSize(window.innerWidth, window.innerHeight);
-            renderer.setPixelRatio(Math.min(window.devicePixelRatio, window.innerWidth < 768 ? 1 : 2));
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
             renderer.setClearColor(0x000000, 0);
             container.appendChild(renderer.domElement);
 
