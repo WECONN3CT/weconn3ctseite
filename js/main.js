@@ -6,6 +6,13 @@
     'use strict';
 
     // ================================
+    // Clean URL: /index.html → /
+    // ================================
+    if (window.location.pathname === '/index.html') {
+        history.replaceState(null, '', '/');
+    }
+
+    // ================================
     // Lenis Smooth Scroll
     // ================================
     let lenis = null;
