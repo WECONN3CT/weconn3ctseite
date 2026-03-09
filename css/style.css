@@ -1142,7 +1142,13 @@ body.menu-open {
     height: 100%;
     z-index: 1;
     pointer-events: none;
+}
+
+@media (max-width: 767px) {
+    #canvas-container {
+        display: none !important;
     }
+}
 
 /* ================================
    References Bar - 1:1 Hero Badge Style

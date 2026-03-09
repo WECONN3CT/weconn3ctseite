@@ -52,6 +52,9 @@
             return particles;
         }
         
+        // Mobile: Keine Partikel-Animation (GPU-intensiv, Logo wird per HTML angezeigt)
+        if (window.innerWidth < 768) return;
+
         var img = new Image();
         img.onload = function() {
             var loadingEl = document.getElementById('loading'); if (loadingEl) loadingEl.style.display = 'none';
