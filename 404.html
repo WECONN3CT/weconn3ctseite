@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seite nicht gefunden | WECONN3CT.App</title>
+    <meta name="robots" content="noindex, nofollow">
+
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="/js/tailwind.config.js"></script>
+
+    <!-- Google Fonts - Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="bg-white text-gray-900 antialiased selection:bg-primary-500 selection:text-white overflow-x-hidden font-sans">
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[9999] focus:bg-primary-500 focus:text-white focus:px-4 focus:py-2 focus:rounded-lg">Zum Inhalt springen</a>
+
+    <!-- NAVIGATION -->
+    <div class="navbar-wrapper">
+    <nav id="navbar">
+        <div class="navbar-container">
+            <a href="/" class="navbar-logo"><img src="/assets/logo.png" alt="WECONN3CT.App" class="navbar-logo-img"></a>
+
+            <ul class="navbar-menu" id="navbarMenu">
+                <li><a href="/" class="navbar-link">Home</a></li>
+                <li><a href="/leistungen/" class="navbar-link">Services</a></li>
+                <li><a href="/projekte/" class="navbar-link">Projekte</a></li>
+                <li><a href="/ueber-uns/" class="navbar-link">Über uns</a></li>
+                <li><a href="/kontakt/" class="navbar-link">Kontakt</a></li>
+                <li class="navbar-cta"><a href="https://calendly.com/weconn3ct/30min" target="_blank" rel="noopener noreferrer" class="navbar-link">Termin buchen</a></li>
+            </ul>
+
+            <div class="navbar-right">
+                <a href="https://calendly.com/weconn3ct/30min" target="_blank" rel="noopener noreferrer" class="navbar-cta-right">Termin buchen</a>
+            </div>
+
+            <button class="navbar-toggle" id="navbarToggle" aria-label="Menü öffnen" aria-expanded="false" aria-controls="navbarMenu">
+                <span class="navbar-toggle-icon"></span>
+            </button>
+        </div>
+    </nav>
+    </div>
+
+    <main id="main-content">
+    <section class="pt-40 pb-24 min-h-[70vh] flex items-center">
+        <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p class="text-8xl font-bold text-primary-500 mb-6">404</p>
+            <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Seite nicht gefunden</h1>
+            <p class="text-lg text-gray-600 mb-10">Die angeforderte Seite existiert leider nicht oder wurde verschoben.</p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="/" class="inline-flex items-center justify-center gap-2 bg-primary-500 text-white font-semibold px-8 py-4 rounded-full hover:bg-primary-600 transition-all hover:scale-105">
+                    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"/></svg>
+                    Zur Startseite
+                </a>
+                <a href="/kontakt/" class="inline-flex items-center justify-center gap-2 bg-gray-100 text-gray-900 font-semibold px-8 py-4 rounded-full hover:bg-gray-200 transition-all hover:scale-105">
+                    Kontakt aufnehmen
+                </a>
+            </div>
+        </div>
+    </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-gray-950 text-white pt-20 pb-0 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="border-t border-white/10"></div>
+            <div class="pb-8 pt-10 flex flex-col items-center gap-3">
+                <p class="text-gray-600 text-sm">&copy; 2026 WECONN3CT – Software made in Germany</p>
+                <div class="flex items-center gap-6">
+                    <a href="/impressum/" class="text-gray-600 hover:text-gray-400 text-sm transition-colors">Impressum</a>
+                    <a href="/datenschutz/" class="text-gray-600 hover:text-gray-400 text-sm transition-colors">Datenschutz</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/navbar.js"></script>
+</body>
+</html>
