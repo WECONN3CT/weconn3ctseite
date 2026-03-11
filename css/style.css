@@ -4233,4 +4233,12 @@ video.case-study-slide::-webkit-media-controls-enclosure {
     .github-tabs-gooey {
         filter: none !important;
     }
+
+    /* --- Fix: Hamburger-Button Ghost-Kreis entfernen --- */
+    .navbar-toggle {
+        -webkit-backdrop-filter: none !important;
+        backdrop-filter: none !important;
+        background: rgba(120, 120, 130, 0.85) !important;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
+    }
 }
