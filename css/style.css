@@ -1125,8 +1125,8 @@ body.menu-open {
 }
 
 @keyframes badge-shimmer {
-    0% { left: -100%; }
-    50%, 100% { left: 100%; }
+    0% { transform: translateX(-200%); }
+    50%, 100% { transform: translateX(200%); }
 }
 
 /* Dark Mode für Hero Badge */
@@ -1240,8 +1240,8 @@ body.menu-open {
 }
 
 @keyframes references-shimmer {
-    0% { left: -100%; }
-    50%, 100% { left: 100%; }
+    0% { transform: translateX(-200%); }
+    50%, 100% { transform: translateX(200%); }
 }
 
 .references-label {
@@ -4135,5 +4135,102 @@ video.case-study-slide::-webkit-media-controls-enclosure {
     .contact-hero__btn-primary,
     .contact-hero__btn-secondary {
         justify-content: center;
+    }
+
+    /* =============================================
+       MOBILE PERFORMANCE FIXES
+       ============================================= */
+
+    /* --- P0: Backdrop-filter auf Mobile entfernen/reduzieren --- */
+    .glass-card-light,
+    .service-icon-glass,
+    .btn-primary,
+    .nav-item,
+    .btn-error,
+    .btn-secondary-outline,
+    .hero-badge,
+    .hero-subtitle,
+    .bento-card,
+    .services-grid-item,
+    .projekte-card__feature,
+    .about-card__feature,
+    .contact-card__feature,
+    .faq-card__feature {
+        -webkit-backdrop-filter: none !important;
+        backdrop-filter: none !important;
+    }
+
+    .references-bar-content {
+        -webkit-backdrop-filter: blur(6px) !important;
+        backdrop-filter: blur(6px) !important;
+    }
+
+    .glass-surface--svg,
+    .glass-surface--fallback {
+        -webkit-backdrop-filter: blur(6px) !important;
+        backdrop-filter: blur(6px) !important;
+    }
+
+    /* --- P0: Große Blur-Orbs auf Mobile deaktivieren --- */
+    .hero-gradient-blue,
+    .hero-gradient-purple,
+    .gradient-orb-blue,
+    .gradient-orb-purple,
+    .projekte-hero__orb-1,
+    .projekte-hero__orb-2,
+    .projekte-hero__orb-3,
+    .about-hero__orb-1,
+    .about-hero__orb-2,
+    .about-hero__orb-3,
+    .contact-hero__orb-1,
+    .contact-hero__orb-2,
+    .contact-hero__orb-3,
+    .faq-orb {
+        display: none !important;
+    }
+
+    /* --- P1: Alle CSS-Animationen auf Mobile stoppen --- */
+    .hero-badge::after,
+    .references-bar-content::after {
+        animation: none !important;
+    }
+
+    .animate-blob,
+    .animate-spin-slow,
+    .animate-spin-slow-reverse {
+        animation: none !important;
+    }
+
+    .faq-dot {
+        animation: none !important;
+    }
+
+    /* --- P1: Teure box-shadows auf Mobile reduzieren --- */
+    .glass-card-animated {
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+    }
+
+    .glass-card-animated::before {
+        animation: none !important;
+    }
+
+    .showcase-glow-container {
+        box-shadow: 0 4px 20px rgba(139, 92, 246, 0.15) !important;
+    }
+
+    .browser-mockup {
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2) !important;
+    }
+
+    /* --- P2: GPU-Hints für animierte Elemente --- */
+    .showcase-glow-container,
+    .hero-scroll-wrapper,
+    .navbar-wrapper {
+        will-change: transform;
+    }
+
+    /* --- P2: Drop-shadow Filter auf Mobile vereinfachen --- */
+    .github-tabs-gooey {
+        filter: none !important;
     }
 }

@@ -251,19 +251,19 @@
         if (!container || !section || !heroSection) return;
 
         const maxOffset = 200;
+        let cachedHeroHeight = heroSection.offsetHeight;
+
+        // Cache hero height on resize (not every frame)
+        window.addEventListener('resize', () => {
+            cachedHeroHeight = heroSection.offsetHeight;
+        }, { passive: true });
 
         function updateParallax() {
             const scrollY = window.scrollY;
-            const heroHeight = heroSection.offsetHeight;
 
-            // Animation startet sofort und endet bei heroHeight
-            const triggerStart = 0;
-            const triggerEnd = heroHeight;
-
-            let progress = (scrollY - triggerStart) / (triggerEnd - triggerStart);
+            let progress = scrollY / cachedHeroHeight;
             progress = Math.max(0, Math.min(1, progress));
 
-            // Ease-out cubic
             const easedProgress = 1 - Math.pow(1 - progress, 3);
 
             const translateY = maxOffset * (1 - easedProgress);
@@ -277,23 +277,20 @@
         container.style.transform = `translateY(${maxOffset}px) scale(0.92)`;
         container.style.opacity = '0';
 
-        let showcaseRafId = null;
-        function animate() {
-            updateParallax();
-            if (!document.hidden) {
-                showcaseRafId = requestAnimationFrame(animate);
+        // Scroll-driven statt endlos-RAF: nur updaten wenn gescrollt wird
+        let scrollTicking = false;
+        window.addEventListener('scroll', () => {
+            if (!scrollTicking) {
+                requestAnimationFrame(() => {
+                    updateParallax();
+                    scrollTicking = false;
+                });
+                scrollTicking = true;
             }
-        }
+        }, { passive: true });
 
-        document.addEventListener('visibilitychange', () => {
-            if (document.hidden) {
-                if (showcaseRafId) cancelAnimationFrame(showcaseRafId);
-            } else {
-                showcaseRafId = requestAnimationFrame(animate);
-            }
-        });
-
-        showcaseRafId = requestAnimationFrame(animate);
+        // Initial einmal ausführen
+        updateParallax();
     }
 
     // ================================
@@ -612,12 +609,16 @@
         const heroContent = heroSection.querySelector('.max-w-7xl');
         if (!heroContent) return;
 
-        let heroRafId = null;
+        let cachedHeroHeight = heroSection.offsetHeight;
+
+        window.addEventListener('resize', () => {
+            cachedHeroHeight = heroSection.offsetHeight;
+        }, { passive: true });
+
         function update() {
             const scrollY = window.scrollY;
-            const heroHeight = heroSection.offsetHeight;
 
-            let progress = scrollY / (heroHeight * 0.7);
+            let progress = scrollY / (cachedHeroHeight * 0.7);
             progress = Math.max(0, Math.min(1, progress));
 
             const scale = 1 - (progress * 0.15);
@@ -626,21 +627,21 @@
 
             heroContent.style.transform = `scale(${scale}) translateY(${translateY}px)`;
             heroContent.style.opacity = opacity;
-
-            if (!document.hidden) {
-                heroRafId = requestAnimationFrame(update);
-            }
         }
 
-        document.addEventListener('visibilitychange', () => {
-            if (document.hidden) {
-                if (heroRafId) cancelAnimationFrame(heroRafId);
-            } else {
-                heroRafId = requestAnimationFrame(update);
+        // Scroll-driven statt endlos-RAF
+        let heroTicking = false;
+        window.addEventListener('scroll', () => {
+            if (!heroTicking) {
+                requestAnimationFrame(() => {
+                    update();
+                    heroTicking = false;
+                });
+                heroTicking = true;
             }
-        });
+        }, { passive: true });
 
-        heroRafId = requestAnimationFrame(update);
+        update();
     }
 
     // ================================
@@ -889,26 +890,44 @@
         const navLinks = document.querySelectorAll('nav a[href^="#"]');
         if (!sections.length || !navLinks.length) return;
 
+        // Cache offsetTop-Werte (kein Reflow pro Scroll-Event)
+        let sectionOffsets = [];
+        function cacheSectionOffsets() {
+            sectionOffsets = Array.from(sections).map(s => ({
+                id: s.getAttribute('id'),
+                top: s.offsetTop
+            }));
+        }
+        cacheSectionOffsets();
+        window.addEventListener('resize', cacheSectionOffsets, { passive: true });
+
+        let navTicking = false;
         window.addEventListener('scroll', () => {
-            let current = '';
+            if (!navTicking) {
+                requestAnimationFrame(() => {
+                    let current = '';
+                    const scrollY = window.scrollY;
 
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                if (window.scrollY >= sectionTop - 200) {
-                    current = section.getAttribute('id');
-                }
-            });
+                    for (let i = 0; i < sectionOffsets.length; i++) {
+                        if (scrollY >= sectionOffsets[i].top - 200) {
+                            current = sectionOffsets[i].id;
+                        }
+                    }
 
-            navLinks.forEach(link => {
-                const href = link.getAttribute('href');
-                if (href === `#${current}`) {
-                    link.classList.add('text-white');
-                    link.classList.remove('text-slate-400');
-                } else {
-                    link.classList.remove('text-white');
-                    link.classList.add('text-slate-400');
-                }
-            });
+                    navLinks.forEach(link => {
+                        const href = link.getAttribute('href');
+                        if (href === `#${current}`) {
+                            link.classList.add('text-white');
+                            link.classList.remove('text-slate-400');
+                        } else {
+                            link.classList.remove('text-white');
+                            link.classList.add('text-slate-400');
+                        }
+                    });
+                    navTicking = false;
+                });
+                navTicking = true;
+            }
         }, { passive: true });
     }
 
@@ -1126,15 +1145,26 @@ if (document.getElementById('contact-form')) {
     if (!scroller || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
     let pos = 0;
-    const speed = 0.5; // px pro Frame
+    const speed = 0.5;
+    let logoRafId = null;
+    let isVisible = false;
+    let cachedHalfWidth = scroller.scrollWidth / 2;
 
     function tick() {
+        if (!isVisible) { logoRafId = null; return; }
         pos -= speed;
-        // Bei Hälfte zurücksetzen (Duplikat-Logos sorgen für nahtlosen Loop)
-        if (Math.abs(pos) >= scroller.scrollWidth / 2) pos = 0;
+        if (Math.abs(pos) >= cachedHalfWidth) pos = 0;
         scroller.style.transform = 'translateX(' + pos + 'px)';
-        requestAnimationFrame(tick);
+        logoRafId = requestAnimationFrame(tick);
     }
 
-    requestAnimationFrame(tick);
+    // Nur animieren wenn sichtbar (spart CPU/GPU wenn aus dem Viewport)
+    const observer = new IntersectionObserver((entries) => {
+        isVisible = entries[0].isIntersecting;
+        if (isVisible && !logoRafId) {
+            cachedHalfWidth = scroller.scrollWidth / 2;
+            logoRafId = requestAnimationFrame(tick);
+        }
+    }, { threshold: 0 });
+    observer.observe(scroller.parentElement || scroller);
 })();
