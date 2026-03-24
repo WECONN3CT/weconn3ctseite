@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /blog/
+Disallow: /referenzen/
+Disallow: /frames/
+
+Sitemap: https://weconn3ct.de/sitemap.xml
